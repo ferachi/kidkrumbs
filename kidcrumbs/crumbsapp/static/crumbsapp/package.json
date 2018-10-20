@@ -1,0 +1,63 @@
+{
+  "name": "kcrumbs",
+  "version": "1.0.0",
+  "description": "an application for helping parents monitor childrens progress",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "wbuild": "webpack --progress --hide-modules --watch",
+    "build": "webpack --progress --hide-modules"
+  },
+  "keywords": [
+    "kids",
+    "track",
+    "results",
+    "progress"
+  ],
+  "author": "ferachi",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/preset-env": "^7.1.0",
+    "animejs": "^2.2.0",
+    "d3": "^5.7.0",
+    "jquery": "^3.3.1",
+    "lodash": "^4.17.11",
+    "moment": "^2.22.2",
+    "svgjs": "^2.6.2",
+    "v-calendar": "^0.9.7",
+    "vee-validate": "^2.1.0-beta.11",
+    "velocity-animate": "^1.5.2",
+    "vue": "^2.5.17",
+    "vue-router": "^3.0.1",
+    "vue2-filters": "^0.3.0",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "autoprefixer": "^9.1.5",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.4",
+    "babel-plugin-transform-es2015-destructuring": "^6.23.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "coffee-loader": "^0.9.0",
+    "coffeescript": "^2.3.2",
+    "css-loader": "^1.0.0",
+    "cssnano": "^4.1.4",
+    "file-loader": "^2.0.0",
+    "imports-loader": "^0.8.0",
+    "mini-css-extract-plugin": "^0.4.3",
+    "postcss-cssnext": "^3.1.0",
+    "postcss-import": "^12.0.0",
+    "postcss-loader": "^3.0.0",
+    "style-loader": "^0.23.0",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2",
+    "svg-inline-loader": "^0.8.0",
+    "vue-loader": "^15.4.2",
+    "vue-template-compiler": "^2.5.17",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.1",
+    "webpack-dev-server": "^3.1.9"
+  }
+}

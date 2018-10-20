@@ -1,0 +1,185 @@
+@import 'colors.styl'
+
+
+if theme is 'light'
+    grey = white
+    grey_0 = lightness(grey,100%)
+    grey_1 = lightness(grey,92%)
+    grey_2 = lightness(grey,80%)
+    grey_3 = lightness(grey,60%)
+    grey_4 = lightness(grey,35%)
+    grey_5 = lightness(grey,20%)
+    grey_aux = lightness(grey,96%)
+    primary_color = darkorange
+    secondary_color = teal
+    head_font_family = 'Oxygen','Lato', -apple-system, BlinkMacSystemFont, "Segoe UI", ubuntu, Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif
+
+
+else
+    grey = blue(lightness(#000,11),33)
+    grey_0 = lightness(grey,7%)
+    grey_1 = lightness(grey,13%)
+    grey_2 = lightness(grey,20%)
+    grey_3 = lightness(grey,28%)
+    grey_4 = lightness(grey,70%)
+    grey_5 = lightness(grey,80%)
+    grey_aux = lightness(grey,10%)
+    primary_color = teal
+    secondary_color = orange
+    head_font_family = 'Dosis','Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", ubuntu, Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif
+
+
+
+.grey_color_0
+    color grey_0 !important
+
+
+.grey_color_1
+    color grey_1 !important
+
+.grey_color_2
+    color grey_2 !important
+
+.grey_color_3
+    color grey_3 !important
+
+.grey_color_4
+    color grey_4 !important
+
+.grey_color_5
+    color grey_5 !important
+
+.grey_color_aux
+    color grey_aux !important
+
+.grey_bg_0
+    background-color grey_0 !important
+
+.grey_bg_1
+    background-color grey_1 !important
+
+.grey_bg_2
+    background-color grey_2 !important
+
+.grey_bg_3
+    background-color grey_3 !important
+
+.grey_bg_4
+    background-color grey_4 !important
+
+.grey_bg_5
+    background-color grey_5 !important
+
+.grey_bg_aux
+    background-color grey_aux !important
+
+.grey_border_0
+    border-color grey_0 !important
+
+.grey_border_1
+    border-color grey_1 !important
+
+.grey_border_2
+    border-color grey_2 !important
+
+.grey_border_3
+    border-color grey_3 !important
+
+.grey_border_4
+    border-color grey_4 !important
+
+.grey_border_5
+    border-color grey_5 !important
+
+.grey_border_aux
+    border-color grey_aux !important
+
+.grey_stroke_0
+    stroke grey_0 !important
+
+.grey_stroke_1
+    stroke grey_1 !important
+
+.grey_stroke_2
+    stroke grey_2 !important
+
+.grey_stroke_3
+    stroke grey_3 !important
+
+.grey_stroke_4
+    stroke grey_4 !important
+
+.grey_stroke_5
+    stroke grey_5 !important
+
+.grey_stroke_aux
+    stroke grey_aux !important
+
+.grey_fill_0
+    fill grey_0 !important
+
+.grey_fill_1
+    fill grey_1 !important
+
+.grey_fill_2
+    fill grey_2 !important
+
+.grey_fill_3
+    fill grey_3 !important
+
+.grey_fill_4
+    fill grey_4 !important
+
+.grey_fill_5
+    fill grey_5 !important
+
+.grey_fill_aux
+    fill grey_aux !important
+
+.primary-color
+	color primary_color !important
+
+.primary-bg
+	background-color primary_color !important
+
+.primary-bg-light
+	background-color lighten(primary_color,50%) !important
+
+.primary-bg-dark
+	background-color saturate(primary_color,50%) !important
+
+.primary-border
+	border-color primary_color !important
+ 	
+.primary-stroke
+    stroke primary_color !important
+
+.primary-fill
+	fill primary_color !important
+	
+.secondary-color
+	color secondary_color !important
+
+.secondary-bg
+	background-color secondary_color !important
+
+.secondary-bg-light
+	background-color lighten(secondary_color,50%) !important
+
+.secondary-bg-dark
+	background-color darken(secondary_color,50%) !important
+
+.secondary-border
+	border-color secondary_color !important
+
+.secondary-stroke
+	stroke secondary_color !important
+
+.secondary-fill
+	fill secondary_color !important
+	
+.border-width-2
+	border-width 2px !important
+
+.border-width-3
+	border-width 3px !important

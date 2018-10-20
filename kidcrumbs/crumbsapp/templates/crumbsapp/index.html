@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block links %}
+{{ block.super }}
+<link rel='stylesheet' href="{% static 'crumbsapp/dist/style.css' %}"></link>
+{% endblock %}
+{% block content %}
+
+<div id="appHome">
+	<h2> Hello </h2>
+  	<div id="app">
+	</div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+  {{ block.super }}
+  <script src="{% static 'crumbsapp/dist/app.bundle.js' %}"></script>
+{% endblock %}

@@ -5,5 +5,6 @@ app_name = 'crumbs'
 
 
 urlpatterns = [
-        path('', views.IndexView.as_view(), name='idex'),
+        path('', views.SplashView.as_view(), name='splash'),
+        path('index/', views.IndexView.as_view(), name='index')
 ]

@@ -32,16 +32,3 @@ class HabitOption(models.Model):
         ordering = ['index','title']
 
 
-class HabitResponse(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    routine = models.ForeignKey("Routine", on_delete = models.CASCADE, related_name="habit_responses", null=True, blank=True)
-    habit_option = models.ForeignKey("HabitOption", on_delete = models.CASCADE, related_name="habit_responses", null=True, blank=True)
-    title = models.CharField(max_length=20, default="NA", help_text="Type in a title only if there is no option to answer")
-    value = models.CharField(max_length=20)
-    created_date = models.DateTimeField(auto_now_add=True)
-    timestamp = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        if self.habit_option:
-            self.habit_option.title
-        return self.title

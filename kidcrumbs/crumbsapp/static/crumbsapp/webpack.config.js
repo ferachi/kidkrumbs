@@ -39,7 +39,12 @@ module.exports = {
 						options: {
 							importLoaders : 2,
 							modules: true,
-							localIdentName: '[path][name]__[local]__[hash:base64:6]'
+							localIdentName: '[path][name]__[local]__[hash:base64:6]',
+                            getLocalIdent : function(context, localIdentName, localName, options){
+                                var index = context.resource.indexOf("module=");
+                                var moduleName = context.resource.substr(index).replace(/module=true|module\=|s/, "");
+                                return moduleName.length > 1 ? moduleName + "--" + localName : localName;
+                            }
 						}
 					},
 				    'postcss-loader',

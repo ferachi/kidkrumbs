@@ -4,7 +4,7 @@ import uuid
 
 class Routine(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    student = models.ForeignKey("Student", on_delete=models.CASCADE, related_name="routines")
+    group = models.ForeignKey("Group", on_delete=models.CASCADE, related_name="routines")
     date = models.DateField()
     comment = models.TextField()
     message = models.TextField("message/request")
@@ -14,3 +14,15 @@ class Routine(models.Model):
     def __str__(self):
         return self.title
 
+
+# Not a join table btw Routine and Students because the Attitude model depends on this model. i.e it has a field ->
+# attitudes
+class StudentRoutine(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    routine = models.ForeignKey("Routine", on_delete = models.CASCADE, related_name="student_routines")
+    student = models.ForeignKey("Student", on_delete=models.CASCADE, related_name="routines")
+    created_date = models.DateTimeField(auto_now_add=True)
+    timestamp = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return "{} routine for {}".format(self.student.full_name, self.routine.date)

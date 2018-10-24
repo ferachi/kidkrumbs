@@ -1,140 +1,145 @@
 @import 'colors.styl'
 
-
 if theme is 'light'
-    grey = white
-    grey_0 = lightness(grey,100%)
-    grey_1 = lightness(grey,92%)
-    grey_2 = lightness(grey,80%)
-    grey_3 = lightness(grey,60%)
-    grey_4 = lightness(grey,35%)
-    grey_5 = lightness(grey,20%)
-    grey_aux = lightness(grey,96%)
+    shade = white
+    shade_0 = lightness(shade,100%)
+    shade_1 = lightness(shade,92%)
+    shade_2 = lightness(shade,80%)
+    shade_3 = lightness(shade,60%)
+    shade_4 = lightness(shade,35%)
+    shade_5 = lightness(shade,20%)
+    shade_aux = lightness(shade,96%)
     primary_color = darkorange
     secondary_color = teal
-    head_font_family = 'Oxygen','Lato', -apple-system, BlinkMacSystemFont, "Segoe UI", ubuntu, Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif
+    head_font_family = 'Dosis','Lato', -apple-system, BlinkMacSystemFont, "Segoe UI", ubuntu, Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif
 
 
 else
-    grey = blue(lightness(#000,11),33)
-    grey_0 = lightness(grey,7%)
-    grey_1 = lightness(grey,13%)
-    grey_2 = lightness(grey,20%)
-    grey_3 = lightness(grey,28%)
-    grey_4 = lightness(grey,70%)
-    grey_5 = lightness(grey,80%)
-    grey_aux = lightness(grey,10%)
+    shade = blue(lightness(#000,11),33)
+    shade_0 = lightness(shade,7%)
+    shade_1 = lightness(shade,13%)
+    shade_2 = lightness(shade,20%)
+    shade_3 = lightness(shade,28%)
+    shade_4 = lightness(shade,70%)
+    shade_5 = lightness(shade,80%)
+    shade_aux = lightness(shade,10%)
     primary_color = teal
     secondary_color = orange
-    head_font_family = 'Dosis','Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", ubuntu, Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif
+    head_font_family = 'Muli','Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", ubuntu, Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif
 
 
+// if app color is defined it converts to the color
+// if not, it will default to any of the primary colors
+// defined above
+if appColor is defined
+    primary_color = convert(appColor)
 
-.grey_color_0
-    color grey_0 !important
+
+.color_0
+    color shade_0 !important
 
 
-.grey_color_1
-    color grey_1 !important
+.color_1
+    color shade_1 !important
 
-.grey_color_2
-    color grey_2 !important
+.color_2
+    color shade_2 !important
 
-.grey_color_3
-    color grey_3 !important
+.color_3
+    color shade_3 !important
 
-.grey_color_4
-    color grey_4 !important
+.color_4
+    color shade_4 !important
 
-.grey_color_5
-    color grey_5 !important
+.color_5
+    color shade_5 !important
 
-.grey_color_aux
-    color grey_aux !important
+.color_aux
+    color shade_aux !important
 
-.grey_bg_0
-    background-color grey_0 !important
+.bg_0
+    background-color shade_0 !important
 
-.grey_bg_1
-    background-color grey_1 !important
+.bg_1
+    background-color shade_1 !important
 
-.grey_bg_2
-    background-color grey_2 !important
+.bg_2
+    background-color shade_2 !important
 
-.grey_bg_3
-    background-color grey_3 !important
+.bg_3
+    background-color shade_3 !important
 
-.grey_bg_4
-    background-color grey_4 !important
+.bg_4
+    background-color shade_4 !important
 
-.grey_bg_5
-    background-color grey_5 !important
+.bg_5
+    background-color shade_5 !important
 
-.grey_bg_aux
-    background-color grey_aux !important
+.bg_aux
+    background-color shade_aux !important
 
-.grey_border_0
-    border-color grey_0 !important
+.border_0
+    border-color shade_0 !important
 
-.grey_border_1
-    border-color grey_1 !important
+.border_1
+    border-color shade_1 !important
 
-.grey_border_2
-    border-color grey_2 !important
+.border_2
+    border-color shade_2 !important
 
-.grey_border_3
-    border-color grey_3 !important
+.border_3
+    border-color shade_3 !important
 
-.grey_border_4
-    border-color grey_4 !important
+.border_4
+    border-color shade_4 !important
 
-.grey_border_5
-    border-color grey_5 !important
+.border_5
+    border-color shade_5 !important
 
-.grey_border_aux
-    border-color grey_aux !important
+.border_aux
+    border-color shade_aux !important
 
-.grey_stroke_0
-    stroke grey_0 !important
+.stroke_0
+    stroke shade_0 !important
 
-.grey_stroke_1
-    stroke grey_1 !important
+.stroke_1
+    stroke shade_1 !important
 
-.grey_stroke_2
-    stroke grey_2 !important
+.stroke_2
+    stroke shade_2 !important
 
-.grey_stroke_3
-    stroke grey_3 !important
+.stroke_3
+    stroke shade_3 !important
 
-.grey_stroke_4
-    stroke grey_4 !important
+.stroke_4
+    stroke shade_4 !important
 
-.grey_stroke_5
-    stroke grey_5 !important
+.stroke_5
+    stroke shade_5 !important
 
-.grey_stroke_aux
-    stroke grey_aux !important
+.stroke_aux
+    stroke shade_aux !important
 
-.grey_fill_0
-    fill grey_0 !important
+.fill_0
+    fill shade_0 !important
 
-.grey_fill_1
-    fill grey_1 !important
+.fill_1
+    fill shade_1 !important
 
-.grey_fill_2
-    fill grey_2 !important
+.fill_2
+    fill shade_2 !important
 
-.grey_fill_3
-    fill grey_3 !important
+.fill_3
+    fill shade_3 !important
 
-.grey_fill_4
-    fill grey_4 !important
+.fill_4
+    fill shade_4 !important
 
-.grey_fill_5
-    fill grey_5 !important
+.fill_5
+    fill shade_5 !important
 
-.grey_fill_aux
-    fill grey_aux !important
+.fill_aux
+    fill shade_aux !important
 
 .primary-color
 	color primary_color !important

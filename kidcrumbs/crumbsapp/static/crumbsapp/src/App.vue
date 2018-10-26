@@ -1,15 +1,7 @@
 <template lang="html">
     <div :id='theme.app'>
-        <div v-if="!isLoading" class="" key='app'>
-            <div id="app" class="green">
-        	    <p class="primary-color">Hello again</p>
-                <form action="">
-                <div class="form-group">
-                    <label for="exampleInputEmail1" class="bmd-label-floating">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1">
-                    <span class="bmd-help">We'll never share your email with anyone else.</span>
-                </div></form>
-            </div>
+        <div id="appTheme" class="teal" v-if="!isLoading" key='app'>
+            <router-view></router-view>
         </div>
         <div v-else key='loader'>
             Loading...
@@ -19,6 +11,7 @@
 
 <script>
 import {mapGetters, mapActions, mapMutations} from "vuex";
+import _ from 'lodash';
 export default {
     created() {
         // get the device type on which the application runs
@@ -51,16 +44,35 @@ export default {
 
 <style lang="stylus" module="dark">
 theme="dark"
+themify() 
+    appColor =split(" ",split(".",selector())[1])[0] 
+    @import './styles'
 #app
     :global
-        @import './styles'
+        // list of colors 
+        colors = 'blue' 'pink' 'purple' 'red' 'green' 'orange' 'teal'
+
+        // for each color create an app theme selector to call themify on
+        for color in colors
+            #appTheme.{color}
+                themify()
+
 </style>
 
 <style lang="stylus" module="light">
 theme="light"
+themify() 
+    appColor =split(" ",split(".",selector())[1])[0] 
+    @import './styles'
 #app
     :global
-        @import './styles'
+        // list of colors 
+        colors = 'blue' 'pink' 'purple' 'red' 'green' 'orange' 'teal'
+
+        // for each color create an app theme selector to call themify on
+        for color in colors
+            #appTheme.{color}
+                themify()
 </style>
 
 <style lang="stylus" module="krumbs">
@@ -70,15 +82,4 @@ theme="krumbs"
         @import './styles'
 </style>
 
-<style lang="stylus">
-#app.orange
-    appColor =split(" ",split(".",selector())[1])[0] 
-    @import './styles' 
-#app.blue
-    appColor =split(" ",split(".",selector())[1])[0] 
-    @import './styles' 
-#app.red
-    appColor =split(" ",split(".",selector())[1])[0] 
-    @import './styles' 
-</style>
 

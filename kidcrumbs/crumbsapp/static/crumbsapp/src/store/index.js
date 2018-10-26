@@ -1,5 +1,6 @@
 import theme from './modules/theme';
 import help from './modules/help.coffee';
+import menu from './modules/menu.coffee';
 import * as actions from './actions';
 import mutations from './mutations';
 import getters from './getters';
@@ -15,6 +16,7 @@ export default {
 	actions,
 	modules:{
 		theme,
+		menu,
 		help
 	}
 }

@@ -9,10 +9,11 @@ class PersonSerializer(serializers.ModelSerializer):
     other_names  = serializers.CharField(source="user.other_names", read_only=True)
     username  = serializers.CharField(source="user.username", read_only=True)
     email  = serializers.CharField(source="user.email", read_only=True)
+    names = serializers.CharField(source="full_name", read_only=True)
 
     class Meta:
         model = Person
-        fields = [ "user", "first_name","last_name","other_names", "username", "email", "title", "description","occupation",
+        fields = [ "user", "first_name","last_name","other_names","names", "username","avatar", "email", "title", "description","occupation",
                 "gender", "dob", "hobbies", "qualifications", "id"]
 
 

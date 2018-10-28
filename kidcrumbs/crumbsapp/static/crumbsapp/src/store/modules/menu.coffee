@@ -16,10 +16,11 @@ state =
 
 getters = 
     # return the menus
-    getMenus : (state) ->
+    getMenus : (state, getters, rootState, rootGetters) ->
         # TEST: 
         # To get the logged in user role
-        userRoles = [ROLES.EXTERNAL, ROLES.ADMINISTRATIVE]
+        profile = rootGetters['profile/getProfile']
+        userRoles = profile.roles
         
         #set the user roles for each menu item
         state.menus.forEach (menu) ->

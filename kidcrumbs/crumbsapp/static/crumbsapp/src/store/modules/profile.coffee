@@ -41,7 +41,10 @@ actions =
             
                 
             # person.relationships = relationships
-            person.roles = responses[3].data
+            person.schoolRoles = responses[3].data
+            
+            person.roles = _.uniq  _.flatMap person.schoolRoles, (sRole) ->
+                sRole.roles
 
 
             commit 'setProfile', person

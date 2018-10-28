@@ -19,5 +19,6 @@ from django.urls import path,include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('crumbs/', include('crumbs.urls')),
+    path('accounts/', include('crumbsauth.urls')),
     path('', include('crumbsapp.urls')),
 ]

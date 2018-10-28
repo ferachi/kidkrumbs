@@ -4,7 +4,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
-from .models import User
+from crumbs.models import User
 
 
 class UserCreationForm(forms.ModelForm):
@@ -43,7 +43,7 @@ class UserChangeForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('email', 'password','is_active', 'is_admin')
+        fields = ('username', 'password','is_active', 'is_admin')
 
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.
@@ -60,11 +60,11 @@ class UserAdmin(BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ('email', 'is_admin')
+    list_display = ('username','email', 'is_admin')
     list_filter = ('is_admin',)
     fieldsets = (
-        (None, {'fields': ('email', 'password')}),
-        ('Personal info', {'fields': ('first_name','last_name','username')}),
+        (None, {'fields': ('username', 'password')}),
+        ('Personal info', {'fields': ('first_name','last_name','other_names','email')}),
         ('Permissions', {'fields': ('is_admin','is_active')}),
         ('Groups', {'fields': ('groups',)}),
     )
@@ -73,17 +73,17 @@ class UserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'password1', 'password2')}
+            'fields': ('username', 'password1', 'password2')}
         ),
     )
-    search_fields = ('email',)
-    ordering = ('email',)
+    search_fields = ('username',)
+    ordering = ('username',)
     filter_horizontal = ()
 
-    def save_model(self,request, object,form,change):
-        if not object.username:
-            object.username = object.email
-        super(UserAdmin, self).save_model(request,object,form,change)
+    # def save_model(self,request, object,form,change):
+    #     if not object.username:
+    #         object.username = object.email
+    #     super(UserAdmin, self).save_model(request,object,form,change)
 
 # Now register the new UserAdmin...
 admin.site.register(User, UserAdmin)

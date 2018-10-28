@@ -29,6 +29,8 @@ ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = 'crumbs.User'
 
+LOGIN_REDIRECT_URL = "/"
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -41,10 +43,12 @@ INSTALLED_APPS = [
 
     # THIRD PARTY
     'rest_framework',
+    'bootstrap4',
 
     # My Apps
     'crumbs.apps.CrumbsConfig',
     'crumbsapp.apps.CrumbsappConfig',
+    'crumbsauth.apps.CrumbsauthConfig',
 ]
 
 MIDDLEWARE = [

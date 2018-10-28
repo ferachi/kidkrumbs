@@ -1,4 +1,5 @@
 const ROLES = {
+    KIDKRUMBEE : 'kidkrumbee',
     ADMINISTRATIVE : 'administrative',
     NONADMINISTRATIVE : 'non-administrative',
     OTHERADMINISTRATIVE : 'other-administrative',

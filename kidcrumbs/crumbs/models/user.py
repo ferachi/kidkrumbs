@@ -5,32 +5,32 @@ from django.core.mail import send_mail
 import uuid
 
 class UserManager(BaseUserManager):
-    def create_user(self, email,first_name, last_name, password=None):
+    def create_user(self, username,email, first_name, last_name, password=None):
         """
         Creates and saves a User with the given email and password.
         """
-        if not email:
-            raise ValueError('Users must have an email address')
+        if not username:
+            raise ValueError('Users must have a username')
 
         user = self.model(
-            email=self.normalize_email(email),
             first_name=first_name,
             last_name=last_name,
-            username = self.normalize_email(email)
+            username = username
         )
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email,first_name, last_name, password):
+    def create_superuser(self, username, email,first_name, last_name, password):
         """
         Creates and saves a superuser with the given email and password.
         """
         user = self.create_user(
+            username,
             email,
-            first_name=first_name,
-            last_name=last_name,
-            password=password,
+            first_name,
+            last_name,
+            password,
         )
         user.is_admin = True
         user.save(using=self._db)
@@ -38,22 +38,18 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(
-        verbose_name='email address',
-        max_length=255,
-        unique=True,
-    )
+    email = models.EmailField( verbose_name='email address', max_length=255,blank=True, unique=True)
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     first_name = models.CharField(blank=True, max_length=150)
     last_name = models.CharField(blank=True, max_length=150)
     other_names = models.CharField(blank=True, max_length=300)
-    username = models.CharField(blank=True, max_length=150, unique=True)
+    username = models.CharField(max_length=150, unique=True)
     is_active = models.BooleanField('Active',default=True)
     is_admin = models.BooleanField('Admin',default=False)
 
     objects = UserManager()
 
-    USERNAME_FIELD = 'email'
+    USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['first_name', 'last_name']
 
     def get_full_name(self):

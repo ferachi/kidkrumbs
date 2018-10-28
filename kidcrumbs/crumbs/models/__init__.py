@@ -9,7 +9,7 @@ from .habit import Habit, HabitOption
 from .home_work import HomeWork
 from .member import Membership
 from .person import Person, PersonContact, PersonSchoolRole, AdminPerson, NonAdminPerson, SuperAdminPerson, \
-OtherAdminPerson, Student, Teacher, ExternalPerson, SchoolPerson
+OtherAdminPerson, Student, Teacher, ExternalPerson, SchoolPerson, Role, Relation
 from .routine import Routine, StudentRoutine
 from .school import School, SchoolContact
 from .session import Session

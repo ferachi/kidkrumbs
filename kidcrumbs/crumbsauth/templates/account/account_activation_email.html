@@ -1,0 +1,8 @@
+{% autoescape off %}
+Hi {{ user.username }},
+Welcome to the schoolknob.
+Your <strong>Password</strong> is {{password}}. Please once activated, do not hesitate to change your password.
+
+Click on the link below to confirm and activate your registration:
+http://{{ domain }}{% url 'schoolauth:activate' uidb64=uid token=token %}
+{% endautoescape %}

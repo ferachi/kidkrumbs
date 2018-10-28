@@ -17,9 +17,11 @@ export default {
         // get the device type on which the application runs
         // note: this actually sets up the device on the store by
         // running it on the first create (before mount)
-        this.$store.dispatch('getDevice').then(res => {
+
+        Promise.all([this.obtainToken(), this.getDevice()]).then( values =>{
             this.isLoading = false;
             this.theme = this[this.getTheme];
+
         });
     },
     data(){
@@ -31,12 +33,23 @@ export default {
     computed : {
         ...mapGetters([
             'getTheme'
-        ])
+        ]),
     },
     methods:{
         ...mapMutations([
             "setTheme"
+        ]),
+        ...mapActions("auth",[
+            "obtainToken"
+        ]),
+        ...mapActions([
+            "getDevice"
         ])
+    }, 
+    watch:{
+        'getTheme'(val){
+            this.theme = this[this.getTheme];
+        }
     }
 
 };

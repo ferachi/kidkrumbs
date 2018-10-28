@@ -4,7 +4,7 @@ const state = {
 }
 
 const mutations = {
-    [types.SET_THEME](state, _theme){
+    setTheme(state, _theme){
         state.theme = _theme;
     }
 }

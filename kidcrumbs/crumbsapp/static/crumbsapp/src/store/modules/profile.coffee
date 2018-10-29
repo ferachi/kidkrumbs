@@ -48,7 +48,7 @@ actions =
 
 
             commit 'setProfile', person
-            # person
+            person
 
 getters =
     getProfile : (state) ->

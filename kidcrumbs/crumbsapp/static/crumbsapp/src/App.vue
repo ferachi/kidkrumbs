@@ -18,10 +18,9 @@ export default {
         // note: this actually sets up the device on the store by
         // running it on the first create (before mount)
 
-        Promise.all([this.obtainToken(), this.getDevice()]).then( values =>{
+        this.getDevice().then( values =>{
             this.isLoading = false;
             this.theme = this[this.getTheme];
-
         });
     },
     data(){

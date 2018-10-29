@@ -40,7 +40,7 @@ export default{
     .app-content
         min-height 98vh
         max-height 98vh
-        overflow-y scroll
+        overflow-y auto
         padding-bottom 30px
     .mobile-menu
         position absolute

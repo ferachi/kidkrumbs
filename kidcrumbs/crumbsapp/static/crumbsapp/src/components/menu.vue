@@ -42,7 +42,7 @@ export default{
                 return record.meta.menuPage
             });
             if(route){
-                let menu = this.menus.find( menu => menu.link == route.name)
+                let menu = this.menus.find( menu => menu.link == route.name);
                 if(menu) this.activateMenu(menu);
             }
         }

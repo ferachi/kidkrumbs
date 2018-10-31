@@ -6,8 +6,10 @@
                     <siteMenu> </siteMenu>
                 </nav>
             </section>
-            <section class="col app-content">
-                <router-view></router-view>
+            <section class="col d-flex justify-content-center p-0 app-content">
+                <div class="col-xl-9 col p-0">
+                    <router-view></router-view>
+                </div>
             </section>
             <section class="d-lg-none mobile-menu">
                 <nav>
@@ -35,7 +37,7 @@ export default{
     },
 }
 </script>
-<style lang="stylus" scoped>
+<style lang="stylus" >
 #mainApp
     .app-content
         min-height 98vh

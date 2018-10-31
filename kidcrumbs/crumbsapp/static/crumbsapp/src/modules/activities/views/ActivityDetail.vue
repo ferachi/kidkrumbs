@@ -1,15 +1,15 @@
 <template>
-    <div>
-        <h2>Student List</h2>
+    <div id="activityDetail">
+        <h4>Activity Detail</h4>
     </div>
 </template>
 <script>
 export default{
-    name : "StudentDetail",
-
+    name : "ActivityDetail",
     created(){
     }
 }
 </script>
 <style lang="stylus">
 </style>
+

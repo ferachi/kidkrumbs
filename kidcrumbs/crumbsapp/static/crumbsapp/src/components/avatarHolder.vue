@@ -3,9 +3,9 @@
         <div v-if="image" class="image">
             <img :src="image" :alt="alt" class="img-fluid" :class="{'rounded-circle':rounded}">
         </div>
-        <div v-else class="image d-flex align-items-center justify-content-center" :class="{'grey_bg_2':showBg}">
-            <p class="grey_5" v-if="rounded"><i class="fas fa-user-circle fa-5x fa-fw"></i></p>
-            <p class="grey_5" v-else><i class="fas fa-user fa-5x fa-fw"></i></p>
+        <div v-else class="image d-flex align-items-center justify-content-center" :class="{'bg_1':showBg}">
+            <p class="color_5" v-if="rounded"><i class="fas fa-user-circle fa-7x fa-fw"></i></p>
+            <p class="color_5" v-else><i class="fas fa-user fa-7x fa-fw"></i></p>
         </div>
     </div>
 </template>
@@ -13,8 +13,8 @@
 export default {
     name: "",
     mounted() {
-      let $image = $(".avatar-holder .image");
-      $image.css('height', $image.css('width'));
+        let $image = $(".avatar-holder .image");
+              $image.css('height', $image.css('width'));
   },
     props:{
         image:{

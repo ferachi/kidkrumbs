@@ -4,12 +4,14 @@
     items : a list of items to search, sort and filter
     filters: a list of field(s) with the interface {filterField:filter} to display off the items, or a  single string 'all' to filter all the fields in the list.
     searchFields: list of fields to search from.
- -->
+-->
 <template>
     <div class='search-list'>
         <div class="list-controls">
             <slot name='controls' >
-                <input type="text" class="form-control" v-model='searchWord' placeholder="search">
+            <div class="form-group">
+                <input type="text" class="form-control" id="listsearch" v-model='searchWord' placeholder="search">
+            </div>
             </slot>
         </div>
         <div class="list-items">
@@ -19,9 +21,9 @@
             </div>
             <div v-else key="empty">
                 <slot name='empty'>
-                    <h1 class="text-center">
-                        Not Found
-                    </h1>
+                <h1 class="text-center">
+                    Not Found
+                </h1>
                 </slot>
             </div>
         </div>
@@ -40,7 +42,7 @@ export default {
     computed:{
         listItems(){
             // first filter the items
-            
+
 
             // setup the initial items that 
             // would eventually be returned after 
@@ -90,7 +92,8 @@ export default {
 
 
             // if there's a search word specified
-            if(!!this.search || !!this.searchWord){
+            let _search = this.search || this.searchWord;
+            if(_search){
 
                 // filter the items where the search word is found in the specied fields.
                 _items = _.filter(_items , item =>{
@@ -99,7 +102,7 @@ export default {
                         acc += item[field];
                         return acc;
                     },"");
-                    return _.includes(concatWords.toLowerCase(), this.search.toLowerCase());
+                    return _.includes(concatWords.toLowerCase(), _search.toLowerCase());
                 });
             }
 
@@ -115,30 +118,30 @@ export default {
             type:[Array, String], // an array with objects of interface {filterField:filter} or 'all'e.g [{type:classroom},{color:green},{school:myschool}]
             default:'all'
         },
-        searchFields:{
-            type:[Array, String], // the fields in the items list where the search shall be applied
-            default:'all'
-        },
-        sortFields:{
-            type:Array,
-            default:()=>{
-                return [];
+            searchFields:{
+                type:[Array, String], // the fields in the items list where the search shall be applied
+                default:'all'
+            },
+            sortFields:{
+                type:Array,
+                default:()=>{
+                    return [];
+                }
+            },
+            search:{
+                type:String,
+                default:''
+            },
+            items:{
+                type:Array,
+                    required:true
+            },
+            order:{
+                type:Array,
+                default:()=>{
+                    return []
+                }
             }
-        },
-        search:{
-            type:String,
-            default:''
-        },
-        items:{
-            type:Array,
-            required:true
-        },
-        order:{
-            type:Array,
-            default:()=>{
-                return []
-            }
-        }
     }
 };
 </script>

@@ -1,6 +1,7 @@
 import App from "../components/Application.vue";
 import NotFound from "../components/NotFound.vue";
-import studentRoute from "../modules/students/route";
+import childrenRoute from "../modules/children/route";
+import childRoute from "../modules/child/route";
 import {store} from "../appbootstrap";
 
 const routes = [
@@ -15,7 +16,8 @@ const routes = [
             });
         },
         children : [
-            studentRoute, 
+            childRoute, 
+            childrenRoute, 
             {
                 path : '*',
                 component : NotFound,

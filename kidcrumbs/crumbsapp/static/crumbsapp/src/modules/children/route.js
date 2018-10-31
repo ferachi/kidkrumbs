@@ -1,14 +1,13 @@
-import StudentList from "./views/StudentList.vue";
-import StudentDetail from "./views/StudentDetail.vue";
-import Student from "./views/Student.vue";
+import ChildList from "./views/ChildList.vue";
+import ChildDetail from "./views/ChildDetail.vue";
+import Child from "./views/Child.vue";
 import {store} from "../../appbootstrap";
 import ROLES from "../../data_models/permissions";
 
 
-const studentRoute = {
+const childrenRoute = {
     path : 'children/',
-    component : Student,
-    meta : { page : "children", menuPage:true }, // if this is the first page of the sites menu navigation
+    component : Child,
     beforeEnter(to, from , next){
         // ensuring that this routes is only accessible by parents and students
         let profile = store.getters["profile/getProfile"];
@@ -23,8 +22,9 @@ const studentRoute = {
     children : [
         {
             path : "",
-            component : StudentList,
+            component : ChildList,
             name : 'children',
+            meta : { page : "children", menuPage:true }, // if this is the first page of the sites menu navigation
             beforeEnter(to, from , next){
                 // ensuring that this routes is only accessible by parents and students
                 let profile = store.getters["profile/getProfile"];
@@ -42,11 +42,11 @@ const studentRoute = {
         },
         {
             path : ":username",
-            component : StudentDetail,
-            name : 'child'
+            component : ChildDetail,
+            name : 'childDetail'
         },
 
     ]
 }
 
-export {studentRoute as default}
+export {childrenRoute as default}

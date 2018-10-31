@@ -26,6 +26,7 @@ class Person(models.Model):
     qualifications = models.CharField(max_length=150, help_text='qualifications separated with commas', blank=True)
     email_confirmed = models.BooleanField(default=False)
     relatives = models.ManyToManyField('self', through='Relation', through_fields=('person','relative'), symmetrical=False, blank=True)
+    username = models.CharField(max_length=150, editable=False)
     created_date = models.DateTimeField(auto_now_add=True)
     timestamp = models.DateTimeField(auto_now=True)
 
@@ -40,8 +41,14 @@ class Person(models.Model):
             return "{} {} {}".format(self.user.last_name, self.user.other_names, self.user.first_name)
         return "{} {}".format(self.user.last_name, self.user.first_name)
 
+    def save(self, *args, **kwargs):
+        self.username = self.user.username
+        super(Person, self).save(*args, **kwargs)
+
     class Meta:
         verbose_name_plural = "People"
+
+
 
 
 class PersonContact(models.Model):

@@ -11,4 +11,7 @@ export const RELATIONSHIPS = (id) => `${PERSON(id)}get_relationships/`; // gets 
 export const ROLES = (id) => `${PERSON(id)}get_roles/`; // gets the users schools roles
 
 
+// STUDENTS
+export const STUDENTS = '/api/students/'; // All Students, this list differs depending on the user requesting it 
+export const STUDENT = (id) => `${STUDENTS}${id}/`; // route to a single student
 

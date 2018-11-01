@@ -1,3 +1,4 @@
+import Activity from "./views/Activity.vue";
 import ActivityList from "./views/ActivityList.vue";
 import ActivityDetail from "./views/ActivityDetail.vue";
 import {store} from "../../appbootstrap";
@@ -7,7 +8,6 @@ import ROLES from "../../data_models/permissions";
 const activitiesRoute = {
     path : '/activities',
     component : Activity,
-    },
     children : [
         {
             path : "",
@@ -16,7 +16,7 @@ const activitiesRoute = {
         },
         {
             path : ":id",
-            component : ActivityDetail
+            component : ActivityDetail,
             name : 'activitiesDetail',
         }
 

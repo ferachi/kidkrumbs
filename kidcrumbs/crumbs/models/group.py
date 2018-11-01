@@ -52,7 +52,7 @@ class Group(models.Model):
     avatar = models.ImageField(upload_to=upload_group_avatars_dir, null=True, blank=True)
     color = models.CharField(max_length=20, choices=COLORS, default='DODGERBLUE')
     members = models.ManyToManyField('Person', through='Membership', related_name='group_list')
-    habits = models.ManyToManyField('Habit', related_name='groups')
+    habits = models.ManyToManyField('Habit', related_name='groups', blank=True)
     session = models.ForeignKey('Session', on_delete=models.CASCADE)
     created_by = models.ForeignKey("AdminPerson", related_name="created_groups", on_delete=models.DO_NOTHING)
     created_date = models.DateTimeField(auto_now_add=True)

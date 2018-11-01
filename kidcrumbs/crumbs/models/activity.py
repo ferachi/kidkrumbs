@@ -10,7 +10,7 @@ class Activity(models.Model):
     """
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     group = models.ForeignKey('Group', on_delete=models.CASCADE, related_name='activities')
-    note = models.TextField()
+    note = models.TextField("teachers comment")
     color = models.CharField(max_length=20, choices=COLORS, default='DODGERBLUE')
     tags = models.CharField(max_length=150, help_text="tags seperated by commas", blank=True)
     date = models.DateField()
@@ -23,7 +23,7 @@ class Activity(models.Model):
         return self.__str__()
 
     def __str__(self):
-        return "{0} activity for {1}".format(self.group.name,self.date)
+        return "{0} activity for {1}".format(self.group,self.date)
 
     class Meta:
         verbose_name_plural = 'activities'
@@ -33,10 +33,10 @@ class Activity(models.Model):
 class ActivityItem(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=50)
-    description = models.CharField(max_length=150)
+    description = models.CharField(max_length=500)
     time = models.TimeField(null=True, blank=True)
     activity = models.ForeignKey('Activity', on_delete=models.CASCADE, related_name='activities')
-    created_by = models.ForeignKey('SchoolPerson', on_delete=models.DO_NOTHING, related_name='created_activities')
+    created_by = models.ForeignKey('AdminPerson', on_delete=models.DO_NOTHING, related_name='created_activities')
     created_date = models.DateTimeField(auto_now_add=True)
     timestamp = models.DateTimeField(auto_now=True)
 
@@ -44,7 +44,7 @@ class ActivityItem(models.Model):
         return "".format(self.title)
 
     class Meta:
-        verbose_name_plural = 'activities'
+        verbose_name_plural = 'activity items'
         ordering = ['-created_date', 'title']
 
 

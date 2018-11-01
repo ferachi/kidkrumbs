@@ -3,15 +3,15 @@ from django.db import models
 
 class AdminPersonManager(models.Manager):
     def get_queryset(self):
-        return super(AdminPersonManager, self).get_queryset().filter(person_school_roles__roles__name='administrator')
+        return super(AdminPersonManager, self).get_queryset().filter(person_school_roles__roles__name='administrative')
 
 class SuperAdminPersonManager(models.Manager):
     def get_queryset(self):
-        return super(SuperAdminPersonManager, self).get_queryset().filter(person_school_roles__roles__name='super administrator')
+        return super(SuperAdminPersonManager, self).get_queryset().filter(person_school_roles__roles__name='super administrative')
 
 class OtherAdminPersonManager(models.Manager):
     def get_queryset(self):
-        return super(OtherAdminPersonManager, self).get_queryset().filter(person_school_roles__roles__name='other administrator')
+        return super(OtherAdminPersonManager, self).get_queryset().filter(person_school_roles__roles__name='other administrative')
 
 class ExternalPersonManager(models.Manager):
     def get_queryset(self):
@@ -20,7 +20,7 @@ class ExternalPersonManager(models.Manager):
 
 class NonAdminPersonManager(models.Manager):
     def get_queryset(self):
-        return super(NonAdminPersonManager, self).get_queryset().filter(person_school_roles__roles__name='non administrator')
+        return super(NonAdminPersonManager, self).get_queryset().filter(person_school_roles__roles__name='non administrative')
 
 
 class RelativeManager(models.Manager):

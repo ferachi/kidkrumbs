@@ -1,5 +1,6 @@
 <template>
     <div id="activityList">
+        <h4>My activity list</h4>
     </div>
 </template>
 <script>

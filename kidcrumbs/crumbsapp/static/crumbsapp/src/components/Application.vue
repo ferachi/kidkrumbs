@@ -1,8 +1,8 @@
 <template>
-    <div id="mainApp" class="bg_aux">
+    <div id="mainApp" class="bg_0">
         <div class="d-flex">
             <section class="col-auto p-0">
-                <nav class="d-none d-lg-block bigscreens-menu">
+                <nav class="d-none d-lg-block bigscreens-menu border-right border_2">
                     <siteMenu> </siteMenu>
                 </nav>
             </section>
@@ -12,7 +12,7 @@
                 </div>
             </section>
             <section class="d-lg-none mobile-menu">
-                <nav>
+                <nav class="border-top border_2">
                     <siteMenu></siteMenu>
                 </nav>
             </section>

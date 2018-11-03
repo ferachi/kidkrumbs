@@ -12,9 +12,9 @@
         <alist :selectedItem="alistSelected" >
         <alistItem :showMenu="true" id="a" :menus="[{name:'Open', icon:'fas fa-envelope-open fa-fw fa-xs'}, {name:'Close', icon: 'fas fa-door-closed fa-fw fa-xs'}]" @alist-click="alistClicked($event)">
 
-        <div slot="menu" slot-scope="{menus, id,active}">
+        <div slot="menu" slot-scope="{menus, id}">
 
-            <slideMenu :canShowMenu="active" direction="top" layout="horizontal" @menu-click="slideMenuClick($event)" :menus="menus" >
+            <slideMenu :showMenu="alistSelected==id" direction="top" layout="horizontal" @menu-click="slideMenuClick($event)" :menus="menus" >
             </slideMenu>
         </div>
         <div class="d-flex align-items-center">
@@ -30,9 +30,9 @@
         </div>
         </alistItem>
         <alistItem :showMenu="true" id="b" :menus="[{name:'Open', icon:'fas fa-envelope-open fa-fw fa-xs'}, {name:'Close', icon: 'fas fa-door-closed fa-fw fa-xs'}]" @alist-click="alistClicked($event)">
-        <div slot="menu" slot-scope="{menus, id, active}">
+        <div slot="menu" slot-scope="{menus, id}">
 
-            <slideMenu :canShowMenu="active" direction="right" @menu-click="slideMenuClick($event)" :menus="menus" >
+            <slideMenu :showMenu="alistSelected==id" direction="right" @menu-click="slideMenuClick($event)" :menus="menus" >
             </slideMenu>
         </div>
         <div class="d-flex align-items-center">
@@ -48,8 +48,8 @@
         </div>
         </alistItem>
         <alistItem :showMenu="true" id="c" :menus="[{name:'Open', icon:'fas fa-envelope-open fa-fw fa-xs'}, {name:'Close', icon: 'fas fa-door-closed fa-fw fa-xs'}]" @alist-click="alistClicked($event)">
-        <div slot="menu" slot-scope="{menus, id, active}">
-            <slideMenu  :canShowMenu="active" @menu-click="slideMenuClick($event)" direction="left" :menus="menus" >
+        <div slot="menu" slot-scope="{menus, id}">
+            <slideMenu  :showMenu="alistSelected==id" @menu-click="slideMenuClick($event)" direction="left" :menus="menus" >
             </slideMenu>
         </div>
         <div class="d-flex align-items-center">

@@ -7,37 +7,44 @@
         </div>
         <div class="tabs">
             <div v-if="selectedTab == tabTitles[0]">
-                <div>
+                <section class="activity-head">
                     <h5>Teachers' Comment</h5>
                     <p>{{activity.note}}</p>
-                </div>
+                </section>
+                <section class="activities-pane">
+                    <activityItems :activityId='activity.id' :activities="activity.activities" :school="activity.school"></activityItems>
+                </section>
             </div>
             <div v-else-if="selectedTab == tabTitles[1]">
                 <h4>Comments</h4>
             </div>
             <div v-else></div>
         </div>
-
     </div>
 </template>
 <script>
 import tabHead from '../../../components/tabHead.vue';
+import activityItems from '../components/ActivityItems.vue';
 import {mapGetters, mapActions} from 'vuex';
 export default{
     name : "ActivityDetail",
     created(){
         this.pullActivity(this.$route.params.id).then(activity =>{
-            this.activity = activity;
             this.isLoading = false;
         });
     }, 
     components : {
-        tabHead
+        tabHead,
+        activityItems
+    },
+    computed:{
+        ...mapGetters("activity",{
+            activity : "getActivity"
+        })
     },
     data: () => ({
         tabTitles : [ 'activity', 'comment'],
         selectedTab : 'activity',
-        activity : null,
         isLoading : true
     }),
     methods:{

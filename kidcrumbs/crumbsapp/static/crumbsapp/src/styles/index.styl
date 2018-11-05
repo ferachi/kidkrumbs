@@ -1,11 +1,15 @@
 @import './theme.styl'
 
+user_font = 'Muli','Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", ubuntu, Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"
+
+user_radius = 5px
+
 h1, h2, h3, h4, h5, h6
     font-family head_font_family !important
     color shade_5 !important
 
 p, a, label, div, small
-    font-family  'Muli','Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", ubuntu, Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"
+    font-family user_font
     color shade_4 !important
 
 
@@ -17,13 +21,64 @@ a
 
 .card
     background-color shade_0
+    box-shadow 0 1px 1px 1px rgba(0,0,0,.14), 0 -1px 1px -2px rgba(0,0,0,.2), 0 0px 1px 1px rgba(0,0,0,.12)
+    // box-shadow 0 1px 1px 1px shade_2, 0 -1px 1px -2px shade_1, 0 0px 1px 1px shade_1
+
+.cad
+    background-color shade_0
+    border 1px solid
+    border-color shade_2 
+
+.ctk-date-time-picker .field .field-input
+    background-color shade_1 !important
+    color shade_4
+.ctk-date-time-picker,
+.ctk-date-time-picker input,
+.ctk-date-time-picker label,
+.ctk-date-time-picker p,
+.ctk-date-time-picker span 
+    color shade_4
+    font-family user_font
+
+.ctk-date-time-picker
+    border-radius user_radius
+    
+.ctk-date-time-picker .field .field-input
+    border none
+
+.vue-swatches__container.vue-swatches--inline
+    background-color shade_1 !important
+    border-radius user_radius
+    
+
+v--modal-box.v--modal,
+.v--modal
+    background-color shade_aux
+
+    @media (max-width : 1200px)
+        width 55vw !important;
+        margin : 0px auto;
+
+    @media (max-width : 1024)
+        width 60vw !important;
+        margin : 0px auto;
+
+    @media (max-width : 992px)
+        width 70vw !important;
+        margin : 0px auto;
+
+    @media (max-width : 768px)
+        width 90vw !important;
+        margin : 0px auto;
+
 
 .custom-select
 .form-control
     color shade_4
     background shade_1 !important
     border none;
-    border-radius 15px
+    border-radius user_radius
+    
     padding-left 10px
     padding-right 10px
     &:focus

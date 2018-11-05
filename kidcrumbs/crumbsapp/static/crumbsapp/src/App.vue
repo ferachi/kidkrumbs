@@ -1,6 +1,6 @@
 <template lang="html">
     <div :id='theme.app'>
-        <div id="appTheme" class="teal" v-if="!isLoading" key='app'>
+        <div id="appTheme" class="orange" v-if="!isLoading" key='app'>
             <router-view></router-view>
         </div>
         <div v-else key='loader'>
@@ -12,11 +12,13 @@
 <script>
 import {mapGetters, mapActions, mapMutations} from "vuex";
 import _ from 'lodash';
+import moment from 'moment';
 export default {
     created() {
         // get the device type on which the application runs
         // note: this actually sets up the device on the store by
         // running it on the first create (before mount)
+        window.moment = moment;
 
         this.getDevice().then( values =>{
             this.isLoading = false;

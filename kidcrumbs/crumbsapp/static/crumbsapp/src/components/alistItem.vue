@@ -1,10 +1,10 @@
 <template>
-    <div id="aListItem" class="my-1"@click="alistItemClicked(id)">
+    <div id="aListItem" class="my-1"@click="alistItemClicked(item)">
         <div class="card"  :class="{'primary-border border-bottom':isActive}" >
             <div class="card-body py-3">
                 <div class="d-flex align-items-center">
                     <div class="col px-2">
-                        <slot></slot>
+                        <slot :item="item"></slot>
                     </div>
                     <div class="col-auto item-menu" v-if="showMenu">
                         <div @click="displayMenu">
@@ -41,6 +41,10 @@ export default {
         menus : {
             type : Array, // [{name,icon}]
             required:true
+        },
+        item:{
+            type : Object,
+            required : true
         }
     },
     methods:{

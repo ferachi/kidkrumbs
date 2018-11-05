@@ -1,5 +1,5 @@
 from .accounts import AccountSerializer
-from .activity import ActivitySerializer
+from .activity import ActivitySerializer, ActivityItemSerializer
 from .classroom import ClassroomSerializer
 from .group import GroupSerializer
 from .person import PersonSerializer, RelationSerializer, PersonSchoolRoleSerializer

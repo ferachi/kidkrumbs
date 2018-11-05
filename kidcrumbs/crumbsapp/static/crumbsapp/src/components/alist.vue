@@ -18,7 +18,7 @@ export default {
     },
     props:{
         selectedItem : {
-            type : String,
+            type : Object,
             required : true
         }
     },
@@ -28,18 +28,16 @@ export default {
         };
     },
     methods: {
-      selectTab(item) {
+      selectItem(item) {
           this.list.forEach(_item => {
-              console.log(_item.id,"hello" ,item, _item.isActive);
-              _item.isActive = _item.id == item;
-              console.log(_item,_item.isActive);
+              _item.isActive = _item.id == item.id;
           });
 
       }
     },
     watch:{
         selectedItem(n,o){
-            this.selectTab(n);
+            this.selectItem(n);
         }
     }
 };

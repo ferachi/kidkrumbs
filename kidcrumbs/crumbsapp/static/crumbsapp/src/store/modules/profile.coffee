@@ -54,6 +54,12 @@ getters =
     getProfile : (state) ->
         state.profile
 
+    getRolesBySchool : (state) -> (school) ->
+        schoolRole  = _.find state.profile.schoolRoles, (role) ->
+           role.school == school
+        schoolRole.roles
+
+
 export default {
 	namespaced : yes,
 	state,

@@ -19,6 +19,8 @@ export const STUDENT = (id) => `${STUDENTS}${id}/`; // route to a single student
 // ACTIVITIES
 export const ACTIVITIES = '/api/activities/'; // All Activities, this list differs with respect to school
 export const ACTIVITY = (id) => `${ACTIVITIES}${id}/`; // route to a single activity
+export const ACTIVITYITEMS = '/api/activity-items/'; // All sub activities, this list differs with respect to school
+export const ACTIVITYITEM = (id) => `${ACTIVITYITEMS}${id}/`; // route to a single activity item
 
 
 // GROUPS

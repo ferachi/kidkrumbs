@@ -10,6 +10,7 @@ app_name = 'crumbsapp'
 router = DefaultRouter()
 router.register(r'accounts', AccountViewSet)
 router.register(r'activities', ActivityViewSet)
+router.register(r'activity-items', ActivityItemViewSet)
 router.register(r'classrooms', ClassroomViewSet)
 router.register(r'groups', GroupViewSet)
 router.register(r'people', PersonViewSet)

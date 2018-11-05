@@ -36,6 +36,7 @@ class ActivityItem(models.Model):
     description = models.CharField(max_length=500)
     time = models.TimeField(null=True, blank=True)
     activity = models.ForeignKey('Activity', on_delete=models.CASCADE, related_name='activities')
+    color = models.CharField(max_length=20, choices=COLORS, default='DODGERBLUE')
     created_by = models.ForeignKey('AdminPerson', on_delete=models.DO_NOTHING, related_name='created_activities')
     created_date = models.DateTimeField(auto_now_add=True)
     timestamp = models.DateTimeField(auto_now=True)

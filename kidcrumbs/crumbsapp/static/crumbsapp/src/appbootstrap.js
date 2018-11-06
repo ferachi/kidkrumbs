@@ -9,10 +9,17 @@ import 'v-calendar/lib/v-calendar.min.css';
 import VModal from 'vue-js-modal'
 import VueCtkDateTimePicker from 'vue-ctk-date-time-picker';
 import 'vue-ctk-date-time-picker/dist/vue-ctk-date-time-picker.min.css';
+import Toasted from 'vue-toasted';
+import Notifications from 'vue-notification';
+
+
+
 
 Vue.use(VeeValidate);
 Vue.use(Vue2Filters);
 Vue.use(VModal)
+Vue.use(Toasted)
+Vue.use(Notifications)
 
 Vue.component('dtpicker', VueCtkDateTimePicker);
 // Access v-calendar, v-date-packer and v-popover components

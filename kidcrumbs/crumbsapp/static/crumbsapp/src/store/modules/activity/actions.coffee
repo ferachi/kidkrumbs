@@ -27,7 +27,6 @@ updateActivityItem = ({dispatch}, item) ->
 
 deleteActivityItem = ({dispatch}, {id, activity}) ->
     http.delete(ACTIVITYITEM(id)).then (response)->
-        dispatch('pullActivity',activity).then (activity) ->
-            item
+        dispatch('pullActivity',activity)
 
 export {pullActivity, saveActivityItem, updateActivityItem, deleteActivityItem}

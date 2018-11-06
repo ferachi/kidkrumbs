@@ -40,7 +40,7 @@ export default {
     created(){
         if(!this.item){
                 let time = moment().format("hh:mm"),
-                color = "dodgerblue";
+                color = "DODGERBLUE";
             this.activityItem = { time, color};
         }
     },

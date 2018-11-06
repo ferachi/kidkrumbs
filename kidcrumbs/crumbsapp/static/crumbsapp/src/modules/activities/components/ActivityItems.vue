@@ -4,7 +4,7 @@
             <button class="btn btn-primary float-right" @click="addActivity">add an activity </button>
         </section>
         <section >
-            <itemList :showItemMenu="false" :activities="activities" @list-select="listSelected($event)"></itemList>
+            <itemList :showItemMenu="true" :activities="activities" @list-select="listSelected($event)"></itemList>
         </section>
         <section >
             <modal class=""  name="activityModal" height="auto" :scrollable="true" >
@@ -14,7 +14,7 @@
                             <itemEdit :activity="activity" @form-submit="formSubmit($event)"></itemEdit>
                         </section>
                         <section class="remove" v-else-if="detailType=='delete'">
-                            <h1>Use notifications to delete me </h1>
+                            <itemDelete :activity="activity" @delete-item="deleteActivity($event)"></itemDelete>
                         </section>
                         <section class="add" v-else-if="detailType== 'add'">
                             <itemAdd :activity="activity" @form-submit="formSubmit($event)"></itemAdd>
@@ -33,6 +33,7 @@ import activityItemList from './ActivityItemList.vue';
 import activityItemView from './ActivityItemView.vue';
 import activityItemAdd from './ActivityItemAdd.vue';
 import activityItemEdit from './ActivityItemEdit.vue';
+import activityItemDelete from './ActivityItemDelete.vue';
 import ROLES from '../../../data_models/permissions';
 import {mapGetters, mapActions} from 'vuex';
 export default {
@@ -41,6 +42,7 @@ export default {
         itemList: activityItemList,
         itemView: activityItemView,
         itemEdit: activityItemEdit,
+        itemDelete: activityItemDelete,
         itemAdd: activityItemAdd,
     },
     data : () => ({
@@ -69,9 +71,6 @@ export default {
             this.activity = item.activity;
             this.detailType = item.detailType;
             this.show();
-            // if(this.detailType !== 'delete')
-            //     this.show();
-            // else this.deleteActivity();
         },
         addActivity(){
             this.detailType = 'add';
@@ -88,12 +87,13 @@ export default {
             this.saveActiveItem();
             this.hide();
         },
-        deleteActivity(){
-            if(this.hasEditPermissions){
+        deleteActivity(canDelete){
+            if(this.hasEditPermissions && canDelete){
                 this.deleteItem(this.activity).then(res => {
-                    console.log(res, "deleted");
+                    this.$toasted.show("Activity Item deleted");
                 });
             }
+            this.hide();
         },
         saveActiveItem(){
             // make sure only teachers and super admins can save this
@@ -110,13 +110,13 @@ export default {
                 if(this.activity.id){
                     // its an edit
                     this.updateItem(this.activity).then(item => {
-                        console.log(item, "item saved")
+                        this.$toasted.show("Activity Item has been updated");
                     });
                 }
                 else{
                     this.activity.activity = this.activityId;
                     this.saveItem(this.activity).then(item => {
-                        console.log(item, "item saved")
+                        this.$toasted.show("Activity Item saved");
                     });
                 }
 

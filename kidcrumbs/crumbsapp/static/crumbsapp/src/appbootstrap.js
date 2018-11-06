@@ -18,7 +18,11 @@ import Notifications from 'vue-notification';
 Vue.use(VeeValidate);
 Vue.use(Vue2Filters);
 Vue.use(VModal)
-Vue.use(Toasted)
+Vue.use(Toasted, {
+    duration : 3000, 
+    position : 'top-center',
+    fullWidth : true
+})
 Vue.use(Notifications)
 
 Vue.component('dtpicker', VueCtkDateTimePicker);
@@ -37,6 +41,7 @@ Vue.use(VCalendar, {
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
+
 
 import routes from './routes';
 import AppStore from "./store";

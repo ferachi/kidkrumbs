@@ -12,6 +12,7 @@ from .person import Person, PersonContact, PersonSchoolRole, AdminPerson, NonAdm
 OtherAdminPerson, Student, Teacher, ExternalPerson, SchoolPerson, Role, Relation
 from .routine import Routine, StudentRoutine
 from .school import School, SchoolContact
+from .school_group import SchoolGroup, SchoolGroupBase
 from .session import Session
 from .subject import CoreSubject, Subject,Syllabus, SyllabusItem, TeacherSubject 
 from .term import Term

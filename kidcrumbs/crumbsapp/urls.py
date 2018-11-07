@@ -13,7 +13,9 @@ router.register(r'activities', ActivityViewSet)
 router.register(r'activity-items', ActivityItemViewSet)
 router.register(r'classrooms', ClassroomViewSet)
 router.register(r'groups', GroupViewSet)
+router.register(r'memberships', MembershipViewSet)
 router.register(r'people', PersonViewSet)
+router.register(r'schools', SchoolViewSet)
 router.register(r'students', StudentViewSet)
 
 urlpatterns = [

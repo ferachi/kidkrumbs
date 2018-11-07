@@ -3,11 +3,9 @@ import mutations from './mutations.coffee';
 import getters from './getters.coffee';
 
 const state = {
-    students : [],
-    student : [],
-    memberships : [],
-    groups : [],
-    currentGroups : []
+    children:[],
+    child : null,
+    group : null
 }
 
 

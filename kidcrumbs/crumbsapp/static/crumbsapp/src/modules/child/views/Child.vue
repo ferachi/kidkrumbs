@@ -33,14 +33,20 @@
     </div>
 </template>
 <script>
-import {mapGetters, mapActions} from 'vuex';
+import {mapGetters, mapActions, mapMutations} from 'vuex';
 import avatar from '../../../components/avatarHolder.vue';
 export default{
     name : "Child",
     created(){
-        this.fetchStudent(this.$route.params.username).then(child =>{
+        this.fetchChildWithProps(this.$route.params.username).then(child =>{
             this.child = child;
             this.isLoading = false;
+
+            // TODO : This will be called on every refresh
+            // this means the group will always be reset 
+            // to current classroom when the browser is refreshed
+            this.setGroup(this.getCurrentClassroom);
+
         }).catch(err => {
             this.isLoading = false;
             this.error_fetching = true;
@@ -59,11 +65,17 @@ export default{
         }
     },
     computed:{
-
+        ...mapGetters('child', [
+            'getCurrentClassroom'
+        ])
     },
     methods : {
-        ...mapActions('student',[
-            "fetchStudent"
+        ...mapActions('child',[
+            "fetchChild",
+            "fetchChildWithProps"
+        ]),
+        ...mapMutations("child", [
+            "setGroup"
         ])
     }
 

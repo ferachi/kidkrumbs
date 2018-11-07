@@ -46,7 +46,7 @@ fetchChildCurrentGroups = ({commit, getters}) ->
         groups
 
 
-fetchChildWithProps = ({commit, dispatch}, username) ->
+fetchChildWithProps = ({commit, dispatch, getters, state}, username) ->
 
     dispatch('fetchChild', username).then (child) ->
         currentGroups = dispatch('fetchChildCurrentGroups')
@@ -54,6 +54,8 @@ fetchChildWithProps = ({commit, dispatch}, username) ->
         memberships = dispatch('fetchChildMemberships')
 
         Promise.all([currentGroups, groups, memberships]).then (props) ->
+            commit 'updateChildren', child
+            console.log getters.getChild, getters.getChildGroups
             child
 
 

@@ -17,15 +17,14 @@ mutations =
 
     setChildMemberships : (state, memberships)->
         if state.child
-            state.child.memberships = memberships
+            state.child = Object.assign {}, state.child,{memberships}
 
     setChildGroups : (state, groups)->
-        if state.child
-            state.child.groups = groups
+        state.child = Object.assign {},state.child,{groups}
 
     setChildCurrentGroups : (state, currentGroups)->
         if state.child
-            state.child.currentGroups = currentGroups
+            state.child = Object.assign {}, state.child,{currentGroups}
 
 export {mutations as default}
 

@@ -14,6 +14,9 @@ export const ROLES = (id) => `${PERSON(id)}get_roles/`; // gets the users school
 // STUDENTS
 export const STUDENTS = '/api/students/'; // All Students, this list differs depending on the user requesting it 
 export const STUDENT = (id) => `${STUDENTS}${id}/`; // route to a single student
+export const STUDENT_GROUPS = (id) => `${STUDENT(id)}get_groups/`; // gets an individual students' groups
+export const STUDENT_MEMBERSHIPS = (id) => `${STUDENT(id)}get_memberships/`; // gets an individual students' memberships
+export const STUDENT_CURRENT_GROUPS = (id) => `${STUDENT(id)}get_current_groups/`; //gets all the current groups for a student 
 
 
 // ACTIVITIES
@@ -30,3 +33,9 @@ export const GROUP_ACTIVITIES = (id) => `${GROUP(id)}get_activities/`; // route 
 
 export const CLASSROOMS = '/api/classrooms/'; // All classrooms, this list differs depending on the user requesting it 
 export const CLASSROOM = (id) => `${CLASSROOMS}${id}/`; // route to a single classroom
+
+
+// SCHOOLS
+export const SCHOOLS = '/api/schools/'; // All Schools, this list differs depending on the user requesting it
+export const SCHOOL = (id) => `${SCHOOLS}${id}/`; // route to a single school
+export const SCHOOL_GROUPS = (id) => `${SCHOOL(id)}get_groups/`; // route to a schools groups

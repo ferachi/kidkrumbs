@@ -7,7 +7,7 @@
                 </nav>
             </section>
             <section class="col d-flex justify-content-center p-0 app-content">
-                <div class="col-xl-8 col px-2 p-xl-0">
+                <div class="col-xl-8 col px-0">
                     <router-view></router-view>
                 </div>
             </section>

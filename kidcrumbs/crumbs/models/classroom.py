@@ -24,14 +24,14 @@ class ClassroomBase(AbstractGroup):
 
 
 class Classroom(Group):
-    classroom_base = models.ForeignKey(ClassroomBase, related_name='classrooms', on_delete=models.CASCADE)
+    group_base = models.ForeignKey(ClassroomBase, related_name='classrooms', on_delete=models.CASCADE)
     subjects = models.ManyToManyField("Subject", related_name='classrooms', blank=True)
     head_teacher = models.ForeignKey('Teacher', on_delete=models.DO_NOTHING, null=True, related_name='classrooms')
 
     @property
-    def classroom_name(self):
-        return "{} {}".format(self.classroom_base.name, self.classroom_base.class_wing)
+    def name(self):
+        return "{} {}".format(self.group_base.name, self.group_base.class_wing)
 
     @property
     def full_name(self):
-        return "{} - {}".format(self.classroom_base.full_name, self.session.session_year)
+        return "{} - {}".format(self.group_base.full_name, self.session.session_year)

@@ -1,5 +1,5 @@
 import Activity from "./views/Activity.vue";
-import ActivityList from "./views/ActivityList.vue";
+import Activities from "./views/Activities.vue";
 import ActivityDetail from "./views/ActivityDetail.vue";
 import {store} from "../../appbootstrap";
 import ROLES from "../../data_models/permissions";
@@ -11,13 +11,13 @@ const activitiesRoute = {
     children : [
         {
             path : "",
-            component : ActivityList,
+            component : Activities,
             name : 'activities',
         },
         {
             path : ":id",
             component : ActivityDetail,
-            name : 'activitiesDetail',
+            name : 'activityDetail',
         }
 
     ]

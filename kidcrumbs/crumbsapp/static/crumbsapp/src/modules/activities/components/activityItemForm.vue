@@ -13,7 +13,7 @@
                 <textarea v-model="activityItem.description" v-validate="'required|min:20|max:450'" id="description"
                                                                                              name="description" class="form-control" placeholder="description" rows=3>
                 </textarea>
-                <i v-show="errors.has('title')" class="fa fa-warning"></i>
+                <i v-show="errors.has('description')" class="fa fa-warning"></i>
                 <span class="text-danger">{{ errors.first('description') }}</span> 
             </div>
             <div class="form-group">
@@ -22,7 +22,7 @@
             </div>
             <div class="form-group">
                 <label for="title">time</label>
-                <dtpicker v-model="activityItem.time" :color="activityItem.color" :dark="false" formatted="h:mm a"
+                <dtpicker v-model="activityItem.time" :color="activityItem.color" :dark="theme" formatted="h:mm a"
                 format="HH:mm" time-format="h:mm a" :minute-interval="5" label="" :without-input="true" :without-header="true" disable-date />
             </div>
             <div class="form-group clearfix">
@@ -33,6 +33,7 @@
 </template>
 <script>
 import Swatches from 'vue-swatches'
+import {mapGetters} from 'vuex';
 import "vue-swatches/dist/vue-swatches.min.css"
 
 export default {
@@ -42,6 +43,14 @@ export default {
                 let time = moment().format("hh:mm"),
                 color = "DODGERBLUE";
             this.activityItem = { time, color};
+        }
+    },
+    computed:{
+        ...mapGetters([
+            'getTheme'
+        ]),
+        theme(){
+            return this.getTheme == 'dark';
         }
     },
     data(){
@@ -73,6 +82,6 @@ export default {
 };
 </script>
 <style lang="stylus">
-#activityItemEdit
+#activityItemForm
     min-height 30vh
 </style>

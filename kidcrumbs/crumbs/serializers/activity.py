@@ -20,7 +20,7 @@ class ActivityItemSerializer(serializers.ModelSerializer):
 
 
 class ActivitySerializer(serializers.ModelSerializer):
-    activities = ActivityItemSerializer(many=True)
+    activities = ActivityItemSerializer(many=True, read_only=True)
     school = serializers.CharField(source="group.session.school.slug", read_only=True)
     class Meta:
         model = Activity

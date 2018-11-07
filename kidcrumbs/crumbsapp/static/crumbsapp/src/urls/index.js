@@ -26,7 +26,7 @@ export const ACTIVITYITEM = (id) => `${ACTIVITYITEMS}${id}/`; // route to a sing
 // GROUPS
 export const GROUPS = '/api/groups/'; // All Groups, this list differs depending on the user requesting it
 export const GROUP = (id) => `${GROUPS}${id}/`; // route to a single group
-export const GROUP_ACTIVITIES = (id) => `${GROUP(id)}${get_activities}/`; // route to a groups activity list
+export const GROUP_ACTIVITIES = (id) => `${GROUP(id)}get_activities/`; // route to a groups activity list
 
 export const CLASSROOMS = '/api/classrooms/'; // All classrooms, this list differs depending on the user requesting it 
 export const CLASSROOM = (id) => `${CLASSROOMS}${id}/`; // route to a single classroom

@@ -10,7 +10,7 @@ class Activity(models.Model):
     """
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     group = models.ForeignKey('Group', on_delete=models.CASCADE, related_name='activities')
-    note = models.TextField("teachers comment")
+    note = models.TextField("teachers comment", default="new activity")
     color = models.CharField(max_length=20, choices=COLORS, default='DODGERBLUE')
     tags = models.CharField(max_length=150, help_text="tags seperated by commas", blank=True)
     date = models.DateField()

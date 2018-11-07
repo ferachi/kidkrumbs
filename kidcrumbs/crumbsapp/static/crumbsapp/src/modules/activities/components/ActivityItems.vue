@@ -14,10 +14,13 @@
                             <itemEdit :activity="activity" @form-submit="formSubmit($event)"></itemEdit>
                         </section>
                         <section class="remove" v-else-if="detailType=='delete'">
-                            <itemDelete :activity="activity" @delete-item="deleteActivity($event)"></itemDelete>
+                            <confirm-action @confirm="deleteActivity($event)">
+                                <h4>Are you sure you want to delete</h4>
+                                <h1>{{activity.title}}</h1>
+                            </confirm-action>
                         </section>
                         <section class="add" v-else-if="detailType== 'add'">
-                            <itemAdd :activity="activity" @form-submit="formSubmit($event)"></itemAdd>
+                            <itemAdd @form-submit="formSubmit($event)"></itemAdd>
                         </section>
                         <section class="view" v-else>
                             <itemView :activity="activity" ></itemView>
@@ -33,16 +36,16 @@ import activityItemList from './ActivityItemList.vue';
 import activityItemView from './ActivityItemView.vue';
 import activityItemAdd from './ActivityItemAdd.vue';
 import activityItemEdit from './ActivityItemEdit.vue';
-import activityItemDelete from './ActivityItemDelete.vue';
+import confirmAction from '../../../components/confirm-action';
 import ROLES from '../../../data_models/permissions';
 import {mapGetters, mapActions} from 'vuex';
 export default {
     name: "activityItems",
     components:{
+        confirmAction,
         itemList: activityItemList,
         itemView: activityItemView,
         itemEdit: activityItemEdit,
-        itemDelete: activityItemDelete,
         itemAdd: activityItemAdd,
     },
     data : () => ({

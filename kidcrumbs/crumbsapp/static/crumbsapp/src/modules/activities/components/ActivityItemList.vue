@@ -3,7 +3,7 @@
         <alist :selectedItem="alistSelected">
         <alistItem v-for="activity in activities" :item="activity" :showMenu="showItemMenu"
                    :id="activity.id" :menus="menus" @alist-click="alistClicked($event)"
-                   :key="activity.key">
+                   :key="activity.id">
         <div slot="menu" slot-scope="{menus, active}">
             <slideMenu :canShowMenu="active" @menu-click="slideMenuClick($event)" :menus="menus" >
             </slideMenu>

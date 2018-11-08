@@ -1,10 +1,10 @@
 <template>
     <div id="activityItems">
-        <section class="clearfix">
+        <section class="clearfix" v-if="canEdit">
             <button class="btn btn-primary float-right" @click="addActivity">add an activity </button>
         </section>
         <section >
-            <itemList :showItemMenu="true" :activities="activities" @list-select="listSelected($event)"></itemList>
+            <itemList :showItemMenu="canEdit" :activities="activities" @list-select="listSelected($event)"></itemList>
         </section>
         <section >
             <modal class=""  name="activityModal" height="auto" :scrollable="true" >
@@ -53,7 +53,25 @@ export default {
         detailType : 'view',
         activity : null
     }),
-    props:['activities','activityId', 'school'],
+    props:{
+        activities : {
+            type : Array,
+            required : true
+        },
+        activityId : {
+            type : String, 
+            required : true
+        },
+        school : {
+            type : String,
+            required : true
+        },
+        canEdit : {
+            type : Boolean,
+            default : false
+        }
+        
+    },
     computed:{
         ...mapGetters('profile',{
             profile:"getProfile",

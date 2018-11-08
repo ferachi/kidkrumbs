@@ -12,7 +12,7 @@
                     <p>{{activity.note}}</p>
                 </section>
                 <section class="activities-pane">
-                    <activityItems :activityId='activity.id' :activities="activity.activities" :school="activity.school"></activityItems>
+                    <activityItems :canEdit="editable" :activityId='activity.id' :activities="activity.activities" :school="activity.school"></activityItems>
                 </section>
             </div>
             <div v-else-if="selectedTab == tabTitles[1]">
@@ -33,6 +33,12 @@ export default{
             this.isLoading = false;
         });
     }, 
+    props:{
+        editable : {
+            type : Boolean,
+            default : false
+        }
+    },
     components : {
         tabHead,
         activityItems

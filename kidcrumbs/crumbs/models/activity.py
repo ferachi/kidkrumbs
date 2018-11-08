@@ -48,11 +48,15 @@ class ActivityItem(models.Model):
         verbose_name_plural = 'activity items'
         ordering = ['-created_date', 'title']
 
-
+# Would have used generic comment class to help with activity (comments)
+# announcements (q & a's) and Suggestion Boxes and
+# any other forum like feature, with the help of 
+# ContentType but this would mean that the comment table will be 
+# over populated too soon. Hence seperate comment/forum tables 
 class ActivityComment(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     person = models.ForeignKey('Person', on_delete=models.CASCADE, related_name='activity_comments')
-    activity = models.ForeignKey('Activity', on_delete=models.CASCADE, related_name='activity_comments')
+    activity = models.ForeignKey('Activity', on_delete=models.CASCADE, related_name='comments')
     comment = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
     timestamp = models.DateTimeField(auto_now=True)
@@ -66,7 +70,7 @@ class ActivityComment(models.Model):
 
 class ActivityCommentReply(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    person = models.ForeignKey('Person', on_delete=models.CASCADE, related_name='comment_replies')
+    person = models.ForeignKey('Person', on_delete=models.CASCADE, related_name='activity_comment_replies')
     activity_comment = models.ForeignKey('ActivityComment', on_delete=models.CASCADE, related_name='replies')
     comment = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)

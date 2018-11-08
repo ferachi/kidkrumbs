@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from crumbs.models import Activity, ActivityItem
+from crumbs.models import Activity, ActivityItem,ActivityComment, ActivityCommentReply
 from .person import PersonSerializer
 
 class ActivityItemSerializer(serializers.ModelSerializer):
@@ -18,10 +18,23 @@ class ActivityItemSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
+class ActivityCommentReplySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ActivityCommentReply
+        fields = "__all__"
+
+class ActivityCommentSerializer(serializers.ModelSerializer):
+    replies = ActivityCommentReplySerializer(many=True, read_only=True)
+    class Meta:
+        model = ActivityComment
+        fields = ['id','person', 'activity', 'comment', 'replies']
 
 class ActivitySerializer(serializers.ModelSerializer):
     activities = ActivityItemSerializer(many=True, read_only=True)
+    comments = ActivityCommentSerializer(many=True, read_only=True)
     school = serializers.CharField(source="group.session.school.slug", read_only=True)
     class Meta:
         model = Activity
         fields = ['id','group','note', 'color','school', 'created_by', 'date', 'activities']
+
+

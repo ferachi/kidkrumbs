@@ -1,5 +1,5 @@
 from .accounts import AccountSerializer
-from .activity import ActivitySerializer, ActivityItemSerializer
+from .activity import ActivitySerializer, ActivityItemSerializer, ActivityCommentSerializer,ActivityCommentReplySerializer
 from .classroom import ClassroomSerializer
 from .group import GroupSerializer, StudentGroupSerializer
 from .membership import MembershipSerializer

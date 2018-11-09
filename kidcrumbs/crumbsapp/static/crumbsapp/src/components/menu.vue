@@ -3,7 +3,7 @@
         <!-- Mobile devices -->
         <div class="mobile d-lg-none">
             <div class="d-flex flex-wrap align-items-center">
-                <div class="col text-center" v-for="menu in menus">
+                <div class="col text-center " v-for="menu in menus">
                     <menuItem :menuItem="menu"> </menuItem>
                 </div>
             </div>
@@ -42,7 +42,7 @@ export default{
                 return record.meta.menuPage
             });
             if(route){
-                let menu = this.menus.find( menu => menu.link == route.name)
+                let menu = this.menus.find( menu => menu.link == route.name);
                 if(menu) this.activateMenu(menu);
             }
         }

@@ -9,7 +9,16 @@ app_name = 'crumbsapp'
 
 router = DefaultRouter()
 router.register(r'accounts', AccountViewSet)
+router.register(r'activities', ActivityViewSet)
+router.register(r'activity-items', ActivityItemViewSet)
+router.register(r'activity-comments', ActivityCommentViewSet)
+router.register(r'activity-comment-replies', ActivityCommentReplyViewSet)
+router.register(r'classrooms', ClassroomViewSet)
+router.register(r'groups', GroupViewSet)
+router.register(r'memberships', MembershipViewSet)
 router.register(r'people', PersonViewSet)
+router.register(r'schools', SchoolViewSet)
+router.register(r'students', StudentViewSet)
 
 urlpatterns = [
     url(r'^$', AppView.as_view(), name='home'),

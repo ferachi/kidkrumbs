@@ -6,11 +6,26 @@ import VeeValidate from 'vee-validate';
 import * as directives from './directives';
 import VCalendar from 'v-calendar';
 import 'v-calendar/lib/v-calendar.min.css';
+import VModal from 'vue-js-modal'
+import VueCtkDateTimePicker from 'vue-ctk-date-time-picker';
+import 'vue-ctk-date-time-picker/dist/vue-ctk-date-time-picker.min.css';
+import Toasted from 'vue-toasted';
+import Notifications from 'vue-notification';
+
+
+
 
 Vue.use(VeeValidate);
 Vue.use(Vue2Filters);
+Vue.use(VModal)
+Vue.use(Toasted, {
+    duration : 3000, 
+    position : 'top-center',
+    fullWidth : true
+})
+Vue.use(Notifications)
 
-
+Vue.component('dtpicker', VueCtkDateTimePicker);
 // Access v-calendar, v-date-packer and v-popover components
 Vue.use(VCalendar, {
    formats: {
@@ -26,6 +41,7 @@ Vue.use(VCalendar, {
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
+
 
 import routes from './routes';
 import AppStore from "./store";

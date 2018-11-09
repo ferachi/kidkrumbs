@@ -30,7 +30,7 @@ class Session(models.Model):
         return "%s" % self.name
 
     def save(self, *args, **kwargs):
-        slug = "{0}-{1}".format(self.school.slug,self.session_year)
+        slug = "{0}-{1}".format(self.school.short_name,self.session_year)
         self.slug = slugify(slug)
         super(Session, self).save(*args, **kwargs)
 

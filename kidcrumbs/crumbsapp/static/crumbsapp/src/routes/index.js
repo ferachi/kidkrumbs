@@ -1,28 +1,31 @@
 import App from "../components/Application.vue";
-import Students from "../components/Students.vue";
-import Student from "../components/Student.vue";
+import Test from "../components/Test.vue";
 import NotFound from "../components/NotFound.vue";
+import childrenRoute from "../modules/children/route";
+import childRoute from "../modules/child/route";
+import activitiesRoute from "../modules/activities/route";
+import {store} from "../appbootstrap";
 
-const studentRoutes = {
-    path : 'children/',
-    component : Students,
-    name : 'children',
-    meta : { page : "children", menuPage:true }, // if this is the first page of the sites menu navigation
-    children : [
-        {
-            path : "child/",
-            component : Student,
-            name : 'child'
-        }
-    ]
-}
 const routes = [
     {
         path : '/',
         component : App,
         name : 'app',
+        beforeEnter(to, from , next){
+            // before entering the application obtain the token
+            store.dispatch("auth/obtainToken").then(res => {
+                next();
+            });
+        },
         children : [
-            studentRoutes, 
+            childRoute, 
+            activitiesRoute, 
+            childrenRoute, 
+            {
+                path:'test',
+                component: Test,
+                name:'test'
+            },
             {
                 path : '*',
                 component : NotFound,

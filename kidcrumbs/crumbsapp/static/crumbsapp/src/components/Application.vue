@@ -1,16 +1,16 @@
 <template>
-    <div id="mainApp" class="bg_aux">
+    <div id="mainApp" class="bg_0">
         <div class="d-flex">
             <section class="col-auto p-0">
-                <nav class="d-none d-lg-block bigscreens-menu">
+                <nav class="d-none d-lg-block bigscreens-menu border-right border_2">
                     <siteMenu> </siteMenu>
                 </nav>
             </section>
-            <section class="col app-content">
-                <router-view></router-view>
+            <section class="col p-0 app-content">
+                    <router-view></router-view>
             </section>
             <section class="d-lg-none mobile-menu">
-                <nav>
+                <nav class="border-top border_2">
                     <siteMenu></siteMenu>
                 </nav>
             </section>
@@ -35,7 +35,7 @@ export default{
     },
 }
 </script>
-<style lang="stylus" scoped>
+<style lang="stylus" >
 #mainApp
     .app-content
         min-height 98vh

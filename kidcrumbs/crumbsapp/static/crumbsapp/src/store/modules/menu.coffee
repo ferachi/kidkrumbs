@@ -20,7 +20,8 @@ getters =
         # TEST: 
         # To get the logged in user role
         profile = rootGetters['profile/getProfile']
-        userRoles = profile.roles
+
+        userRoles = if profile?.roles then profile.roles else []
         
         #set the user roles for each menu item
         state.menus.forEach (menu) ->

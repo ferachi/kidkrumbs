@@ -16,7 +16,6 @@ def crop_image(image,ratio):
     if img_ratio > ratio:
         # adjusted width
         new_width = ratio * img_height
-        print(img_ratio, ratio, img_width, img_height,"new width =",new_width )
         # new crop center
         x = (img_width - new_width)/2
         cropped_image = img.crop((x,0,new_width+x, img_height))
@@ -28,7 +27,6 @@ def crop_image(image,ratio):
     elif img_ratio < ratio:
         # adjusted img_height
         new_height = img_width/ratio
-        print(img_ratio, ratio, img_width, img_height,"new height =",new_height )
         # new crop center on y axis
         y = (img_height - new_height) / 2
         cropped_image = img.crop((0, y, img_width, new_height + y))

@@ -15,10 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from django.conf import settings
+from django.conf.urls.static import static
+from crumbsauth.views import TokenView 
+from django.conf.urls import url, include
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('crumbs/', include('crumbs.urls')),
-    path('accounts/', include('crumbsauth.urls')),
-    path('', include('crumbsapp.urls')),
+
+urlpatterns = []
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_URL)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += [
+    url('admin/', admin.site.urls),
+    url('crumbs/', include('crumbs.urls')),
+    url('accounts/', include('crumbsauth.urls')),
+    url(r'^', include('crumbsapp.urls', namespace="crumbsapp")),
 ]

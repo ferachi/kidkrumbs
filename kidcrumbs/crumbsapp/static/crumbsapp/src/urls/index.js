@@ -24,6 +24,8 @@ export const ACTIVITIES = '/api/activities/'; // All Activities, this list diffe
 export const ACTIVITY = (id) => `${ACTIVITIES}${id}/`; // route to a single activity
 export const ACTIVITYITEMS = '/api/activity-items/'; // All sub activities, this list differs with respect to school
 export const ACTIVITYITEM = (id) => `${ACTIVITYITEMS}${id}/`; // route to a single activity item
+export const ACTIVITYCOMMENTS = '/api/activity-comments/'; // this route should only be used to create comments
+export const ACTIVITYCOMMENTREPLIES = '/api/activity-comment-replies/'; // this route should only be used to create replies
 
 
 // GROUPS
@@ -37,5 +39,4 @@ export const CLASSROOM = (id) => `${CLASSROOMS}${id}/`; // route to a single cla
 
 // SCHOOLS
 export const SCHOOLS = '/api/schools/'; // All Schools, this list differs depending on the user requesting it
-export const SCHOOL = (id) => `${SCHOOLS}${id}/`; // route to a single school
-export const SCHOOL_GROUPS = (id) => `${SCHOOL(id)}get_groups/`; // route to a schools groups
+export const SCHOOL = (id) => `${SCHOOLS}${id}/`; // route to a single school export const SCHOOL_GROUPS = (id) => `${SCHOOL(id)}get_groups/`; // route to a schools groups

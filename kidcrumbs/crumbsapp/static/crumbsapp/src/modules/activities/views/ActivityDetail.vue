@@ -17,6 +17,7 @@
             </div>
             <div v-else-if="selectedTab == tabTitles[1]">
                 <h4>Comments</h4>
+                <comment :comments="comments" @add-comment="addComment($event)"></comment>
             </div>
             <div v-else></div>
         </div>
@@ -24,6 +25,7 @@
 </template>
 <script>
 import tabHead from '../../../components/tabHead.vue';
+import comment from '../../../components/Comment.vue';
 import activityItems from '../components/ActivityItems.vue';
 import {mapGetters, mapActions} from 'vuex';
 export default{
@@ -41,12 +43,20 @@ export default{
     },
     components : {
         tabHead,
-        activityItems
+        activityItems,
+        comment
     },
     computed:{
         ...mapGetters("activity",{
             activity : "getActivity"
-        })
+        }),
+        ...mapGetters("profile",{
+            profile : "getProfile"
+        }),
+        comments(){
+            console.log(this.activity, "my name")
+            return this.activity.comments;
+        }
     },
     data: () => ({
         tabTitles : [ 'activity', 'comment'],
@@ -55,11 +65,16 @@ export default{
     }),
     methods:{
         ...mapActions('activity', [
+            'saveComment',
             'pullActivity'
         ]),
         tabClicked(tab){
             this.selectedTab = tab;
         },
+        addComment(_comment){
+            let data = {activity : this.activity.id, person : this.profile.user, comment : _comment}
+            this.saveComment(data);
+        }
     }
 }
 </script>

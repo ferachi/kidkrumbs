@@ -57,7 +57,7 @@ class ActivityComment(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     person = models.ForeignKey('Person', on_delete=models.CASCADE, related_name='activity_comments')
     activity = models.ForeignKey('Activity', on_delete=models.CASCADE, related_name='comments')
-    comment = models.TextField()
+    comment = models.TextField(max_length=300)
     created_date = models.DateTimeField(auto_now_add=True)
     timestamp = models.DateTimeField(auto_now=True)
 

@@ -22,12 +22,14 @@ class ActivityCommentReplySerializer(serializers.ModelSerializer):
     class Meta:
         model = ActivityCommentReply
         fields = "__all__"
+        depth = 1
 
 class ActivityCommentSerializer(serializers.ModelSerializer):
     replies = ActivityCommentReplySerializer(many=True, read_only=True)
     class Meta:
         model = ActivityComment
-        fields = ['id','person', 'activity', 'comment', 'replies']
+        fields = "__all__"
+        depth = 1
 
 class ActivitySerializer(serializers.ModelSerializer):
     activities = ActivityItemSerializer(many=True, read_only=True)
@@ -35,6 +37,6 @@ class ActivitySerializer(serializers.ModelSerializer):
     school = serializers.CharField(source="group.session.school.slug", read_only=True)
     class Meta:
         model = Activity
-        fields = ['id','group','note', 'color','school', 'created_by', 'date', 'activities']
+        fields = ['id','group','note', 'color','school', 'created_by', 'date', 'activities', 'comments']
 
 

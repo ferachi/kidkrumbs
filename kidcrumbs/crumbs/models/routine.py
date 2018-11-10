@@ -8,6 +8,7 @@ class Routine(models.Model):
     date = models.DateField()
     comment = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
+    created_by = models.ForeignKey('AdminPerson', on_delete=models.DO_NOTHING, related_name='created_routines')
     timestamp = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -22,6 +23,7 @@ class StudentRoutine(models.Model):
     student = models.ForeignKey("Student", on_delete=models.CASCADE, related_name="routines")
     message = models.TextField("message/request")
     created_date = models.DateTimeField(auto_now_add=True)
+    created_by = models.ForeignKey('AdminPerson', on_delete=models.DO_NOTHING, related_name='created_student_routines')
     timestamp = models.DateTimeField(auto_now=True)
 
     def __str__(self):

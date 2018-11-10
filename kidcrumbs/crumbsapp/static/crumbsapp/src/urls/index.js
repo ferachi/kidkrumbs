@@ -32,6 +32,9 @@ export const ACTIVITYCOMMENTREPLIES = '/api/activity-comment-replies/'; // this 
 export const GROUPS = '/api/groups/'; // All Groups, this list differs depending on the user requesting it
 export const GROUP = (id) => `${GROUPS}${id}/`; // route to a single group
 export const GROUP_ACTIVITIES = (id) => `${GROUP(id)}get_activities/`; // route to a groups activity list
+export const GROUP_MEMBERS = (id) => `${GROUP(id)}get_current_members/`; // route to a groups member list
+export const GROUP_STUDENTS = (id) => `${GROUP(id)}get_current_students/`; // route to a groups student list
+export const GROUP_TEACHERS = (id) => `${GROUP(id)}get_current_teachers/`; // route to a groups teacher list
 
 export const CLASSROOMS = '/api/classrooms/'; // All classrooms, this list differs depending on the user requesting it 
 export const CLASSROOM = (id) => `${CLASSROOMS}${id}/`; // route to a single classroom

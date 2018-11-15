@@ -1,11 +1,13 @@
 <template>
     <div class="avatar-holder">
-        <div v-if="image" class="image">
+        <div v-if="image" class="image px-2">
             <img :src="image" :alt="alt" class="img-fluid" :class="{'rounded-circle':rounded}">
         </div>
-        <div v-else class="image d-flex align-items-center justify-content-center" :class="{'bg_1':showBg}">
-            <p class="color_5" v-if="rounded"><i class="fas fa-user-circle fa-7x fa-fw"></i></p>
-            <p class="color_5" v-else><i class="fas fa-user fa-7x fa-fw"></i></p>
+        <div v-else class="image d-flex align-items-center justify-content-center" :class="{'grey_bg_2':showBg}">
+            <div class="col px-0">
+                <p class="grey_5" v-if="rounded"><i  :class="['fas fa-user-circle fa-fw',size]"></i></p>
+                <p class="grey_5" v-else><i :class="['fas fa-user fa-fw',size]" ></i></p>
+            </div>
         </div>
     </div>
 </template>
@@ -14,8 +16,8 @@ export default {
     name: "",
     mounted() {
         let $image = $(".avatar-holder .image");
-              $image.css('height', $image.css('width'));
-  },
+        $image.css('height', $image.css('width'));
+    },
     props:{
         image:{
             type:String,
@@ -30,8 +32,12 @@ export default {
             default:false
         },
         showBg:{
-          type:Boolean,
-          default : true
+            type:Boolean,
+            default : true
+        },
+        size : {
+            type : String,
+            default : "fa-5x"
         }
     }
 }

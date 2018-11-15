@@ -1,42 +1,51 @@
 <template>
-    <div v-if="isLoading" key="loading">
-    </div>
-    <div id="child" v-else key="loaded">
-        <div id="childContent">
-            <section class="page-header primary-bg">
-                <div class="d-flex align-items-center">
-                    <div class="col-xl-2 col">
-                        <avatar :image="child.avatar" class="p-2" :rounded="true" >
-                        </avatar>
-                    </div>
-                    <div class="col-8">
-                        <h4 class="color_0 m-0">{{child.names}}</h4>
-                        <router-link class="m-0 color_0" :to="{name:'childHomework', params:{id:1}}"><small
-                        class="color_0">view profile</small></router-link>
-                    </div>
-                </div>
-                <div class="d-flex align-items-center justify-content-around">
-                    <router-link class="col p-0 py-3 m-0 text-center color_0" :to="{name:'childActivity',
-                        params:{id:activityId}}"><small class="color_0">Activity</small></router-link>
-                    <router-link class="col p-0 text-center color_0" :to="{name:'childBehaviour', params:{id:1}}"><small class="color_0">Behaviour</small></router-link>
-                    <router-link class="col p-0 text-center color_0" :to="{name:'childHomework', params:{id:1}}"><small class="color_0">Homework</small></router-link>
-                    <router-link class="col p-0 text-center color_0" :to="{name:'app'}"><small class="color_0">More</small></router-link>
-                </div>
-            </section>
-            <section class="p-2">
-                <router-view></router-view>
-            </section>
+    <div id="child" class="">
+        <div v-if="isLoading" class="" key="loading">
         </div>
-        <div id="errorFetching">
-            <div>
-                <h4 class="text-center">{{this.errorMessage}}</h4>
+        <div id="child" v-else key="loaded">
+            <page>
+            <div slot="header">
+                <section class="page-header primary-bg d-flex flex-wrap justify-content-center">
+                    <div class="col-xl-8 col px-0">
+                        <div class="d-flex align-items-center">
+                            <div class="col-xl-2 col">
+                                <avatar :image="child.avatar" class="p-2" :rounded="true" >
+                                </avatar>
+                            </div>
+                            <div class="col-8">
+                                <h4 class="color_0 m-0">{{child.names}}</h4>
+                                <router-link class="m-0 color_0" :to="{name:'childHomework', params:{id:1}}"><small
+                                             class="color_0">view profile</small></router-link>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center  col-12 justify-content-around">
+                            <router-link class="col p-0 py-3 m-0 text-center color_0" :to="{name:'childActivity',
+                            params:{id:activityId}}"><small class="color_0">Activity</small></router-link>
+                        <router-link class="col p-0 text-center color_0" :to="{name:'childBehaviour', params:{id:1}}"><small class="color_0">Behaviour</small></router-link>
+                        <router-link class="col p-0 text-center color_0" :to="{name:'childHomework', params:{id:1}}"><small class="color_0">Homework</small></router-link>
+                        <router-link class="col p-0 text-center color_0" :to="{name:'app'}"><small class="color_0">More</small></router-link>
+                        </div>
+                    </div>
+                </section>
             </div>
+            <div id="childContent">
+                <section class="p-2">
+                    <router-view></router-view>
+                </section>
+            </div>
+            <div id="errorFetching">
+                <div>
+                    <h4 class="text-center">{{this.errorMessage}}</h4>
+                </div>
+            </div>
+            </page>
         </div>
     </div>
 </template>
 <script>
 import {mapGetters, mapActions, mapMutations} from 'vuex';
 import avatar from '../../../components/avatarHolder.vue';
+import page from '../../../components/page.vue';
 export default{
     name : "Child",
     created(){
@@ -67,7 +76,8 @@ export default{
         });
     },
     components:{
-        avatar
+        avatar,
+            page
     },
     data(){
         return {
@@ -82,22 +92,22 @@ export default{
         ...mapGetters('child', [
             'getCurrentClassroom'
         ]),
-        ...mapGetters('activity', [
-            'getCurrentActivity'
-        ])
+            ...mapGetters('activity', [
+                'getCurrentActivity'
+            ])
     },
     methods : {
         ...mapActions('child',[
             "fetchChild",
             "fetchChildWithProps"
         ]),
-        ...mapMutations("child", [
-            "setGroup"
-        ]), 
-        ...mapActions('activity', {
-            fetchActivities : "pullActivities"
-        })
-            
+            ...mapMutations("child", [
+                "setGroup"
+            ]), 
+            ...mapActions('activity', {
+                fetchActivities : "pullActivities"
+            })
+
     }
 
 }

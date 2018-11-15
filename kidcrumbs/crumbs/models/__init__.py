@@ -1,11 +1,10 @@
 from .activity import Activity, ActivityComment, ActivityItem, ActivityCommentReply
 from .announcement import Announcement
 from .assessment import Assessment, AssessmentPaper, AssessmentResult, AssessmentType, Grade, GradeSystem
-from .attitude import AttitudeResponse
 from .classroom import Classroom, ClassroomBase
 from .enrollment import Enrollment
 from .group import Group
-from .habit import Habit, HabitOption
+from .habit import Habit, HabitOption, HabitResponse
 from .home_work import HomeWork
 from .member import Membership
 from .person import Person, PersonContact, PersonSchoolRole, AdminPerson, NonAdminPerson, SuperAdminPerson, \

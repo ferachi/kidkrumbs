@@ -14,7 +14,7 @@ class Activity(models.Model):
     color = models.CharField(max_length=20, choices=COLORS, default='DODGERBLUE')
     tags = models.CharField(max_length=150, help_text="tags seperated by commas", blank=True)
     date = models.DateField()
-    created_by = models.ForeignKey('AdminPerson', on_delete=models.DO_NOTHING, related_name='activities')
+    created_by = models.ForeignKey('AdminPerson', on_delete=models.DO_NOTHING, related_name='created_activities')
     created_date = models.DateTimeField(auto_now_add=True)
     timestamp = models.DateTimeField(auto_now=True)
 
@@ -37,7 +37,7 @@ class ActivityItem(models.Model):
     time = models.TimeField(null=True, blank=True)
     activity = models.ForeignKey('Activity', on_delete=models.CASCADE, related_name='activities')
     color = models.CharField(max_length=20, choices=COLORS, default='DODGERBLUE')
-    created_by = models.ForeignKey('AdminPerson', on_delete=models.DO_NOTHING, related_name='created_activities')
+    created_by = models.ForeignKey('AdminPerson', on_delete=models.DO_NOTHING, related_name='created_activity_items')
     created_date = models.DateTimeField(auto_now_add=True)
     timestamp = models.DateTimeField(auto_now=True)
 
@@ -48,12 +48,16 @@ class ActivityItem(models.Model):
         verbose_name_plural = 'activity items'
         ordering = ['-created_date', 'title']
 
-
+# Would have used generic comment class to help with activity (comments)
+# announcements (q & a's) and Suggestion Boxes and
+# any other forum like feature, with the help of 
+# ContentType but this would mean that the comment table will be 
+# over populated too soon. Hence seperate comment/forum tables 
 class ActivityComment(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     person = models.ForeignKey('Person', on_delete=models.CASCADE, related_name='activity_comments')
-    activity = models.ForeignKey('Activity', on_delete=models.CASCADE, related_name='activity_comments')
-    comment = models.TextField()
+    activity = models.ForeignKey('Activity', on_delete=models.CASCADE, related_name='comments')
+    comment = models.TextField(max_length=300)
     created_date = models.DateTimeField(auto_now_add=True)
     timestamp = models.DateTimeField(auto_now=True)
 
@@ -66,7 +70,7 @@ class ActivityComment(models.Model):
 
 class ActivityCommentReply(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    person = models.ForeignKey('Person', on_delete=models.CASCADE, related_name='comment_replies')
+    person = models.ForeignKey('Person', on_delete=models.CASCADE, related_name='activity_comment_replies')
     activity_comment = models.ForeignKey('ActivityComment', on_delete=models.CASCADE, related_name='replies')
     comment = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)

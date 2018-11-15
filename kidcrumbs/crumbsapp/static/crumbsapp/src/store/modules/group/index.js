@@ -4,7 +4,7 @@ import getters from './getters.coffee';
 
 const state = {
     groups : [],
-    group : [],
+    group : null
 }
 
 

@@ -22,3 +22,33 @@ class Announcement(models.Model):
 
     class Meta:
         ordering = ['-published_date']
+
+class AnnouncementQuestion(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    person = models.ForeignKey('Person', on_delete=models.CASCADE, related_name='announcement_questions')
+    announcement = models.ForeignKey('Announcement', on_delete=models.CASCADE, related_name='announcement_questions')
+    comment = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+    timestamp = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return "{0}'s question on {1}".format(self.person.full_name, self.announcement.name)
+
+    class Meta:
+        ordering = ['-created_date']
+
+
+class AnnouncementQuestionReply(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    person = models.ForeignKey('Person', on_delete=models.CASCADE, related_name='announcement_question_replies')
+    announcement_question = models.ForeignKey('AnnouncementQuestion', on_delete=models.CASCADE, related_name='replies')
+    comment = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+    timestamp = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return "{0}'s reply to {1}".format(self.person.full_name, self.announcement_question.person.full_name)
+
+    class Meta:
+        ordering = ['-created_date']
+

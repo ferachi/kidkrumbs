@@ -12,11 +12,15 @@
                     <p>{{activity.note}}</p>
                 </section>
                 <section class="activities-pane">
-                    <activityItems :activityId='activity.id' :activities="activity.activities" :school="activity.school"></activityItems>
+                    <activityItems :canEdit="editable" :activityId='activity.id' :activities="activity.activities" :school="activity.school"></activityItems>
                 </section>
             </div>
             <div v-else-if="selectedTab == tabTitles[1]">
-                <h4>Comments</h4>
+                <section class="activity-head">
+                    <h5>Teachers' Comment</h5>
+                    <p>{{activity.note}}</p>
+                </section>
+                <comment :comments="comments" @add-comment="addComment($event)" @reply-comment="replyComment($event)"></comment>
             </div>
             <div v-else></div>
         </div>
@@ -24,6 +28,7 @@
 </template>
 <script>
 import tabHead from '../../../components/tabHead.vue';
+import comment from '../../../components/Comment.vue';
 import activityItems from '../components/ActivityItems.vue';
 import {mapGetters, mapActions} from 'vuex';
 export default{
@@ -33,14 +38,27 @@ export default{
             this.isLoading = false;
         });
     }, 
+    props:{
+        editable : {
+            type : Boolean,
+            default : false
+        }
+    },
     components : {
         tabHead,
-        activityItems
+        activityItems,
+        comment
     },
     computed:{
         ...mapGetters("activity",{
             activity : "getActivity"
-        })
+        }),
+        ...mapGetters("profile",{
+            profile : "getProfile"
+        }),
+        comments(){
+            return this.activity.comments;
+        }
     },
     data: () => ({
         tabTitles : [ 'activity', 'comment'],
@@ -49,11 +67,21 @@ export default{
     }),
     methods:{
         ...mapActions('activity', [
+            'saveComment',
+            'saveReplyComment',
             'pullActivity'
         ]),
         tabClicked(tab){
             this.selectedTab = tab;
         },
+        addComment(_comment){
+            let data = {activity : this.activity.id, person : this.profile.user, comment : _comment}
+            this.saveComment(data);
+        },
+        replyComment(reply){
+            let data = {activity_comment : reply.comment.id, person: this.profile.user, comment:reply.data}; 
+            this.saveReplyComment(data);
+        }
     }
 }
 </script>

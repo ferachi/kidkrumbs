@@ -18,6 +18,7 @@ const activitiesRoute = {
             path : ":id",
             component : ActivityDetail,
             name : 'activityDetail',
+            props : {editable : true}
         }
 
     ]

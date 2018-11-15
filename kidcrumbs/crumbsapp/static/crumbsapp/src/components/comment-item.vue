@@ -18,17 +18,15 @@
                 </div>
                 <div class="person-comment">
                     <slot>
-                    <p class="m-0">
-                    <small class="color_5">
+                    <p class="m-0 color_5">
                         {{comment.comment}}
-                    </small>
                     </p>
                     </slot>
                 </div>
                 <div v-if="canReply" class="controls">
                     <div class="d-flex">
-                    <p class="pr-5"><small><span class="primary-color">reply</span> </small></p>
-                    <p class=""><small><span class="secondary-color"> view replies </span></small></p>
+                    <p class="col-auto px-0" @click="$emit('reply', comment)"><small><span class="primary-color">reply</span> </small></p>
+                    <p class="px-5"><small><span class="secondary-color"> view replies </span></small></p>
                     </div>
                 </div>
             </div>

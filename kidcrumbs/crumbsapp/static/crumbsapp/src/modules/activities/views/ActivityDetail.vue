@@ -16,8 +16,11 @@
                 </section>
             </div>
             <div v-else-if="selectedTab == tabTitles[1]">
-                <h4>Comments</h4>
-                <comment :comments="comments" @add-comment="addComment($event)"></comment>
+                <section class="activity-head">
+                    <h5>Teachers' Comment</h5>
+                    <p>{{activity.note}}</p>
+                </section>
+                <comment :comments="comments" @add-comment="addComment($event)" @reply-comment="replyComment($event)"></comment>
             </div>
             <div v-else></div>
         </div>
@@ -54,7 +57,6 @@ export default{
             profile : "getProfile"
         }),
         comments(){
-            console.log(this.activity, "my name")
             return this.activity.comments;
         }
     },
@@ -66,6 +68,7 @@ export default{
     methods:{
         ...mapActions('activity', [
             'saveComment',
+            'saveReplyComment',
             'pullActivity'
         ]),
         tabClicked(tab){
@@ -74,6 +77,10 @@ export default{
         addComment(_comment){
             let data = {activity : this.activity.id, person : this.profile.user, comment : _comment}
             this.saveComment(data);
+        },
+        replyComment(reply){
+            let data = {activity_comment : reply.comment.id, person: this.profile.user, comment:reply.data}; 
+            this.saveReplyComment(data);
         }
     }
 }

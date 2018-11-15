@@ -19,17 +19,17 @@ class ActivityItemSerializer(serializers.ModelSerializer):
         return instance
 
 class ActivityCommentReplySerializer(serializers.ModelSerializer):
+    person = PersonSerializer(read_only=True)
     class Meta:
         model = ActivityCommentReply
         fields = "__all__"
-        depth = 1
 
 class ActivityCommentSerializer(serializers.ModelSerializer):
     replies = ActivityCommentReplySerializer(many=True, read_only=True)
+    person = PersonSerializer(read_only=True)
     class Meta:
         model = ActivityComment
         fields = "__all__"
-        depth = 1
 
 class ActivitySerializer(serializers.ModelSerializer):
     activities = ActivityItemSerializer(many=True, read_only=True)

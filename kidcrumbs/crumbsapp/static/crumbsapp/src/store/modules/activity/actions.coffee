@@ -1,5 +1,5 @@
 import http from "../../../http";
-import {GROUP_ACTIVITIES,ACTIVITIES, ACTIVITY, ACTIVITYITEMS, ACTIVITYITEM, ACTIVITYCOMMENTS} from "../../../urls";
+import {GROUP_ACTIVITIES,ACTIVITIES, ACTIVITY, ACTIVITYITEMS, ACTIVITYITEM, ACTIVITYCOMMENTS, ACTIVITYCOMMENTREPLIES} from "../../../urls";
 
 
 # Pulls a groups' activities 
@@ -30,6 +30,16 @@ saveComment = ({commit}, comment) ->
     http.post(ACTIVITYCOMMENTS, comment).then (response)->
         _comment = response.data
         commit("addActivityComments", _comment)
+        _comment
+            
+saveReplyComment = ({commit, getters}, comment) ->
+    console.log comment, 'what is the coment'
+    http.post(ACTIVITYCOMMENTREPLIES, comment).then (response)->
+        _comment = response.data
+        activity = getters.getActivity
+        originalComment = _.find activity.comments, {id : _comment.activity_comment}
+        originalComment.replies.push(_comment)
+        commit 'setActivity', activity
         _comment
             
 saveActivity = ({dispatch}, item) ->
@@ -70,4 +80,4 @@ deleteActivityItem = ({dispatch}, {id, activity}) ->
     http.delete(ACTIVITYITEM(id)).then (response)->
         dispatch('pullActivity',activity)
 
-export {pullActivities, pullActivity,saveActivity, deleteActivity,updateActivity, saveActivityItem, updateActivityItem, deleteActivityItem, saveComment}
+export {pullActivities, pullActivity,saveActivity, deleteActivity,updateActivity, saveActivityItem, updateActivityItem, deleteActivityItem, saveComment, saveReplyComment}

@@ -5,8 +5,8 @@
         </div>
         <div v-else class="image d-flex align-items-center justify-content-center" :class="{'grey_bg_2':showBg}">
             <div class="col px-0">
-                <p class="grey_5" v-if="rounded"><i class="fas fa-user-circle fa-fw" :class="size"></i></p>
-                <p class="grey_5" v-else><i class="fas fa-user fa-fw" :class"size"></i></p>
+                <p class="grey_5" v-if="rounded"><i  :class="['fas fa-user-circle fa-fw',size]"></i></p>
+                <p class="grey_5" v-else><i :class="['fas fa-user fa-fw',size]" ></i></p>
             </div>
         </div>
     </div>

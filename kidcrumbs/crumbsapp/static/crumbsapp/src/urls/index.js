@@ -32,9 +32,11 @@ export const ACTIVITYCOMMENTREPLIES = '/api/activity-comment-replies/'; // this 
 export const GROUPS = '/api/groups/'; // All Groups, this list differs depending on the user requesting it
 export const GROUP = (id) => `${GROUPS}${id}/`; // route to a single group
 export const GROUP_ACTIVITIES = (id) => `${GROUP(id)}get_activities/`; // route to a groups activity list
+export const GROUP_ROUTINES = (id) => `${GROUP(id)}get_routines/`; // route to a groups activity list
 export const GROUP_MEMBERS = (id) => `${GROUP(id)}get_current_members/`; // route to a groups member list
 export const GROUP_STUDENTS = (id) => `${GROUP(id)}get_current_students/`; // route to a groups student list
 export const GROUP_TEACHERS = (id) => `${GROUP(id)}get_current_teachers/`; // route to a groups teacher list
+export const GROUP_HABITS = (id) => `${GROUP(id)}get_habits/`; // route to a groups habit list
 
 export const CLASSROOMS = '/api/classrooms/'; // All classrooms, this list differs depending on the user requesting it 
 export const CLASSROOM = (id) => `${CLASSROOMS}${id}/`; // route to a single classroom
@@ -43,3 +45,13 @@ export const CLASSROOM = (id) => `${CLASSROOMS}${id}/`; // route to a single cla
 // SCHOOLS
 export const SCHOOLS = '/api/schools/'; // All Schools, this list differs depending on the user requesting it
 export const SCHOOL = (id) => `${SCHOOLS}${id}/`; // route to a single school export const SCHOOL_GROUPS = (id) => `${SCHOOL(id)}get_groups/`; // route to a schools groups
+
+
+// ROUTINES
+export const ROUTINES = '/api/routines/';
+export const ROUTINE = (id) => `${ROUTINES}${id}/`;
+export const ROUTINE_STUDENT_ROUTINES = (id) => `${ROUTINE(id)}get_students_routines/`;
+export const STUDENT_ROUTINES = '/api/student-routines/';
+export const STUDENT_ROUTINE =  (id) => `${STUDENT_ROUTINES}${id}/`;
+export const STUDENT_ROUTINE_ATTITUDES =  (id) => `${STUDENT_ROUTINE(id)}get_students_attitudes/`;
+export const ATTITUDES = '/api/attitudes/';

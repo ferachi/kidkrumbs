@@ -19,7 +19,8 @@ class HabitOption(models.Model):
     TYPES = (
         ("CH", "choice"),
         ("TX", "text"),
-        ("DT", "date")
+        ("DT", "date"),
+        ("RD", "radio")
     )
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     habit = models.ForeignKey(Habit, on_delete = models.CASCADE, related_name="options")
@@ -37,11 +38,11 @@ class HabitOption(models.Model):
 class HabitResponse(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     habit_option = models.ForeignKey("HabitOption", on_delete=models.CASCADE, related_name="responses", null=True, blank=True)
-    student_routine = models.ForeignKey("StudentRoutine", on_delete =models.CASCADE, related_name="habits")
+    student_routine = models.ForeignKey("StudentRoutine", on_delete =models.CASCADE, related_name="attitudes")
     # should default to title in habit option; only type in
     # a title if there is no option.
     title = models.CharField(max_length=20, blank=True)
-    value = models.CharField(max_length=20)
+    value = models.CharField(max_length=20, blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
     timestamp = models.DateTimeField(auto_now=True)
 

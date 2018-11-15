@@ -4,6 +4,8 @@ import profile from './modules/profile.coffee';
 import help from './modules/help.coffee';
 import student from './modules/student';
 import child from './modules/child';
+import group from './modules/group';
+import routine from './modules/routine';
 import activity from './modules/activity';
 import menu from './modules/menu.coffee';
 import * as actions from './actions';
@@ -23,9 +25,11 @@ export default {
         activity,
         auth,
 		child,
+		group,
 		help,
 		menu,
         profile,
+        routine,
         student,
 		theme,
 	}

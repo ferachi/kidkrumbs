@@ -3,8 +3,10 @@ import mutations from './mutations.coffee';
 import getters from './getters.coffee';
 
 const state = {
-    groups : [],
-    group : null
+    routines : [],
+    routine : null,
+    studentRoutine : null,
+    studentsRoutines : []
 }
 
 

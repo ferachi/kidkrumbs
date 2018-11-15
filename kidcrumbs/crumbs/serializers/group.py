@@ -7,7 +7,7 @@ from .membership import MembershipSerializer
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = Group
-        fields = "__all__"
+        exclude = ["habits"]
     
 
 # Student group serializer

@@ -1,5 +1,5 @@
 import http from "../../http";
-import {PROFILE, RELATIONSHIPS, RELATIVES, ROLES} from "../../urls";
+import {PERSON, PERSON_RELATIONSHIPS, PERSON_RELATIVES, PERSON_ROLES} from "../../urls";
 
 
 state =
@@ -23,11 +23,11 @@ mutations =
 
 actions = 
     # Fetch users profile (person object)
-    fetchProfile : ({commit, dispatch, state}, {id}) ->
-        person = http.get(PROFILE(id))
-        relatives = http.get(RELATIVES(id))
-        relationships = http.get(RELATIONSHIPS(id))
-        roles = http.get(ROLES(id))
+    fetchProfile : ({commit, dispatch, state}, id) ->
+        person = http.get(PERSON(id))
+        relatives = http.get(PERSON_RELATIVES(id))
+        relationships = http.get(PERSON_RELATIONSHIPS(id))
+        roles = http.get(PERSON_ROLES(id))
 
         Promise.all([person,relatives,relationships, roles]).then (responses) ->
 

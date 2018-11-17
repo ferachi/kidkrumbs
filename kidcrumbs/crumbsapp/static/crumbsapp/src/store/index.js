@@ -1,6 +1,7 @@
 import theme from './modules/theme';
 import auth from './modules/auth.coffee';
 import profile from './modules/profile.coffee';
+import person from './modules/person.coffee';
 import help from './modules/help.coffee';
 import student from './modules/student';
 import child from './modules/child';
@@ -29,6 +30,7 @@ export default {
 		help,
 		menu,
         profile,
+        person,
         routine,
         student,
 		theme,

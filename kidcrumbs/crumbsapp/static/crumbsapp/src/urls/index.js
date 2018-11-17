@@ -4,12 +4,19 @@ export const AUTH_USER = (id) => `/api/accounts/${id}/`; // access to the logged
 
 
 // USER PROFILES
+export const PROFILES = '/api/profiles/'; // All Users; Will not be available 
+export const PROFILE = (id) => `${PROFILES}${id}/`; // route to a single person
+export const RELATIVES = (id) => `${PROFILE(id)}get_relatives/`; // gets the users relatives
+export const RELATIONSHIPS = (id) => `${PROFILE(id)}get_relationships/`; // gets the users relatives
+export const ROLES = (id) => `${PROFILE(id)}get_roles/`; // gets the users schools roles
+
+
+// PEOPLE PROFILES
 export const PEOPLE = '/api/people/'; // All Users; Will not be available 
 export const PERSON = (id) => `${PEOPLE}${id}/`; // route to a single person
-export const RELATIVES = (id) => `${PERSON(id)}get_relatives/`; // gets the users relatives
-export const RELATIONSHIPS = (id) => `${PERSON(id)}get_relationships/`; // gets the users relatives
-export const ROLES = (id) => `${PERSON(id)}get_roles/`; // gets the users schools roles
-
+export const PERSON_RELATIVES = (id) => `${PERSON(id)}get_relatives/`; // gets the users relatives
+export const PERSON_RELATIONSHIPS = (id) => `${PERSON(id)}get_relationships/`; // gets the users relatives
+export const PERSON_ROLES = (id) => `${PERSON(id)}get_roles/`; // gets the users schools roles
 
 // STUDENTS
 export const STUDENTS = '/api/students/'; // All Students, this list differs depending on the user requesting it 

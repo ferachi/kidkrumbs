@@ -6,10 +6,7 @@ from crumbs.serializers import PersonSerializer, RelationSerializer, PersonSchoo
 from crumbs.models import Person, Relation, PersonSchoolRole
 
 
-# class AccountViewSet(viewsets.ModelViewSet):
-# removing the ListModelMixin and CreateModelMixin by removing the ModelViewSet
-# if a call to api/accounts/ is made, nothing is returned
-class PersonViewSet(mixins.RetrieveModelMixin,mixins.UpdateModelMixin,viewsets.GenericViewSet):
+class ProfileViewSet(mixins.RetrieveModelMixin,mixins.UpdateModelMixin,viewsets.GenericViewSet):
     queryset = Person.objects.all()
     serializer_class = PersonSerializer
 
@@ -34,6 +31,41 @@ class PersonViewSet(mixins.RetrieveModelMixin,mixins.UpdateModelMixin,viewsets.G
 
     @detail_route()
     def get_roles(self, request, pk=None):
+        """
+        Gets the persons relatives
+        """
+        person = self.get_object()
+        school_roles = PersonSchoolRole.objects.filter(person=person)
+        serializer = PersonSchoolRoleSerializer(school_roles, many=True)
+        return Response(serializer.data)
+
+
+class PersonViewSet(mixins.RetrieveModelMixin,mixins.UpdateModelMixin,viewsets.GenericViewSet):
+    queryset = Person.objects.all()
+    serializer_class = PersonSerializer
+    lookup_field = 'username'
+
+    @detail_route()
+    def get_relationships(self, request, username=None):
+        """
+        Gets the source relations
+        """
+        person = self.get_object()
+        relations = Relation.objects.filter(person=person)
+        serializer = RelationSerializer(relations, many=True)
+        return Response(serializer.data)
+
+    @detail_route()
+    def get_relatives(self, request, username=None):
+        """
+        Gets the persons relatives
+        """
+        person = self.get_object()
+        serializer = PersonSerializer(person.relatives, many=True)
+        return Response(serializer.data)
+
+    @detail_route()
+    def get_roles(self, request, username=None):
         """
         Gets the persons relatives
         """

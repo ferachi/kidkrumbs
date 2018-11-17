@@ -4,7 +4,7 @@ from .classroom import ClassroomViewSet
 from .group import GroupViewSet 
 from .habit import HabitViewSet, HabitOptionViewSet, HabitResponseViewSet 
 from .membership import MembershipViewSet 
-from .person import PersonViewSet 
+from .person import PersonViewSet,ProfileViewSet
 from .routine import RoutineViewSet, StudentRoutineViewSet 
 from .school import SchoolViewSet 
 from .student import StudentViewSet 

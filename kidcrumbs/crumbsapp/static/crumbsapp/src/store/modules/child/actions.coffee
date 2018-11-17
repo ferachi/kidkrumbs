@@ -1,5 +1,5 @@
 import http from "../../../http";
-import {STUDENT, STUDENTS, STUDENT_MEMBERSHIPS, STUDENT_GROUPS, STUDENT_CURRENT_GROUPS} from "../../../urls";
+import {STUDENT, STUDENTS, STUDENT_MEMBERSHIPS, STUDENT_GROUPS, STUDENT_CURRENT_GROUPS, STUDENT_HABITS, STUDENT_HABITS_BY_GROUP} from "../../../urls";
 
 
 fetchChild = ({commit}, username) ->
@@ -21,6 +21,30 @@ fetchChildMemberships = ({commit, getters}) ->
         commit 'setChildMemberships', memberships
         memberships
     
+
+# Fetches the currently selected childs' habits
+fetchChildHabits = ({commit, getters}) ->
+    child = getters.getChild
+
+    return null unless child 
+
+    http.get(STUDENT_HABITS(child.username)).then (response)->
+        habits = response.data
+        commit 'setChildHabits', habits
+        habits
+    
+
+# Fetches the currently selected childs' habits
+fetchChildHabitsByGroup = ({commit, getters}, groupId) ->
+    child = getters.getChild
+
+    return null unless child 
+
+    http.get(STUDENT_HABITS_BY_GROUP(child.username, groupId)).then (response)->
+        habits = response.data
+        commit 'setChildHabits', habits
+        habits
+
 
 # Fetches the currently selected childs' groups
 fetchChildGroups = ({commit, getters}) ->
@@ -52,11 +76,12 @@ fetchChildWithProps = ({commit, dispatch, getters, state}, username) ->
         currentGroups = dispatch('fetchChildCurrentGroups')
         groups = dispatch('fetchChildGroups')
         memberships = dispatch('fetchChildMemberships')
+        habits = dispatch('fetchChildHabits')
 
-        Promise.all([currentGroups, groups, memberships]).then (props) ->
+        Promise.all([currentGroups, groups, memberships, habits]).then (props) ->
             commit 'updateChildren', child
             console.log getters.getChild, getters.getChildGroups
             child
 
 
-export {fetchChild, fetchChildGroups, fetchChildCurrentGroups, fetchChildMemberships , fetchChildWithProps}
+export {fetchChild, fetchChildGroups, fetchChildCurrentGroups, fetchChildMemberships ,fetchChildHabitsByGroup, fetchChildHabits, fetchChildWithProps}

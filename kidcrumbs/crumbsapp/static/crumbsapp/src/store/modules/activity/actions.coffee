@@ -7,8 +7,9 @@ import {GROUP_ACTIVITIES,ACTIVITIES, ACTIVITY, ACTIVITYITEMS, ACTIVITYITEM, ACTI
 pullActivities = ({commit}, id) ->
     http.get(GROUP_ACTIVITIES(id)).then (response)->
         activities = response.data
-        commit 'setActivities', activities
+        commit 'addActivities', activities
         activities
+
 
 pullActivity = ({commit}, id) ->
     http.get(ACTIVITY(id)).then (response)->

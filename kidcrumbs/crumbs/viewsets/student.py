@@ -2,8 +2,8 @@ from rest_framework import permissions, viewsets, status
 from rest_framework import mixins
 from rest_framework.response import Response
 from rest_framework.decorators import detail_route, list_route
-from crumbs.serializers import StudentSerializer, GroupSerializer, MembershipSerializer, StudentGroupSerializer
-from crumbs.models import Student, Group, Membership
+from crumbs.serializers import StudentSerializer, GroupSerializer, MembershipSerializer, StudentGroupSerializer, StudentRoutineSerializer
+from crumbs.models import Student, Group, Membership, StudentRoutine
 from crumbs.permissions import CanViewStudents
 
 
@@ -54,3 +54,27 @@ class StudentViewSet(viewsets.ModelViewSet):
         memberships = Membership.objects.filter(person=student)
         serializer = MembershipSerializer(memberships, many=True)
         return Response(serializer.data)
+
+    @detail_route()
+    def get_routines(self, request, username=None):
+        """
+        Gets the Students' routines(habits)
+        """
+        student = self.get_object()
+        routines = StudentRoutine.objects.filter(student=student)
+        serializer = StudentRoutineSerializer(routines, many=True)
+        return Response(serializer.data)
+
+    @detail_route()
+    def get_routines_by_group(self, request, username=None):
+        """
+        Gets the Students' routines(habits) by a group specified
+        """
+        group = request.query_params.get('group')
+        student = self.get_object()
+        if group:
+            routines = StudentRoutine.objects.filter(routine__group__id__exact=group,student=student)
+            serializer = StudentRoutineSerializer(routines, many=True)
+            return Response(serializer.data)
+        return ([])
+

@@ -16,16 +16,17 @@ getters =
         if state.child
             state.child.memberships
 
+    getChildHabits : (state) ->
+        if state.child
+            state.child.habits
+
     getChildGroups : (state) ->
         if state.child
             state.child.groups
 
-
     getChildCurrentGroups : (state) ->
         if state.child
             state.child.currentGroups
-
-
 
     getCurrentClassroom : (state, getters) ->
         if state.child

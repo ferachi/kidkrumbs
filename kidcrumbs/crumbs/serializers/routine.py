@@ -16,6 +16,7 @@ class StudentRoutineListSerializer(serializers.ListSerializer):
 
 
 class StudentRoutineSerializer(serializers.ModelSerializer):
+    routine = RoutineSerializer(read_only=True)
     attitudes = HabitResponseSerializer(many=True, read_only=True)
     class Meta:
         list_serializer_class = StudentRoutineListSerializer

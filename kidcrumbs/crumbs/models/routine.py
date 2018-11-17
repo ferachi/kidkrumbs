@@ -7,6 +7,7 @@ class Routine(models.Model):
     group = models.ForeignKey("Group", on_delete=models.CASCADE, related_name="routines")
     date = models.DateField()
     comment = models.TextField(blank=True)
+    public_display = models.BooleanField(default=True)
     created_date = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey('AdminPerson', on_delete=models.DO_NOTHING, related_name='created_routines')
     timestamp = models.DateTimeField(auto_now=True)

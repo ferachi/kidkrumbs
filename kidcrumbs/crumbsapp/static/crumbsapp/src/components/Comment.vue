@@ -1,6 +1,6 @@
 <template>
     <div id="comments" class=" d-flex justify-content-center flex-wrap">
-        <div class="comments col-xl-  px-0">
+        <div class="comments col-12 px-0">
             <section>
                 <div class="my-3">
                     <comment-form @form-submit="submitForm($event)"></comment-form>

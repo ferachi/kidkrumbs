@@ -26,9 +26,15 @@ class StudentRoutineViewSet(viewsets.ModelViewSet):
     serializer_class = StudentRoutineSerializer
 
     def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data, many=isinstance(request.data,list))
+        data = request.data
+        serializer = self.get_serializer(data=data, many=isinstance(data,list))
         serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
+        if isinstance(data, list):
+            routineId = data[0].get('routine')
+        else:
+            routineId = data.get('routine')
+        routine = Routine.objects.get(id=routineId)
+        serializer.save(routine=routine)
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 

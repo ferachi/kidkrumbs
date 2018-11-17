@@ -16,7 +16,9 @@ export const STUDENTS = '/api/students/'; // All Students, this list differs dep
 export const STUDENT = (id) => `${STUDENTS}${id}/`; // route to a single student
 export const STUDENT_GROUPS = (id) => `${STUDENT(id)}get_groups/`; // gets an individual students' groups
 export const STUDENT_MEMBERSHIPS = (id) => `${STUDENT(id)}get_memberships/`; // gets an individual students' memberships
-export const STUDENT_CURRENT_GROUPS = (id) => `${STUDENT(id)}get_current_groups/`; //gets all the current groups for a student 
+export const STUDENT_CURRENT_GROUPS = (id) => `${STUDENT(id)}get_current_groups/`;//gets all the current groups for a student 
+export const STUDENT_HABITS = (id) => `${STUDENT(id)}get_routines/`;//gets all the routines for the student
+export const STUDENT_HABITS_BY_GROUP = (id,group) => `${STUDENT(id)}get_routines_by_group/?group=${group}`; // same as above but by group
 
 
 // ACTIVITIES

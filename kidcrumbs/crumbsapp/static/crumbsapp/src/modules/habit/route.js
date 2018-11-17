@@ -52,7 +52,7 @@ const habitRoute = {
             path:'attitude/:id',
             component : StudentAttitude,
             name : 'studentAttitude',
-            props : {editable : false}
+            props : {editable : true}
         },
     ]
 }

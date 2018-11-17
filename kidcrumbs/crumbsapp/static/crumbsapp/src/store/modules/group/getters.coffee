@@ -13,6 +13,10 @@ getters =
         if state.group
             state.group.habits
 
+    getGroupActivities : (state) ->
+        if state.group
+            state.group.activities
+
     getGroupRoutines : (state) ->
         if state.group
             state.group.routines

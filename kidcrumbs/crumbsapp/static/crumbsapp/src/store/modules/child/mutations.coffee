@@ -19,6 +19,10 @@ mutations =
         if state.child
             state.child = Object.assign {}, state.child,{memberships}
 
+    setChildHabits : (state, habits)->
+        if state.child
+            state.child = Object.assign {}, state.child,{habits}
+
     setChildGroups : (state, groups)->
         state.child = Object.assign {},state.child,{groups}
 

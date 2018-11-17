@@ -27,4 +27,7 @@ mutations =
     setGroupHabits : (state, habits)->
         state.group = Object.assign {},state.group,{habits}
 
+    setGroupActivities : (state, activities)->
+        state.group = Object.assign {},state.group,{activities}
+
 export {mutations as default}

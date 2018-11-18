@@ -15,6 +15,8 @@ router.register(r'classrooms', ClassroomViewSet)
 router.register(r'groups', GroupViewSet)
 router.register(r'people', PersonViewSet)
 router.register(r'students', StudentViewSet)
+router.register(r'subjects', SubjectViewSet)
+router.register(r'student-routines', StudentRoutineViewSet)
 
 urlpatterns = [
     url(r'^$', AppView.as_view(), name='home'),

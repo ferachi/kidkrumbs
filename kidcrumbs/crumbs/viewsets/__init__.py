@@ -4,3 +4,4 @@ from .classroom import ClassroomViewSet
 from .group import GroupViewSet 
 from .person import PersonViewSet 
 from .student import StudentViewSet 
+from .subject import SubjectViewSet, CoreSubjectViewSet

@@ -1,5 +1,5 @@
 <template>
-    <div id="mainApp" class="bg_0">
+    <div id="mainApp" class="bg_aux">
         <div class="d-flex">
             <section class="col-auto p-0">
                 <nav class="d-none d-lg-block bigscreens-menu border-right border_2">

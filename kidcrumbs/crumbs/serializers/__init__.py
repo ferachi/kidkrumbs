@@ -8,4 +8,5 @@ from .person import PersonSerializer, RelationSerializer, PersonSchoolRoleSerial
 from .routine import RoutineSerializer, StudentRoutineSerializer
 from .school import SchoolSerializer
 from .school_group import SchoolGroupSerializer
+from .session import SessionSerializer
 from .student import StudentSerializer

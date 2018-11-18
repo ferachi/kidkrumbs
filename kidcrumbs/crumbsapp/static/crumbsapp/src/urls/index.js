@@ -64,3 +64,7 @@ export const STUDENT_ROUTINES = '/api/student-routines/';
 export const STUDENT_ROUTINE =  (id) => `${STUDENT_ROUTINES}${id}/`;
 export const STUDENT_ROUTINE_ATTITUDES =  (id) => `${STUDENT_ROUTINE(id)}get_students_attitudes/`;
 export const ATTITUDES = '/api/attitudes/';
+
+// ROUTINES
+export const SUBJECTS = '/api/subjects/';
+export const SUBJECT = (id) => `${SUBJECTS}${id}/`;

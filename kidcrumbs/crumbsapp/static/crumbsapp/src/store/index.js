@@ -4,6 +4,7 @@ import profile from './modules/profile.coffee';
 import person from './modules/person.coffee';
 import help from './modules/help.coffee';
 import student from './modules/student';
+import subject from './modules/subject';
 import child from './modules/child';
 import group from './modules/group';
 import routine from './modules/routine';
@@ -33,6 +34,7 @@ export default {
         person,
         routine,
         student,
+        subject,
 		theme,
 	}
 }

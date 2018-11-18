@@ -2,8 +2,9 @@ from rest_framework import permissions, viewsets, status
 from rest_framework import mixins
 from rest_framework.response import Response
 from rest_framework.decorators import detail_route, list_route
-from crumbs.serializers import ActivitySerializer, ActivityItemSerializer
-from crumbs.models import Activity, ActivityItem, AdminPerson
+from crumbs.serializers import ActivitySerializer, ActivityItemSerializer, ActivityCommentSerializer, \
+        ActivityCommentReplySerializer
+from crumbs.models import Activity, ActivityItem, AdminPerson, ActivityComment, ActivityCommentReply,Person
 from django.shortcuts import get_object_or_404
 
 
@@ -29,5 +30,26 @@ class ActivityItemViewSet(viewsets.ModelViewSet):
         if deserialized.is_valid():
             deserialized.save(created_by=person)
             return Response(deserialized.data)
+
+
+class ActivityCommentViewSet(viewsets.ModelViewSet):
+    queryset = ActivityComment.objects.all()
+    serializer_class = ActivityCommentSerializer
+
+    def perform_create(self, serializer):
+        user = self.request.data.pop("person")
+        person = get_object_or_404(Person.objects,user=user)
+        serializer.save(person=person)
+
+
+
+class ActivityCommentReplyViewSet(viewsets.ModelViewSet):
+    queryset = ActivityCommentReply.objects.all()
+    serializer_class = ActivityCommentReplySerializer
+
+    def perform_create(self, serializer):
+        user = self.request.data.pop("person")
+        person = get_object_or_404(Person.objects,user=user)
+        serializer.save(person=person)
 
 

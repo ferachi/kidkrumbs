@@ -8,7 +8,9 @@ SuperAdminPersonManager, OtherAdminPersonManager
 from crumbs.utils.image_uploaders import upload_person_avatars_dir
 from django.core.validators import RegexValidator
 
+
 import uuid
+
 
 class Person(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, related_name='person')
@@ -47,7 +49,6 @@ class Person(models.Model):
 
     class Meta:
         verbose_name_plural = "People"
-
 
 
 

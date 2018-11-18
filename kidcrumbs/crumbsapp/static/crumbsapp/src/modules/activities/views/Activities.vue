@@ -1,9 +1,9 @@
 <template>
-    <div id="activities" class="p-2">
-        <div class="is-loading" v-if="isLoading">
+    <div id="activities ">
+        <div class="is-loading col" v-if="isLoading">
             ... 
         </div>
-        <div v-else>
+        <div v-else class="">
             <section class="header clearfix">
                 <button class="btn btn-primary float-right" @click="addActivity">Add activity</button>
             </section>

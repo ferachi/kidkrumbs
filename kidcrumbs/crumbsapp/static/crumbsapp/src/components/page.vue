@@ -1,11 +1,11 @@
 <template>
-    <div id="pageComponent">
+    <div id="pageComponent" class="d-flex justify-content-center flex-wrap">
         <!-- This component -->
-        <header>
+        <header class="col-12 px-0">
             <slot name='header'>
             </slot>
         </header>
-        <div class="content">
+        <div class="content col-xl-8 col px-0 ">
             <slot>
                 Content comes here
             </slot>

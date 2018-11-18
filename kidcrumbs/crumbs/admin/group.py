@@ -1,5 +1,5 @@
 from django.contrib import admin
-from crumbs.models import Group, Classroom, ClassroomBase
+from crumbs.models import Group, Classroom, ClassroomBase, SchoolGroup, SchoolGroupBase
 
 
 @admin.register(Group)

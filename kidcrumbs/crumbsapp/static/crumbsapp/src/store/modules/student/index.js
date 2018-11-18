@@ -4,6 +4,10 @@ import getters from './getters.coffee';
 
 const state = {
     students : [],
+    student : [],
+    memberships : [],
+    groups : [],
+    currentGroups : []
 }
 
 

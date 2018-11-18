@@ -6,10 +6,8 @@
                     <siteMenu> </siteMenu>
                 </nav>
             </section>
-            <section class="col d-flex justify-content-center p-0 app-content">
-                <div class="col-xl-8 col px-2 p-xl-0">
+            <section class="col p-0 app-content">
                     <router-view></router-view>
-                </div>
             </section>
             <section class="d-lg-none mobile-menu">
                 <nav class="border-top border_2">

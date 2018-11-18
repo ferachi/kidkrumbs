@@ -35,17 +35,22 @@ export const ACTIVITIES = '/api/activities/'; // All Activities, this list diffe
 export const ACTIVITY = (id) => `${ACTIVITIES}${id}/`; // route to a single activity
 export const ACTIVITYITEMS = '/api/activity-items/'; // All sub activities, this list differs with respect to school
 export const ACTIVITYITEM = (id) => `${ACTIVITYITEMS}${id}/`; // route to a single activity item
+export const ACTIVITYCOMMENTS = '/api/activity-comments/'; // this route should only be used to create comments
+export const ACTIVITYCOMMENTREPLIES = '/api/activity-comment-replies/'; // this route should only be used to create replies
 
 
 // GROUPS
 export const GROUPS = '/api/groups/'; // All Groups, this list differs depending on the user requesting it
 export const GROUP = (id) => `${GROUPS}${id}/`; // route to a single group
 export const GROUP_ACTIVITIES = (id) => `${GROUP(id)}get_activities/`; // route to a groups activity list
+export const GROUP_ROUTINES = (id) => `${GROUP(id)}get_routines/`; // route to a groups activity list
+export const GROUP_MEMBERS = (id) => `${GROUP(id)}get_current_members/`; // route to a groups member list
+export const GROUP_STUDENTS = (id) => `${GROUP(id)}get_current_students/`; // route to a groups student list
+export const GROUP_TEACHERS = (id) => `${GROUP(id)}get_current_teachers/`; // route to a groups teacher list
+export const GROUP_HABITS = (id) => `${GROUP(id)}get_habits/`; // route to a groups habit list
 
 export const CLASSROOMS = '/api/classrooms/'; // All classrooms, this list differs depending on the user requesting it 
 export const CLASSROOM = (id) => `${CLASSROOMS}${id}/`; // route to a single classroom
-<<<<<<< Updated upstream
-=======
 export const CLASSROOM_SUBJECTS = (id) => `${CLASSROOM(id)}get_subjects/`; // route to a single classrooms' subjects
 
 
@@ -66,4 +71,3 @@ export const ATTITUDES = '/api/attitudes/';
 // ROUTINES
 export const SUBJECTS = '/api/students/';
 export const SUBJECT = (id) => `${SUBJECTS}${id}/`;
->>>>>>> Stashed changes

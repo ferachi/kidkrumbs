@@ -56,6 +56,7 @@ fetchChildEnrollments = ({commit, getters}) ->
         commit 'setChildEnrollments', enrollments
         enrollments
     
+
 # Fetches the currently selected childs' habits
 fetchChildHabitsByGroup = ({commit, getters}, groupId) ->
     child = getters.getChild

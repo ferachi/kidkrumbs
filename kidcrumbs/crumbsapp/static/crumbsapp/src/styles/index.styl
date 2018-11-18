@@ -22,16 +22,77 @@ a
 .card
     background-color shade_0
     box-shadow 0 1px 1px 1px rgba(0,0,0,.14), 0 -1px 1px -2px rgba(0,0,0,.2), 0 0px 1px 1px rgba(0,0,0,.12)
+    border 1px solid shade_1 !important
     // box-shadow 0 1px 1px 1px shade_2, 0 -1px 1px -2px shade_1, 0 0px 1px 1px shade_1
 
-.cad
-    background-color shade_0
-    border 1px solid
-    border-color shade_2 
+.md-checkbox.md-theme-default.md-checked.md-primary
+    .md-checkbox-container
+        background-color primary_color !important
+        border-color primary_color !important
 
+.md-checkbox.md-theme-default.md-disabled.md-checked
+    .md-checkbox-container
+        background-color secondary_color !important
+        border-color secondary_color !important
+
+.md-checkbox.md-theme-default .md-checkbox-container
+    border-color shade_4 !important
+
+.md-radio.md-theme-default.md-checked.md-disabled.md-primary .md-radio-container
+    border-color secondary_color !important
+
+.md-radio.md-theme-default.md-checked.md-primary .md-radio-container
+    border-color primary_color !important
+
+.md-radio.md-theme-default.md-checked.md-primary .md-ripple
+    color primary_color !important
+
+.md-radio.md-theme-default.md-checked.md-disabled.md-primary .md-radio-container:after
+    background-color secondary_color
+
+.md-radio.md-theme-default.md-checked.md-primary .md-radio-container:after
+    background-color primary_color
+    
+.md-field.md-theme-default.md-focused .md-input,
+.md-field.md-theme-default.md-focused .md-textarea,
+.md-field.md-theme-default.md-has-value .md-input,
+.md-field.md-theme-default.md-has-value .md-textarea 
+    -webkit-text-fill-color shade_4 !important
+    text-fill-color shade_4 !important
+    color shade_4 !important
+
+.md-field.md-theme-default.md-focused .md-input,
+.md-field.md-theme-default.md-focused .md-textarea,
+.md-field.md-theme-default.md-highlight .md-input,
+.md-field.md-theme-default.md-highlight .md-textarea
+    color primary_color !important
+.md-field.md-theme-default:after
+    background-color shade_4 !important
+.md-field.md-theme-default:before
+    background-color primary_color !important
+
+.md-datepicker-dialog.md-theme-default .md-datepicker-header
+    background-color primary_color !important
+.md-datepicker-dialog.md-theme-default
+    color shade_4 !important
+.md-datepicker-dialog.md-theme-default .md-datepicker-today
+    color primary_color !important
+
+.md-button.md-theme-default.md-primary
+    color primary_color !important
+.md-datepicker-dialog.md-theme-default
+    color primary_color !important
+    background-color shade_0 !important
+.md-datepicker-dialog.md-theme-default .md-datepicker-week
+    color shade_2 !important
+.md-datepicker-dialog.md-theme-default .md-datepicker-day-button.md-datepicker-selected
+    background-color primary_color
+.md-button.md-theme-default
+    color shade_4 !important
 .ctk-date-time-picker .field .field-input
     background-color shade_1 !important
     color shade_4
+
 .ctk-date-time-picker,
 .ctk-date-time-picker input,
 .ctk-date-time-picker label,

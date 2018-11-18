@@ -78,7 +78,6 @@ class StudentViewSet(viewsets.ModelViewSet):
             return Response(serializer.data)
         return ([])
 
-    @detail_route()
     def get_subjects(self, request, username=None):
         """
         Gets the Students' subjects

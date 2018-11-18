@@ -34,6 +34,7 @@ actions =
             person = responses[0].data
             person.relatives = responses[1].data
             relationships = responses[2].data
+            console.log person
             person.relatives.forEach (relative) ->
                 relationship = relationships.find (relationship) -> relationship.relative == relative.user
                 relative.relationship = relationship.relationship

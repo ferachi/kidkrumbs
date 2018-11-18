@@ -8,4 +8,4 @@ from .person import PersonViewSet,ProfileViewSet
 from .routine import RoutineViewSet, StudentRoutineViewSet 
 from .school import SchoolViewSet 
 from .student import StudentViewSet 
-from .subject import SubjectViewSet 
+from .subject import SubjectViewSet, CoreSubjectViewSet

@@ -24,7 +24,16 @@ mutations =
             state.child = Object.assign {}, state.child,{habits}
 
     setChildGroups : (state, groups)->
-        state.child = Object.assign {},state.child,{groups}
+        if state.child
+            state.child = Object.assign {},state.child,{groups}
+
+    setChildEnrollments : (state, enrollments)->
+        if state.child
+            state.child = Object.assign {},state.child,{enrollments}
+
+    setChildSubjects : (state, subjects)->
+        if state.child
+            state.child = Object.assign {},state.child,{subjects}
 
     setChildCurrentGroups : (state, currentGroups)->
         if state.child

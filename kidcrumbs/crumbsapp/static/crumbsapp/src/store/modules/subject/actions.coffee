@@ -22,13 +22,11 @@ pullSubject = ({commit}, id) ->
 fetchSubjects = ({dispatch, commit, getters}) ->
     subjects = getters.getSubjects
 
-    console.log subjects, 'subjects'
     if subjects[0]?
         return subjects
 
     dispatch('pullSubjects').then (subjects) ->
         commit 'addSubjects', subjects
-        console.log subjects, 'subjects 3'
         subjects
 
 

@@ -24,6 +24,10 @@ getters =
         if state.child
             state.child.groups
 
+    getChildSubjects : (state) ->
+        if state.child
+            state.child.subjects
+
     getChildCurrentGroups : (state) ->
         if state.child
             state.child.currentGroups

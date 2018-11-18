@@ -1,5 +1,5 @@
 import http from "../../../http";
-import {STUDENT, STUDENTS, STUDENT_MEMBERSHIPS, STUDENT_GROUPS, STUDENT_CURRENT_GROUPS, STUDENT_HABITS, STUDENT_HABITS_BY_GROUP} from "../../../urls";
+import {STUDENT, STUDENTS, STUDENT_MEMBERSHIPS, STUDENT_GROUPS, STUDENT_CURRENT_GROUPS, STUDENT_HABITS, STUDENT_HABITS_BY_GROUP, STUDENT_SUBJECTS, STUDENT_ENROLLMENTS} from "../../../urls";
 
 
 fetchChild = ({commit}, username) ->
@@ -32,6 +32,29 @@ fetchChildHabits = ({commit, getters}) ->
         habits = response.data
         commit 'setChildHabits', habits
         habits
+    
+# Fetches the currently selected childs' subjects
+fetchChildSubjects = ({commit, getters}) ->
+    child = getters.getChild
+
+    return null unless child 
+
+    http.get(STUDENT_SUBJECTS(child.username)).then (response)->
+        subjects = response.data
+        commit 'setChildSubjects', subjects
+        commit 'child/addSubjects', subjects
+        subjects
+    
+# Fetches the currently selected childs' enrollments
+fetchChildEnrollments = ({commit, getters}) ->
+    child = getters.getChild
+
+    return null unless child 
+
+    http.get(STUDENT_ENROLLMENTS(child.username)).then (response)->
+        enrollments = response.data
+        commit 'setChildEnrollments', enrollments
+        enrollments
     
 
 # Fetches the currently selected childs' habits
@@ -77,6 +100,7 @@ fetchChildWithProps = ({commit, dispatch, getters, state}, username) ->
         groups = dispatch('fetchChildGroups')
         memberships = dispatch('fetchChildMemberships')
         habits = dispatch('fetchChildHabits')
+        subjects = dispatch('fetchChildSubjects')
 
         Promise.all([currentGroups, groups, memberships, habits]).then (props) ->
             commit 'updateChildren', child
@@ -84,4 +108,4 @@ fetchChildWithProps = ({commit, dispatch, getters, state}, username) ->
             child
 
 
-export {fetchChild, fetchChildGroups, fetchChildCurrentGroups, fetchChildMemberships ,fetchChildHabitsByGroup, fetchChildHabits, fetchChildWithProps}
+export {fetchChild, fetchChildGroups, fetchChildCurrentGroups, fetchChildMemberships ,fetchChildHabitsByGroup, fetchChildHabits, fetchChildWithProps, fetchChildSubjects}

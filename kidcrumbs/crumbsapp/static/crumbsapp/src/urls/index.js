@@ -22,6 +22,8 @@ export const PERSON_ROLES = (id) => `${PERSON(id)}get_roles/`; // gets the users
 export const STUDENTS = '/api/students/'; // All Students, this list differs depending on the user requesting it 
 export const STUDENT = (id) => `${STUDENTS}${id}/`; // route to a single student
 export const STUDENT_GROUPS = (id) => `${STUDENT(id)}get_groups/`; // gets an individual students' groups
+export const STUDENT_SUBJECTS = (id) => `${STUDENT(id)}get_subjects/`; // gets an individual students' subjects
+export const STUDENT_ENROLLMENTS = (id) => `${STUDENT(id)}get_enrollments/`; // gets an individual students' enrollments
 export const STUDENT_MEMBERSHIPS = (id) => `${STUDENT(id)}get_memberships/`; // gets an individual students' memberships
 export const STUDENT_CURRENT_GROUPS = (id) => `${STUDENT(id)}get_current_groups/`;//gets all the current groups for a student 
 export const STUDENT_HABITS = (id) => `${STUDENT(id)}get_routines/`;//gets all the routines for the student
@@ -49,6 +51,7 @@ export const GROUP_HABITS = (id) => `${GROUP(id)}get_habits/`; // route to a gro
 
 export const CLASSROOMS = '/api/classrooms/'; // All classrooms, this list differs depending on the user requesting it 
 export const CLASSROOM = (id) => `${CLASSROOMS}${id}/`; // route to a single classroom
+export const CLASSROOM_SUBJECTS = (id) => `${CLASSROOM(id)}get_subjects/`; // route to a single classrooms' subjects
 
 
 // SCHOOLS

@@ -33,7 +33,7 @@ class ClassroomAdmin(GroupAdmin):
                     pass
 
             for subject in new_subjects:
-                enrollment = Enrollment.objects.update_or_create(student=student, subject=subject, date_enrolled=date.today(), is_current=False)
+                enrollment = Enrollment.objects.update_or_create(student=student, subject=subject, date_enrolled=date.today())
 
 
         # student, subject and date

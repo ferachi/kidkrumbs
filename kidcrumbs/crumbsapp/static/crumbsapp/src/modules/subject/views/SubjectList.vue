@@ -1,6 +1,5 @@
 <template>
     <div id="subjectList">
-        <subjects :subjects="subjects"></subjects>
     </div>
 </template>
 <script>
@@ -10,6 +9,7 @@ export default{
     name : "SubjectList",
     created(){
         this.fetchSubjects().then( subjects => {
+            console.log( subjects , 'fo');
             this.subjects = subjects;
         });
     },

@@ -10,3 +10,4 @@ from .school import SchoolSerializer
 from .school_group import SchoolGroupSerializer
 from .session import SessionSerializer
 from .student import StudentSerializer
+from .subject import SubjectSerializer

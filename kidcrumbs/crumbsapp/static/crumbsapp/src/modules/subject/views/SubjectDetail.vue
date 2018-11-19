@@ -1,8 +1,8 @@
 <template>
     <div id="subjectDetail" class="bg_0 border border_1">
-        <transition name="fade">
-        <div v-if="isLoading" class="loading" key="loading">
-
+        <transition name="fade" mode="out-in">
+        <div v-if="isLoading" class="loading d-flex align-items-center justify-content-center" key="loading">
+            <self-building-square-spinner :animation-duration="6000" :size="40" :color="'#ff1d5e'" />
         </div>
         <div v-else key="loaded">
             <section class="header d-flex align-items-center flex-wrap" >
@@ -22,17 +22,23 @@
                 </div>
             </section>
             <section class="menus">
-                <div class="d-flex align-items-center  col-12 justify-content-around">
-                    <router-link class="col p-0 py-3 m-0 text-center color_0" :to="{name:'subjectDetail'}"><small
-                                 class="">About</small></router-link>
-                         <router-link class="col p-0 text-center color_0" :to="{name:'subjectSyllabus'}"><small class="">Syllabus</small></router-link>
+                <div class="d-flex align-items-center  col-12 justify-content-around mt-3">
+                    <router-link class="col p-0 m-0 text-center color_0" :to="{name:'subjectDetail'}"><small
+                                 class="primary-color">About</small></router-link>
+                         <router-link class="col p-0 text-center color_0" :to="{name:'subjectSyllabus'}"><small
+                                      class="color_5 font-weight-bold"><u>Syllabus</u></small></router-link>
                          <router-link class="col p-0 text-center color_0" :to="{name:'subjectTeacher'}"><small
-                                      class="">Teachers</small></router-link>
-                              <router-link class="col p-0 text-center color_0" :to="{name:'subjectResult'}"><small class="">Results</small></router-link>
+                                      class="primary-color">Teachers</small></router-link>
+                              <router-link class="col p-0 text-center color_0" :to="{name:'subjectResult'}"><small
+                                      class="primary-color">Results</small></router-link>
                 </div>
+                <hr>
             </section>
-            <section class="p-3">
+            <section class="p-3 sub-views">
+                <transition name="fade-right" mode="out-in">
+                
                 <router-view></router-view>
+                </transition>
             </section>
         </div>
         </transition>
@@ -40,10 +46,14 @@
 </template>
 <script>
 import {mapActions, mapGetters} from 'vuex';
+import {SelfBuildingSquareSpinner} from 'epic-spinners';
 export default{
     name : "SubjectDetail",
     created(){
         this.init();
+    },
+    components:{
+        SelfBuildingSquareSpinner
     },
     computed:{
         firstChar(){
@@ -85,4 +95,8 @@ export default{
         @media screen and (max-width: 600px)
             width 100vw
             height @width
+    .sub-views
+        min-height 75vh
+        max-height 75vh
+        overflow-y auto
 </style>

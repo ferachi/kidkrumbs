@@ -1,5 +1,6 @@
 <template>
     <div id="subjectList">
+        <subjects :subjects="subjects" @subject-click="subjectClicked($event)"></subjects>
     </div>
 </template>
 <script>
@@ -9,7 +10,6 @@ export default{
     name : "SubjectList",
     created(){
         this.fetchSubjects().then( subjects => {
-            console.log( subjects , 'fo');
             this.subjects = subjects;
         });
     },
@@ -25,6 +25,10 @@ export default{
         ...mapActions('subject',[
             'fetchSubjects'
         ]),
+        subjectClicked(subject){
+            this.$router.push({name : 'subjectDetail', params:{id:subject.id}});
+        }
+
     }
 }
 </script>

@@ -3,13 +3,16 @@
         <div v-if="syllabus">
             <h5 class="righteous text-capitalize">{{subject.name}} Syllabus</h5>
             <p>{{syllabus.description}}</p>
+            
             <div>
                 <dl>
                     <template v-for="item in syllabus.syllabus_items" >
+                        <hr>
                         <dt class="color_5">{{item.title}} <span class="color_3"> - {{item.duration}}</span></dt>
                         <dd>
                         <p class="m-0">{{item.description}}</p>
                         </dd>
+                        
                     </template>
                 </dl>
             </div>

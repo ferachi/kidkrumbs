@@ -47,4 +47,27 @@ export default{
         bottom 0
         min-width 100vw
 
+    .fade-enter-active
+    .fade-leave-active
+        transition opacity .5s
+    .fade-enter
+    .fade-leave-to
+        opacity 0
+
+    .fade-right-enter-active
+    .fade-right-leave-active
+        transition-property opacity transform
+        transition-duration 0.4s
+        transition-timing-function ease-in-out
+        transition-delay 0 0.2s
+
+    .fade-right-enter
+        opacity 0
+        transform translateX(-10px)
+
+    .fade-right-leave-to
+        opacity 0
+        transform translateX(10px)
+
+
 </style>

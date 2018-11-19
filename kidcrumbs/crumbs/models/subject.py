@@ -85,7 +85,7 @@ class SyllabusItem(models.Model):
     timestamp = models.DateField(auto_now=True)
 
     def __str__(self):
-        return self.name
+        return self.syllabus.subject.name
 
     class Meta:
         ordering = ('index','title')
@@ -96,8 +96,8 @@ class SyllabusItem(models.Model):
 # can't add extra fields; in this case subject
 class TeacherSubject(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    teacher = models.ForeignKey('Teacher', related_name='teacher_subject', on_delete=models.CASCADE)
-    subject = models.ForeignKey('Subject', related_name='teacher_subject', blank=True, on_delete=models.CASCADE)
+    teacher = models.ForeignKey('Teacher', related_name='teacher_subjects', on_delete=models.CASCADE)
+    subject = models.ForeignKey('Subject', related_name='subject_teachers', blank=True, on_delete=models.CASCADE)
     created_by = models.ForeignKey("AdminPerson", on_delete=models.DO_NOTHING, null=True)
     created_date = models.DateField(auto_now_add=True)
     timestamp = models.DateField(auto_now=True)

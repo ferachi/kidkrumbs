@@ -22,7 +22,7 @@ pullSubject = ({commit}, id) ->
 fetchSubjects = ({dispatch, commit, getters}) ->
     subjects = getters.getSubjects
 
-    if subjects
+    if subjects[0]?
         return subjects
 
     dispatch('pullSubjects').then (subjects) ->
@@ -30,7 +30,7 @@ fetchSubjects = ({dispatch, commit, getters}) ->
         subjects
 
 
-pullSubjects = ({commit}, id) ->
+pullSubjects = ({commit}) ->
     http.get(SUBJECTS).then (response)->
         response.data
 

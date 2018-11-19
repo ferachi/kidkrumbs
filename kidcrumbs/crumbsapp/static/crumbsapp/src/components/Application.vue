@@ -1,5 +1,5 @@
 <template>
-    <div id="mainApp" class="bg_0">
+    <div id="mainApp" class="bg_aux">
         <div class="d-flex">
             <section class="col-auto p-0">
                 <nav class="d-none d-lg-block bigscreens-menu border-right border_2">
@@ -46,5 +46,28 @@ export default{
         position absolute
         bottom 0
         min-width 100vw
+
+    .fade-enter-active
+    .fade-leave-active
+        transition opacity .5s
+    .fade-enter
+    .fade-leave-to
+        opacity 0
+
+    .fade-right-enter-active
+    .fade-right-leave-active
+        transition-property opacity transform
+        transition-duration 0.4s
+        transition-timing-function ease-in-out
+        transition-delay 0 0.2s
+
+    .fade-right-enter
+        opacity 0
+        transform translateX(-10px)
+
+    .fade-right-leave-to
+        opacity 0
+        transform translateX(10px)
+
 
 </style>

@@ -8,5 +8,5 @@ from .person import PersonAdmin, PersonSchoolRoleAdmin, RoleAdmin,Student
 from .routine import RoutineAdmin, StudentRoutineAdmin
 from .school import SchoolAdmin
 from .session import SessionAdmin
-from .subject import SubjectAdmin, CoreSubjectAdmin, SyllabusAdmin
+from .subject import SubjectAdmin, CoreSubjectAdmin, SyllabusAdmin,TeacherSubjectAdmin
 from .user import UserAdmin

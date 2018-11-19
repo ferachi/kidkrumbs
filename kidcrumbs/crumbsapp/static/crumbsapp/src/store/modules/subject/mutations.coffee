@@ -1,22 +1,22 @@
 
 mutations = 
-    setStudent : (state, subject) ->
+    setSubject : (state, subject) ->
         state.subject = subject
 
-    addStudent : (state, student)->
-        state.students = _.unionBy state.students, [student], 'id'
+    addSubject : (state, subject)->
+        state.subjects = _.unionBy state.subjects, [subject], 'id'
 
-    addStudents : (state, students)->
-        state.students = _.unionBy state.students, students, 'id'
+    addSubjects : (state, subjects)->
+        state.subjects = _.unionBy state.subjects, subjects, 'id'
 
-    updateStudents : (state, student)->
-        index = _.findIndex state.students, (_student) ->
-            _student.id == student.id
+    updateSubjects : (state, subject)->
+        index = _.findIndex state.subjects, (_subject) ->
+            _subject.id == subject.id
 
         if index is -1
-            state.students.push(student)
+            state.subjects.push(subject)
         else 
-            state.students.splice(index, 1, student)
+            state.subjects.splice(index, 1, subject)
 
 
 export {mutations as default}

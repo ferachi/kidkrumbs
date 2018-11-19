@@ -1,4 +1,5 @@
 @import './theme.styl'
+@import './anim.styl'
 
 user_font = 'Muli','Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", ubuntu, Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"
 
@@ -9,7 +10,7 @@ h1, h2, h3, h4, h5, h6
     color shade_5 !important
 
 p, a, label, div, small
-    font-family user_font
+    font-family user_font !important
     color shade_4 !important
 
 
@@ -18,6 +19,18 @@ a
         color lightblue !important
         &:hover
             cursor pointer
+        
+.loading
+    min-height 60vh
+
+.rammeto
+    font-family: 'Rammetto One','Oregano','Comic Sans', cursive !important
+
+.righteous
+    font-family: 'Righteous', 'Oregano', 'Comic Sans', cursive !important
+
+.muli
+    font-family user_font !important
 
 .card
     background-color shade_0

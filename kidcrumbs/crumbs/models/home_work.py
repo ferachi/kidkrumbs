@@ -6,8 +6,8 @@ class HomeWork(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     subject = models.ForeignKey("Subject", on_delete=models.CASCADE, related_name="assignments")
     classroom = models.ForeignKey("Classroom", on_delete=models.CASCADE, related_name="assignments")
-    overview = models.CharField(max_length=100)
-    duration = models.CharField(max_length=20, blank=True)
+    description = models.TextField()
+    date = models.DateField()
     teacher = models.ForeignKey("Teacher", null=True,blank=True, on_delete=models.DO_NOTHING, related_name="assigned_home_works")
     created_by = models.ForeignKey("AdminPerson", null=True,blank=True, on_delete=models.DO_NOTHING, \
     related_name="created_home_works")

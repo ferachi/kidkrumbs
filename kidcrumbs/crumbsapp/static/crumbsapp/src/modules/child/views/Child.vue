@@ -27,16 +27,14 @@
                     </div>
                 </section>
             </div>
-            <div id="childContent">
-                <section class="p-2">
-                    <router-view></router-view>
-                </section>
-            </div>
-            <div id="errorFetching">
+            <section id="childContent" class="p-2 px-4 bg_0 border border_1">
+                <router-view></router-view>
+            </section>
+            <section id="errorFetching">
                 <div>
                     <h4 class="text-center">{{this.errorMessage}}</h4>
                 </div>
-            </div>
+            </section>
             </page>
         </div>
     </div>
@@ -112,5 +110,8 @@ export default{
 }
 </script>
 <style lang="stylus">
+#child
+    #childContent
+        min-height 70vh
 </style>
 

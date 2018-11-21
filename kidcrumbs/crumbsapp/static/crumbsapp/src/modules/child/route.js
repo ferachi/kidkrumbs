@@ -1,7 +1,11 @@
 import Child from "./views/Child.vue";
+import ChildActivity from "./views/ChildActivity.vue";
+import ChildInit from "./views/ChildInit.vue";
+import ChildBehaviour from "./views/ChildBehaviour.vue";
+import ChildHomework from "./views/ChildHomework.vue";
 import ActivityDetail from "../activities/views/ActivityDetail.vue";
-import BehaviourDetail from "../behaviours/views/BehaviourDetail.vue";
-import HomeworkDetail from "../homework/views/HomeworkDetail.vue";
+import ChildHabits from "../habit/views/StudentAttitude.vue";
+import HabitNotFound from "../habit/views/HabitNotFound.vue";
 import {store} from "../../appbootstrap";
 import ROLES from "../../data_models/permissions";
 
@@ -9,7 +13,6 @@ import ROLES from "../../data_models/permissions";
 const childRoute = {
     path : '/child/:username',
     component : Child,
-    name : "child",
     beforeEnter(to, from , next){
         // ensuring that this routes is only accessible by parents and students
         let profile = store.getters["profile/getProfile"];
@@ -23,18 +26,44 @@ const childRoute = {
     },
     children : [
         {
-            path : "activities/:id",
-            component : ActivityDetail,
+            path : '',
+            component : ChildInit,
+            name : 'child'
+        },
+        {
+            path : "activities",
+            component : ChildActivity,
             name : 'childActivity',
+            children:[
+                {
+                    path : ":id",
+                    component : ActivityDetail,
+                    name : 'childActivityDetail',
+                }
+            ]
         },
         {
-            path : "behaviours/:id",
-            component : BehaviourDetail,
+            path : "behaviours",
+            component : ChildBehaviour,
             name : 'childBehaviour',
+            children : [
+                {
+                    path : "no-habits",
+                    component : HabitNotFound,
+                    name : 'noChildHabits',
+                    props:{editable : false}
+                },
+                {
+                    path : ":id",
+                    component : ChildHabits,
+                    name : 'childHabits',
+                    props : {editable : false}
+                },
+            ]
         },
         {
-            path : "homework/:id",
-            component : HomeworkDetail,
+            path : "homeworks",
+            component : ChildHomework,
             name : 'childHomework',
         },
 

@@ -19,25 +19,22 @@
                             </div>
                         </div>
                         <div class="d-flex align-items-center  col-12 justify-content-around">
-                            <router-link class="col p-0 py-3 m-0 text-center color_0" :to="{name:'childActivity',
-                            params:{id:activityId}}"><small class="color_0">Activity</small></router-link>
-                        <router-link class="col p-0 text-center color_0" :to="{name:'childBehaviour', params:{id:1}}"><small class="color_0">Behaviour</small></router-link>
+                            <router-link class="col p-0 py-3 m-0 text-center color_0" :to="{name:'childActivity'}"><small class="color_0">Activity</small></router-link>
+                        <router-link class="col p-0 text-center color_0" :to="{name:'childBehaviour'}"><small class="color_0">Behaviour</small></router-link>
                         <router-link class="col p-0 text-center color_0" :to="{name:'childHomework', params:{id:1}}"><small class="color_0">Homework</small></router-link>
                         <router-link class="col p-0 text-center color_0" :to="{name:'app'}"><small class="color_0">More</small></router-link>
                         </div>
                     </div>
                 </section>
             </div>
-            <div id="childContent">
-                <section class="p-2">
-                    <router-view></router-view>
-                </section>
-            </div>
-            <div id="errorFetching">
+            <section id="childContent" class="p-2 px-4 bg_0 border border_1">
+                <router-view></router-view>
+            </section>
+            <section id="errorFetching">
                 <div>
                     <h4 class="text-center">{{this.errorMessage}}</h4>
                 </div>
-            </div>
+            </section>
             </page>
         </div>
     </div>
@@ -60,16 +57,17 @@ export default{
 
 
             // SETUP ALL GROUP RELATED MODELS
-
+            let group = this.getCurrentClassroom
+            let habits = this.fetchChildHabitsByGroup(group.id),
+                activities = this.fetchActivities(group.id);
             // get the groups activities
-            this.fetchActivities(this.getCurrentClassroom.id).then( activities => {
+            Promise.all([habits,activities]).then( props => {
                 this.child = child;
-                this.activityId = this.getCurrentActivity.id;
-                this.$router.push({name:"childActivity", params:{id:this.activityId}});
                 this.isLoading = false;
             })
 
         }).catch(err => {
+            console.log(err);
             this.isLoading = false;
             this.error_fetching = true;
             this.errorMessage = err.response.data.detail
@@ -92,26 +90,28 @@ export default{
         ...mapGetters('child', [
             'getCurrentClassroom'
         ]),
-            ...mapGetters('activity', [
-                'getCurrentActivity'
-            ])
+        ...mapGetters('activity', [
+            'getCurrentActivity'
+        ])
     },
     methods : {
         ...mapActions('child',[
-            "fetchChild",
+            "fetchChildHabitsByGroup",
             "fetchChildWithProps"
         ]),
-            ...mapMutations("child", [
-                "setGroup"
-            ]), 
-            ...mapActions('activity', {
-                fetchActivities : "pullActivities"
-            })
-
+        ...mapMutations("child", [
+            "setGroup"
+        ]), 
+        ...mapActions('activity', {
+            fetchActivities : "pullActivities"
+        })
     }
 
 }
 </script>
 <style lang="stylus">
+#child
+    #childContent
+        min-height 70vh
 </style>
 

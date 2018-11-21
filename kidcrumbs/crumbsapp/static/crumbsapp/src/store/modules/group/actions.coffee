@@ -1,5 +1,5 @@
 import http from "../../../http";
-import {GROUP, GROUPS, GROUP_STUDENTS, GROUP_HABITS, GROUP_ROUTINES} from "../../../urls";
+import {GROUP, GROUPS, GROUP_STUDENTS, GROUP_HABITS, GROUP_ROUTINES, GROUP_ACTIVITIES, GROUP_HOME_WORKS} from "../../../urls";
 
 
 fetchGroup = ({dispatch,commit, getters}, id) ->
@@ -52,13 +52,40 @@ fetchGroupHabits = ({dispatch, getters, commit}, id) ->
             commit "setGroupHabits", habits
             habits
 
+fetchGroupHomeworks = ({dispatch, getters, commit}, id) ->
+    dispatch('fetchGroup', id).then (group) ->
+        homeWorks = getters.getGroupHomeworks
+
+        if homeWorks
+            return homeWorks
+
+        http.get(GROUP_HOME_WORKS(id)).then (response)->
+            homeWorks = response.data
+            commit "setGroupHomeworks", homeWorks
+            homeWorks
+
+fetchGroupActivities = ({dispatch, getters, commit}, id) ->
+    dispatch('fetchGroup', id).then (group) ->
+        activities = getters.getGroupActivities
+
+        if activities
+            return activities
+
+        http.get(GROUP_ACTIVITIES(id)).then (response)->
+            activities = response.data
+            commit "setGroupActivities", activities
+            commit "activity/addActivities", activities, {root:true}
+            activities
+
 fetchGroupWithProps = ({dispatch, commit, state}, id) ->
     dispatch('fetchGroup', id).then (group) ->
         students = dispatch('fetchGroupStudents', id)
         habits = dispatch('fetchGroupHabits', id)
-        habits = dispatch('fetchGroupRoutines', id)
+        routines = dispatch('fetchGroupRoutines', id)
+        activities = dispatch('fetchGroupActivities', id)
+        homeWorks = dispatch('fetchGroupHomeworks', id)
 
-        Promise.all([students, habits]).then (props) ->
+        Promise.all([students, habits, routines, activities]).then (props) ->
             commit 'updateGroups', state.group
             state.group
 
@@ -82,4 +109,4 @@ pullGroup = ({commit}, id) ->
         response.data
 
 
-export {pullGroup, fetchGroup, fetchGroups, pullGroups, fetchGroupStudents, fetchGroupHabits,fetchGroupRoutines, fetchGroupWithProps}
+export {pullGroup, fetchGroup, fetchGroups, pullGroups, fetchGroupStudents, fetchGroupHabits,fetchGroupRoutines, fetchGroupWithProps, fetchGroupActivities, fetchGroupHomeworks}

@@ -11,9 +11,10 @@ import VueCtkDateTimePicker from 'vue-ctk-date-time-picker';
 import 'vue-ctk-date-time-picker/dist/vue-ctk-date-time-picker.min.css';
 import Toasted from 'vue-toasted';
 import Notifications from 'vue-notification';
-import { MdCheckbox, MdField, MdRadio, MdDatepicker, MdButton, MdDialog } from 'vue-material/dist/components';
+import { MdCheckbox, MdField, MdRadio, MdDatepicker, MdButton, MdDialog, MdMenu, MdListItem, MdList } from 'vue-material/dist/components';
 import 'vue-material/dist/vue-material.min.css';
 import 'vue-material/dist/theme/default.css';
+import 'vue-material/dist/theme/default-dark.css';
 import './styles/material_styles.scss';
 
 
@@ -33,6 +34,9 @@ Vue.use(MdField)
 Vue.use(MdDialog)
 Vue.use(MdDatepicker)
 Vue.use(MdButton)
+Vue.use(MdMenu)
+Vue.use(MdList)
+
 
 Vue.component('dtpicker', VueCtkDateTimePicker);
 // Access v-calendar, v-date-packer and v-popover components

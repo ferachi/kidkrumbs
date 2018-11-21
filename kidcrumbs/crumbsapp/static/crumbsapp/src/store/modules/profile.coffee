@@ -1,5 +1,5 @@
 import http from "../../http";
-import {PERSON, RELATIONSHIPS, RELATIVES, ROLES} from "../../urls";
+import {PROFILE, RELATIONSHIPS, RELATIVES, ROLES} from "../../urls";
 
 
 state =
@@ -24,7 +24,7 @@ mutations =
 actions = 
     # Fetch users profile (person object)
     fetchProfile : ({commit, dispatch, state}, {id}) ->
-        person = http.get(PERSON(id))
+        person = http.get(PROFILE(id))
         relatives = http.get(RELATIVES(id))
         relationships = http.get(RELATIONSHIPS(id))
         roles = http.get(ROLES(id))
@@ -34,6 +34,7 @@ actions =
             person = responses[0].data
             person.relatives = responses[1].data
             relationships = responses[2].data
+            console.log person
             person.relatives.forEach (relative) ->
                 relationship = relationships.find (relationship) -> relationship.relative == relative.user
                 relative.relationship = relationship.relationship

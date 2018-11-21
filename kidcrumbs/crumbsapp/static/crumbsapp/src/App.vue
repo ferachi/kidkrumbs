@@ -1,6 +1,6 @@
 <template lang="html">
     <div :id='theme.app'>
-        <div id="appTheme" class="pink" v-if="!isLoading" key='app'>
+        <div id="appTheme" class="green" v-if="!isLoading" key='app'>
             <router-view></router-view>
         </div>
         <div v-else key='loader'>
@@ -8,7 +8,6 @@
         </div>
     </div>
 </template>
-
 <script>
 import {mapGetters, mapActions, mapMutations} from "vuex";
 import _ from 'lodash';

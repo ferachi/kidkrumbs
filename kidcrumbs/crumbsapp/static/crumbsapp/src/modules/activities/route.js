@@ -1,6 +1,7 @@
 import Activity from "./views/Activity.vue";
 import Activities from "./views/Activities.vue";
 import ActivityDetail from "./views/ActivityDetail.vue";
+import ActivityDateDetail from "./views/ActivityDateDetail.vue";
 import {store} from "../../appbootstrap";
 import ROLES from "../../data_models/permissions";
 
@@ -15,10 +16,15 @@ const activitiesRoute = {
             name : 'activities',
         },
         {
+            path : "date/:date",
+            component : ActivityDateDetail,
+            name : 'activityDateDetail',
+        },
+        {
             path : ":id",
             component : ActivityDetail,
             name : 'activityDetail',
-            props : {editable : true}
+            props : (route) => ( {id:route.params.id, editable : true} )
         }
 
     ]

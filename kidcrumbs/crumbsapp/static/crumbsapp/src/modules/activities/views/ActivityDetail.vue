@@ -2,7 +2,6 @@
     <div v-if="isLoading"  key="loading"></div>
     <div v-else id="activityDetail" key="loaded">
         <div class="d-flex">
-            <p class="primary-color col-auto">Date</p>
             <tab-head class="col" :tabTitles="['activity', 'comment']" justify="justify-content-end" @tab-click="tabClicked($event)"></tab-head>
         </div>
         <div class="tabs">
@@ -34,14 +33,16 @@ import {mapGetters, mapActions} from 'vuex';
 export default{
     name : "ActivityDetail",
     created(){
-        this.pullActivity(this.$route.params.id).then(activity =>{
-            this.isLoading = false;
-        });
+        this.init();
     }, 
     props:{
         editable : {
             type : Boolean,
             default : false
+        },
+        id : {
+            type : String,
+            required : true
         }
     },
     components : {
@@ -81,6 +82,16 @@ export default{
         replyComment(reply){
             let data = {activity_comment : reply.comment.id, person: this.profile.user, comment:reply.data}; 
             this.saveReplyComment(data);
+        },
+        init(){
+            this.pullActivity(this.id).then(activity =>{
+                this.isLoading = false;
+            });
+        }
+    },
+    watch:{
+        '$route'(to ,from ){
+            this.init();
         }
     }
 }

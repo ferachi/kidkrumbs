@@ -1,5 +1,5 @@
 import Child from "./views/Child.vue";
-import ChildActivity from "./views/ChildActivity.vue";
+import ChildActivity from "../activities/views/ActivityDateDetail.vue";
 import ChildInit from "./views/ChildInit.vue";
 import ChildBehaviour from "./views/ChildBehaviour.vue";
 import ChildHomework from "./views/ChildHomework.vue";
@@ -31,16 +31,9 @@ const childRoute = {
             name : 'child'
         },
         {
-            path : "activities",
+            path : "activities/:date",
             component : ChildActivity,
-            name : 'childActivity',
-            children:[
-                {
-                    path : ":id",
-                    component : ActivityDetail,
-                    name : 'childActivityDetail',
-                }
-            ]
+            name : 'activityDateDetail',
         },
         {
             path : "behaviours",

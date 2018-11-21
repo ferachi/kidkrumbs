@@ -19,7 +19,8 @@
                             </div>
                         </div>
                         <div class="d-flex align-items-center  col-12 justify-content-around">
-                            <router-link class="col p-0 py-3 m-0 text-center color_0" :to="{name:'childActivity'}"><small class="color_0">Activity</small></router-link>
+                            <router-link class="col p-0 py-3 m-0 text-center color_0" :to="{name:'activityDateDetail',
+                            params:{date:date}}"><small class="color_0">Activity</small></router-link>
                         <router-link class="col p-0 text-center color_0" :to="{name:'childBehaviour'}"><small class="color_0">Behaviour</small></router-link>
                         <router-link class="col p-0 text-center color_0" :to="{name:'childHomework', params:{id:1}}"><small class="color_0">Homework</small></router-link>
                         <router-link class="col p-0 text-center color_0" :to="{name:'app'}"><small class="color_0">More</small></router-link>
@@ -80,7 +81,7 @@ export default{
     data(){
         return {
             child:{},
-            activityId: 0,
+            date : moment().format("YYYY-MM-DD"),
             isLoading : true,
             error_fetching:false,
             errorMessage : ''
@@ -99,7 +100,7 @@ export default{
             "fetchChildHabitsByGroup",
             "fetchChildWithProps"
         ]),
-        ...mapMutations("child", [
+        ...mapMutations("group", [
             "setGroup"
         ]), 
         ...mapActions('activity', {

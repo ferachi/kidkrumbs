@@ -7,18 +7,7 @@ import {mapGetters, mapActions, mapMutations} from 'vuex';
 export default{
     name : "ChildInit",
     created(){
-        this.activityId = this.getCurrentActivity.id;
-        this.$router.push({name:"childActivityDetail", params:{id:this.activityId}});
-    },
-    data(){
-        return{
-            activityId : 0,
-        }
-    },
-    computed:{
-        ...mapGetters('activity', [
-            'getCurrentActivity'
-        ]),
+        this.$router.push({name:"activityDateDetail", params:{date:moment().format("YYYY-MM-DD")}});
     },
 }
 </script>

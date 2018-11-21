@@ -18,6 +18,7 @@ import activityDetail from "./ActivityDetail.vue"
 export default{
     name : "ActivityDateDetail",
     created(){
+        console.log(this.group)
         this.activities = this.getActivitiesByGroup(this.group.id);
         this.init();
     },

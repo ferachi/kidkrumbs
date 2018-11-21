@@ -13,6 +13,10 @@ getters =
         if state.group
             state.group.habits
 
+    getGroupHomeworks : (state) ->
+        if state.group
+            state.group.homeWorks
+
     getGroupActivities : (state) ->
         if state.group
             state.group.activities

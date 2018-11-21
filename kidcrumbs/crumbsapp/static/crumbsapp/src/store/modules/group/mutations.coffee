@@ -21,6 +21,9 @@ mutations =
     setGroupStudents : (state, students)->
         state.group = Object.assign {},state.group,{students}
 
+    setGroupHomeworks : (state, students)->
+        state.group = Object.assign {},state.group,{students}
+
     setGroupRoutines : (state, routines)->
         state.group = Object.assign {},state.group,{routines}
 

@@ -8,7 +8,6 @@
         </div>
     </div>
 </template>
-
 <script>
 import {mapGetters, mapActions, mapMutations} from "vuex";
 import _ from 'lodash';

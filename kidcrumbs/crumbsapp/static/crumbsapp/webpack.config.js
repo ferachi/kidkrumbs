@@ -46,6 +46,7 @@ module.exports = {
                             getLocalIdent : function(context, localIdentName, localName, options){
                                 var index = context.resource.indexOf("module=");
                                 var moduleName = context.resource.substr(index).replace(/module=true|module\=|s/, "");
+                                if(moduleName == 'krumbs&') return localName
                                 return moduleName.length > 1 ? moduleName + "--" + localName : localName;
                             }
 						}

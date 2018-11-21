@@ -4,6 +4,7 @@ import NotFound from "../components/NotFound.vue";
 import childrenRoute from "../modules/children/route";
 import childRoute from "../modules/child/route";
 import profileRoute from "../modules/profile/route";
+import homeworkProfile from "../modules/homework/route";
 import subjectRoute from "../modules/subject/route";
 import routineRoute from "../modules/routine/route";
 import habitRoute from "../modules/habit/route";
@@ -25,6 +26,7 @@ const routes = [
             childRoute, 
             profileRoute, 
             subjectRoute, 
+            homeworkProfile, 
             routineRoute, 
             habitRoute, 
             activitiesRoute, 

@@ -1,11 +1,10 @@
 <template>
-    <div id="activityDetail">
-        <h4>Homework Detail</h4>
+    <div id="homeWorkDetail">
     </div>
 </template>
 <script>
 export default{
-    name : "ActivityDetail",
+    name : "HomeWorkDetail",
     created(){
     }
 }

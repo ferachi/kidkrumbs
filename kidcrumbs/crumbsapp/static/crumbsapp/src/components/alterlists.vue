@@ -47,7 +47,7 @@ export default {
             // setup the initial items that 
             // would eventually be returned after 
             // filtering, ordering and sorting
-            let _items = this.items;
+            let _items = _.cloneDeep(this.items);
 
 
             // if the filter is not a string
@@ -71,7 +71,14 @@ export default {
                             filterVal = _.values(filter)[0];
 
                         // filter the object e.g if item[type] == 'classroom'
-                        return _.includes(item[filterKey].toLowerCase(),filterVal.toLowerCase());
+                        if(typeof item[filterKey] == 'string'){
+                            return _.includes(item[filterKey].toLowerCase(),filterVal.toLowerCase());
+                        }
+                        else{
+                            if(filterVal == '')
+                                return true;
+                            return item[filterKey] == filterVal;
+                        }
                     });
                 });
             }

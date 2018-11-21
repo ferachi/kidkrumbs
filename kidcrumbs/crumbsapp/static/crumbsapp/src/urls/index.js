@@ -56,7 +56,9 @@ export const CLASSROOM_SUBJECTS = (id) => `${CLASSROOM(id)}get_subjects/`; // ro
 
 // SCHOOLS
 export const SCHOOLS = '/api/schools/'; // All Schools, this list differs depending on the user requesting it
-export const SCHOOL = (id) => `${SCHOOLS}${id}/`; // route to a single school export const SCHOOL_GROUPS = (id) => `${SCHOOL(id)}get_groups/`; // route to a schools groups
+export const SCHOOL = (id) => `${SCHOOLS}${id}/`; // route to a single school
+export const SCHOOL_SUBJECTS = (id) => `${SCHOOL(id)}get_subjects/`; // route to a schools subjects
+export const SCHOOL_GROUPS = (id) => `${SCHOOL(id)}get_groups/`; // route to a schools groups
 
 
 // ROUTINES
@@ -71,3 +73,7 @@ export const ATTITUDES = '/api/attitudes/';
 // ROUTINES
 export const SUBJECTS = '/api/subjects/';
 export const SUBJECT = (id) => `${SUBJECTS}${id}/`;
+
+// ROUTINES
+export const HOMEWORKS = '/api/home-works/';
+export const HOMEWORK = (id) => `${HOMEWORKS}${id}/`;

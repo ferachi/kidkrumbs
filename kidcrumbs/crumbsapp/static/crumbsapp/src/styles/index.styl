@@ -1,6 +1,7 @@
 @import './theme.styl'
 @import './anim.styl'
 
+
 user_font = 'Muli','Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", ubuntu, Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"
 
 user_radius = 5px
@@ -13,6 +14,24 @@ p, a, label, div, small
     font-family user_font !important
     color shade_4 !important
 
+/body 
+    background-color teal
+    .md-select-menu.md-menu-content-bottom-start.md-menu-content-small.md-menu-content.md-theme-light 
+    .md-datepicker-dialog.md-theme-default
+        z-index 10000 !important
+    .md-list.md-theme-default
+    .md-list.md-theme-light
+        background-color whitesmoke !important
+        &,
+        .md-list-item-container
+            color #222 !important
+    .md-list.md-theme-dark
+        background-color #111 !important
+        &,
+        .md-list-item-container
+            color gainsboro !important
+            
+
 
 a
     &.active
@@ -21,6 +40,7 @@ a
             cursor pointer
         
 .loading
+.loader
     min-height 60vh
 
 .rammeto
@@ -37,6 +57,21 @@ a
     box-shadow 0 1px 1px 1px rgba(0,0,0,.14), 0 -1px 1px -2px rgba(0,0,0,.2), 0 0px 1px 1px rgba(0,0,0,.12)
     border 1px solid shade_1 !important
     // box-shadow 0 1px 1px 1px shade_2, 0 -1px 1px -2px shade_1, 0 0px 1px 1px shade_1
+
+.md-list.md-theme-default
+    .md-list-item-default.md-list-item-container.md-button-clean
+        color shade_4 !important
+
+.md-list.md-theme-default
+    background-color shade_0 !important
+    color shade_4 !important
+
+.md-button.md-theme-light.md-raised:not([disabled]).md-primary
+.md-button.md-theme-dark.md-raised:not([disabled]).md-primary
+    background-color primary_color !important
+.md-button.md-theme-light.md-raised:not([disabled]).md-primary .md-icon-font
+.md-button.md-theme-dark.md-raised:not([disabled]).md-primary .md-icon-font
+    color shade_0 !important
 
 .md-checkbox.md-theme-default.md-checked.md-primary
     .md-checkbox-container
@@ -66,23 +101,46 @@ a
 .md-radio.md-theme-default.md-checked.md-primary .md-radio-container:after
     background-color primary_color
     
+
 .md-field.md-theme-default.md-focused .md-input,
 .md-field.md-theme-default.md-focused .md-textarea,
+.md-field.md-theme-default.md-focused .md-select,
 .md-field.md-theme-default.md-has-value .md-input,
 .md-field.md-theme-default.md-has-value .md-textarea 
+.md-field.md-theme-default.md-has-value .md-select 
     -webkit-text-fill-color shade_4 !important
     text-fill-color shade_4 !important
     color shade_4 !important
 
+
 .md-field.md-theme-default.md-focused .md-input,
 .md-field.md-theme-default.md-focused .md-textarea,
+.md-field.md-theme-default.md-focused .md-select,
 .md-field.md-theme-default.md-highlight .md-input,
 .md-field.md-theme-default.md-highlight .md-textarea
+.md-field.md-theme-default.md-highlight .md-select
     color primary_color !important
 .md-field.md-theme-default:after
     background-color shade_4 !important
+
+
+.md-list.md-theme-light .md-selected .md-list-item-content,
+.md-list.md-theme-light .router-link-exact-active .md-list-item-content    
+    color primary_color !important
+
+
 .md-field.md-theme-default:before
+.md-field.md-theme-dark:before
+.md-field.md-theme-light:before
     background-color primary_color !important
+
+
+.md-field.md-theme-light.md-focused .md-input,
+.md-field.md-theme-light.md-focused .md-textarea,
+.md-field.md-theme-light.md-highlight .md-input,
+.md-field.md-theme-light.md-highlight .md-textarea
+    color primary_color !important
+
 
 .md-datepicker-dialog.md-theme-default .md-datepicker-header
     background-color primary_color !important
@@ -95,13 +153,17 @@ a
     color primary_color !important
 .md-datepicker-dialog.md-theme-default
     color primary_color !important
-    background-color shade_0 !important
+    background-color shade_aux !important
 .md-datepicker-dialog.md-theme-default .md-datepicker-week
     color shade_2 !important
 .md-datepicker-dialog.md-theme-default .md-datepicker-day-button.md-datepicker-selected
     background-color primary_color
 .md-button.md-theme-default
     color shade_4 !important
+.md-icon.md-theme-default.md-icon-font
+    color shade_4 !important
+
+
 .ctk-date-time-picker .field .field-input
     background-color shade_1 !important
     color shade_4
@@ -111,7 +173,7 @@ a
 .ctk-date-time-picker label,
 .ctk-date-time-picker p,
 .ctk-date-time-picker span 
-    color shade_4
+    color shade_5
     font-family user_font
 
 .ctk-date-time-picker
@@ -119,6 +181,12 @@ a
     
 .ctk-date-time-picker .field .field-input
     border none
+
+#CtkDatePicker.datepicker-container .datepicker-days .datepicker-day span.datepicker-day-effect
+    background-color primary_color !important
+    
+#CtkDatePicker.datepicker-container .datepicker-days .datepicker-day.selected span.datepicker-day-text
+    color shade_aux !important
 
 .vue-swatches__container.vue-swatches--inline
     background-color shade_1 !important
@@ -210,10 +278,12 @@ v--modal-box.v--modal,
 		
 		&.active
 		&:active
-			color shade_5
+			color white
 			background-color primary_color
 			outline none !important
-			
+
+.dropdown-toggle::after			
+    border none !important
 		
 .self-building-square-spinner
 	>div

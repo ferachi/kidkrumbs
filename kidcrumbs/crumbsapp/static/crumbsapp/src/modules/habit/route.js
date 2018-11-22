@@ -38,6 +38,7 @@ const habitRoute = {
                     path:'attitude/:id',
                     component : StudentAttitude,
                     name : 'studentsAttitude',
+                    props : (route) => ( {id:route.params.id, editable : true} )
                 },
 
             ]

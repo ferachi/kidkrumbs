@@ -19,9 +19,9 @@
                             </div>
                         </div>
                         <div class="d-flex align-items-center  col-12 justify-content-around">
-                            <router-link class="col p-0 py-3 m-0 text-center color_0" :to="{name:'activityDateDetail',
+                            <router-link class="col p-0 py-3 m-0 text-center color_0" :to="{name:'activityDetailByDate',
                             params:{date:date}}"><small class="color_0">Activity</small></router-link>
-                        <router-link class="col p-0 text-center color_0" :to="{name:'childBehaviour'}"><small class="color_0">Behaviour</small></router-link>
+                        <router-link class="col p-0 text-center color_0" :to="{name:'childBehaviour', params:{date:date}}"><small class="color_0">Behaviour</small></router-link>
                         <router-link class="col p-0 text-center color_0" :to="{name:'childHomework', params:{id:1}}"><small class="color_0">Homework</small></router-link>
                         <router-link class="col p-0 text-center color_0" :to="{name:'app'}"><small class="color_0">More</small></router-link>
                         </div>
@@ -60,9 +60,10 @@ export default{
             // SETUP ALL GROUP RELATED MODELS
             let group = this.getCurrentClassroom
             let habits = this.fetchChildHabitsByGroup(group.id),
+                groupHabits = this.fetchGroupHabits(group.id),
                 activities = this.fetchActivities(group.id);
             // get the groups activities
-            Promise.all([habits,activities]).then( props => {
+            Promise.all([habits,groupHabits, activities]).then( props => {
                 this.child = child;
                 this.isLoading = false;
             })
@@ -99,6 +100,9 @@ export default{
         ...mapActions('child',[
             "fetchChildHabitsByGroup",
             "fetchChildWithProps"
+        ]),
+        ...mapActions('group',[
+            "fetchGroupHabits"
         ]),
         ...mapMutations("group", [
             "setGroup"

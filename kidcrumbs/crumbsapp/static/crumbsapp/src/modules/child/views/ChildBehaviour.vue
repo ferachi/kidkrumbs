@@ -3,37 +3,28 @@
         <section class="header">
                 <dtpicker :disable-time="true" :dark="isDark" :without-header="true" v-model="date" format="YYYY-MM-DD" :auto-close="true" formatted="dddd, MMMM DD, YYYY" label="Select date"></dtpicker>
         </section>
-        <section>
-            <router-view></router-view>
+        <section v-if="habit">
+            <student-attitude :id="habit.id" :editable="false"></student-attitude>
+        </section>
+        <section v-else>
+            <h1 class="display-2">No habits</h1>
         </section>
     </div>
 </template>
 <script>
 import {mapGetters, mapActions, mapMutations} from 'vuex';
+import studentAttitude from "../../habit/views/StudentAttitude.vue";
 export default{
     name : "ChildBehaviour",
     created(){
-        let group = this.getCurrentClassroom;
-        Promise.all([this.fetchGroupHabits(group.id),this.fetchChildHabitsByGroup(group.id)]).then( props => {
-            this.habits = _.map(props[1] , _habit => {
-                _habit.date = moment(_habit.routine.date).format("YYYY-MM-DD");   
-                return _habit;
-            }); 
-            this.habits = _.filter(this.habits, _habit => {
-                // only display edited habits and routines with permissions to display. 
-                return _habit.editted_habit && _habit.routine.public_display; 
-            })
-            
-            this.date =  moment().format("YYYY-MM-DD");
-        });
+        this.init();
     },
     components:{
+        studentAttitude
     },
     data(){
         return {
             date : null,
-            habits : [], 
-            habit : null
         }
     },
     computed:{
@@ -41,10 +32,23 @@ export default{
             'getTheme'
         ]),
         ...mapGetters('child', [
-            'getCurrentClassroom'
+            'getCurrentClassroom',
+            'getChildHabitsByGroup'
         ]),
         isDark(){
             return this.getTheme == 'dark';
+        },
+        habit(){
+            return _.find(this.habits, {date : this.date});
+        },
+        habits() {
+            let habits = _.compact(_.map(this.getChildHabitsByGroup(this.getCurrentClassroom.id), _habit => {
+                _habit.date = moment(_habit.routine.date).format("YYYY-MM-DD");   
+                // only display edited habits and routines with permissions to display. 
+                if (_habit.editted_habit && _habit.routine.public_display) 
+                    return _habit;
+            })); 
+            return habits
         }
     },
     methods : {
@@ -54,17 +58,16 @@ export default{
         ...mapActions('group',[
             "fetchGroupHabits",
         ]),
-        dateChanged(){
-            this.habit = _.find(this.habits, {date : this.date});
-            if(this.habit) 
-                this.$router.push({name: "childHabits", params:{id:this.habit.id}});
-            else
-                this.$router.push({name:"noChildHabits"});
-        }
+        init(){
+            this.date = this.$route.params.date;
+        },
     },
     watch:{
+        '$route'(to,from){
+            this.init();       
+        },
         date(val){
-            this.dateChanged();
+            this.$router.push({name: "childBehaviour", params:{date:this.date}});
         }
     },
 

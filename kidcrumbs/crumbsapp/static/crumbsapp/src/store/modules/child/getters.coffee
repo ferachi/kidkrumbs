@@ -19,6 +19,13 @@ getters =
     getChildHabits : (state) ->
         if state.child
             state.child.habits
+        else
+            []
+
+    getChildHabitsByGroup : (state, getters) -> (groupId) ->
+        habits = getters.getChildHabits
+        _.filter habits, (habit) ->
+            habit.routine.group == groupId
 
     getChildGroups : (state) ->
         if state.child

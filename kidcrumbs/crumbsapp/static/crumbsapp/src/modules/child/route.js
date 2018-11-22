@@ -1,5 +1,9 @@
 import Child from "./views/Child.vue";
-import ChildActivity from "../activities/views/ActivityDateDetail.vue";
+import ChildActivity from "./views/ChildActivity.vue";
+import ChildActivities from "./views/ChildActivities.vue";
+import ChildActivityList from "./views/ChildActivityList.vue";
+import ChildBehaviours from "./views/ChildBehaviours.vue";
+import ChildBehaviourList from "./views/ChildBehaviourList.vue";
 import ChildInit from "./views/ChildInit.vue";
 import ChildBehaviour from "./views/ChildBehaviour.vue";
 import ChildHomework from "./views/ChildHomework.vue";
@@ -9,7 +13,8 @@ import HabitNotFound from "../habit/views/HabitNotFound.vue";
 import {store} from "../../appbootstrap";
 import ROLES from "../../data_models/permissions";
 
-
+let date = new Date(),
+    today = `${date.getUTCFullYear()}-${date.getUTCMonth() + 1} - ${date.getUTCDate()}`
 const childRoute = {
     path : '/child/:username',
     component : Child,
@@ -31,27 +36,38 @@ const childRoute = {
             name : 'child'
         },
         {
-            path : "activities/:date",
-            component : ChildActivity,
-            name : 'activityDateDetail',
+            path : "activities",
+            component : ChildActivities,
+            children:[
+                {
+                    path : "",
+                    component : ChildActivityList,
+                    name : 'childActivities',
+
+                },
+                {
+                    path : ":date",
+                    component : ChildActivity,
+                    name : 'activityDetailByDate',
+                }
+
+            ]
         },
         {
             path : "behaviours",
-            component : ChildBehaviour,
-            name : 'childBehaviour',
-            children : [
+            component : ChildBehaviours,
+            children:[
                 {
-                    path : "no-habits",
-                    component : HabitNotFound,
-                    name : 'noChildHabits',
-                    props:{editable : false}
+                    path : "",
+                    component : ChildBehaviourList,
+                    name : 'childBehaviours',
+
                 },
                 {
-                    path : ":id",
-                    component : ChildHabits,
-                    name : 'childHabits',
-                    props : {editable : false}
-                },
+                    path : ":date",
+                    component : ChildBehaviour,
+                    name : 'childBehaviour',
+                }
             ]
         },
         {

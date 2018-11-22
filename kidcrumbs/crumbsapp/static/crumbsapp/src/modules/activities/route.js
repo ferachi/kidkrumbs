@@ -18,7 +18,7 @@ const activitiesRoute = {
         {
             path : "date/:date",
             component : ActivityDateDetail,
-            name : 'activityDateDetail',
+            name : 'activityDetailByDate',
         },
         {
             path : ":id",

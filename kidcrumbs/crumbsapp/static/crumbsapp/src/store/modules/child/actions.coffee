@@ -42,7 +42,7 @@ fetchChildSubjects = ({commit, getters}) ->
     http.get(STUDENT_SUBJECTS(child.username)).then (response)->
         subjects = response.data
         commit 'setChildSubjects', subjects
-        commit 'child/addSubjects', subjects
+        commit 'subject/addSubjects', subjects, {root:true}
         subjects
     
 # Fetches the currently selected childs' enrollments

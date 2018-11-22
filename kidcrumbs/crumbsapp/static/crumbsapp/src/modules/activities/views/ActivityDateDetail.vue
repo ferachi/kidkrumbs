@@ -61,7 +61,7 @@ export default{
             this.init();
         },
         date(){
-            this.$router.push({name : 'activityDateDetail', params:{date: this.date}})
+            this.$router.push({name : 'activityDetailByDate', params:{date: this.date}})
         }
     }
 }

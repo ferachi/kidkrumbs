@@ -94,6 +94,10 @@ export default{
         editable:{
             type : Boolean,
             default:true
+        },
+        id:{
+            type : String,
+            required:true
         }
     },
     data(){
@@ -117,7 +121,7 @@ export default{
             'updateStudentsRoutine'
         ]),
         init(){
-            this.fetchStudentRoutine(this.$route.params.id).then( routine =>{
+            this.fetchStudentRoutine(this.id).then( routine =>{
                 this.routine = routine;
                 let attitudes = routine.attitudes
 

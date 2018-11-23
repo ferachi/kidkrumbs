@@ -5,7 +5,7 @@
             <slot name='header'>
             </slot>
         </header>
-        <div class="content col-xl-8 col px-0 ">
+        <div class="content col-xl-7 col-lg-8 col px-0 ">
             <slot>
                 Content comes here
             </slot>

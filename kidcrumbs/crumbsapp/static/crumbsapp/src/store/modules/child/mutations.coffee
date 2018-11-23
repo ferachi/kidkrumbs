@@ -27,6 +27,10 @@ mutations =
         if state.child
             state.child = Object.assign {},state.child,{groups}
 
+    setChildClassrooms : (state, classrooms)->
+        if state.child
+            state.child = Object.assign {},state.child,{classrooms}
+
     setChildEnrollments : (state, enrollments)->
         if state.child
             state.child = Object.assign {},state.child,{enrollments}

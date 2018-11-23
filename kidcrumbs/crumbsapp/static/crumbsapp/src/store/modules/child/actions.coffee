@@ -1,5 +1,5 @@
 import http from "../../../http";
-import {STUDENT, STUDENTS, STUDENT_MEMBERSHIPS, STUDENT_GROUPS, STUDENT_CURRENT_GROUPS, STUDENT_HABITS, STUDENT_HABITS_BY_GROUP, STUDENT_SUBJECTS, STUDENT_ENROLLMENTS} from "../../../urls";
+import {STUDENT, STUDENTS, STUDENT_MEMBERSHIPS, STUDENT_GROUPS, STUDENT_CURRENT_GROUPS, STUDENT_HABITS, STUDENT_HABITS_BY_GROUP, STUDENT_SUBJECTS, STUDENT_ENROLLMENTS, STUDENT_CLASSROOMS} from "../../../urls";
 
 
 fetchChild = ({commit}, username) ->
@@ -33,6 +33,7 @@ fetchChildHabits = ({commit, getters}) ->
         commit 'setChildHabits', habits
         habits
     
+
 # Fetches the currently selected childs' subjects
 fetchChildSubjects = ({commit, getters}) ->
     child = getters.getChild
@@ -45,6 +46,7 @@ fetchChildSubjects = ({commit, getters}) ->
         commit 'subject/addSubjects', subjects, {root:true}
         subjects
     
+
 # Fetches the currently selected childs' enrollments
 fetchChildEnrollments = ({commit, getters}) ->
     child = getters.getChild
@@ -80,6 +82,17 @@ fetchChildGroups = ({commit, getters}) ->
         commit 'setChildGroups', groups
         groups
 
+# Fetches the currently selected childs' classrooms
+fetchChildClassrooms = ({commit, getters}) ->
+    child = getters.getChild
+
+    return null unless child 
+
+    http.get(STUDENT_CLASSROOMS(child.username)).then (response)->
+        classrooms = response.data
+        commit 'setChildClassrooms', classrooms
+        classrooms
+
 
 # Fetches the currently selected childs' current groups
 fetchChildCurrentGroups = ({commit, getters}) ->
@@ -101,11 +114,12 @@ fetchChildWithProps = ({commit, dispatch, getters, state}, username) ->
         memberships = dispatch('fetchChildMemberships')
         habits = dispatch('fetchChildHabits')
         subjects = dispatch('fetchChildSubjects')
+        classrooms = dispatch('fetchChildClassrooms')
 
-        Promise.all([currentGroups, groups, memberships, habits]).then (props) ->
+        Promise.all([currentGroups, groups, memberships, habits, subjects, classrooms]).then (props) ->
             commit 'updateChildren', child
             console.log getters.getChild, getters.getChildGroups
             child
 
 
-export {fetchChild, fetchChildGroups, fetchChildCurrentGroups, fetchChildMemberships ,fetchChildHabitsByGroup, fetchChildHabits, fetchChildWithProps, fetchChildSubjects}
+export {fetchChild, fetchChildGroups, fetchChildCurrentGroups, fetchChildClassrooms, fetchChildMemberships ,fetchChildHabitsByGroup, fetchChildHabits, fetchChildWithProps, fetchChildSubjects}

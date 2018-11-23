@@ -31,6 +31,10 @@ getters =
         if state.child
             state.child.groups
 
+    getChildClassrooms : (state) ->
+        if state.child
+            state.child.classrooms
+
     getChildSubjects : (state) ->
         if state.child
             state.child.subjects

@@ -1,0 +1,32 @@
+<template>
+    <div class="classroom-list-item d-flex justify-content-center p-0">
+        <div class="bg_0 border border_1 menu clickable col px-0 d-flex" >
+            <div class="col px-0">
+                <div class="w-100" :style="{background:color}">
+                    <h1 class="display-2">{{firstChar}}</h1>
+                </div>
+                <div class="text-center mt-2">
+                    <h6 ><small>{{classroom.group_base.name}}</small> </h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+export default{
+    name : "ClassroomListItem",
+    props : ['classroom'],
+    computed:{
+        firstChar(){
+            return this.classroom.group_base.name.charAt(0);
+        },
+        color(){
+            return this.classroom.color.toLowerCase()
+        }
+    }
+}
+</script>
+<style lang="stylus">
+.classroom-list-item
+    min-height 150px
+</style>

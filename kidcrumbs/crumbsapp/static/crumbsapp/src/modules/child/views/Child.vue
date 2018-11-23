@@ -23,12 +23,12 @@
                             params:{date:date}}"><small class="color_0">Activity</small></router-link>
                         <router-link class="col p-0 text-center color_0" :to="{name:'childBehaviour', params:{date:date}}"><small class="color_0">Behaviour</small></router-link>
                         <router-link class="col p-0 text-center color_0" :to="{name:'childHomework', params:{id:1}}"><small class="color_0">Homework</small></router-link>
-                        <router-link class="col p-0 text-center color_0" :to="{name:'app'}"><small class="color_0">More</small></router-link>
+                        <router-link class="col p-0 text-center color_0" :to="{name:'more'}"><small class="color_0">More</small></router-link>
                         </div>
                     </div>
                 </section>
             </div>
-            <section id="childContent" class="p-2 px-4 bg_0 border border_1">
+            <section id="childContent" class="p-2 ">
                 <router-view></router-view>
             </section>
             <section id="errorFetching">
@@ -62,6 +62,7 @@ export default{
             let habits = this.fetchChildHabitsByGroup(group.id),
                 groupHabits = this.fetchGroupHabits(group.id),
                 activities = this.fetchActivities(group.id);
+            
             // get the groups activities
             Promise.all([habits,groupHabits, activities]).then( props => {
                 this.child = child;

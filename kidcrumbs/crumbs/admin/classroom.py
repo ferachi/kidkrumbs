@@ -22,7 +22,6 @@ class ClassroomAdmin(GroupAdmin):
         new_subjects = form.cleaned_data.get('subjects')
         
         deleted_subjects = set(classroom_subjects) - set(new_subjects)
-        print('deleted subjects', deleted_subjects)
 
         for student in students:
             for subject in list(deleted_subjects):

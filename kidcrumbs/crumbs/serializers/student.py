@@ -10,6 +10,7 @@ class StudentSerializer(serializers.ModelSerializer):
     username  = serializers.CharField(read_only=True)
     email  = serializers.CharField(source="user.email", read_only=True)
     names = serializers.CharField(source="full_name", read_only=True)
+    gender = serializers.CharField(source="get_gender_display", read_only=True)
 
     class Meta:
         model = Student

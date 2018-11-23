@@ -30,46 +30,6 @@ pullClassroom = ({commit}, id) ->
     http.get(CLASSROOM(id)).then (response)->
         response.data
 
-
-
-# This fetches a classrooms' routines
-fetchClassroomRoutines = ({dispatch,commit,getters}, id) -> 
-    dispatch('fetchClassroom', id).then (classroom) ->
-        routines = getters.getClassroomRoutines
-
-        if routines
-            return routines
-
-        http.get(GROUP_ROUTINES(id)).then (response)->
-            routines = response.data
-            commit "setClassroomRoutines", routines
-            commit "routine/addRoutines", routines, {root : true}
-            routines
-
-fetchClassroomStudents = ({dispatch, getters, commit}, id) ->
-    dispatch('fetchClassroom', id).then (classroom) ->
-        students = getters.getClassroomStudents
-
-        if students
-            return students
-
-        http.get(GROUP_STUDENTS(id)).then (response)->
-            students = response.data
-            commit "setClassroomStudents", students
-            students
-    
-fetchClassroomHabits = ({dispatch, getters, commit}, id) ->
-    dispatch('fetchClassroom', id).then (classroom) ->
-        habits = getters.getClassroomHabits
-
-        if habits
-            return habits
-
-        http.get(GROUP_HABITS(id)).then (response)->
-            habits = response.data
-            commit "setClassroomHabits", habits
-            habits
-
 fetchClassroomHomeworks = ({dispatch, getters, commit}, id) ->
     dispatch('fetchClassroom', id).then (classroom) ->
         homeWorks = getters.getClassroomHomeworks
@@ -82,33 +42,7 @@ fetchClassroomHomeworks = ({dispatch, getters, commit}, id) ->
             commit "setClassroomHomeworks", homeWorks
             homeWorks
 
-fetchClassroomActivities = ({dispatch, getters, commit}, id) ->
-    dispatch('fetchClassroom', id).then (classroom) ->
-        activities = getters.getClassroomActivities
-
-        if activities
-            return activities
-
-        http.get(GROUP_ACTIVITIES(id)).then (response)->
-            activities = response.data
-            commit "setClassroomActivities", activities
-            commit "activity/addActivities", activities, {root:true}
-            activities
-
-
-fetchClassroomWithProps = ({dispatch, commit, state}, id) ->
-    dispatch('fetchClassroom', id).then (classroom) ->
-        students = dispatch('fetchClassroomStudents', id)
-        habits = dispatch('fetchClassroomHabits', id)
-        routines = dispatch('fetchClassroomRoutines', id)
-        activities = dispatch('fetchClassroomActivities', id)
-        homeWorks = dispatch('fetchClassroomHomeworks', id)
-
-        Promise.all([students, habits, routines, activities]).then (props) ->
-            commit 'updateClassrooms', state.classroom
-            state.classroom
 
 
 
-
-export {pullClassroom, fetchClassroom, fetchClassrooms, pullClassrooms, fetchClassroomStudents, fetchClassroomHabits,fetchClassroomRoutines, fetchClassroomWithProps, fetchClassroomActivities, fetchClassroomHomeworks}
+export {pullClassroom, fetchClassroom, fetchClassrooms, pullClassrooms, fetchClassroomHomeworks}

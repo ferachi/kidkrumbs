@@ -5,9 +5,13 @@ import ChildActivityList from "./views/ChildActivityList.vue";
 import ChildBehaviours from "./views/ChildBehaviours.vue";
 import ChildBehaviourList from "./views/ChildBehaviourList.vue";
 import ChildInit from "./views/ChildInit.vue";
+import ChildProfile from "./views/ChildProfile.vue";
+import More from "./views/More.vue";
 import ChildBehaviour from "./views/ChildBehaviour.vue";
 import ChildHomework from "./views/ChildHomework.vue";
 import ActivityDetail from "../activities/views/ActivityDetail.vue";
+import ChildSubjects from "./views/ChildSubjects.vue";
+import ChildClassrooms from "./views/ChildClassrooms.vue";
 import ChildHabits from "../habit/views/StudentAttitude.vue";
 import HabitNotFound from "../habit/views/HabitNotFound.vue";
 import {store} from "../../appbootstrap";
@@ -75,6 +79,26 @@ const childRoute = {
             component : ChildHomework,
             name : 'childHomework',
         },
+        {
+            path : "menu",
+            component : More,
+            name : 'more',
+        },
+        {
+            path : "subjects",
+            component : ChildSubjects,
+            name : "childSubjects"
+        },
+        {
+            path : "classrooms",
+            component : ChildClassrooms,
+            name : "childClassrooms"
+        },
+        {
+            path : "profile",
+            component : ChildProfile,
+            name : "childProfile"
+        }
 
     ]
 }

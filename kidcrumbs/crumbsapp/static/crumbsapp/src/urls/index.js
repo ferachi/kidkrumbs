@@ -9,6 +9,7 @@ export const PROFILE = (id) => `${PROFILES}${id}/`; // route to a single person
 export const RELATIVES = (id) => `${PROFILE(id)}get_relatives/`; // gets the users relatives
 export const RELATIONSHIPS = (id) => `${PROFILE(id)}get_relationships/`; // gets the users relatives
 export const ROLES = (id) => `${PROFILE(id)}get_roles/`; // gets the users schools roles
+export const PROFILE_ANNOUNCEMENTS = (id) => `${PROFILE(id)}get_announcements/`; // gets the users schools roles
 
 
 // PEOPLE PROFILES
@@ -78,3 +79,7 @@ export const SUBJECT = (id) => `${SUBJECTS}${id}/`;
 // ROUTINES
 export const HOMEWORKS = '/api/home-works/';
 export const HOMEWORK = (id) => `${HOMEWORKS}${id}/`;
+
+// ANNOUNCEMENTS
+export const ANNOUNCEMENTS = '/api/announcements/';
+export const ANNOUNCEMENT = (id) => `${ANNOUNCEMENTS}${id}/`;

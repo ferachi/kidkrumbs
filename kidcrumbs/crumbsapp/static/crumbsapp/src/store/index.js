@@ -3,6 +3,7 @@ import auth from './modules/auth.coffee';
 import profile from './modules/profile.coffee';
 import person from './modules/person.coffee';
 import help from './modules/help.coffee';
+import announcement from './modules/announcement';
 import student from './modules/student';
 import subject from './modules/subject';
 import school from './modules/school';
@@ -28,6 +29,7 @@ export default {
 	actions,
 	modules:{
         activity,
+        announcement,
         auth,
 		child,
 		classroom,

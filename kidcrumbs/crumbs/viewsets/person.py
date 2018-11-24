@@ -2,8 +2,8 @@ from rest_framework import permissions, viewsets, status
 from rest_framework import mixins
 from rest_framework.response import Response
 from rest_framework.decorators import detail_route, list_route
-from crumbs.serializers import PersonSerializer, RelationSerializer, PersonSchoolRoleSerializer
-from crumbs.models import Person, Relation, PersonSchoolRole
+from crumbs.serializers import PersonSerializer, RelationSerializer, PersonSchoolRoleSerializer, AnnouncementSerializer
+from crumbs.models import Person, Relation, PersonSchoolRole, Announcement
 
 
 class ProfileViewSet(mixins.RetrieveModelMixin,mixins.UpdateModelMixin,viewsets.GenericViewSet):
@@ -39,6 +39,15 @@ class ProfileViewSet(mixins.RetrieveModelMixin,mixins.UpdateModelMixin,viewsets.
         serializer = PersonSchoolRoleSerializer(school_roles, many=True)
         return Response(serializer.data)
 
+    @detail_route()
+    def get_announcements(self, request, pk=None):
+        """
+        Gets the announcements from the persons schools
+        """
+        person = self.get_object()
+        announcements = Announcement.objects.filter(term__session__school__person_roles__person=person)
+        serializer = AnnouncementSerializer(announcements, many=True)
+        return Response(serializer.data)
 
 class PersonViewSet(mixins.RetrieveModelMixin,mixins.UpdateModelMixin,viewsets.GenericViewSet):
     queryset = Person.objects.all()

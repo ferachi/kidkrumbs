@@ -1,8 +1,9 @@
 import App from "../components/Application.vue";
 import Test from "../components/Test.vue";
 import NotFound from "../components/NotFound.vue";
-import childrenRoute from "../modules/children/route";
+import announcementRoute from "../modules/announcement/route";
 import childRoute from "../modules/child/route";
+import childrenRoute from "../modules/children/route";
 import profileRoute from "../modules/profile/route";
 import homeworkProfile from "../modules/homework/route";
 import subjectRoute from "../modules/subject/route";
@@ -30,6 +31,7 @@ const routes = [
             routineRoute, 
             habitRoute, 
             activitiesRoute, 
+            announcementRoute, 
             childrenRoute, 
             {
                 path:'test',

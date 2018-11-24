@@ -1,5 +1,5 @@
 import http from "../../http";
-import {PROFILE, RELATIONSHIPS, RELATIVES, ROLES} from "../../urls";
+import {PROFILE, RELATIONSHIPS, RELATIVES, ROLES, PROFILE_ANNOUNCEMENTS} from "../../urls";
 
 
 state =
@@ -28,21 +28,24 @@ actions =
         relatives = http.get(RELATIVES(id))
         relationships = http.get(RELATIONSHIPS(id))
         roles = http.get(ROLES(id))
+        announcements = http.get(PROFILE_ANNOUNCEMENTS(id))
 
-        Promise.all([person,relatives,relationships, roles]).then (responses) ->
+        Promise.all([person,relatives,relationships, roles, announcements]).then (responses) ->
 
             person = responses[0].data
             person.relatives = responses[1].data
             relationships = responses[2].data
-            console.log person
             person.relatives.forEach (relative) ->
                 relationship = relationships.find (relationship) -> relationship.relative == relative.user
                 relative.relationship = relationship.relationship
                 relative.relationship_type = relationship.relationship_type_display
+            person.announcements = responses[4].data
+            commit 'announcement/setAnnouncements', person.announcements, {root : true} 
             
                 
             # person.relationships = relationships
             person.schoolRoles = responses[3].data
+
             
             person.roles = _.uniq  _.flatMap person.schoolRoles, (sRole) ->
                 sRole.roles
@@ -54,6 +57,9 @@ actions =
 getters =
     getProfile : (state) ->
         state.profile
+
+    getAnnouncements : (state) ->
+        state.profile?.announcements
 
     getRolesBySchool : (state) -> (school) ->
         schoolRole  = _.find state.profile.schoolRoles, (role) ->

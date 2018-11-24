@@ -1,5 +1,6 @@
 from .accounts import AccountViewSet 
 from .activity import ActivityViewSet, ActivityItemViewSet, ActivityCommentViewSet, ActivityCommentReplyViewSet
+from .announcement import AnnouncementViewSet 
 from .classroom import ClassroomViewSet 
 from .group import GroupViewSet 
 from .habit import HabitViewSet, HabitOptionViewSet, HabitResponseViewSet 

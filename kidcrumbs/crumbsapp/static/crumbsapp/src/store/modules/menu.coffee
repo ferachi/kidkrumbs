@@ -5,7 +5,7 @@ menus = [
     new MenuItem 0, "Me", "me", "app", "far fa-grin-stars fa-sm fa-fw", [ROLES.STUDENT]
     new MenuItem 1, "Children", "children", "children", "far fa-grin-squint fa-sm fa-fw", [ROLES.EXTERNAL]
     new MenuItem 2, "Class", "classroom", "app", "fas fa-sm fa-chalkboard fa-fw", [ROLES.ADMINISTRATIVE]
-    new MenuItem 3, "News", "news", "app", "far fa-bell fa-sm fa-fw", [ROLES.STUDENT,ROLES.ADMINISTRATIVE, ROLES.EXTERNAL]
+    new MenuItem 3, "News", "news", "news", "far fa-bell fa-sm fa-fw", [ROLES.STUDENT,ROLES.ADMINISTRATIVE, ROLES.EXTERNAL]
     new MenuItem 4, "Profile", "profile", "app", "far fa-user fa-sm fa-fw", [ROLES.STUDENT,ROLES.ADMINISTRATIVE, ROLES.EXTERNAL]
     new MenuItem 5, "More", "more", "app", "fas fa-bars fa-sm fa-fw", [ROLES.STUDENT,ROLES.ADMINISTRATIVE, ROLES.EXTERNAL]
 ]

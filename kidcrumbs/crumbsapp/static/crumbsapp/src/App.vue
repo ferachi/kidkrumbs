@@ -11,6 +11,7 @@
 <script>
 import {mapGetters, mapActions, mapMutations} from "vuex";
 import _ from 'lodash';
+import * as d3 from 'd3';
 import moment from 'moment';
 export default {
     created() {
@@ -18,6 +19,8 @@ export default {
         // note: this actually sets up the device on the store by
         // running it on the first create (before mount)
         window.moment = moment;
+        window.d3 = d3;
+
 
         this.getDevice().then( values =>{
             this.isLoading = false;

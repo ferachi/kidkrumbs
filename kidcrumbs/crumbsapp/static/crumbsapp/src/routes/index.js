@@ -9,6 +9,7 @@ import homeworkProfile from "../modules/homework/route";
 import subjectRoute from "../modules/subject/route";
 import routineRoute from "../modules/routine/route";
 import habitRoute from "../modules/habit/route";
+import playRoute from "../modules/play/route";
 import activitiesRoute from "../modules/activities/route";
 import {store} from "../appbootstrap";
 
@@ -24,6 +25,7 @@ const routes = [
             });
         },
         children : [
+            playRoute, 
             childRoute, 
             profileRoute, 
             subjectRoute, 

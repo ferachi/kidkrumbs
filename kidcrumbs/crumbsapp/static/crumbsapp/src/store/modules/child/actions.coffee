@@ -93,6 +93,16 @@ fetchChildClassrooms = ({commit, getters}) ->
         commit 'setChildClassrooms', classrooms
         classrooms
 
+# Fetches the currently selected childs' classrooms
+fetchChildResults = ({commit, getters, dispatch}) ->
+    child = getters.getChild
+
+    return null unless child 
+
+    dispatch("result/fetchStudentResults", child.username, {root:true}).then (results) ->
+        commit 'setChildResults', results
+        results
+
 
 # Fetches the currently selected childs' current groups
 fetchChildCurrentGroups = ({commit, getters}) ->
@@ -115,11 +125,11 @@ fetchChildWithProps = ({commit, dispatch, getters, state}, username) ->
         habits = dispatch('fetchChildHabits')
         subjects = dispatch('fetchChildSubjects')
         classrooms = dispatch('fetchChildClassrooms')
+        results = dispatch('fetchChildResults')
 
-        Promise.all([currentGroups, groups, memberships, habits, subjects, classrooms]).then (props) ->
+        Promise.all([currentGroups, groups, memberships, habits, subjects, classrooms, results]).then (props) ->
             commit 'updateChildren', child
-            console.log getters.getChild, getters.getChildGroups
             child
 
 
-export {fetchChild, fetchChildGroups, fetchChildCurrentGroups, fetchChildClassrooms, fetchChildMemberships ,fetchChildHabitsByGroup, fetchChildHabits, fetchChildWithProps, fetchChildSubjects}
+export {fetchChild, fetchChildGroups, fetchChildCurrentGroups, fetchChildClassrooms, fetchChildMemberships ,fetchChildHabitsByGroup, fetchChildHabits, fetchChildWithProps, fetchChildSubjects, fetchChildResults}

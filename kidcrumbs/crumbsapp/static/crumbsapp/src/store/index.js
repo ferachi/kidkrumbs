@@ -2,6 +2,8 @@ import theme from './modules/theme';
 import auth from './modules/auth.coffee';
 import profile from './modules/profile.coffee';
 import person from './modules/person.coffee';
+import result from './modules/result';
+import grade from './modules/grades.coffee';
 import help from './modules/help.coffee';
 import announcement from './modules/announcement';
 import student from './modules/student';
@@ -33,12 +35,14 @@ export default {
         auth,
 		child,
 		classroom,
+		grade,
 		group,
 		help,
         homework,
 		menu,
         person,
         profile,
+        result,
         routine,
         school,
         subject,

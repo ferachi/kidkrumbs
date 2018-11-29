@@ -53,7 +53,7 @@ const menus = [
         name : 'results',
         title : 'results',
         icons : ['fa-chart-bar', 'fa-calendar', 'fa-graduation-cap', 'fa-chart-pie'],
-        link : '',
+        link : 'childResult',
         index : 3
     },
 

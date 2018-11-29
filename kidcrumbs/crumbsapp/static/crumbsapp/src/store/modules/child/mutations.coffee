@@ -39,6 +39,10 @@ mutations =
         if state.child
             state.child = Object.assign {},state.child,{subjects}
 
+    setChildResults : (state, results)->
+        if state.child
+            state.child = Object.assign {},state.child,{results}
+
     setChildCurrentGroups : (state, currentGroups)->
         if state.child
             state.child = Object.assign {}, state.child,{currentGroups}

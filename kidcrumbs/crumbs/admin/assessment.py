@@ -33,7 +33,7 @@ class AssessmentResultAdminForm(forms.ModelForm):
             raise forms.ValidationError(
                     'assessment selected does not pertain to the enrollment'
             )
-        if term.start_date < enrollment.session.start_date or term.end_date > enrollment.session.end_date:
+        if term.start_date < enrollment.subject.session.start_date or term.end_date > enrollment.subject.session.end_date:
             self.add_error('assessment','The session the assessment was taken differs from the session when the student was enrolled.')
             raise forms.ValidationError(
                         'Selected Assessment Session does not conform to the selected Enrollment Session.'

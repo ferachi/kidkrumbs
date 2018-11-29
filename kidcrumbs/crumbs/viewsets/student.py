@@ -2,8 +2,9 @@ from rest_framework import permissions, viewsets, status
 from rest_framework import mixins
 from rest_framework.response import Response
 from rest_framework.decorators import detail_route, list_route
-from crumbs.serializers import StudentSerializer, GroupSerializer, MembershipSerializer, StudentGroupSerializer, StudentRoutineSerializer, SubjectSerializer,EnrollmentSerializer, ClassroomSerializer
-from crumbs.models import Student, Group, Membership, StudentRoutine, Subject, Enrollment, Classroom
+from crumbs.serializers import StudentSerializer, GroupSerializer, MembershipSerializer, StudentGroupSerializer,\
+StudentRoutineSerializer, SubjectSerializer,EnrollmentSerializer, ClassroomSerializer, StudentResultSerializer
+from crumbs.models import Student, Group, Membership, StudentRoutine, Subject, Enrollment, Classroom, AssessmentResult
 from crumbs.permissions import CanViewStudents
 
 
@@ -96,6 +97,16 @@ class StudentViewSet(viewsets.ModelViewSet):
         student = self.get_object()
         subjects = Subject.objects.filter(enrollments__student=student)
         serializer = SubjectSerializer(subjects, many=True)
+        return Response(serializer.data)
+
+    @detail_route()
+    def get_results(self, request, username=None):
+        """
+        Gets the Students' results
+        """
+        student = self.get_object()
+        results = AssessmentResult.objects.filter(enrollment__student=student)
+        serializer = StudentResultSerializer(results, many=True)
         return Response(serializer.data)
 
     @detail_route()

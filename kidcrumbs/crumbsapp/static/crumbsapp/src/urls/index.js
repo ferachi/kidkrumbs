@@ -23,6 +23,7 @@ export const PERSON_ROLES = (id) => `${PERSON(id)}get_roles/`; // gets the users
 export const STUDENTS = '/api/students/'; // All Students, this list differs depending on the user requesting it 
 export const STUDENT = (id) => `${STUDENTS}${id}/`; // route to a single student
 export const STUDENT_GROUPS = (id) => `${STUDENT(id)}get_groups/`; // gets an individual students' groups
+export const STUDENT_RESULTS = (id) => `${STUDENT(id)}get_results/`; // gets an individual students' groups
 export const STUDENT_CLASSROOMS = (id) => `${STUDENT(id)}get_classrooms/`; // gets an individual students' groups
 export const STUDENT_SUBJECTS = (id) => `${STUDENT(id)}get_subjects/`; // gets an individual students' subjects
 export const STUDENT_ENROLLMENTS = (id) => `${STUDENT(id)}get_enrollments/`; // gets an individual students' enrollments
@@ -61,6 +62,7 @@ export const SCHOOLS = '/api/schools/'; // All Schools, this list differs depend
 export const SCHOOL = (id) => `${SCHOOLS}${id}/`; // route to a single school
 export const SCHOOL_SUBJECTS = (id) => `${SCHOOL(id)}get_subjects/`; // route to a schools subjects
 export const SCHOOL_GROUPS = (id) => `${SCHOOL(id)}get_groups/`; // route to a schools groups
+export const SCHOOL_GRADE_SYSTEM = (id) => `${SCHOOL(id)}get_grade_system/`; // route to a schools groups
 
 
 // ROUTINES

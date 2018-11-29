@@ -1,6 +1,6 @@
 from rest_framework import viewsets
-from knob.serializers import AssessmentSerializer, AssessmentPaperSerializer, AssessmentResultSerializer, GradeSystemSerializer
-from knob.models import Assessment,AssessmentPaper, AssessmentResult, GradeSystem
+from crumbs.serializers import AssessmentSerializer,AssessmentResultSerializer, GradeSystemSerializer
+from crumbs.models import Assessment,AssessmentPaper, AssessmentResult, GradeSystem
 from rest_framework.decorators import detail_route, list_route
 from rest_framework.response import Response
 
@@ -13,11 +13,6 @@ class AssessmentViewSet(viewsets.ModelViewSet):
 class AssessmentResultViewSet(viewsets.ModelViewSet):
     queryset = AssessmentResult.objects.all()
     serializer_class = AssessmentResultSerializer
-
-
-class AssessmentPaperViewSet(viewsets.ModelViewSet):
-    queryset = AssessmentPaper.objects.all()
-    serializer_class = AssessmentPaperSerializer
 
 class GradeSystemViewSet(viewsets.ModelViewSet):
     queryset = GradeSystem.objects.all()

@@ -1,5 +1,6 @@
 from .activity import ActivityAdmin
 from .announcement import AnnouncementAdmin
+from .assessment import AssessmentAdmin, AssessmentResultAdmin
 from .classroom import ClassroomAdmin, ClassroomBaseAdmin
 from .enrollment import EnrollmentAdmin
 from .group import GroupAdmin

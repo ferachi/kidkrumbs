@@ -35,7 +35,7 @@ export default
         @xScale = d3.scaleBand()
                     .domain(labels)
                     .rangeRound([0,width])
-                    .paddingInner(0.05)
+                    .padding(@padding)
 
 
     mounted : () ->
@@ -84,7 +84,7 @@ export default
                     .attr("stroke-width", '1')
                     .attr("fill", 'transparent');
 
-        if showVG?
+        if @showGuide
             vGuideScale = d3.scaleLinear()
                             .domain([0,d3.max(@grading, (g) -> g.maxScore)])
                             .range([height, 0])
@@ -127,25 +127,26 @@ export default
                             .text (d) -> d.label.split('')[0...3].join('').toUpperCase()
                             .classed "fill_4", true
                             .attr "text-anchor", "middle"
+                            .attr "font-size", "0.8em"
                             .attr "y", (d) =>
                                 @yScale(d.score) + @margin.bottom/2                                
                             .attr "x", (d, i) => 
                                 @xScale.bandwidth()/2
 
-        tooltip = d3.select("##{@name} .bar-chart")
-                    .append("div")
-                        .style "position", 'absolute'
-                        .style "opacity", 0.5
-                        .classed "bg_0", true
+        #tooltip = d3.select("##{@name} .bar-chart")
+        #            .append("div")
+        #                .style "position", 'absolute'
+        #                .style "opacity", 0.5
+        #                .classed "bg_0", true
 
 
-        bars.on 'mouseover', (d) =>
-            tooltip.transition()
-                .style 'opacity', 0.9
-            tooltip.html("#{d.label} - #{d.score}")
-                .classed "color_4", true
-                .style "left", "#{d3.event.pageX }px"
-                .style "top", "#{d3.event.pageY - 30}px"
+        #bars.on 'mouseover', (d) =>
+        #    tooltip.transition()
+        #        .style 'opacity', 0.9
+        #    tooltip.html("#{d.label} - #{d.score}")
+        #        .classed "color_4", true
+        #        .style "left", "#{d3.event.pageX }px"
+        #        .style "top", "#{d3.event.pageY - 30}px"
 
 
         scores = canvas.selectAll("g.bar")
@@ -185,5 +186,11 @@ export default
         grading : 
             type : Array
             required : true
+        padding : 
+            type : Number
+            default : 0.5
+        showGuide : 
+            type : Boolean
+            default : false
 
 </script>

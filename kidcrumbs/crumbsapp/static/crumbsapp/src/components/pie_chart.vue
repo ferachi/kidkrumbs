@@ -21,7 +21,7 @@ export default
             top : 20
             right : 20
             bottom : 20
-            left : 20
+            left : 40
         grader : null
         colorScale : null
 
@@ -37,9 +37,6 @@ export default
             type : String
             required : true
         data : 
-            type : Array
-            required : true
-        grading : 
             type : Array
             required : true
 
@@ -76,22 +73,26 @@ export default
                     .attr 'fill', 'white'
                     .attr 'text-anchor', 'middle'
                     .attr 'transform' , (d) ->
-                        console.log d
                         "translate(#{arc.centroid(d)})"
 
-            tooltip = d3.select("##{@name} .pie-chart")
-                        .append("div")
-                            .style "position", 'absolute'
-                            .style "opacity", 0.5
-                            .classed "bg_0", true
+            display = pie.append("g")
+                        .classed "display" , true
+                        .attr "transform",(d, i ) =>
+                            "translate(#{-width/2 - @margin.left},#{ -height/2 + @margin.top + (i * 35) })"
+                        .append("rect")
+                        .attr "width" , "30"
+                        .attr "height" , "30"
+                        .attr "fill", (d) -> d.data.color
 
-            pie.on 'mouseover', (d) =>
-                tooltip.transition()
-                    .style 'opacity', 0.9
-                tooltip.html("#{d.data.label} - #{d.data.percentage}%")
-                    .classed "color_4", true
-                    .style "left", "#{d3.event.pageX }px"
-                    .style "top", "#{d3.event.pageY - 30}px"
+            display = pie.selectAll("g.display")
+                        .append("text")
+                        .text( (d) -> "#{d.data.percentage}%" )
+                        .attr 'text-anchor', 'middle'
+                        .attr 'font-size', '0.8em'
+                        .attr "class", "fill_0" 
+                        .attr "y", 20 
+                        .attr "x", 15 
+
 
 
 

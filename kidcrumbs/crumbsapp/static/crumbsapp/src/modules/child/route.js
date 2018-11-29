@@ -6,6 +6,7 @@ import ChildBehaviours from "./views/ChildBehaviours.vue";
 import ChildBehaviourList from "./views/ChildBehaviourList.vue";
 import ChildInit from "./views/ChildInit.vue";
 import ChildProfile from "./views/ChildProfile.vue";
+import ChildResult from "./views/ChildResult.vue";
 import More from "./views/More.vue";
 import ChildBehaviour from "./views/ChildBehaviour.vue";
 import ChildHomework from "./views/ChildHomework.vue";
@@ -98,6 +99,11 @@ const childRoute = {
             path : "profile",
             component : ChildProfile,
             name : "childProfile"
+        },
+        {
+            path : "result",
+            component : ChildResult,
+            name : "childResult"
         }
 
     ]

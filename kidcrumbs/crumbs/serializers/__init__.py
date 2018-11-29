@@ -1,6 +1,7 @@
 from .accounts import AccountSerializer
 from .activity import ActivitySerializer, ActivityItemSerializer, ActivityCommentSerializer,ActivityCommentReplySerializer
 from .announcement import AnnouncementSerializer
+from .assessment import AssessmentResultSerializer, StudentResultSerializer, AssessmentSerializer, GradeSystemSerializer
 from .classroom import ClassroomSerializer
 from .enrollment import EnrollmentSerializer
 from .group import GroupSerializer, StudentGroupSerializer

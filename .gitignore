@@ -3,6 +3,9 @@ dist/
 npm-debug.log
 *.swp
 *.pyc
+automated*
+assign_assessment.py
+ipython_*
 __pycache__/
 db.sqlite3
 media/

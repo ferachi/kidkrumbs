@@ -1,7 +1,6 @@
 <template>
     <div id="childResult" class="">
         <div class="d-flex justify-content-end"> 
-            <router-link :to="" >view all</router-link>
         </div>
         <hr>
         <h6 class="text-uppercase font-weight-bold ">Scores Summary</h6>

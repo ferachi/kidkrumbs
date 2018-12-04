@@ -9,7 +9,8 @@ export const PROFILE = (id) => `${PROFILES}${id}/`; // route to a single person
 export const RELATIVES = (id) => `${PROFILE(id)}get_relatives/`; // gets the users relatives
 export const RELATIONSHIPS = (id) => `${PROFILE(id)}get_relationships/`; // gets the users relatives
 export const ROLES = (id) => `${PROFILE(id)}get_roles/`; // gets the users schools roles
-export const PROFILE_ANNOUNCEMENTS = (id) => `${PROFILE(id)}get_announcements/`; // gets the users schools roles
+export const PROFILE_ANNOUNCEMENTS = (id) => `${PROFILE(id)}get_announcements/`; // gets the users announcements
+export const PROFILE_SCHOOLS = (id) => `${PROFILE(id)}get_schools/`; // gets the users schools
 
 
 // PEOPLE PROFILES
@@ -24,6 +25,7 @@ export const STUDENTS = '/api/students/'; // All Students, this list differs dep
 export const STUDENT = (id) => `${STUDENTS}${id}/`; // route to a single student
 export const STUDENT_GROUPS = (id) => `${STUDENT(id)}get_groups/`; // gets an individual students' groups
 export const STUDENT_RESULTS = (id) => `${STUDENT(id)}get_results/`; // gets an individual students' groups
+export const STUDENT_TERM_POSITIONS = (id) => `${STUDENT(id)}get_term_result_positions/`; // gets an individual students' groups
 export const STUDENT_CLASSROOMS = (id) => `${STUDENT(id)}get_classrooms/`; // gets an individual students' groups
 export const STUDENT_SUBJECTS = (id) => `${STUDENT(id)}get_subjects/`; // gets an individual students' subjects
 export const STUDENT_ENROLLMENTS = (id) => `${STUDENT(id)}get_enrollments/`; // gets an individual students' enrollments
@@ -61,6 +63,7 @@ export const CLASSROOM_SUBJECTS = (id) => `${CLASSROOM(id)}get_subjects/`; // ro
 export const SCHOOLS = '/api/schools/'; // All Schools, this list differs depending on the user requesting it
 export const SCHOOL = (id) => `${SCHOOLS}${id}/`; // route to a single school
 export const SCHOOL_SUBJECTS = (id) => `${SCHOOL(id)}get_subjects/`; // route to a schools subjects
+export const SCHOOL_STUDENTS = (id) => `${SCHOOL(id)}get_current_students/`; // route to a schools students
 export const SCHOOL_GROUPS = (id) => `${SCHOOL(id)}get_groups/`; // route to a schools groups
 export const SCHOOL_GRADE_SYSTEM = (id) => `${SCHOOL(id)}get_grade_system/`; // route to a schools groups
 

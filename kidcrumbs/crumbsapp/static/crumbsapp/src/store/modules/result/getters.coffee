@@ -1,4 +1,4 @@
-getters = 
+getters =
 
     getResults : (state) ->
         state.results
@@ -11,25 +11,20 @@ getters =
         _.map state.resultSet , (result) ->
             result.score
 
-
     # Total scores obtained on the result set
     getTotalScores : (state, getters) ->
         _.sum getters.getScores
 
 
-    getBestResult : (state) ->
-        results = _.groupBy state.resultSet, 'subject'
-        results
-
     # total obtainable scores. 
-    getTotalAssessmentScores : (state, getters) ->
-        getters.getBestResult
+    getTotalAssessmentScores : (state) ->
         _.sum _.map state.resultSet , (result) ->
             result.assessmentMaxScore
         
     # total average on result set
     getTotalAverageScore : (state, getters) ->
         _.round (getters.getTotalScores / getters.getTotalAssessmentScores * 100)
+
 
     # This calculates the summary of the current result set
     # Most result transforms can be derived from here except
@@ -49,23 +44,60 @@ getters =
             subjectCode = _results[0].subjectCode
             subjectColor = _results[0].subjectColor
             school = _results[0].school
-            session = _results[0].assessmentSession
+            session = _results[0].assessmentSessionId
             
             # calculate the average scores per term
             _.map termResults, (_termResults, term) ->
+                termEnd = _termResults[0].assessmentTermEnd
+                sessionStart = _termResults[0].assessmentSessionStart
+                sessionEnd = _termResults[0].assessmentSessionEnd
+                termPosition = _termResults[0].assessmentTermPosition
+                studentTotal = _termResults[0].assessmentTermStudentTotal
                 score = _.sum _.map _termResults, 'score'
                 maxScore = _.sum _.map _termResults, 'assessmentMaxScore'
                 {school: school,subject:subject, term: term,score:score, subjectBase : subjectBase,session:session, 
                 maxScore:maxScore,subjectBase:subjectBase, subjectCode : subjectCode,
-                subjectColor:subjectColor,
-                average:_.round(score/maxScore * 100)}
+                subjectColor:subjectColor,termEnd:termEnd, term:term, position:termPosition, studentTotal : studentTotal,
+                average:_.round(score/maxScore * 100), sessionStart, sessionEnd}
 
     getMinResult : (state, getters) ->
         _.minBy getters.getResultSummary, 'score'
 
-
     getMaxResult : (state,getters) ->
         _.maxBy getters.getResultSummary, 'score'
+
+    getSessionDuration : (state,getters) ->
+        sessionDates = _.map getters.getResultSummary, 'sessionStart'
+        {start : moment(_.min sessionDates).format("YYYY"), end : moment(_.max sessionDates).format("YYYY") }
+
+    # gets the percentage scored per assessment type
+    getAssessmentPercentageScores : (state, getters) ->
+        results = getters.getResultSet
+
+        # group by assessment type first
+        assessmentTypeResults = _.groupBy results, "assessmentType" 
+
+        _.map assessmentTypeResults, (_results, assessment) ->
+            score = _.sum _.map _results, 'score'
+            maxScore = _.sum _.map _results, 'assessmentMaxScore'
+            averageScore = _.round(score/maxScore * 100)
+            color = _results[0].assessmentColor
+            {assessment, score, maxScore, averageScore, color}
+
+
+    getPercentageAssessmentWritten : (state, getters) ->
+        results = getters.getResultSet
+
+        assessmentCount = results.length
+        
+        # group by assessment type first
+        assessmentTypeResults = _.groupBy results, "assessmentType" 
+
+        _.map assessmentTypeResults, (_results, assessment) ->
+            count = _results.length
+            percentage = _.round(count/assessmentCount * 100)
+            color = _results[0].assessmentColor
+            {assessment, count, percentage, color}
 
 
     getBaseSubjectResultSummary : (state, getters) ->

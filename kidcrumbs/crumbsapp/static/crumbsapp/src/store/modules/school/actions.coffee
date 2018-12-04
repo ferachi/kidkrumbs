@@ -1,5 +1,5 @@
 import http from "../../../http";
-import {SCHOOL, SCHOOLS, GROUP_STUDENTS, GROUP_HABITS, SCHOOL_SUBJECTS, GROUP_ACTIVITIES, GROUP_HOME_WORKS} from "../../../urls";
+import {SCHOOL, SCHOOLS, SCHOOL_STUDENTS, GROUP_HABITS, SCHOOL_SUBJECTS, GROUP_ACTIVITIES, GROUP_HOME_WORKS} from "../../../urls";
 
 
 fetchSchool = ({dispatch,commit, getters}, id) ->
@@ -53,8 +53,8 @@ fetchSchoolStudents = ({dispatch, getters, commit}, id) ->
         if students
             return students
 
-        http.get(GROUP_STUDENTS(id)).then (response)->
-            students = response.data
+        http.get(SCHOOL_STUDENTS(id)).then (response)->
+            students = _.sortBy response.data, (student) -> [student.last_name, student.first_name]
             commit "setSchoolStudents", students
             students
     

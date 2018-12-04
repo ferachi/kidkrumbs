@@ -6,6 +6,7 @@ from crumbs.serializers import StudentSerializer, GroupSerializer, MembershipSer
 StudentRoutineSerializer, SubjectSerializer,EnrollmentSerializer, ClassroomSerializer, StudentResultSerializer
 from crumbs.models import Student, Group, Membership, StudentRoutine, Subject, Enrollment, Classroom, AssessmentResult
 from crumbs.permissions import CanViewStudents
+from itertools import groupby
 
 
 class StudentViewSet(viewsets.ModelViewSet):
@@ -76,6 +77,7 @@ class StudentViewSet(viewsets.ModelViewSet):
         serializer = StudentRoutineSerializer(routines, many=True)
         return Response(serializer.data)
 
+
     @detail_route()
     def get_routines_by_group(self, request, username=None):
         """
@@ -108,6 +110,101 @@ class StudentViewSet(viewsets.ModelViewSet):
         results = AssessmentResult.objects.filter(enrollment__student=student)
         serializer = StudentResultSerializer(results, many=True)
         return Response(serializer.data)
+
+
+    @detail_route()
+    def get_term_result_positions(self, request, username=None):
+        """
+            Gets the position (using scores obtained in a term) of the student when
+            compared with peers using his/her total scores
+        """
+        student = self.get_object()
+
+        # the students' classrooms
+        student_classrooms = []
+
+        # term results
+        results = []
+
+        # for each group the student belongs to get
+        # the classroom;
+        for group in student.group_list.all():
+            try:
+                student_classrooms.append(group.classroom)
+            except:
+                pass
+
+         # for each classroom get all results
+         # get all the students, each student has results
+        for classroom in student_classrooms:
+
+            # making sure the membership in classroom are only students
+            classroom_students = classroom.members.filter(person_school_roles__roles__name='student')
+
+            #used to combine all the students results
+            student_results = []
+
+            for _student in classroom_students:
+                # get each students resuls
+                _results = AssessmentResult.objects.filter(enrollment__student__user__id=_student.user.id,\
+                         assessment__term__session=classroom.session)\
+                         .values('enrollment__student__user__id','score','assessment__max_score',\
+                         'assessment__subject', 'assessment__term__id', 'assessment__term__end_date')
+
+                student_results += list(_results)
+
+            # holds a list of terms' results (which is a list of students results) 
+            classroom_term_results = []
+
+            # prerequisite for sorting
+            student_results_sorted = sorted(list(student_results).copy(), key=lambda res : res['assessment__term__id'])
+
+            # group by term 
+            for k,g in groupby(student_results_sorted, lambda res : res['assessment__term__id']):
+                # convert the values to a list
+                _groups = list(g)
+
+                # sort by student
+                sorted_results = sorted(_groups, key=lambda res: res['enrollment__student__user__id'])
+                term_results = []
+
+                # groupby student
+                for i,s in groupby(sorted_results, lambda res : res['enrollment__student__user__id']):
+                    #students' result
+                    _results = list(s)
+
+                    # students total score for the term
+                    student_total_scores = sum(map(lambda res : res['score'], _results))
+
+                    # the maximum scores
+                    maximum_scores = sum(map(lambda res : res['assessment__max_score'],_results))
+
+                    term_results.append({'id':i, 'term_id':k, 'total_scores':student_total_scores,\
+                        'max_scores':maximum_scores})
+
+                classroom_term_results.append(term_results) # this holds a list of term results
+
+            for _term_results in classroom_term_results:
+                # number of results
+                no_results = len(_term_results)
+
+                # map the total_scores into classroom score set
+                # using a set so if 2 students have same score they are awarded same position
+                classroom_scores = sorted(list(set(map(lambda res : res['total_scores'],\
+                                   _term_results))), reverse=True) # in desc order
+
+                # get the student result from the _term_results
+                student_result = list(filter(lambda res : res['id'] == student.user.id, _term_results))[0]
+
+                #get the position
+                student_result['position'] = classroom_scores.index(student_result['total_scores']) + 1
+                student_result['total_count'] = no_results
+
+                # get index of the student in the sorted results
+                results.append(student_result)
+        
+        return Response(results)
+
 
     @detail_route()
     def get_enrollments(self, request, username=None):

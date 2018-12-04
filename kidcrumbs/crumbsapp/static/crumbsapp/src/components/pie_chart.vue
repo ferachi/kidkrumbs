@@ -17,41 +17,43 @@ export default
 
 
     data : () ->
-        margin : 
-            top : 20
-            right : 20
-            bottom : 20
-            left : 40
-        grader : null
+        margin :
+            top : 10
+            right : 80
+            bottom : 10
+            left : 25
         colorScale : null
 
 
-    props : 
-        width : 
+    props :
+        width :
             type : Number
             default : 300
-        height : 
+        height :
             type : Number
             default : 250
-        title : 
+        title :
             type : String
             required : true
-        data : 
+        data :
+            type : Array
+            required : true
+        labels :
             type : Array
             required : true
 
-    methods : 
+    methods :
         pieChart : () ->
             width = @width - @margin.left - @margin.right
-            height = @height - @margin.top - @margin.bottom;
+            height = @height - @margin.top - @margin.bottom
             rfactor = 2
-            radius = width/rfactor
+            radius = _.round(width/rfactor)
 
             arc = d3.arc()
                     .innerRadius 0
                     .outerRadius radius
 
-            arcs = d3.pie().value((d) -> d.percentage)(@data)
+            arcs = d3.pie().value((d) -> d.percentage)(_.sortBy @data, 'label')
 
             svg = d3.select("##{@name} .pie-chart")
                 .append("svg")
@@ -69,31 +71,29 @@ export default
                     .attr "d", arc
 
             text = pie.append("text")
-                    .text((d) -> d.data.label)
+                .text((d) -> "#{d.data.percentage}%")
                     .attr 'fill', 'white'
                     .attr 'text-anchor', 'middle'
                     .attr 'transform' , (d) ->
                         "translate(#{arc.centroid(d)})"
 
-            display = pie.append("g")
+            displayWidth = _.round(width/15)
+
+            display = pie.selectAll('g').data(_.sortBy(@labels, 'label')).enter().append("g")
                         .classed "display" , true
-                        .attr "transform",(d, i ) =>
-                            "translate(#{-width/2 - @margin.left},#{ -height/2 + @margin.top + (i * 35) })"
+                        .attr "transform",(d, i ) => "translate(#{ width/2 +  @margin.left/2  }, #{ -((@labels.length/2) * displayWidth) + (i * (displayWidth + 5)) })"
                         .append("rect")
-                        .attr "width" , "30"
-                        .attr "height" , "30"
-                        .attr "fill", (d) -> d.data.color
+                        .attr "width" , "#{displayWidth}"
+                        .attr "height" , "#{displayWidth}"
+                        .attr "fill", (d) -> d.color
 
             display = pie.selectAll("g.display")
                         .append("text")
-                        .text( (d) -> "#{d.data.percentage}%" )
-                        .attr 'text-anchor', 'middle'
+                        .text( (d) -> "#{d.label}" )
                         .attr 'font-size', '0.8em'
-                        .attr "class", "fill_0" 
-                        .attr "y", 20 
-                        .attr "x", 15 
-
-
+                        .attr "class", "fill_4"
+                        .attr "y", displayWidth - 5
+                        .attr "x" , displayWidth + 10
 
 
 </script>

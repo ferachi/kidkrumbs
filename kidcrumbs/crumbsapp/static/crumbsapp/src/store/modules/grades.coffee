@@ -28,16 +28,17 @@ getters =
     getGradeSystemBySchool : (state) -> (school) ->
         _.find state.gradeSystems, {school}
     
-    getGrader : (state) -> 
-        grades = _.reverse(_.map(state.gradeSystem.grades, 'grade'))
-        scores = _.flatMap( state.gradeSystem.grades, (grade) -> [grade.maxScore, grade.minScore])
-        colors = _.map(state.gradeSystem.grades, (_grade) -> _grade.color).reverse()
-        gradeColors = _.fromPairs(_.zip(grades,colors))
-        gradeScale = d3.scaleQuantile()
-                        .domain(scores)
-                        .range(grades)
-        console.log gradeColors, gradeScale(33)
-        {gradeColors,gradeScale}
+    getGrader : (state, getters) -> 
+        grades = getters.getGrades
+        if grades
+            grades = _.reverse(_.map(grades, 'grade'))
+            scores = _.flatMap( state.gradeSystem.grades, (grade) -> [grade.maxScore, grade.minScore])
+            colors = _.map(state.gradeSystem.grades, (_grade) -> _grade.color).reverse()
+            gradeColors = _.fromPairs(_.zip(grades,colors))
+            gradeScale = d3.scaleQuantile()
+                            .domain(scores)
+                            .range(grades)
+            {gradeColors,gradeScale}
 
 
 

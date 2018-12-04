@@ -1,5 +1,5 @@
 import http from "../../http";
-import {PROFILE, RELATIONSHIPS, RELATIVES, ROLES, PROFILE_ANNOUNCEMENTS} from "../../urls";
+import {PROFILE, RELATIONSHIPS, RELATIVES, ROLES, PROFILE_ANNOUNCEMENTS, PROFILE_SCHOOLS} from "../../urls";
 
 
 state =
@@ -29,11 +29,13 @@ actions =
         relationships = http.get(RELATIONSHIPS(id))
         roles = http.get(ROLES(id))
         announcements = http.get(PROFILE_ANNOUNCEMENTS(id))
+        schools = http.get(PROFILE_SCHOOLS(id))
 
-        Promise.all([person,relatives,relationships, roles, announcements]).then (responses) ->
+        Promise.all([person,relatives,relationships, roles, announcements, schools]).then (responses) ->
 
             person = responses[0].data
             person.relatives = responses[1].data
+            person.schools = responses[5].data
             relationships = responses[2].data
             person.relatives.forEach (relative) ->
                 relationship = relationships.find (relationship) -> relationship.relative == relative.user
@@ -65,6 +67,9 @@ getters =
         schoolRole  = _.find state.profile.schoolRoles, (role) ->
            role.school == school
         schoolRole.roles
+
+    getSchools : (state) -> 
+        state.profile?.schools
 
 
 export default {

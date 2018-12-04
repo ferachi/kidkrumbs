@@ -69,6 +69,14 @@ a
     background-color shade_0 !important
     color shade_4 !important
 
+.md-tabs.md-theme-dark .md-tabs-indicator
+.md-tabs.md-theme-light .md-tabs-indicator
+    background-color primary_color !important
+    
+.md-tabs.md-theme-dark .md-tabs-navigation .md-button.md-active
+.md-tabs.md-theme-light .md-tabs-navigation .md-button.md-active
+    color primary_color !important
+
 .md-button.md-theme-light.md-raised:not([disabled]).md-primary
 .md-button.md-theme-dark.md-raised:not([disabled]).md-primary
     background-color primary_color !important
@@ -92,17 +100,35 @@ a
 .md-radio.md-theme-default.md-checked.md-disabled.md-primary .md-radio-container
     border-color secondary_color !important
 
+.md-radio.md-theme-dark .md-radio-container
+.md-radio.md-theme-light .md-radio-container
+.md-radio.md-theme-default .md-radio-container
+    border-color shade_4 !important
+
+
+.md-radio.md-theme-default.md-checked .md-radio-container
+.md-radio.md-theme-dark.md-checked .md-radio-container
+.md-radio.md-theme-light.md-checked .md-radio-container
 .md-radio.md-theme-default.md-checked.md-primary .md-radio-container
     border-color primary_color !important
 
 .md-radio.md-theme-default.md-checked.md-primary .md-ripple
+.md-radio.md-theme-dark.md-checked.md-primary .md-ripple
+.md-radio.md-theme-light.md-checked.md-primary .md-ripple
     color primary_color !important
 
 .md-radio.md-theme-default.md-checked.md-disabled.md-primary .md-radio-container:after
-    background-color secondary_color
+.md-radio.md-theme-dark.md-checked.md-disabled.md-primary .md-radio-container:after
+.md-radio.md-theme-light.md-checked.md-disabled.md-primary .md-radio-container:after
+    background-color secondary_color !important 
 
+.md-radio.md-theme-default.md-checked .md-radio-container:after
+.md-radio.md-theme-dark.md-checked .md-radio-container:after
+.md-radio.md-theme-light.md-checked .md-radio-container:after
 .md-radio.md-theme-default.md-checked.md-primary .md-radio-container:after
-    background-color primary_color
+.md-radio.md-theme-dark.md-checked.md-primary .md-radio-container:after
+.md-radio.md-theme-light.md-checked.md-primary .md-radio-container:after
+    background-color primary_color !important
     
 
 .md-field.md-theme-default.md-focused .md-input,

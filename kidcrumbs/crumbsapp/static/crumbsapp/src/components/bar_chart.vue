@@ -48,41 +48,43 @@ export default
                 .attr 'width', @width
                 .attr 'height', @height
         
-        gridLines = 50
-        xgridScale = d3.scaleLinear()
-                        .domain([0,gridLines])
-                        .rangeRound([0, width])
+        if @showGrid
+            gridLines = 50
+            xgridScale = d3.scaleLinear()
+                            .domain([0,gridLines])
+                            .rangeRound([0, width])
 
-        ygridScale = d3.scaleLinear()
-                        .domain([0,gridLines])
-                        .rangeRound([0, height])
+            ygridScale = d3.scaleLinear()
+                            .domain([0,gridLines])
+                            .rangeRound([0, height])
 
-        # 1 is added to close the grids
-        gridRange = d3.range(gridLines + 1)
+            # 1 is added to close the grids
+            gridRange = d3.range(gridLines + 1)
 
-        xgrid = svg.append("g")
-                    .attr "transform", "translate(#{@margin.left}, #{@margin.top})"
-                    .selectAll("line").data(gridRange)
-                    .enter().append("line")
-                    .attr('x1', (d, i) =>  xgridScale(d))
-                    .attr('x2', (d, i) =>  xgridScale(d))
-                    .attr('y1', (d) => 0)
-                    .attr('y2', (d) => height )
-                    .attr('class', 'stroke_1')
-                    .attr("stroke-width", '1')
-                    .attr("fill", 'transparent');
 
-        ygrid = svg.append("g")
-                    .attr "transform", "translate(#{@margin.left}, #{@margin.top})"
-                    .selectAll("line").data(gridRange)
-                    .enter().append("line")
-                    .attr('x1',0)
-                    .attr('x2', width)
-                    .attr('y1', (d) => ygridScale(d))
-                    .attr('y2', (d) => ygridScale(d))
-                    .attr('class', 'stroke_1')
-                    .attr("stroke-width", '1')
-                    .attr("fill", 'transparent');
+            xgrid = svg.append("g")
+                        .attr "transform", "translate(#{@margin.left}, #{@margin.top})"
+                        .selectAll("line").data(gridRange)
+                        .enter().append("line")
+                        .attr('x1', (d, i) =>  xgridScale(d))
+                        .attr('x2', (d, i) =>  xgridScale(d))
+                        .attr('y1', (d) => 0)
+                        .attr('y2', (d) => height )
+                        .attr('class', 'stroke_1')
+                        .attr("stroke-width", '1')
+                        .attr("fill", 'transparent');
+
+            ygrid = svg.append("g")
+                        .attr "transform", "translate(#{@margin.left}, #{@margin.top})"
+                        .selectAll("line").data(gridRange)
+                        .enter().append("line")
+                        .attr('x1',0)
+                        .attr('x2', width)
+                        .attr('y1', (d) => ygridScale(d))
+                        .attr('y2', (d) => ygridScale(d))
+                        .attr('class', 'stroke_1')
+                        .attr("stroke-width", '1')
+                        .attr("fill", 'transparent');
 
         if @showGuide
             vGuideScale = d3.scaleLinear()
@@ -122,41 +124,26 @@ export default
                     .attr "fill", (d) =>
                         @colorScale d.score
 
-        labels = canvas.selectAll("g.bar")
-                        .append("text")
-                            .text (d) -> d.label.split('')[0...3].join('').toUpperCase()
-                            .classed "fill_4", true
-                            .attr "text-anchor", "middle"
-                            .attr "font-size", "0.8em"
-                            .attr "y", (d) =>
-                                @yScale(d.score) + @margin.bottom/2                                
-                            .attr "x", (d, i) => 
-                                @xScale.bandwidth()/2
+        if @showLabel
+            canvas.selectAll("g.bar")
+                .append("text")
+                    .text (d) -> d.label.split('')[0...3].join('').toUpperCase()
+                    .classed "fill_4", true
+                    .attr "text-anchor", "middle"
+                    .attr "font-size", "0.8em"
+                    .attr "y", (d) =>
+                        @yScale(d.score) + @margin.bottom/2
+                    .attr "x", (d, i) => 
+                        @xScale.bandwidth()/2
 
-        #tooltip = d3.select("##{@name} .bar-chart")
-        #            .append("div")
-        #                .style "position", 'absolute'
-        #                .style "opacity", 0.5
-        #                .classed "bg_0", true
+        canvas.selectAll("g.bar").append("g")
+            .attr("transform", (d) => "translate(10,#{@yScale(d.score)- 10}) rotate(90)")
+            .append('text')
+            .text((d) => "#{d.score}% #{d.label}")
+            .attr('text-anchor','end')
+            .attr('fill', 'white')
+            .attr('font-size', '0.8em')
 
-
-        #bars.on 'mouseover', (d) =>
-        #    tooltip.transition()
-        #        .style 'opacity', 0.9
-        #    tooltip.html("#{d.label} - #{d.score}")
-        #        .classed "color_4", true
-        #        .style "left", "#{d3.event.pageX }px"
-        #        .style "top", "#{d3.event.pageY - 30}px"
-
-
-        scores = canvas.selectAll("g.bar")
-                        .append("text")
-                            .text (d) -> d.score
-                            .classed "fill_3", true
-                            .attr "text-anchor", "middle"
-                            .attr "y", -10
-                            .attr "x", (d, i) => 
-                                @xScale.bandwidth()/2
 
     data : () ->
         margin : 
@@ -190,6 +177,14 @@ export default
             type : Number
             default : 0.5
         showGuide : 
+            type : Boolean
+            default : false
+
+        showGrid : 
+            type : Boolean
+            default : true
+
+        showLabel : 
             type : Boolean
             default : false
 

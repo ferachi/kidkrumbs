@@ -1,8 +1,10 @@
 import App from "../components/Application.vue";
 import Test from "../components/Test.vue";
 import NotFound from "../components/NotFound.vue";
+import NoPermissions from "../components/NoPermissions.vue";
 import announcementRoute from "../modules/announcement/route";
 import childRoute from "../modules/child/route";
+import resultRoute from "../modules/result/route";
 import childrenRoute from "../modules/children/route";
 import profileRoute from "../modules/profile/route";
 import homeworkProfile from "../modules/homework/route";
@@ -27,6 +29,7 @@ const routes = [
         children : [
             playRoute, 
             childRoute, 
+            resultRoute, 
             profileRoute, 
             subjectRoute, 
             homeworkProfile, 
@@ -39,6 +42,11 @@ const routes = [
                 path:'test',
                 component: Test,
                 name:'test'
+            },
+            {
+                path:'403',
+                component: NoPermissions,
+                name:'noPermissions'
             },
             {
                 path : '*',

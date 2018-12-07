@@ -20,7 +20,7 @@ export default
         margin :
             top : 10
             right : 20
-            bottom : 10
+            bottom : 30
             left : 20
 
 
@@ -48,13 +48,13 @@ export default
         arcChart : () ->
             width = @width - @margin.left - @margin.right
             height = @height - @margin.top - @margin.bottom
-            rfactor = 3
+            rfactor = 2
             radius = _.round(width/rfactor)
 
 
             # arc to represent the percentage scores 
             arc = d3.arc()
-                    .innerRadius  radius * 7 / 9
+                    .innerRadius  radius * 9 / 10
                     .outerRadius radius
                     .startAngle 0
                     .endAngle (@percentage/100) * 2 * Math.PI
@@ -87,7 +87,11 @@ export default
                     .text(@label)
                     .classed("fill_4", true)
                     .attr("text-anchor", "middle")
-                    .attr("transform", "translate(0,#{radius + 20})")
+                    .attr("transform", "translate(0,#{radius + 30})")
                     .attr("font-size", '1.3em')
+    watch :
+        percentage : (val) ->
+            $("##{@name} .arc-chart").empty()
+            @arcChart()
 
 </script>

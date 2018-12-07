@@ -5,14 +5,13 @@
                 <h6 class="my-1 color_4 text-capitalize"> Average obtained for each assessment</h6>
                 <p class="primary-color m-0 text-center">{{session.start}} - {{session.end}}</p>
            </div>
-            <assessment-chart title="results" :width="600" :height="400" :grading="getGrades" :data="results" 
-                :padding="0.1" :showGuide="true"> </assessment-chart>
+            <assessment-chart title="results" :width="600" :height="400" :grading="getGrades" :data="results" :padding="0.1" :showGuide="true"> </assessment-chart>
        </div>
     </div>
 </template>
 <script>
 import {mapGetters, mapActions, mapMutations} from 'vuex';
-import assessmentChart from '../../../components/bar-chart.vue'
+import assessmentChart from '../../../components/bar_chart.vue'
 export default{
     name : "assessmentPercentages",
     created(){

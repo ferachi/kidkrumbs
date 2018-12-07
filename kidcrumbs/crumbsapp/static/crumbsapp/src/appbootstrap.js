@@ -11,11 +11,15 @@ import VueCtkDateTimePicker from 'vue-ctk-date-time-picker';
 import 'vue-ctk-date-time-picker/dist/vue-ctk-date-time-picker.min.css';
 import Toasted from 'vue-toasted';
 import Notifications from 'vue-notification';
-import { MdCheckbox, MdAvatar, MdField,MdTabs, MdRadio, MdDatepicker, MdButton, MdDialog, MdMenu, MdListItem, MdList } from 'vue-material/dist/components';
+import { MdCheckbox,MdSwitch, MdAvatar, MdField,MdTabs, MdRadio, MdDatepicker, MdButton, MdDialog, MdMenu, MdListItem, MdList } from 'vue-material/dist/components';
 import 'vue-material/dist/vue-material.min.css';
 import 'vue-material/dist/theme/default.css';
 import 'vue-material/dist/theme/default-dark.css';
 import './styles/material_styles.scss';
+import VueGoodTablePlugin from 'vue-good-table';
+
+// import the styles 
+import 'vue-good-table/dist/vue-good-table.css'
 
 
 
@@ -29,6 +33,7 @@ Vue.use(Toasted, {
 })
 Vue.use(Notifications)
 Vue.use(MdCheckbox)
+Vue.use(MdSwitch)
 Vue.use(MdRadio)
 Vue.use(MdField)
 Vue.use(MdTabs)
@@ -38,6 +43,7 @@ Vue.use(MdButton)
 Vue.use(MdMenu)
 Vue.use(MdList)
 Vue.use(MdAvatar)
+Vue.use(VueGoodTablePlugin);
 
 
 Vue.component('dtpicker', VueCtkDateTimePicker);

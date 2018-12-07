@@ -16,7 +16,7 @@
     </div>
 </template>
 <script>
-import {mapActions, mapGetters} from 'vuex';
+import {mapActions, mapGetters, mapMutations} from 'vuex';
 import transicion from '../../../components/transicion.vue';
 import students from '../../../components/People.vue';
 export default {
@@ -39,6 +39,7 @@ export default {
     },
     methods : {
         ...mapActions('school', ['fetchSchoolStudents']),
+        ...mapMutations('child', ['setChild']),
         fetchData(){
             this.fetchSchoolStudents(this.$route.params.schoolId).then(students => {
                 this.students = students;
@@ -46,6 +47,7 @@ export default {
             });
         },
         personClicked(student){
+            this.setChild(student);
             this.$router.push({name:'resultDetail', params:{username : student.username}});
         }
     }

@@ -51,4 +51,58 @@ fetchStudentResults = ({commit,dispatch, getters}, id) ->
                 commit 'addResults', resultSet
                 resultSet
 
-export {fetchStudentResults}
+
+fetchReport = ({commit,getters,rootGetters}) ->
+    # resultSet = getters.getResultsByStudentId(id)
+    resultSet = getters.getResultSet
+
+    reports = []
+
+    # group by term
+    groupedTermReport = _.groupBy resultSet , 'assessmentTerm'
+    termReport = _.flatMap groupedTermReport, (_termReports) ->
+        subjectReports = _.groupBy _termReports, 'subject'
+        _.map subjectReports, (_subjectReports) ->
+            sr = _subjectReports[0]
+            report =
+                _term : sr.assessmentTerm
+                _termName : sr.assessmentTermName
+                subject : sr.subject
+                _position : sr.assessmentTermPosition
+                _session : sr.assessmentSessionId
+                _sessionYear : sr.assessmentSessionYear
+                _school : sr.school
+                _studentCount : sr.assessmentTermStudentTotal
+                totalScore : 0
+                maximumScore : 0
+                averageScore : 0
+                _scoreIndex :{subject:0,}
+
+
+            _.reduce _subjectReports, (acc, _report ) ->
+                acc['totalScore'] +=  _report.score
+                acc['maximumScore'] += _report.assessmentMaxScore
+                acc['averageScore'] = _.round(acc['totalScore']/acc['maximumScore'],1)
+                acc[_report.assessmentType] = _report.score
+
+                # this is used to sort the fields for the table columns
+                acc['_scoreIndex'][_report.assessmentType] = _report.assessmentMaxScore
+                acc['_scoreIndex']['totalScore'] = acc['maximumScore']
+                acc['_scoreIndex']['maximumScore'] = acc['maximumScore'] + 1
+                acc['_scoreIndex']['averageScore'] = acc['maximumScore'] + 2
+
+                acc
+
+            ,report
+            report['grade'] = rootGetters['grade/getGrader'].gradeScale(_.round(report.averageScore * 100))
+            report['_scoreIndex']['grade'] = report['_scoreIndex']['averageScore'] + 1
+
+            report
+
+    commit "setFullReport", _.cloneDeep(termReport)
+    commit "setReport", termReport
+    termReport
+
+
+
+export {fetchStudentResults, fetchReport}

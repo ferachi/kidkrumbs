@@ -4,7 +4,9 @@ import getters from './getters.coffee';
 
 const state = {
     results:[], 
-    resultSet:[] // current list of results being viewed
+    resultSet:[], // current list of results being viewed
+    fullReport :[],
+    report : []
 }
 
 

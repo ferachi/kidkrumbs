@@ -1,6 +1,6 @@
 <template>
     <div id="resultOverview">
-        <div class="d-flex flex-wrap p-2">
+        <div class="d-flex flex-wrap px-1">
             <div class="col-lg px-1 bg_0 m-1 pt-4">
                 <tseries></tseries>
             </div>
@@ -67,7 +67,7 @@ export default {
                 {score : this.maxScore.score, maxScore:this.maxScore.maxScore, session:{start:this.session.start,
                     end:this.session.end},subject: this.maxScore.subject, title:"Maximum score ever obtained"}, 
                 {score : this.totalScore, maxScore:this.assessmentScores, session:{start:this.session.start,
-                    end:this.session.end},subject: '', title:"Maximum score ever obtained"}
+                    end:this.session.end},subject: '', title:"Total Average Score"}
                 ]
         }
     }

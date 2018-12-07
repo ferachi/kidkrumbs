@@ -3,9 +3,9 @@
         <div class="col-auto px-0">
             <h6 class="my-1 color_4 text-capitalize text-center" > Score and Grade summary</h6>
             <p class="primary-color m-0 text-center">{{session.start}} - {{session.end}}</p>
+        <div class="chart-holder py-3">
+            <arc-chart title="gradeChart" :width="300" :height="300" :label="label" :percentage="percentage" :color="color" > </arc-chart>
         </div>
-        <div class="chart-holder">
-            <arc-chart title="gradeChart" :width="350" :height="350" :label="label" :percentage="percentage" :color="color" > </arc-chart>
         </div>
     </div>
 </template>

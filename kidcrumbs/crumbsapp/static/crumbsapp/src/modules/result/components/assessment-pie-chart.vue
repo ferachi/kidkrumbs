@@ -1,7 +1,7 @@
 <template>
     <div id="apie" class=" d-flex justify-content-center">
         <div class="col px-0">
-            <h6 class="my-1 color_4 text-capitalize text-center" > Percentage of grades obtained </h6>
+            <h6 class="my-1 color_4 text-capitalize text-center" > Percentage of Assessments written </h6>
             <p class="primary-color m-0 text-center">{{session.start}} - {{session.end}}</p>
             <div class="pie-holder text-center">
                 <asspie title="assessmentPieChart" :width="350" :height="350" :data="pieData" class="col-auto px-0" :labels="labels"> </asspie>

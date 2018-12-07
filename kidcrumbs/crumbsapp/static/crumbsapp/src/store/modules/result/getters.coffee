@@ -121,6 +121,76 @@ getters =
     getResultsByStudentId : (state) -> (id) ->
         _.filter state.result, (result) ->
             result.enrollment.student == id
+
+    getResultTerms : (state, getters) ->
+        terms = _.uniq _.map getters.getResultSet,'assessmentTermName'
+        terms.sort()
+
+    getResultSessions : (state, getters) ->
+        sessions = _.uniq _.map getters.getResultSet,'assessmentSessionYear'
+        sessions.sort()
+
+    getReportBySession : (state, getters, rootState, rootGetters) -> (session) ->
+        if session.term?
+            report = _.filter getters.getFullReport, (rep) ->
+                rep._sessionYear == session.name and rep._termName == session.term
+            report
+        else
+            unAfColumns = ['subject', 'averageScore','grade']
+            report = _.filter getters.getFullReport, (rep) ->
+                rep._sessionYear == session.name
+            report = _(report).groupBy('subject').map( (rows) ->
+                _.reduce(rows, (acc, row) ->
+                    keys = _.keys(row._scoreIndex)
+                    _.forEach keys, (key) ->
+                        unless _.includes unAfColumns, key
+                            acc[key] = if acc[key]? then row[key] + acc[key] else row[key]
+                            
+                    acc['subject'] = row['subject']
+                    acc['averageScore'] = _.round(acc['totalScore']/acc['maximumScore'],1)
+                    acc['grade'] = rootGetters['grade/getGrader'].gradeScale(_.round(acc.averageScore * 100))
+
+                    _.forEach _.keys(row), (key) ->
+                        if key.startsWith('_')
+                            acc[key] = row[key]
+                    acc
+                ,{})
+            ).value()
+            report
+
         
+    getTableReport : (state, getters) ->
+        rows = getters.getReport
+        columns =_.flatMap rows, (row) ->
+            keys = _(row._scoreIndex).toPairs().sortBy(1).fromPairs().keys().value()
+            _.map keys, (key) ->
+                column = {label : _.replace(_.snakeCase(key),'_',' '), field : key}
+                if key == 'averageScore'
+                    column['type'] = 'percentage'
+                else
+                    unless _.includes(['grade','subject'],key)
+                        column['type'] = 'number'
+                column
+        columns = _.uniqBy columns, 'field'
+        {rows, columns}
+
+    getReportSummary : (state, getters, rootState, rootGetters) ->
+        report = getters.getReport
+        total = _(report).map('totalScore').sum()
+        maximum = _(report).map('maximumScore').sum()
+        average = _.round(total/maximum * 100,0)
+        maxScore = _.maxBy(report, 'totalScore')
+        minScore = _.minBy(report, 'totalScore')
+        grade = rootGetters['grade/getGrader']?.gradeScale(average)
+        color = rootGetters['grade/getGrader']?.gradeColors[grade]
+        {total,maximum, average, maxScore, minScore, grade, color }
+
+
+
+    getReport : (state) ->
+        state.report
+
+    getFullReport : (state) ->
+        state.fullReport
 
 export {getters as default}

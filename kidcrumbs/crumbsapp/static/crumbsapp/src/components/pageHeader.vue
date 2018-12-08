@@ -1,10 +1,10 @@
 <template>
-    <div id="pageHeader" >
-        <div class="d-flex justify-content-between align-items-center py-2 primary-bg">
-            <div class="col-auto">
+    <div id="pageHeader" class="p-3" >
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="col-auto px-1">
                 <slot name="pageTitle"></slot>
             </div>
-            <div class="col-auto">
+            <div class="col-auto px-1">
                 <slot name="pageMenu"></slot>
             </div>
         </div>

@@ -1,20 +1,20 @@
-import ROLES from '../../data_models/permissions';
-import MenuItem from '../../component_models/menu';
+import ROLES from '../../data_models/permissions'
+import MenuItem from '../../component_models/menu'
 
 menus = [
     new MenuItem 0, "Me", "me", "app", "far fa-grin-stars fa-sm fa-fw", [ROLES.STUDENT]
     new MenuItem 1, "Children", "children", "children", "far fa-grin-squint fa-sm fa-fw", [ROLES.EXTERNAL]
-    new MenuItem 2, "Class", "classroom", "app", "fas fa-sm fa-chalkboard fa-fw", [ROLES.ADMINISTRATIVE]
+    new MenuItem 2, "Class", "classroom", "classrooms", "fas fa-sm fa-chalkboard fa-fw", [ROLES.ADMINISTRATIVE]
     new MenuItem 3, "News", "news", "news", "far fa-bell fa-sm fa-fw", [ROLES.STUDENT,ROLES.ADMINISTRATIVE, ROLES.EXTERNAL]
     new MenuItem 4, "Profile", "profile", "app", "far fa-user fa-sm fa-fw", [ROLES.STUDENT,ROLES.ADMINISTRATIVE, ROLES.EXTERNAL]
     new MenuItem 5, "More", "more", "app", "fas fa-bars fa-sm fa-fw", [ROLES.STUDENT,ROLES.ADMINISTRATIVE, ROLES.EXTERNAL]
 ]
     
-state = 
+state =
     menus : menus
 
 
-getters = 
+getters =
     # return the menus
     getMenus : (state, getters, rootState, rootGetters) ->
         # TEST: 
@@ -35,7 +35,7 @@ getters =
         # return menus
         menus
 
-actions = 
+actions =
     activateMenu : ({state},menu) ->
         state.menus.forEach (menu) ->
             menu.isActive = false

@@ -1,4 +1,4 @@
-getters = 
+getters =
     getClassrooms : (state) ->
         state.classrooms
 
@@ -8,15 +8,15 @@ getters =
 
 
     getClassroomHomeworks : (state) ->
-        if state.classroom
-            state.classroom.homeWorks
+        state.classroom?.homeWorks
 
 
     getClassroomById : (state) -> (id) ->
-        _.find(state.classrooms, ["id", id])
+        _.find(state.classrooms, {id})
 
 
     getClassroomsBySchool : (state) -> (id) ->
         _.filter(state.classrooms, ["school", id])
+
 
 export {getters as default}

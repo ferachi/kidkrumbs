@@ -6,6 +6,7 @@ import announcementRoute from "../modules/announcement/route";
 import childRoute from "../modules/child/route";
 import resultRoute from "../modules/result/route";
 import childrenRoute from "../modules/children/route";
+import classroomRoute from "../modules/classroom/route";
 import profileRoute from "../modules/profile/route";
 import homeworkProfile from "../modules/homework/route";
 import subjectRoute from "../modules/subject/route";
@@ -29,6 +30,7 @@ const routes = [
         children : [
             playRoute, 
             childRoute, 
+            classroomRoute, 
             resultRoute, 
             profileRoute, 
             subjectRoute, 

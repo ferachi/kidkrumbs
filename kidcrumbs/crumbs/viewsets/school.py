@@ -2,8 +2,10 @@ from rest_framework import permissions, viewsets, status
 from rest_framework import mixins
 from rest_framework.response import Response
 from rest_framework.decorators import detail_route, list_route
-from crumbs.serializers import SchoolSerializer, GroupSerializer, SubjectSerializer, GradeSystemSerializer, StudentSerializer
-from crumbs.models import School, Group, Subject, GradeSystem, Session, Student
+from crumbs.serializers import SchoolSerializer, GroupSerializer, SubjectSerializer, GradeSystemSerializer,\
+        StudentSerializer, ClassroomSerializer
+from crumbs.models import School, Group, Subject, GradeSystem, Session, Student, Classroom
+
 
 
 class SchoolViewSet(viewsets.ModelViewSet):
@@ -18,6 +20,16 @@ class SchoolViewSet(viewsets.ModelViewSet):
         school = self.get_object()
         groups = Group.objects.filter(session__school=school)
         serializer = GroupSerializer(groups, many=True)
+        return Response(serializer.data)
+
+    @detail_route()
+    def get_classrooms(self, request, pk=None):
+        """
+        Gets the Schools' Classrooms
+        """
+        school = self.get_object()
+        classrooms = Classroom.objects.filter(session__school=school)
+        serializer = ClassroomSerializer(classrooms, many=True)
         return Response(serializer.data)
 
     @detail_route()

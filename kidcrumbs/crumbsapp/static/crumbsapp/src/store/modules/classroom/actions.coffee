@@ -1,10 +1,10 @@
-import http from "../../../http";
-import {CLASSROOM, CLASSROOMS, GROUP_STUDENTS, GROUP_HABITS, GROUP_ROUTINES, GROUP_ACTIVITIES, GROUP_HOME_WORKS} from "../../../urls";
+import http from "../../../http"
+import {CLASSROOM, SCHOOL_CLASSROOMS, GROUP_STUDENTS, GROUP_HABITS, GROUP_ROUTINES, GROUP_ACTIVITIES, GROUP_HOME_WORKS} from "../../../urls";
 
 
 fetchClassroom = ({dispatch,commit, getters}, id) ->
     classroom = getters.getClassroomById(id)
-    if classroom 
+    if classroom
         commit('setClassroom', classroom)
         return classroom
     dispatch("pullClassroom", id).then (classroom) ->
@@ -13,7 +13,7 @@ fetchClassroom = ({dispatch,commit, getters}, id) ->
         classroom
 
 
-fetchClassrooms = ({dispatch, getters}, schoolId) ->
+fetchClassrooms = ({commit,dispatch, getters}, schoolId) ->
     classrooms = getters.getClassroomsBySchool(schoolId)
     if classrooms[0]?
         return classrooms
@@ -23,12 +23,14 @@ fetchClassrooms = ({dispatch, getters}, schoolId) ->
 
 
 pullClassrooms = ({commit}, schoolId) ->
-    http.get(CLASSROOMS).then (response)->
+    http.get(SCHOOL_CLASSROOMS(schoolId)).then (response)->
         response.data
+
 
 pullClassroom = ({commit}, id) ->
     http.get(CLASSROOM(id)).then (response)->
         response.data
+
 
 fetchClassroomHomeworks = ({dispatch, getters, commit}, id) ->
     dispatch('fetchClassroom', id).then (classroom) ->

@@ -1,26 +1,26 @@
 <template>
     <div id="selectSchool" class="d-flex">
         <div class="col-lg-8 col-xl-6">
-        <h4 class="font-weight- p-2 mt-4 text-uppercase">Select a school</h4>
-        <div class="d-flex align-items-center flex-wrap">
-            <div class="col-sm-6 col-12 p-2" v-for="school in schools" :key="school.id">
-                <div class="p-4 clickable" :style="{background:school.color}" @click="viewSchoolResults(school)">
-                    <div class="d-flex align-items-center">
-                        <div class="col-auto px-1">
-                            <md-avatar class="md-small">
-                                <img :src="school.logo" :alt="school.name">
-                            </md-avatar>
+            <h4 class="font-weight- p-2 mt-4 text-uppercase">Select a school</h4>
+            <div class="d-flex align-items-center flex-wrap">
+                <div class="col-sm-6 col-12 p-2" v-for="school in schools" :key="school.id">
+                    <div class="p-4 clickable" :style="{background:school.color}" @click="viewSchoolResults(school)">
+                        <div class="d-flex align-items-center">
+                            <div class="col-auto px-1">
+                                <md-avatar class="md-small">
+                                    <img :src="school.logo" :alt="school.name">
+                                </md-avatar>
+                            </div>
+                            <div class="col px-3 py-4">
+                                <h6 class="font-weight- color_white ">
+                                    {{school.name}} 
+                                </h6>
+                            </div>
                         </div>
-                        <div class="col px-3 py-4">
-                            <h6 class="font-weight- color_white ">
-                                {{school.name}} 
-                            </h6>
-                        </div>
+                        <p class="color_white"> {{school.motto}}</p>
                     </div>
-                    <p class="color_white"> {{school.motto}}</p>
                 </div>
             </div>
-        </div>
         </div>
     </div>
 </template>

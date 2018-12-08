@@ -54,6 +54,8 @@ export const GROUP_STUDENTS = (id) => `${GROUP(id)}get_current_students/`; // ro
 export const GROUP_TEACHERS = (id) => `${GROUP(id)}get_current_teachers/`; // route to a groups teacher list
 export const GROUP_HABITS = (id) => `${GROUP(id)}get_habits/`; // route to a groups habit list
 
+
+// CLASSROOMS
 export const CLASSROOMS = '/api/classrooms/'; // All classrooms, this list differs depending on the user requesting it 
 export const CLASSROOM = (id) => `${CLASSROOMS}${id}/`; // route to a single classroom
 export const CLASSROOM_SUBJECTS = (id) => `${CLASSROOM(id)}get_subjects/`; // route to a single classrooms' subjects
@@ -62,6 +64,7 @@ export const CLASSROOM_SUBJECTS = (id) => `${CLASSROOM(id)}get_subjects/`; // ro
 // SCHOOLS
 export const SCHOOLS = '/api/schools/'; // All Schools, this list differs depending on the user requesting it
 export const SCHOOL = (id) => `${SCHOOLS}${id}/`; // route to a single school
+export const SCHOOL_CLASSROOMS = (id) => `${SCHOOL(id)}get_classrooms/`; // route to a schools classrooms
 export const SCHOOL_SUBJECTS = (id) => `${SCHOOL(id)}get_subjects/`; // route to a schools subjects
 export const SCHOOL_STUDENTS = (id) => `${SCHOOL(id)}get_current_students/`; // route to a schools students
 export const SCHOOL_GROUPS = (id) => `${SCHOOL(id)}get_groups/`; // route to a schools groups

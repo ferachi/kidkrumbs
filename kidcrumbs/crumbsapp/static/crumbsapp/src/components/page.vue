@@ -23,4 +23,8 @@ export default {
 };
 </script>
 <style lang="stylus">
+#pageComponent
+    >.content
+        max-height 80vh
+        overflow-y auto
 </style>

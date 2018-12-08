@@ -12,6 +12,7 @@ import ROLES from "../../data_models/permissions";
 const subjectRoute = {
     path : 'subjects',
     component : Subject,
+    meta : { page : "subjects", menuPage:true },
     children : [
         {
             path : "",

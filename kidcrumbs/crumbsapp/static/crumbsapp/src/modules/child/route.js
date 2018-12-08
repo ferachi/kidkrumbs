@@ -23,6 +23,7 @@ let date = new Date(),
 const childRoute = {
     path : '/child/:username',
     component : Child,
+    meta : { page : "children", menuPage:true }, // if this is the first page of the sites menu navigation
     beforeEnter(to, from , next){
         // ensuring that this routes is only accessible by parents and students
         let profile = store.getters["profile/getProfile"];

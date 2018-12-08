@@ -10,6 +10,7 @@ import ROLES from "../../data_models/permissions";
 const resultRoute = {
     path : 'results/',
     component : Result,
+    meta : { page : "results", menuPage:true },
     beforeEnter(to, from , next){
         // who has permissions here?
         next();

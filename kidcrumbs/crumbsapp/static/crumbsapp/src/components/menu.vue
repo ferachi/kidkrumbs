@@ -8,7 +8,6 @@
                 </div>
             </div>
         </div>
-
         <!-- tabs and cpus  -->
         <div class="bigscreens d-none d-lg-block">
             <div class="py-3">
@@ -19,9 +18,8 @@
         </div>
     </div>
 </template>
-
 <script>
-import {mapGetters, mapActions} from "vuex";
+import {mapGetters, mapActions, mapMutations} from "vuex";
 import menuItem from "./menuItem.vue";
 export default{
     name : "AppMenu",
@@ -37,12 +35,20 @@ export default{
         ...mapActions("menu",[
             "activateMenu"
         ]),
+        ...mapMutations("page", ["setPage"]),
         watchRoute(_route){
+
+            // find the parent link/route
             let route = _route.matched.find( record => {
                 return record.meta.menuPage
             });
+
+            // set the page
+            this.setPage(route.meta.page);
+
+            // activate the menu if it exist
             if(route){
-                let menu = this.menus.find( menu => menu.link == route.name);
+                let menu = this.menus.find( menu => menu.link == route.meta.page);
                 if(menu) this.activateMenu(menu);
             }
         }

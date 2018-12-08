@@ -10,6 +10,7 @@ import ROLES from "../../data_models/permissions";
 const classroomRoute = {
     path : 'classrooms/',
     component : Classroom,
+    meta : { page : "classrooms", menuPage:true },
     beforeEnter(to, from , next){
         // who has permissions here?
         // Only Administrative users should be allowed to view anything here

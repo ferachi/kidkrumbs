@@ -1,7 +1,7 @@
 <template>
     <div id="pageMenu">
         <div class="d-flex align-items-center py-2" :class="justify">
-            <div v-for="menu in menus" class="col-auto text-center px-2 menu" :class="[menu.active ? activeClasses : '']"
+            <div v-for="menu in menus" class="col-auto text-center px-2 menu" :class="[menu.active ? `${activeClasses} active` : '']"
                 :key="menu.name" @click="menuClicked(menu.name)">
                 <slot :menu="menu" ></slot>
             </div>
@@ -22,7 +22,7 @@ export default {
         },
         activeClasses : {
             type : String,
-            default : 'active border-bottom primary-border'
+            default : 'border-bottom border_white'
         }
     },
     computed : {

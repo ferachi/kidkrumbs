@@ -1,5 +1,9 @@
 import Classroom from "./views/Classroom.vue";
 import ClassroomGuard from "./views/ClassroomGuard.vue";
+import ClassroomProfile from "./views/ClassroomProfile.vue";
+import ClassroomHomework from "./views/ClassroomHomework.vue";
+import ClassroomBehaviour from "./views/ClassroomBehaviour.vue";
+import ClassroomActivity from "./views/ClassroomActivity.vue";
 import ClassroomDetail from "./views/ClassroomDetail.vue";
 import ClassroomList from "./views/ClassroomList.vue";
 import School from "./views/School.vue";
@@ -88,12 +92,32 @@ const classroomRoute = {
                     name : 'classroomList'
                 }
             ]
-
         },
         {
             path : ":id",
             component : ClassroomDetail,
-            name : 'classroomDetail'
+            children : [
+                {
+                    path : '',
+                    component : ClassroomProfile,
+                    name : 'classroomDetail'
+                },
+                {
+                    path : 'activity',
+                    component : ClassroomActivity,
+                    name : 'classroomActivity'
+                },
+                {
+                    path : 'behaviour',
+                    component : ClassroomBehaviour,
+                    name : 'classroomBehaviour'
+                },
+                {
+                    path : 'homework',
+                    component : ClassroomHomework,
+                    name : 'classroomHomework'
+                }
+            ],
         }
     ]
 }

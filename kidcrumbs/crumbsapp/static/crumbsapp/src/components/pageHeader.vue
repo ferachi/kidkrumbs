@@ -1,5 +1,5 @@
 <template>
-    <div id="pageHeader" class="p-3" >
+    <div id="pageHeader" class="p-2" >
         <div class="d-flex justify-content-between align-items-center">
             <div class="col-auto px-1">
                 <slot name="pageTitle"></slot>

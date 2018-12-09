@@ -7,14 +7,41 @@
 
 .fade-right-enter-active
 .fade-right-leave-active
+.fade-right-left-enter-active
+.fade-right-left-leave-active
     transition-property opacity transform
     transition-duration 0.4s
     transition-timing-function ease-in-out
     transition-delay 0 0.2s
 
 .fade-right-enter
+.fade-right-left
     opacity 0
     transform translateX(-10px)
+
+.fade-right-left-leave-to
+    opacity 0
+    transform translateX(-10px)
+
+.fade-right-left-leave-to
+
+.fade-right-leave-to
+    opacity 0
+    transform translateX(10px)
+
+.fade-down-enter-active
+.fade-down-leave-active
+.fade-up-enter-active
+.fade-up-leave-active
+.fade-down-up-enter-active
+.fade-down-up-leave-active
+.fade-up-down-enter-active
+.fade-up-down-leave-active
+    transition-property opacity transform
+    transition-duration 0.4s
+    transition-timing-function ease-in-out
+    transition-delay 0 0.2s
+
 
 .fade-right-leave-to
     opacity 0

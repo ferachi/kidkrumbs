@@ -43,11 +43,13 @@ export default{
                 return record.meta.menuPage
             });
 
-            // set the page
-            this.setPage(route.meta.page);
 
             // activate the menu if it exist
             if(route){
+                // set the page
+                this.setPage(route.meta.page);
+
+                // activate menu
                 let menu = this.menus.find( menu => menu.link == route.meta.page);
                 if(menu) this.activateMenu(menu);
             }

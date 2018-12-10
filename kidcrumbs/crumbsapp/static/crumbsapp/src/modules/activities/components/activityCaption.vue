@@ -2,11 +2,23 @@
     <div class="activity-caption">
         <div class="d-flex align-items-center">
             <div class="col-auto d-flex align-items-center justify-content-center text-center color-head p-0 px-lg-4" :style="{'background-color':`${activity.color.toLowerCase()} !important` }">
-                <h1 class="display-4 color_0 m-0">{{activity.note.charAt(0)}}</h1>
+                <h1 class="display-4 color_0 m-0 text-uppercase">{{activity.note.charAt(0)}}</h1>
             </div>
-            <div class="col px-2">
-                <h5 class="" >{{date}}</h5>
-                <p class="color_5">{{activity.note}}</p>
+            <div class="col px-2 d-flex">
+                <div class="col">
+                    <h6 class="color_5">{{activity.note | truncate(100)}}</h6>
+                    <div class="d-flex">
+                        <div class="col-auto px-2">
+                            <h6><small class="color_3"><span class="font-weight-bold"> {{activityCount}} </span><i class="fas fa-stopwatch fa-fw"></i></small></h6>
+                        </div>
+                        <div class="col-auto px-2">
+                            <h6><small class="color_3"><span class="font-weight-bold"> {{commentCount}} </span><i class="fas fa-comments fa-fw"></i></small></h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <h6 class="" ><small class="color_5">{{date}}</small></h6>
+                </div>
             </div>
         </div>
     </div>
@@ -17,7 +29,13 @@ export default {
     props :['activity'],
     computed:{
         date(){
-            return moment(this.activity.date, "YYYY-MM-DD").format("DD/MM/YYYY");
+            return moment(this.activity.date, "YYYY-MM-DD").format("MMMM DD, YYYY");
+        },
+        activityCount(){
+            return this.activity.activities.length;
+        },
+        commentCount(){
+            return this.activity.comments.length;
         }
     }
 
@@ -26,8 +44,7 @@ export default {
 <style lang="stylus">
 .activity-caption
     .color-head
-        
-        min-height 80px
-        min-width @min-height
+        height 70px
+        width @height
 
 </style>

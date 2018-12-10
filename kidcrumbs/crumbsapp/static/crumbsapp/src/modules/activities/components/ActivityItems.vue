@@ -1,13 +1,17 @@
 <template>
     <div id="activityItems">
-        <section class="clearfix" v-if="canEdit">
-            <button class="btn btn-primary float-right" @click="addActivity">add an activity </button>
+        <section v-if="canEdit">
+            <div class="add-btn">
+                <md-button class="md-fab md-mini" @click="addActivity">
+                    <md-icon class="fas fa-plus"></md-icon>
+                </md-button>
+            </div>
         </section>
         <section >
             <itemList :showItemMenu="canEdit" :activities="activities" @list-select="listSelected($event)"></itemList>
         </section>
         <section >
-            <modal class=""  name="activityModal" height="auto" :scrollable="true" >
+            <modal ref="modal" :enable-mobile-fullscreen="true" @close="$emit('hide-modal')" :modal-theme="getTheme" :overlay-theme="getTheme" class="px-0">
                 <div class="d-flex justify-content-center">
                     <div class="col col-lg-10 py-3 ">
                         <section class="edit" v-if="detailType == 'edit'">
@@ -37,6 +41,7 @@ import activityItemView from './ActivityItemView.vue';
 import activityItemAdd from './ActivityItemAdd.vue';
 import activityItemEdit from './ActivityItemEdit.vue';
 import confirmAction from '../../../components/confirm-action';
+import { SweetModal } from 'sweet-modal-vue';
 import ROLES from '../../../data_models/permissions';
 import {mapGetters, mapActions} from 'vuex';
 export default {
@@ -47,12 +52,15 @@ export default {
         itemView: activityItemView,
         itemEdit: activityItemEdit,
         itemAdd: activityItemAdd,
+        modal : SweetModal
     },
-    data : () => ({
-        isList : true,
-        detailType : 'view',
-        activity : null
-    }),
+    data () {
+        return {
+            isList : true,
+            detailType : 'view',
+            activity :this.activities[0]
+        }
+    },
     props:{
         activities : {
             type : Array,
@@ -69,10 +77,10 @@ export default {
         canEdit : {
             type : Boolean,
             default : false
-        }
-        
+        },
     },
     computed:{
+        ...mapGetters(['getTheme']),
         ...mapGetters('profile',{
             profile:"getProfile",
             roles : "getRolesBySchool"
@@ -98,10 +106,10 @@ export default {
             this.show();
         },
         show () {
-            this.$modal.show('activityModal');
+            this.$refs.modal.open(); 
         },
         hide () {
-            this.$modal.hide('activityModal');
+            this.$refs.modal.close(); 
         },
         formSubmit(item){
             this.activity = item;
@@ -147,4 +155,9 @@ export default {
 };
 </script>
 <style lang="stylus">
+#activityItems
+    .add-btn
+        position fixed
+        bottom 50px
+        right 5px
 </style>

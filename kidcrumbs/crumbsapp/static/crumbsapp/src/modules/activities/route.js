@@ -9,11 +9,13 @@ import ROLES from "../../data_models/permissions";
 const activitiesRoute = {
     path : '/activities',
     component : Activity,
+    meta : { page : "activities", menuPage:false },
     children : [
         {
             path : "",
             component : Activities,
             name : 'activities',
+            props : { groupId : "944e18be-0b51-4ab5-a584-a87811cf1886", schoolSlug : "blue-international-primary-secondary-school" }
         },
         {
             path : "date/:date",

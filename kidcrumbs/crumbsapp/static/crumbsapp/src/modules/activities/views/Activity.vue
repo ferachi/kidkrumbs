@@ -1,9 +1,7 @@
 <template>
     <div id="activity" class="p-2" v-if="!isLoading">
         <h4>Activity</h4>
-        <page>
-            <router-view></router-view>
-        </page>
+        <router-view></router-view>
     </div>
 </template>
 <script>

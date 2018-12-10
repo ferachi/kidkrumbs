@@ -16,8 +16,10 @@
             </alist>
         </div>
         <div class="empty d-flex justify-content-center align-items-center" v-else>
-            <div class="col-auto">
-                <h1 class="display-4 color_3">Add Items by clicking the add button.</h1>
+            <div class="col text-center">
+                <h2 class="color_3 text-uppercase">No Activities</h2>
+                <h1 class="display-3 color_2"><i class="fas fa-people-carry fa-fw"></i></h1>
+                <h6 class="color_3">Add an activity by clicking the add button.</h6>
             </div>
         </div>
     </div>

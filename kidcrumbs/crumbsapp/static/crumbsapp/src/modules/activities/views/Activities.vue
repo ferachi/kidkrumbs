@@ -1,17 +1,29 @@
 <template>
-    <div id="activities ">
+    <div id="activities" class="mx-3">
         <div class="is-loading col" v-if="isLoading">
             ... 
         </div>
         <div v-else class="">
-            <section class="header clearfix">
-                <button class="btn btn-primary float-right" @click="addActivity">Add activity</button>
+            <section >
+                <div class="add-btn">
+                    <md-button class="md-fab md-mini" @click="addActivity">
+                        <md-icon class="fas fa-plus"></md-icon>
+                    </md-button>
+                </div>
+            </section>
+            <section class="filters d-flex flex-wrap align-items-center">
+                <div class="col">
+                    <dtpicker :disable-time="true" :dark="isDark" :without-header="true" v-model="date" format="YYYY-MM-DD" :auto-close="true" formatted="dddd, MMMM DD, YYYY" label="Select date"></dtpicker>
+                </div>
+                <div class="col-auto">
+                    <md-checkbox class="md-primary" v-model="showAll">Show All</md-checkbox>
+                </div>
             </section>
             <section class="list-activity">
-                <activity-list :showItemMenu="true" :activities="activities" @list-select="itemSelected($event)"></activity-list>
+                <activity-list :showItemMenu="editable" :activities="activities" @list-select="itemSelected($event)"></activity-list>
             </section>
             <section class="edit-activity" >
-                <modal ref="modal" :enable-mobile-fullscreen="false" :modal-theme="getTheme" :overlay-theme="getTheme">
+                <modal ref="modal" :enable-mobile-fullscreen="true" :modal-theme="getTheme" :overlay-theme="getTheme">
                     <div class="d-flex justify-content-center">
                         <div class="col col-lg-11 py-2 ">
                             <section class="edit" v-if="detailType=='edit'">
@@ -45,33 +57,56 @@ import ROLES from '../../../data_models/permissions';
 export default{
     name : "Activities",
     created(){
-        this.pullActivities(this.testGroup).then( activities => {
+        this.pullActivities(this.groupId).then( activities => {
             this.isLoading = false;
         });
     }, 
     computed:{
-        ...mapGetters("activity", {
-            activities : "getActivities"
-        }),
+        ...mapGetters("activity",[ 
+            "getActivities"
+        ]),
         ...mapGetters([ 'getTheme' ]),
         ...mapGetters('profile',{
             profile:"getProfile",
             roles : "getRolesBySchool"
         }),
+        isDark(){
+            return this.getTheme == "dark";
+        },
+        activities(){
+            if(this.showAll) 
+                return this.getActivities;
+            else 
+                return _.filter(this.getActivities, {date : this.date});
+        },
         hasEditPermissions(){
             let permittedRoles = [ROLES.TEACHER,ROLES.SUPERADMINISTRATIVE];
 
             // TODO: get the school from the group
-            return !_.isEmpty(_.intersection(this.roles(this.testSchool), permittedRoles));
+            return !_.isEmpty(_.intersection(this.roles(this.schoolSlug), permittedRoles));
         }
     },
     data : () => ({
         isLoading : true,
         detailType:'view',
-        testGroup : "944e18be-0b51-4ab5-a584-a87811cf1886",
-        testSchool : "blue-international-primary-secondary-school",
+        date : moment().format("YYYY-MM-DD"),
+        showAll: true,
         selectedActivity:{},
     }),
+    props:{
+        groupId : {
+            type : String,
+            required : true
+        },
+        schoolSlug:{
+            type : String,
+            required : true
+        },
+        editable:{
+            type :Boolean,
+            default: true
+        }
+    },
     components:{
         activityList,
         addActivity,
@@ -92,7 +127,6 @@ export default{
         },
         show () {
             this.$refs.modal.open(); 
-
         },
         hide () {
             this.$refs.modal.close(); 
@@ -134,7 +168,7 @@ export default{
                     });
                 }
                 else{
-                    this.selectedActivity.group = this.testGroup;
+                    this.selectedActivity.group = this.groupId;
                     this.selectedActivity.created_by = this.profile.user;
                     this.saveActivity(this.selectedActivity).then(item => {
                         this.$toasted.show("Activity saved");
@@ -147,5 +181,10 @@ export default{
 }
 </script>
 <style lang="stylus">
+#activities
+    .add-btn
+        position fixed
+        bottom 50px
+        right 5px
 </style>
 

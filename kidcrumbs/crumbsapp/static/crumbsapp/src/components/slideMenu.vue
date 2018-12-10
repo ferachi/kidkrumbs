@@ -2,7 +2,7 @@
     <div class="slideMenu d-inline-block">
         <div class="d-flex align-items-center" :class="{'flex-column':direction=='top' || direction=='bottom',
         'flex-row':direction=='left' || direction=='right'}">
-            <div @click="toggleMenu" class="menu-icon col-auto p-1"
+            <div @click="toggleMenu" class="menu-icon col-auto px-0"
                                      :class="{'order-0':direction=='bottom'||direction=='right','order-1':direction=='top'|| direction=='left'}">
                 <div class="text-center">
                     <slot>
@@ -16,7 +16,8 @@
                 </div>
             </div>
             <div class="menus col-auto px-0 ">
-                <div v-if="canShowMenu && menuOpen" class="d-flex slide-menu-pane border border_2 rounded p-1 text-center "
+                <div v-if="canShowMenu && menuOpen" class="d-flex slide-menu-pane border border_2 rounded p-1
+                                                    text-center bg_0 "
                     :class="[layout=='vertical' ? 'flex-column' : 'flex-row', 
                     {'leftright left': direction=='left','leftright right': direction=='right',
                     'topbottom top':direction == 'top', 'topbottom bottom': direction == 'bottom'}] ">
@@ -44,7 +45,7 @@ export default {
         }, 
         direction:{
             type : String,
-            default: 'right' //'top', 'bottom', 'left', 'right'
+            default: 'left' //'top', 'bottom', 'left', 'right'
         },
         canShowMenu:{
             type : Boolean,
@@ -88,7 +89,7 @@ export default {
             transform : translate(0%,-50%)
         .slide-menu-pane.topbottom
             left 50%
-            transform : translate(-50%,0%)
+            transform : translate(-10%,0%)
         .slide-menu-pane.right
             left 0
         .slide-menu-pane.left

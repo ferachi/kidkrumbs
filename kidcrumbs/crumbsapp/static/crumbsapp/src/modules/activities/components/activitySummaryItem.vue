@@ -5,7 +5,7 @@
                 <h1 class="display-2 d-none d-lg-block" >{{_time}} </h1>
             </div>
             <div class="col px-2">
-                <h5 class="font-weight-bold" :style="{color:`${color.toLowerCase()} !important` }">{{title}}</h5>
+                <h6 class="font-weight-d" :style="{color:`${color.toLowerCase()} !important` }">{{title}}</h6>
                 <p>{{description | truncate(100)}} </p>
             </div>
         </div>

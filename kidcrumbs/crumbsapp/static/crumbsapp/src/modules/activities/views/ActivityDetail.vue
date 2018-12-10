@@ -1,6 +1,6 @@
 <template>
     <div v-if="isLoading"  key="loading"></div>
-    <div v-else id="activityDetail" key="loaded">
+    <div v-else id="activityDetail" key="loaded" class="mx-2">
         <div class="d-flex">
             <tab-head class="col" :tabTitles="['activity', 'comment']" justify="justify-content-end" @tab-click="tabClicked($event)"></tab-head>
         </div>
@@ -11,7 +11,8 @@
                     <p>{{activity.note}}</p>
                 </section>
                 <section class="activities-pane">
-                    <activityItems :canEdit="editable" :activityId='activity.id' :activities="activity.activities" :school="activity.school"></activityItems>
+                    <activityItems :canEdit="editable" :activityId='activity.id' :activities="activity.activities"
+                    :school="activity.school" ></activityItems>
                 </section>
             </div>
             <div v-else-if="selectedTab == tabTitles[1]">
@@ -19,7 +20,9 @@
                     <h5>Teachers' Comment</h5>
                     <p>{{activity.note}}</p>
                 </section>
+                <section class="comments-pane">
                 <comment :comments="comments" @add-comment="addComment($event)" @reply-comment="replyComment($event)"></comment>
+                </section>
             </div>
             <div v-else></div>
         </div>
@@ -87,7 +90,7 @@ export default{
             this.pullActivity(this.id).then(activity =>{
                 this.isLoading = false;
             });
-        }
+        }, 
     },
     watch:{
         '$route'(to ,from ){

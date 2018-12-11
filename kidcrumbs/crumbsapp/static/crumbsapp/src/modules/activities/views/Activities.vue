@@ -1,9 +1,7 @@
 <template>
+    <transicion :isLoading="isLoading">
     <div id="activities" class="mx-3">
-        <div class="is-loading col" v-if="isLoading">
-            ... 
-        </div>
-        <div v-else class="">
+        <div class="">
             <section >
                 <div class="add-btn">
                     <md-button class="md-fab md-mini" @click="addActivity">
@@ -24,27 +22,28 @@
             </section>
             <section class="edit-activity" >
                 <modal ref="modal" :enable-mobile-fullscreen="true" :modal-theme="getTheme" :overlay-theme="getTheme">
-                    <div class="d-flex justify-content-center">
-                        <div class="col col-lg-11 py-2 ">
-                            <section class="edit" v-if="detailType=='edit'">
-                                <edit-activity :activity="selectedActivity"  @form-submit="formSubmitted($event)"></edit-activity>
-                            </section>
-                            <section class="add" v-else-if="detailType=='add'">
-                                <add-activity  @form-submit="formSubmitted($event)"></add-activity>
-                            </section>
-                            <section class="remove" v-else-if="detailType == 'delete'">
-                                <confirm-action @confirm="removeActivity($event)">
-                                    <h4>Are you sure you want to to delete this activity</h4>
-                                    <h1>{{selectedActivity.date}}</h1>
-                                </confirm-action>
-                            </section>
-                            <section class="view" v-else></section>
-                        </div>
+                <div class="d-flex justify-content-center">
+                    <div class="col col-lg-11 py-2 ">
+                        <section class="edit" v-if="detailType=='edit'">
+                            <edit-activity :activity="selectedActivity"  @form-submit="formSubmitted($event)"></edit-activity>
+                        </section>
+                        <section class="add" v-else-if="detailType=='add'">
+                            <add-activity  @form-submit="formSubmitted($event)"></add-activity>
+                        </section>
+                        <section class="remove" v-else-if="detailType == 'delete'">
+                            <confirm-action @confirm="removeActivity($event)">
+                                <h4>Are you sure you want to to delete this activity</h4>
+                                <h1>{{selectedActivity.date}}</h1>
+                            </confirm-action>
+                        </section>
+                        <section class="view" v-else></section>
                     </div>
+                </div>
                 </modal>
             </section>
         </div>
     </div>
+    </transicion>
 </template>
 <script>
 import { SweetModal } from 'sweet-modal-vue';
@@ -54,12 +53,11 @@ import addActivity from '../components/addActivity.vue';
 import editActivity from '../components/editActivity.vue';
 import confirmAction from '../../../components/confirm-action.vue';
 import ROLES from '../../../data_models/permissions';
+import transicion from '../../../components/transicion.vue';
 export default{
     name : "Activities",
     created(){
-        this.pullActivities(this.groupId).then( activities => {
-            this.isLoading = false;
-        });
+        this.fetchData();
     }, 
     computed:{
         ...mapGetters("activity",[ 
@@ -94,25 +92,30 @@ export default{
         selectedActivity:{},
     }),
     props:{
-        groupId : {
+        groupId:{
             type : String,
             required : true
         },
         schoolSlug:{
             type : String,
-            required : true
+                required : true
         },
         editable:{
+            type :Boolean,
+            default: true
+        },
+        isComponent:{
             type :Boolean,
             default: true
         }
     },
     components:{
         activityList,
-        addActivity,
-        editActivity,
-        confirmAction,
-        modal: SweetModal,
+            addActivity,
+            editActivity,
+            confirmAction,
+            transicion,
+            modal: SweetModal,
     },
     methods:{
         ...mapActions("activity", [
@@ -121,63 +124,77 @@ export default{
             "updateActivity",
             "deleteActivity"
         ]),
-        addActivity(){
-            this.detailType = 'add';
-            this.$refs.modal.open(); 
-        },
-        show () {
-            this.$refs.modal.open(); 
-        },
-        hide () {
-            this.$refs.modal.close(); 
-        },
-        removeActivity(canDelete){
-            if(this.hasEditPermissions && canDelete){
-                this.deleteActivity(this.selectedActivity).then(res => {
-                    this.$toasted.show("Activity deleted");
-                });
-            }
-            this.$refs.modal.close(); 
-        },
-        itemSelected(item){
-            this.selectedActivity = item.activity;
-            this.detailType = item.detailType;
-            if(this.detailType == 'view'){
-                this.$router.push( {name:'activityDetail', params:{id:item.activity.id}});
-            }
-            else{
-                this.show()
-            }
-        },
-        formSubmitted(item){
-            this.selectedActivity = item;
-            this.saveSelectedActivity();
-            this.hide()
-        },
-        saveSelectedActivity(){
-            // make sure only teachers and super admins can save this
-            // if the user profile has permissions then save it
-            if(this.hasEditPermissions){
-                
-                // code to save to db
-                // is this a save or an update
-                if(this.selectedActivity.id){
-                    // its an edit
-                    this.updateActivity(this.selectedActivity).then(item => {
-                        this.$toasted.show("Activity has been updated");
+            addActivity(){
+                this.detailType = 'add';
+                this.$refs.modal.open(); 
+            },
+            show () {
+                this.$refs.modal.open(); 
+            },
+            hide () {
+                this.$refs.modal.close(); 
+            },
+            removeActivity(canDelete){
+                if(this.hasEditPermissions && canDelete){
+                    this.deleteActivity(this.selectedActivity).then(res => {
+                        this.$toasted.show("Activity deleted");
                     });
+                }
+                this.$refs.modal.close(); 
+            },
+            itemSelected(item){
+                this.selectedActivity = item.activity;
+                this.detailType = item.detailType;
+                if(this.detailType == 'view'){
+                    if(this.isComponent)
+                        this.$emit('view-click', item);
+                    else
+                        this.$router.push( {name:'activityDetail', params:{id:item.activity.id}});
                 }
                 else{
-                    this.selectedActivity.group = this.groupId;
-                    this.selectedActivity.created_by = this.profile.user;
-                    this.saveActivity(this.selectedActivity).then(item => {
-                        this.$toasted.show("Activity saved");
-                    });
+                    this.show()
                 }
+            },
+            formSubmitted(item){
+                this.selectedActivity = item;
+                this.saveSelectedActivity();
+                this.hide()
+            },
+            saveSelectedActivity(){
+                // make sure only teachers and super admins can save this
+                // if the user profile has permissions then save it
+                if(this.hasEditPermissions){
 
+                    // code to save to db
+                    // is this a save or an update
+                    if(this.selectedActivity.id){
+                        // its an edit
+                        this.updateActivity(this.selectedActivity).then(item => {
+                            this.$toasted.show("Activity has been updated");
+                        });
+                    }
+                    else{
+                        this.selectedActivity.group = this.groupId;
+                        this.selectedActivity.created_by = this.profile.user;
+                        this.saveActivity(this.selectedActivity).then(item => {
+                            this.$toasted.show("Activity saved");
+                        });
+                    }
+
+                }
+            },
+            fetchData(){
+                this.pullActivities(this.groupId).then( activities => {
+                    this.isLoading = false;
+                });
             }
+    },
+    watch : {
+        '$route'(){
+            this.fetchData();
         }
     }
+
 }
 </script>
 <style lang="stylus">

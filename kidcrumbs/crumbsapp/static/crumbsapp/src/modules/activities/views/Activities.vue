@@ -147,7 +147,7 @@ export default{
                 this.detailType = item.detailType;
                 if(this.detailType == 'view'){
                     if(this.isComponent)
-                        this.$emit('view-click', item);
+                        this.$emit('view-click', item.activity);
                     else
                         this.$router.push( {name:'activityDetail', params:{id:item.activity.id}});
                 }

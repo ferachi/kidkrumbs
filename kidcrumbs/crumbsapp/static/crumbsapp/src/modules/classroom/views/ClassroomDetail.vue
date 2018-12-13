@@ -79,6 +79,7 @@ export default {
             });
         },
         viewMenu(){
+            this.menus.forEach( menu => menu.active = false );
             let activeMenu = this.menus.find(menu => menu.link == this.$route.name);
             activeMenu.active = true;
         },

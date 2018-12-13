@@ -3,7 +3,7 @@ mutations =
         state.activities = activities
 
     addActivities : (state, activities)->
-        state.activities = _.unionBy state.activities, activities, 'id'
+        state.activityList = _.unionBy state.activities, activities, 'id'
 
     addActivity : (state, activity)->
         state.activities = _.unionBy state.activities, [activity], 'id'

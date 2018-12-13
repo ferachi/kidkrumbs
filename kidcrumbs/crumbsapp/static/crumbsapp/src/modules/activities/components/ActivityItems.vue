@@ -26,9 +26,10 @@
                         <section class="add" v-else-if="detailType== 'add'">
                             <itemAdd @form-submit="formSubmit($event)"></itemAdd>
                         </section>
-                        <section class="view" v-else>
+                        <section class="view" v-else-if="detailType== 'view'">
                             <itemView :activity="activity" ></itemView>
                         </section>
+                        <section v-else></section>
                     </div>
                 </div>
             </modal>
@@ -57,7 +58,7 @@ export default {
     data () {
         return {
             isList : true,
-            detailType : 'view',
+            detailType : '',
             activity :this.activities[0]
         }
     },

@@ -29,7 +29,7 @@
                     </div>
                 </page-header>
             </div>
-            <section class="p-3 bg_0 detail-content">
+            <section class="p-lg-3 px-2 py-3 bg_aux detail-content">
                 <transition name="fade-down-up" mode="out-in">
                     <router-view></router-view>
                 </transition>
@@ -71,9 +71,9 @@ export default {
         }
     },
     methods :{
-        ...mapActions('classroom', ['fetchClassroom']),
+        ...mapActions('classroom', ['fetchClassroomWithProps']),
         fetchData(){
-            this.fetchClassroom(this.$route.params.id).then(classroom => {
+            this.fetchClassroomWithProps(this.$route.params.id).then(classroom => {
                 this.classroom = classroom; 
                 this.loading = false;
             });

@@ -59,6 +59,7 @@ export const GROUP_HABITS = (id) => `${GROUP(id)}get_habits/`; // route to a gro
 export const CLASSROOMS = '/api/classrooms/'; // All classrooms, this list differs depending on the user requesting it 
 export const CLASSROOM = (id) => `${CLASSROOMS}${id}/`; // route to a single classroom
 export const CLASSROOM_SUBJECTS = (id) => `${CLASSROOM(id)}get_subjects/`; // route to a single classrooms' subjects
+export const CLASSROOM_HOMEWORKS = (id) => `${CLASSROOM(id)}get_homeworks/`; // route to a single classrooms' homeworks
 
 
 // SCHOOLS

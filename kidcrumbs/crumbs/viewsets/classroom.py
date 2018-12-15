@@ -2,8 +2,8 @@ from rest_framework import permissions, viewsets, status
 from rest_framework import mixins
 from rest_framework.response import Response
 from rest_framework.decorators import detail_route, list_route
-from crumbs.serializers import ClassroomSerializer, ActivitySerializer, SubjectSerializer
-from crumbs.models import Classroom, Activity, Subject
+from crumbs.serializers import ClassroomSerializer, ActivitySerializer, SubjectSerializer, HomeWorkSerializer
+from crumbs.models import Classroom, Activity, Subject, HomeWork
 
 
 class ClassroomViewSet(viewsets.ModelViewSet):
@@ -20,3 +20,12 @@ class ClassroomViewSet(viewsets.ModelViewSet):
         serializer = SubjectSerializer(subjects, many=True)
         return Response(serializer.data)
 
+    @detail_route()
+    def get_homeworks(self, request, pk=None):
+        """
+        Gets the Classrooms' Homework
+        """
+        classroom = self.get_object()
+        homeworks = HomeWork.objects.filter(classroom=classroom)
+        serializer = HomeWorkSerializer(homeworks, many=True)
+        return Response(serializer.data)

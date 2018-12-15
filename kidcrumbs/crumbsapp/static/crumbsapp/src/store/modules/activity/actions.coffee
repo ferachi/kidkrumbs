@@ -8,7 +8,7 @@ pullActivities = ({commit}, id) ->
     http.get(GROUP_ACTIVITIES(id)).then (response)->
         activities = response.data
         commit 'setActivities', activities
-        commit 'addActivities', activities
+        # commit 'addActivities', activities
         activities
 
 

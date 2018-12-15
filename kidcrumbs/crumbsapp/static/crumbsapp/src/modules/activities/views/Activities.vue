@@ -1,6 +1,6 @@
 <template>
     <transicion :isLoading="isLoading">
-    <div id="activities" class="mx-3">
+    <div id="activities" >
         <div class="">
             <section >
                 <div class="add-btn">
@@ -13,7 +13,7 @@
                 <div class="col">
                     <dtpicker :disable-time="true" :dark="isDark" :without-header="true" v-model="date" format="YYYY-MM-DD" :auto-close="true" formatted="dddd, MMMM DD, YYYY" label="Select date"></dtpicker>
                 </div>
-                <div class="col-auto">
+                <div class="col-lg-auto col-12">
                     <md-checkbox class="md-primary" v-model="showAll">Show All</md-checkbox>
                 </div>
             </section>

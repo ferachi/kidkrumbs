@@ -45,7 +45,7 @@ import {mapGetters, mapActions} from 'vuex';
 export default{
     name : "HomeWorkEdit",
     created(){
-        this.fetchSchoolSubjects(this.classroom.group_base.school).then( subjects => {
+        this.fetchClassroomSubjects(this.classroom.id).then( subjects => {
             this.subjects = subjects;
             this.isLoading = false;
         });
@@ -84,10 +84,8 @@ export default{
     },
     methods : {
         ...mapActions('classroom', [
-            'fetchClassroom'
-        ]),
-        ...mapActions('school', [
-            'fetchSchoolSubjects'
+            'fetchClassroom',
+            'fetchClassroomSubjects'
         ]),
         ...mapActions('homework',[
             'saveHomework',
@@ -140,6 +138,7 @@ export default{
     }
 }
 </script>
+
 <style lang="stylus">
 </style>
 

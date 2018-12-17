@@ -1,6 +1,6 @@
 <template>
     <div class="homeworks">
-        <search-list :items="homeworks" :search="search" :filters="[{assigned_date:date}]" :searchFields="['_name', 'description','date']">
+        <search-list :items="homeworks" :search="search" :filters="[{assigned_date:date}]" :sortFields="['assigned_date']" :order="[sortOrder]" :searchFields="['_name', 'description','date']">
             <section class="" slot="controls"> 
                 <div class="">
                     <md-field class="mb-2">
@@ -38,7 +38,11 @@ export default{
         date:{
             type : String,
             required : true
-        }
+        },
+        sortOrder : {
+            type : String, // asc, desc
+            default : 'desc'
+        },
     },
     computed:{
         ...mapGetters([

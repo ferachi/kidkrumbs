@@ -1,24 +1,43 @@
 <template>
     <div id="homeWorkList" v-if="!isLoading">
-        <div class="d-flex align-items-center">
+        <section v-if="editable">
+            <div class="add-btn">
+                <md-button class="md-fab md-mini" @click="addHomework">
+                    <md-icon class="fas fa-plus"></md-icon>
+                </md-button>
+            </div>
+        </section>
+        <div class="d-flex align-items-center flex-wrap">
             <div class="col p-0">
                 <dtpicker :disable-time="true" :dark="isDark" :without-header="true" v-model="date" format="YYYY-MM-DD" :auto-close="true" formatted="dddd, MMMM DD, YYYY" label="Select date"></dtpicker>
             </div>
-            <div class="col-auto px-1" v-if="editable">
-                <!-- <dropdown :right="true">  -->
-                <!--     <template slot="menuBtn"> -->
-                <!--         <span class="fas fa&#45;ellipsis&#45;v fa&#45;fw"></span>   -->
-                <!--     </template> -->
-                <!--     <button class="dropdown&#45;item" @click="addHomework"><span class="fas fa&#45;plus fa&#45;fw"></span> Add Homework</button> -->
-                <!-- </dropdown> -->
-                <md-button class="md-icon-button md-raised md-primary" :md-theme="getTheme" @click="addHomework">
-                    <md-icon class="fas fa-plus fa-fw"></md-icon>
-                </md-button>
+            <div class="col-12 p-0 d-flex">
+                <div class="col d-flex justify-content-betwen align-items-center p-0">
+                    <div class="col-auto p-0">
+                        <md-checkbox class="md-primary" v-model="showAll">Show All</md-checkbox>
+                    </div>
+                    <div class="col-auto px-4 pb-1 d-flex align-items-center">
+                        <div class="col-auto p-0">
+                            <md-switch v-model="sortAsc" class="md-primary"> </md-switch>
+                        </div>
+                        <div class="col-auto p-0 pb-1" style="margin-left : -10px !important">
+                            <p class="m-0" v-if="sortAsc" key="up"> <i class="fas fa-sort-amount-up fa-fw"></i></p>
+                            <p class="m-0" v-else key="down"> <i class="fas fa-sort-amount-down fa-fw"></i></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col d-flex justify-content-end p-0">
+                    <div class="col-auto p-0">
+                        <md-radio class="md-primary" v-model="status" value="">all</md-radio>
+                        <md-radio class="md-primary" v-model="status" :value="false">active</md-radio>
+                        <md-radio class="md-primary" v-model="status" :value="true">inactive</md-radio>
+                    </div>
+                </div>
             </div>
         </div>
-        <hr>
+        <hr class="m-1 p-1">
         <div class="homework-list">
-            <homeworks :homeworks="homeworks" :date="date" @homework-click="homeworkClicked($event)"></homeworks>
+            <homeworks :sortOrder="sorting" :homeworks="homeworks" :date="dateChoice" @homework-click="homeworkClicked($event)"></homeworks>
         </div>
     </div>
 </template>
@@ -42,7 +61,10 @@ export default{
     data(){
         return {
             date : moment().format("YYYY-MM-DD"),
-            isLoading : true
+            isLoading : true,
+            showAll : false,
+            sortAsc : true,
+            status : ''
         }
     },
     components:{
@@ -53,13 +75,25 @@ export default{
         ...mapGetters([
             'getTheme'
         ]),
-        ...mapGetters('homework',{
-            homeworks : 'getHomeworks'
-        }),
+        ...mapGetters('homework',[
+            'getHomeworks'
+        ]),
+        homeworks(){
+            if(this.status === '') return this.getHomeworks;
+            else return _.filter(this.getHomeworks, {isExpired : this.status})
+        },
         isDark(){
             return this.getTheme == 'dark';
         },
-
+        dateChoice(){
+            return this.showAll ? '' : this.date;
+        },
+        sortOrder(){
+            return this.sortAsc ? 'ascending' : 'descending';
+        },
+        sorting(){
+            return this.sortAsc ? 'asc' : 'desc';
+        }
     },
     methods:{
         ...mapActions('homework',[
@@ -75,5 +109,10 @@ export default{
 }
 </script>
 <style lang="stylus">
+#homeWorkList
+    .add-btn
+        position fixed
+        bottom 50px
+        right 5px
 </style>
 

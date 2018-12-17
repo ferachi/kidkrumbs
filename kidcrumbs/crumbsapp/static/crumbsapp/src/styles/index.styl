@@ -36,6 +36,10 @@ hr
         .md-list-item-container
             color gainsboro !important
             
+    .md-list.md-theme-light .md-selected .md-list-item-content, .md-list.md-theme-light .router-link-exact-active .md-list-item-content
+    .md-list.md-theme-dark .md-selected .md-list-item-content, .md-list.md-theme-dark .router-link-exact-active .md-list-item-content
+        color primary_color !important
+
 
 
 a
@@ -107,6 +111,14 @@ a
 .md-radio.md-theme-light .md-radio-container
 .md-radio.md-theme-default .md-radio-container
     border-color shade_4 !important
+
+.md-switch.md-theme-default.md-checked.md-primary
+    .md-switch-thumb
+        background-color primary_color !important
+
+.md-switch.md-theme-default.md-checked.md-primary
+    .md-switch-container
+        background-color lighten(primary_color,70%) !important
 
 
 .md-avatar.md-theme-default.md-avatar-icon

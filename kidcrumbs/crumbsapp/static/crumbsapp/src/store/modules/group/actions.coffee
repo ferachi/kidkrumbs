@@ -86,7 +86,6 @@ fetchGroupWithProps = ({dispatch, commit, state}, id) ->
         habits = dispatch('fetchGroupHabits', id)
         routines = dispatch('fetchGroupRoutines', id)
         activities = dispatch('fetchGroupActivities', id)
-        homeWorks = dispatch('fetchGroupHomeworks', id)
 
         Promise.all([students, habits, routines, activities]).then (props) ->
             commit 'updateGroups', state.group

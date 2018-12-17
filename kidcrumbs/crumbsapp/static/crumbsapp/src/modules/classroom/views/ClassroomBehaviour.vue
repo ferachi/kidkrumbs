@@ -1,6 +1,8 @@
 <template>
     <div id="ClassroomBehaviour" class="">
-        <h1>Behaviour</h1>
+        <transition name="fade" mode="out-in">
+            <router-view></router-view>
+        </transition>
     </div>
 </template>
 <script>

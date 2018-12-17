@@ -79,9 +79,17 @@ export default {
             });
         },
         viewMenu(){
+
             this.menus.forEach( menu => menu.active = false );
-            let activeMenu = this.menus.find(menu => menu.link == this.$route.name);
-            activeMenu.active = true;
+
+            // find the parent link/route
+            let route = this.$route.matched.find( record => {
+                return record.meta.subMenu;
+            });
+            if(route){
+                let activeMenu = this.menus.find(menu => menu.link == route.meta.subMenuName);
+                activeMenu.active = true;
+            }
         },
         menuClicked(menu){
             this.$router.push({name : menu.link});

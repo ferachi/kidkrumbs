@@ -2,11 +2,10 @@
     <div class="studentAttitude">
         <div v-if="isLoading" key="loading" id="myE"></div>
         <div v-else class="my-2" key="loaded">
-            <div class="card">
-                <div class="card-body">
+            <div class="cad p-2">
+                <div class="cad-body">
                     <div class="d-flex justify-content-between">
-                        <h3 class="text-uppercase text-right font-weight-bold col">Habits</h3>
-                        <!-- <div class="col&#45;auto">{{routine.date}}</div> -->
+                        <button class="btn btn-primary" @click="$router.go(-1)">back to list</button>
                     </div>
                     <hr>
                     <div class="px-3 py-1">
@@ -247,7 +246,8 @@ export default{
             // using the radiosSelected.
             _.forEach(radiosSelected, opt => {
                 let attitude = _.find(radioAttitudes, {id:opt});
-                attitude.value = attitude.title;
+                if(attitude)
+                    attitude.value = attitude.title;
             });
 
             // TEXTS

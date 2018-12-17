@@ -8,6 +8,10 @@ import ClassroomDetail from "./views/ClassroomDetail.vue";
 import ClassroomList from "./views/ClassroomList.vue";
 import School from "./views/School.vue";
 import SchoolList from "./views/SchoolList.vue";
+import HabitToday from "./components/habitToday.vue";
+import HabitByDate from "./components/habitByDate.vue";
+import HabitNotFound from "./components/habitNotFound.vue";
+import StudentAttitude from "./components/studentAttitude.vue";
 import {store} from "../../appbootstrap";
 import ROLES from "../../data_models/permissions";
 
@@ -100,17 +104,39 @@ const classroomRoute = {
                 {
                     path : '',
                     component : ClassroomProfile,
-                    name : 'classroomDetail'
+                    name : 'classroomDetail',
+                    meta : {subMenu : true, subMenuName : 'classroomDetail'}
                 },
                 {
                     path : 'activity',
                     component : ClassroomActivity,
-                    name : 'classroomActivity'
+                    name : 'classroomActivity',
+                    meta : {subMenu : true, subMenuName : 'classroomActivity'}
                 },
                 {
                     path : 'behaviour',
                     component : ClassroomBehaviour,
-                    name : 'classroomBehaviour'
+                    meta : {subMenu : true, subMenuName : 'classroomBehaviour'},
+                    children :[
+                        {
+                            path : "",
+                            component : HabitToday,
+                            name : 'classroomBehaviour',
+                        },
+                        {
+                            path:'attitude/:routineId',
+                            component : StudentAttitude,
+                            name : 'studentBehaviour',
+                            props : (route) => ( {id:route.params.routineId, editable : true} )
+                        },
+                        {
+                            path : ":date",
+                            component : HabitByDate,
+                            name : 'habitByDate',
+                            props : {editable : true}
+                        },
+
+                    ]
                 },
                 {
                     path : 'homework',

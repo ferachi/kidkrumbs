@@ -1,4 +1,3 @@
-
 mutations = 
     setGroups : (state, groups) ->
         state.groups = groups
@@ -27,6 +26,13 @@ mutations =
     setGroupRoutines : (state, routines)->
         state.group = Object.assign {},state.group,{routines}
 
+    addGroupRoutine : (state, routine)->
+        state.group?.routines = _.unionBy state.group?.routines, [routine], 'id'
+
+    removeGroupRoutine : (state, routine)->
+        state.group.routines = _.differenceBy state.group.routines,[routine], 'id' 
+        console.log(state.group.routines, 'routineee')
+            
     setGroupHabits : (state, habits)->
         state.group = Object.assign {},state.group,{habits}
 

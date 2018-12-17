@@ -6,9 +6,11 @@ fetchClassroom = ({dispatch,commit, getters}, id) ->
     classroom = getters.getClassroomById(id)
     if classroom
         commit('setClassroom', classroom)
+        commit('group/setGroup', classroom, {root : true})
         return classroom
     dispatch("pullClassroom", id).then (classroom) ->
         commit('setClassroom', classroom)
+        commit('group/setGroup', classroom, {root : true})
         commit('updateClassrooms', classroom)
         classroom
 
@@ -62,6 +64,7 @@ fetchClassroomWithProps = ({commit, dispatch, getters, state}, id) ->
     dispatch('fetchClassroom', id).then (classroom) ->
         activities = dispatch('fetchClassroomActivities', id)
         homeworks = dispatch('fetchClassroomHomeworks',id)
+        group = dispatch('group/fetchGroupWithProps', id, {root : true})
 
         Promise.all([activities]).then (props) ->
             commit 'updateClassrooms', classroom

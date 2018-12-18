@@ -11,4 +11,9 @@ export default {
 };
 </script>
 <style lang="stylus">
+#Classroom
+    .add-btn
+        position fixed
+        bottom 50px
+        right 10px
 </style>

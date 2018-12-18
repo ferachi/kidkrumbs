@@ -1,5 +1,5 @@
 import http from "../../../http"
-import {CLASSROOM, SCHOOL_CLASSROOMS, GROUP_STUDENTS, GROUP_HABITS, GROUP_ROUTINES, GROUP_ACTIVITIES, CLASSROOM_HOMEWORKS} from "../../../urls";
+import {CLASSROOM, SCHOOL_CLASSROOMS, CLASSROOM_SUBJECTS, GROUP_STUDENTS, GROUP_HABITS, GROUP_ROUTINES, GROUP_ACTIVITIES, CLASSROOM_HOMEWORKS} from "../../../urls";
 
 
 fetchClassroom = ({dispatch,commit, getters}, id) ->
@@ -42,9 +42,25 @@ fetchClassroomHomeworks = ({dispatch, getters, commit}, id) ->
             return homeWorks
 
         http.get(CLASSROOM_HOMEWORKS(id)).then (response)->
-            homeWorks = response.data
+            homeWorks = _.map response.data, (homework) ->
+                homework.isExpired = moment(homework.submission_date, "YYYY-MM-DD").isBefore(moment().format("YYYY-MM-DD"));
+                homework._name = homework.subject.name
+                homework
             commit "setClassroomHomeworks", homeWorks
             homeWorks
+
+
+fetchClassroomSubjects = ({dispatch, getters, commit}, id) ->
+    dispatch('fetchClassroom', id).then (classroom) ->
+        subjects = getters.getClassroomSubjects
+
+        if subjects?[0] and typeof subjects?[0] isnt 'string'
+            return subjects
+
+        http.get(CLASSROOM_SUBJECTS(id)).then (response)->
+            subjects = response.data
+            commit "setClassroomSubjects", subjects
+            subjects
 
 
 fetchClassroomActivities = ({dispatch, getters, commit}, id) ->
@@ -64,13 +80,14 @@ fetchClassroomWithProps = ({commit, dispatch, getters, state}, id) ->
     dispatch('fetchClassroom', id).then (classroom) ->
         activities = dispatch('fetchClassroomActivities', id)
         homeworks = dispatch('fetchClassroomHomeworks',id)
+        subjects = dispatch('fetchClassroomSubjects',id)
         group = dispatch('group/fetchGroupWithProps', id, {root : true})
 
-        Promise.all([activities]).then (props) ->
+        Promise.all([activities,homeworks, subjects]).then (props) ->
             commit 'updateClassrooms', classroom
             classroom
 
 
 
 
-export {pullClassroom, fetchClassroom, fetchClassrooms,fetchClassroomActivities, fetchClassroomWithProps, pullClassrooms, fetchClassroomHomeworks}
+export {pullClassroom, fetchClassroom, fetchClassrooms,fetchClassroomActivities, fetchClassroomWithProps, pullClassrooms, fetchClassroomHomeworks, fetchClassroomSubjects}

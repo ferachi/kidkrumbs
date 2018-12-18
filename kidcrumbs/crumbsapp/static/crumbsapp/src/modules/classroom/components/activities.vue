@@ -59,6 +59,12 @@ export default{
     created(){
         // this.fetchData();
     }, 
+    mounted(){
+        this.isLoading = false;
+    },
+    beforeDestroy(){
+        $('.add-btn').hide();
+    },
     computed:{
         ...mapGetters("activity",[ 
             "getActivities"
@@ -85,7 +91,7 @@ export default{
         }
     },
     data : () => ({
-        isLoading : false,
+        isLoading : true,
         detailType:'view',
         date : moment().format("YYYY-MM-DD"),
         showAll: true,
@@ -198,10 +204,5 @@ export default{
 }
 </script>
 <style lang="stylus">
-#activities
-    .add-btn
-        position fixed
-        bottom 50px
-        right 5px
 </style>
 

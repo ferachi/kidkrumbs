@@ -1,12 +1,18 @@
 <template>
     <div class="subject-list-item d-flex my-3 align-items-center">
-        <div class="col-auto p-1 first-char " :class="[homework.isExpired ? 'secondary-bg' : 'primary-bg']">
-            <h2 class="rammeto text-center color_white align-middle m-0" >{{firstChar}} </h2>    
+        <div class="col-auto p-1">
+            <div class="first-char d-none d-sm-block" :class="[homework.isExpired ? 'secondary-bg' : 'primary-bg-light']">
+                <div class="d-flex align-items-center justify-content-center h-100">
+                    <div class="col-auto">
+                        <h2 class="rammeto text-center color_white m-0" >{{firstChar}} </h2>    
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="col-autom p-0">
-                    <h6 class="m-0 font-weight-bold ">{{homework.subject.name}}</h6>
+                    <h6 class="m-0 font-weight-bold " :class="[homework.isExpired ? 'color_5' : 'primary-color']">{{homework.subject.name}}</h6>
                 </div>
                 <div class="col-auto p-0">
                     <p class="m-0 col-auto"><small class="color_3">{{assignedDate}}</small></p>

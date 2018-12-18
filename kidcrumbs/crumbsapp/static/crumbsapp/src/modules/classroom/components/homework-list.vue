@@ -1,6 +1,6 @@
 <template>
-    <transicion :isLoading="isLoading">
-    <div id="homeWorkList" >
+<transicion :isLoading="isLoading">
+    <div id="homeworkList" >
         <section v-if="editable">
             <div class="add-btn">
                 <md-button class="md-fab md-mini" @click="addHomework">
@@ -41,31 +41,33 @@
         </div>
     </div>
     </transicion>
+    
 </template>
 <script>
-import homeworks from '../components/homeworks.vue';
+import homeworks from '../../homework/components/homeworks.vue';
 import dropdown from '../../../components/dropdown.vue';
 import transicion from '../../../components/transicion.vue';
 import {mapGetters, mapActions} from 'vuex';
 export default{
     name : "HomeWorkList",
-    created(){
-        this.fetchHomeworks().then( homeworks => {
-            this.isLoading = false;
-        });
+    mounted(){
+        this.isLoading = false;
+    },
+    beforeDestroy(){
+        $('.add-btn').hide();
     },
     props:{
         editable : {
             type : Boolean,
             default : false
-        }
+        },
     },
     data(){
         return {
             date : moment().format("YYYY-MM-DD"),
-            isLoading : true,
             showAll : false,
             sortAsc : true,
+            isLoading :true,
             status : ''
         }
     },
@@ -78,9 +80,9 @@ export default{
         ...mapGetters([
             'getTheme'
         ]),
-        ...mapGetters('homework',[
-            'getHomeworks'
-        ]),
+        ...mapGetters('classroom',{
+            getHomeworks : 'getClassroomHomeworks'
+        }),
         homeworks(){
             if(this.status === '') return this.getHomeworks;
             else return _.filter(this.getHomeworks, {isExpired : this.status})
@@ -112,10 +114,5 @@ export default{
 }
 </script>
 <style lang="stylus">
-#homeWorkList
-    .add-btn
-        position fixed
-        bottom 50px
-        right 5px
 </style>
 

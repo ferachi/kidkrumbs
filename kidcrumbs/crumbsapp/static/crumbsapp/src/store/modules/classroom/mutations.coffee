@@ -21,8 +21,11 @@ mutations =
     setClassroomStudents : (state, students)->
         state.classroom = Object.assign {},state.classroom,{students}
 
-    setClassroomHomeworks : (state, students)->
-        state.classroom = Object.assign {},state.classroom,{students}
+    setClassroomHomeworks : (state, homeWorks)->
+        state.classroom = Object.assign {},state.classroom,{homeWorks}
+
+    setClassroomSubjects : (state, subjects)->
+        state.classroom = Object.assign {},state.classroom,{subjects}
 
     setClassroomRoutines : (state, routines)->
         state.classroom = Object.assign {},state.classroom,{routines}

@@ -141,7 +141,8 @@ const classroomRoute = {
                 {
                     path : 'homework',
                     component : ClassroomHomework,
-                    name : 'classroomHomework'
+                    name : 'classroomHomework',
+                    meta : {subMenu : true, subMenuName : 'classroomHomework'}
                 }
             ],
         }

@@ -27,6 +27,7 @@ router.register(r'profiles', ProfileViewSet)
 router.register(r'routines', RoutineViewSet)
 router.register(r'schools', SchoolViewSet)
 router.register(r'students', StudentViewSet)
+router.register(r'sessions', SessionViewSet)
 router.register(r'subjects', SubjectViewSet)
 router.register(r'student-routines', StudentRoutineViewSet)
 

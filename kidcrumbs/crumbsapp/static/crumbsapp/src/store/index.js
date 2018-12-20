@@ -5,6 +5,7 @@ import person from './modules/person.coffee';
 import result from './modules/result';
 import grade from './modules/grades.coffee';
 import page from './modules/page.coffee';
+import session from './modules/session.coffee';
 import help from './modules/help.coffee';
 import announcement from './modules/announcement';
 import student from './modules/student';
@@ -47,6 +48,7 @@ export default {
         result,
         routine,
         school,
+        session,
         subject,
         student,
 		theme,

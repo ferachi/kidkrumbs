@@ -26,6 +26,6 @@ export default {
 <style lang="stylus">
 #pageComponent
     >.content
-        max-height 85vh
+        max-height 90vh
         overflow-y auto
 </style>

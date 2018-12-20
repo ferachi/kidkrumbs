@@ -45,6 +45,17 @@ class GroupViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @detail_route()
+    def get_students(self, request, pk=None):
+        """
+        Gets the Groups students
+        """
+        group = self.get_object()
+        # current members only
+        members = Person.objects.filter(memberships__group=group, person_school_roles__roles__name='student')
+        serializer = PersonSerializer(members, many=True)
+        return Response(serializer.data)
+
+    @detail_route()
     def get_current_teachers(self, request, pk=None):
         """
         Gets the Groups current teachers

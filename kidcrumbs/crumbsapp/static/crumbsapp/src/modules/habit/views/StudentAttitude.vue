@@ -1,12 +1,11 @@
 <template>
     <div class="studentAttitude">
         <div v-if="isLoading" key="loading" id="myE"></div>
-        <div v-else class="my-2" key="loaded">
-            <div class="card">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
+        <div v-else class="my-2 mb-5" key="loaded">
+            <div class="border border_2 p-4">
+                <div class="">
+                    <div class="d-flex justify-content-between ">
                         <h3 class="text-uppercase text-right font-weight-bold col">Habits</h3>
-                        <!-- <div class="col&#45;auto">{{routine.date}}</div> -->
                     </div>
                     <hr>
                     <div class="px-3 py-1">
@@ -18,17 +17,11 @@
                             </md-field>
                         </div>
                         <div v-else>
-                            <h5 class="text-uppercase font-weight-bold">Note:</h5>
                             <div v-if="routine.message" >
+                                <h5 class="text-uppercase font-weight-bold">Note:</h5>
                                 <blockquote class="blockquote">
                                     <p class="mb-0">{{routine.message}}</p>
                                 </blockquote>
-                            </div>
-                            <div v-else>
-                                <md-field >
-                                    <label>message/notes/reminders</label>
-                                    <md-textarea v-model="routine.message" md-autogrow readonly></md-textarea>
-                                </md-field>
                             </div>
                         </div>
                     </div>

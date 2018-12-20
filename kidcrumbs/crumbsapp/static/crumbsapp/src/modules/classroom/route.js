@@ -2,6 +2,9 @@ import Classroom from "./views/Classroom.vue";
 import ClassroomGuard from "./views/ClassroomGuard.vue";
 import ClassroomProfile from "./views/ClassroomProfile.vue";
 import ClassroomHomework from "./views/ClassroomHomework.vue";
+import ClassroomMember from "./views/ClassroomMember.vue";
+import ClassroomResult from "./views/ClassroomResult.vue";
+import ClassroomSubject from "./views/ClassroomSubject.vue";
 import ClassroomBehaviour from "./views/ClassroomBehaviour.vue";
 import ClassroomActivity from "./views/ClassroomActivity.vue";
 import ClassroomDetail from "./views/ClassroomDetail.vue";
@@ -143,7 +146,25 @@ const classroomRoute = {
                     component : ClassroomHomework,
                     name : 'classroomHomework',
                     meta : {subMenu : true, subMenuName : 'classroomHomework'}
-                }
+                },
+                {
+                    path : 'members',
+                    component : ClassroomMember,
+                    name : 'classroomMember',
+                    meta : {subMenu : false, subMenuName : 'classroomMember'}
+                },
+                {
+                    path : 'subjects',
+                    component : ClassroomSubject,
+                    name : 'classroomSubject',
+                    meta : {subMenu : false, subMenuName : 'classroomSubject'}
+                },
+                {
+                    path : 'results',
+                    component : ClassroomResult,
+                    name : 'classroomResult',
+                    meta : {subMenu : false, subMenuName : 'classroomResult'}
+                },
             ],
         }
     ]

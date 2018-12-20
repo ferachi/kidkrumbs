@@ -18,6 +18,12 @@
                     </div>
                 </div>
             </section>
+            <section slot="empty" class="d-flex justify-content-center py-5">
+                <div class="col-auto text-center">
+                    <h1 class="display-3 color_2"><i class="fas fa-book-open fa-fw fa-2x"></i></h1>
+                    <h4 class="color_3 text-uppercase">No Home Work Today!</h4>
+                </div>
+            </section>
         </search-list>
     </div>
 </template>

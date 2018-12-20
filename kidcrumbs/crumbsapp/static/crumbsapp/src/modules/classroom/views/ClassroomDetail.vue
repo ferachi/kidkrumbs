@@ -13,10 +13,18 @@
                         </div>
                     </div>
                     <div slot="pageMenu">
-                        <p class="m-0 color_white d-inline-block"> <i class="fas fa-ellipsis-v fa-fw fa-lg"></i></p>
-                        <!-- <div class="py&#45;1"> -->
-                        <!--     <md&#45;avatar class="md&#45;avatar&#45;icon"> <md&#45;icon class="fas fa&#45;glasses"></md&#45;icon></md&#45;avatar> -->
-                        <!-- </div> -->
+                        <md-menu md-size="medium" :md-offset-x="-130" :md-offset-y="-36" >
+                            <md-button md-menu-trigger class="md-icon-button md-dense md-primary">
+                                <md-icon class="fas fa-ellipsis-v fa-fw color_white" md-theme="dark"></md-icon>
+                            </md-button>
+                            <md-menu-content :md-theme="getTheme">
+                                <md-menu-item @click="$router.push({name:'classroomMember'})">members</md-menu-item>
+                                <md-menu-item @click="$router.push({name:'classroomSubject'})">subjects</md-menu-item>
+                                <md-menu-item @click="$router.push({name:'classroomResult'})">results</md-menu-item>
+                                <md-divider></md-divider>
+                                <md-menu-item @click="backToSchools">classrooms</md-menu-item>
+                            </md-menu-content>
+                        </md-menu>
                     </div>
                     <div class="menu d-flex justify-content-center">
                         <div class="col-xl-6 col-lg-8 px-0 ">
@@ -29,7 +37,7 @@
                     </div>
                 </page-header>
             </div>
-            <section class="p-lg-3 px-2 py-3 bg_aux detail-content">
+            <section class="p-3 bg_0 detail-content">
                 <transition name="fade-down-up" mode="out-in">
                     <router-view></router-view>
                 </transition>
@@ -63,6 +71,9 @@ export default {
         pageHeader,
         pageMenu
     },
+    computed:{
+        ...mapGetters([ 'getTheme' ]),
+    },
     data(){
         return {
             loading : true,
@@ -93,6 +104,9 @@ export default {
         },
         menuClicked(menu){
             this.$router.push({name : menu.link});
+        },
+        backToSchools(){
+            this.$router.push({name : "classroomList" , params : {id : this.classroom.group_base.school}});
         }
     },
     watch:{
@@ -105,5 +119,8 @@ export default {
 <style lang="stylus">
 #ClassroomDetail
     .detail-content
-        min-height 80vh
+        min-height 85vh
+        padding-bottom 80px !important
+    .md-icon.md-theme-default.md-icon-font 
+        color white !important
 </style>

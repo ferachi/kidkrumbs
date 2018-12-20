@@ -10,6 +10,8 @@ getters =
     getClassroomHomeworks : (state) ->
         state.classroom?.homeWorks
 
+    getClassroomMembers : (state) ->
+        state.classroom?.members
 
     getClassroomSubjects : (state) ->
         state.classroom?.subjects

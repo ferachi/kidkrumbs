@@ -16,7 +16,7 @@
                 <i v-show="errors.has('description')" class="fa fa-warning"></i>
                 <span class="text-danger">{{ errors.first('description') }}</span> 
             </div>
-            <div class="form-group">
+            <div class="form-grup">
                 <label for="title">select a color</label>
                 <swatches v-model="activityItem.color" :colors="colors" shapes="circles" inline/>
             </div>
@@ -56,7 +56,12 @@ export default {
     data(){
         return{
             activityItem : this.item,
-            colors: ['DODGERBLUE', 'RED', 'DARKSEAGREEN', 'ORANGE']
+            colors:[
+                [ 'DARKRED','RED','ORANGERED','TOMATO',],
+                ['SEAGREEN','FORESTGREEN','DARKOLIVEGREEN','TEAL'],
+                ['LIGHTBLUE','DODGERBLUE','DARKBLUE','CADETBLUE'],
+                ['REBECCAPURPLE','MEDIUMPURPLE','PLUM','HOTPINK'],
+            ]
         }
     },
     props:{
@@ -77,6 +82,11 @@ export default {
                     return;
                 }
             });
+        }
+    },
+    watch : {
+        item(val){
+            this.activityItem = val;
         }
     }
 };

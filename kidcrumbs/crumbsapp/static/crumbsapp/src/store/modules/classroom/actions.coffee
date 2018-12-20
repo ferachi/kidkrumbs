@@ -1,5 +1,5 @@
 import http from "../../../http"
-import {CLASSROOM, SCHOOL_CLASSROOMS, CLASSROOM_SUBJECTS, GROUP_STUDENTS, GROUP_HABITS, GROUP_ROUTINES, GROUP_ACTIVITIES, CLASSROOM_HOMEWORKS} from "../../../urls";
+import {CLASSROOM, SCHOOL_CLASSROOMS, CLASSROOM_MEMBERS, CLASSROOM_SUBJECTS, GROUP_STUDENTS, GROUP_HABITS, GROUP_ROUTINES, GROUP_ACTIVITIES, CLASSROOM_HOMEWORKS} from "../../../urls"
 
 
 fetchClassroom = ({dispatch,commit, getters}, id) ->
@@ -75,19 +75,32 @@ fetchClassroomActivities = ({dispatch, getters, commit}, id) ->
             activities
 
 
+fetchClassroomMembers = ({dispatch, getters, commit}, id) ->
+    dispatch('fetchClassroom', id).then (classroom) ->
+        members = getters.getClassroomMembers
+
+        if members?[0] and typeof members[0] isnt 'string'
+            return members
+
+        http.get(CLASSROOM_MEMBERS(id)).then (response)->
+            members = response.data
+            commit "setClassroomMembers", members
+            members
+
 fetchClassroomWithProps = ({commit, dispatch, getters, state}, id) ->
 
     dispatch('fetchClassroom', id).then (classroom) ->
         activities = dispatch('fetchClassroomActivities', id)
         homeworks = dispatch('fetchClassroomHomeworks',id)
         subjects = dispatch('fetchClassroomSubjects',id)
+        members = dispatch('fetchClassroomMembers',id)
         group = dispatch('group/fetchGroupWithProps', id, {root : true})
 
-        Promise.all([activities,homeworks, subjects]).then (props) ->
+        Promise.all([activities,homeworks, subjects, group, members]).then (props) ->
             commit 'updateClassrooms', classroom
             classroom
 
 
 
 
-export {pullClassroom, fetchClassroom, fetchClassrooms,fetchClassroomActivities, fetchClassroomWithProps, pullClassrooms, fetchClassroomHomeworks, fetchClassroomSubjects}
+export {pullClassroom, fetchClassroom, fetchClassrooms,fetchClassroomActivities, fetchClassroomWithProps, pullClassrooms, fetchClassroomHomeworks, fetchClassroomSubjects, fetchClassroomMembers}

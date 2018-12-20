@@ -1,5 +1,7 @@
 <template>
     <div id="habitDetail">
+        <h4 class="m-0 font-weight-bold text-upperase"> Behaviour </h4>
+        <hr>
         <section class="header d-flex flex-wrap mt-2 mb-3">
             <div class="col-12 pt-3">
                 <dtpicker :disable-time="true" :dark="isDark" :without-header="true" v-model="date" format="YYYY-MM-DD"
@@ -8,12 +10,9 @@
             <div class="col d-flex " v-if="routine"> 
                 <div class="col">
                     <md-field>
-                        <label>comment</label>
+                        <label><i class="fas fa-edit fa-fw"></i> comment</label>
                         <md-textarea md-autogrow v-model="routine.comment"></md-textarea>
                     </md-field>
-                </div>
-                <div class="col-auto pt-4">
-                    <p class="color_5" @click="modifyRoutine"><span class="fas fa-lg fa-save fa-fw"></span></p>
                 </div>
                 <div class="col-auto pt-4">
                     <p class="color_5" @click="show"><span class="fas fa-lg fa-trash fa-fw"></span></p>
@@ -150,7 +149,7 @@ export default {
         },
         modifyRoutine(){
             this.updateRoutine(this.routine).then(routine =>{
-                this.$toasted.show("Routine updated");
+                // this.$toasted.show("Routine updated");
             })
         },
         removeRoutine(canDelete){
@@ -166,7 +165,9 @@ export default {
         date(val){
             this.dateChanged();
         },
-        '$route'(){
+        'routine.comment':function (val){
+            console.log('titanium');
+            _.debounce(this.modifyRoutine, 2000)();
         }
     }
 

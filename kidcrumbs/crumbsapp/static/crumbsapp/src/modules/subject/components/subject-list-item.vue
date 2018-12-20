@@ -1,9 +1,13 @@
 <template>
     <div class="subject-list-item d-flex my-3 align-items-center">
         <div class="col-auto p-1 first-char" :style="{'background':color}">
-            <h2 class="rammeto text-center color_white align-middle m-0">{{firstChar}}</h2>    
+            <div class="d-flex h-100 align-items-center justify-content-center">
+                <div class="col-auto px-0">
+                    <h2 class="rammeto text-center color_white align-middle m-0">{{firstChar}}</h2>    
+                </div>
+            </div>
         </div>
-        <div class="col">
+        <div class="col px-2">
             <h6 class="m-0">{{subject.name}}</h6>
             <p class="color_3 m-0">{{subject.subject_code}}</p>
         </div>

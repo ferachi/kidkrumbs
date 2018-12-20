@@ -15,11 +15,11 @@
                         </div>
                         <div v-else>
                             <md-avatar class="md-avatar-icon md-large">
-                                <md-icon class="fas fa-user-circle md-size-3x"></md-icon>
+                                <md-icon class="fas fa-user-circle md-size-2x"></md-icon>
                             </md-avatar>
                         </div>
                     </div>
-                    <h6 class="font-weight-bold m-0">{{routine.student.first_name}}</h6>
+                    <h6 class="font-weight-old m-0">{{routine.student.first_name}}</h6>
                     <p :class="[routine.editted_habit ? 'primary-color' : 'color_3']" >{{routine.student.last_name}}</p>
                 </div>
             </div>

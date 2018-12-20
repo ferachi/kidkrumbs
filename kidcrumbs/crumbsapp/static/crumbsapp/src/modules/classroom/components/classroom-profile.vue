@@ -1,8 +1,9 @@
 <template>
-    <div id="classroomProfile">
+    <div id="classroomProfile" class="px-2">
        <section class="header text-center pb-3">
            <div>
-           <h3 class="font-weight-bold m-0" >{{classroom.className}}</h3>
+           <h6 class="m-0 color_4" >{{classroom.className}}</h6>
+           <h3 class="font-weight-bold m-0 text-uppercase" > Profile </h3>
            <p class="m-0 color_3 font-weight-bold" style="margin-top : -5px !important"><small class="color_3">{{classroom.session.year}} - {{classroom.group_base.category}}</small></p>
            </div>
            <div class="mt-2" v-if="classroom.head_teacher">

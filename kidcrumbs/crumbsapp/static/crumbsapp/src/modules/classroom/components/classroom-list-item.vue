@@ -3,9 +3,12 @@
         <div class="bg_0 border border_1 menu clickable col px-0 d-flex h-100 pb-3" >
             <div class="col px-0 h-100">
                 <div class="w-100 py-3 h-75 d-flex align-items-center justify-content-center" :style="{background:color}">
-                    <h1 class="display- color_white m-0">{{classroom.group_base.short_name}}</h1>
+                    <div class="col text-center">
+                        <h1 class="display-4 color_white m-0 text-uppercase">{{classroom.group_base.class_wing}}</h1>
+                        <p class="color_white m-0 text-uppercase" style="opacity : 0.5">{{classroom.className}}</p>
+                    </div>
                 </div>
-                <div class="p-2">
+                <div class="p-2 text-center">
                     <h6 class="m-0"><span>{{classroom.className}}</span> </h6>
                     <p class="m-0" style="margin-top:-4px !important"><small class="color_3">{{classroom.session.year}}</small></p>
                 </div>

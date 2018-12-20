@@ -157,6 +157,12 @@ if appColor is defined
 .primary-color
 	color primary_color !important
 
+.primary-color-light
+	color lighten(primary_color,50%) !important
+
+.primary-color-dark
+	color saturate(primary_color,50%) !important
+
 .primary-bg
 	background-color primary_color !important
 
@@ -177,6 +183,12 @@ if appColor is defined
 	
 .secondary-color
 	color secondary_color !important
+
+.secondary-color-light
+	color lighten(secondary_color,50%) !important
+
+.secondary-color-dark
+	color saturate(secondary_color,50%) !important
 
 .secondary-bg
 	background-color secondary_color !important

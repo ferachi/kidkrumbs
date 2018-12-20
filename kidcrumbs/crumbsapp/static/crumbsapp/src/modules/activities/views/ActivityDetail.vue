@@ -1,13 +1,29 @@
 <template>
     <div v-if="isLoading"  key="loading"></div>
     <div v-else id="activityDetail" key="loaded" class="mx-2">
-        <div class="d-flex">
-            <tab-head class="col" :tabTitles="['activity', 'comment']" justify="justify-content-end" @tab-click="tabClicked($event)"></tab-head>
-        </div>
+        <section class="">
+            <div class="d-flex justify-content-between align-items-center flex-wrap">
+                <div class="col-auto px-0 py-3">
+                    <h5 class="m-0"><span class="color_3">Activity - </span> {{date}} </h5>
+                </div>
+                <div class="d-flex col-sm-auto px-0 col-xs-12 ">
+                    <div class="col-auto px-0">
+                        <h6><small class="color_3"><span class="font-weight-bold"> {{activityCount}} </span><i class="fas fa-stopwatch fa-fw"></i></small></h6>
+                    </div>
+                    <div class="col-auto px-0">
+                        <h6><small class="color_3"><span class="font-weight-bold"> {{commentCount}} </span><i class="fas fa-comments fa-fw"></i></small></h6>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-end">
+                <tab-head class="col-auto px-0" :tabTitles="['activity', 'comment']" justify="justify-content-end" @tab-click="tabClicked($event)"></tab-head>
+            </div>
+        </section>
         <div class="tabs">
             <div v-if="selectedTab == tabTitles[0]">
                 <section class="activity-head">
-                    <h5>Teachers' Comment</h5>
+                    <h6 class="font-weight-bold">Teachers' Comment</h6>
                     <p>{{activity.note}}</p>
                 </section>
                 <section class="activities-pane">
@@ -62,7 +78,16 @@ export default{
         }),
         comments(){
             return this.activity.comments;
-        }
+        },
+        date(){
+            return moment(this.activity.date, "YYYY-MM-DD").format("MMMM DD, YYYY");
+        },
+        activityCount(){
+            return this.activity.activities.length;
+        },
+        commentCount(){
+            return this.activity.comments.length;
+        },
     },
     data: () => ({
         tabTitles : [ 'activity', 'comment'],

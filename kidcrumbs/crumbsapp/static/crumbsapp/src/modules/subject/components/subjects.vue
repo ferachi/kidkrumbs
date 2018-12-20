@@ -1,19 +1,18 @@
 <template>
     <div class="subjects">
         <search-list :items="subjects" :search="search" :searchFields="['name', 'subject_code','overview']">
-            <section slot="controls"> 
+            <section slot="controls" class="px-3"> 
                 <md-field>
-                    <label >search</label>
+                    <label ><i class="fas fa-search fa-fw"></i> search</label>
                     <md-input v-model='search'></md-input>
                 </md-field>
             </section>
-            <section slot="items" slot-scope="{items}">
-                <hr>
+            <section slot="items" slot-scope="{items}" >
                 <group-by :items="items" field="session">
                     <div slot-scope="{values, id}" >
                         <div class="d-flex flex-wrap my-4">
                             <h4 class="font-weight-bold col-12 righteous">{{id}}</h4>
-                            <div class="col-12 col-md-6 col-xl-3" v-for="subject in values" :key="subject.id"
+                            <div class="col-12 col-md-6 col-xl-4" v-for="subject in values" :key="subject.id"
                             @click="$emit('subject-click', subject)">
                                 <list-item :subject="subject"></list-item>
                             </div>
@@ -25,6 +24,12 @@
                 <!--     <h6>{{item.name}}</h6> -->
                 <!--     <p class="color_3">{{item.subject_code}}</p> -->
                 <!-- </div>     -->
+            </section>
+            <section slot="empty" class="d-flex justify-content-center py-5">
+                <div class="col-auto text-center">
+                    <h1 class="display-3 color_2"><i class="fas fa-chalkboard fa-fw fa-2x"></i></h1>
+                    <h4 class="color_3 text-uppercase">No Subject Found!</h4>
+                </div>
             </section>
         </search-list>
     </div>

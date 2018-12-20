@@ -3,6 +3,7 @@
         <section class="date-filter">
             <dtpicker :disable-time="true" :dark="isDark" :without-header="true" v-model="date" format="YYYY-MM-DD" :auto-close="true" formatted="dddd, MMMM DD, YYYY" label="Select date"></dtpicker>
         </section>
+        <hr>
         <section class="activity-detail" v-if="activity">
             <activity-detail :id="activity.id"></activity-detail>
         </section>

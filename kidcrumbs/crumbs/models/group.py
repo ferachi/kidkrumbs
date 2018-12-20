@@ -45,6 +45,7 @@ class AbstractGroup(models.Model):
 
 class Group(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    group_name = models.CharField(max_length=50, blank=True)
     slug = models.SlugField(blank=True)
     slogan = models.CharField(max_length=100, blank=True)
     overview = models.TextField()

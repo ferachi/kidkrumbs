@@ -74,6 +74,7 @@ class StudentViewSet(viewsets.ModelViewSet):
         """
         student = self.get_object()
         routines = StudentRoutine.objects.filter(student=student)
+        print(len(routines), 'length of routines')
         serializer = StudentRoutineSerializer(routines, many=True)
         return Response(serializer.data)
 

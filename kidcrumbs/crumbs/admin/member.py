@@ -47,30 +47,26 @@ class GroupListFilter(admin.SimpleListFilter):
 class MembershipAdmin(admin.ModelAdmin):
 	form = MembershipAdminForm
 	raw_id_fields = ['person', 'group']
-	list_display = ['group_person', 'group_name', 'group_slogan','group_session']
+	list_display = ['group_person', 'group_name','group_session']
 	list_filter = [GroupListFilter, 'group__session']
-	search_fields = ['^person__first_name', '^person__last_name', '^group__name']
+	# search_fields = ['^group__name']
 	ordering = ['person']
 
 	def group_person(self, obj):
-		return "{} {} {}".format(obj.person.first_name, obj.person.other_name, obj.person.last_name)
-	group_person.admin_order_field = 'person__first_name'
+		return "{} {} {}".format(obj.person.user.first_name, obj.person.user.other_names, obj.person.user.last_name)
+	group_person.admin_order_field = 'person__user__first_name'
 	group_person.short_description = 'member'
 
 	def group_name(self, obj):
-		return obj.group.name
-	group_name.admin_order_field = 'group__name'
+		return obj.group.group_name
+	group_name.admin_order_field = 'group__group_name'
 	group_name.short_description = 'name'
 
 	def group_session(self, obj):
-		return obj.term.session
-	group_session.admin_order_field = 'term__session__name'
+		return obj.group.session
+	group_session.admin_order_field = 'group__session__name'
 	group_session.short_description = 'session'
 
-	def group_slogan(self, obj):
-		return obj.group.slogan
-	group_slogan.admin_order_field = 'group__slogan'
-	group_slogan.short_description = 'slogan/class wing'
 
 	def save_model(self, request, obj, form, change):
 		if obj.group.category == 'CL':
@@ -96,7 +92,7 @@ class MembershipAdmin(admin.ModelAdmin):
 							enrollment = Enrollment()
 							enrollment.student = student
 							enrollment.course = course
-							enrollment.session = obj.term.session
+							enrollment.session = obj.group.session
 							enrollment.save()
 				except Student.DoesNotExist:
 					pass

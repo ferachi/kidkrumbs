@@ -1,7 +1,7 @@
 <template>
     <div id="activityItems">
         <section v-if="canEdit">
-            <div class="add-btn">
+            <div class="add-btn" v-if="showBtn">
                 <md-button class="md-fab md-mini" @click="addActivity">
                     <md-icon class="fas fa-plus"></md-icon>
                 </md-button>
@@ -47,6 +47,14 @@ import ROLES from '../../../data_models/permissions';
 import {mapGetters, mapActions} from 'vuex';
 export default {
     name: "activityItems",
+    mounted(){
+        setTimeout(() => {
+            this.showBtn = true;
+        }, 400);
+    },
+    beforeDestroy(){
+        $('.add-btn').hide();
+    },
     components:{
         confirmAction,
         itemList: activityItemList,
@@ -59,6 +67,7 @@ export default {
         return {
             isList : true,
             detailType : '',
+            showBtn : false,
             activity :this.activities[0]
         }
     },

@@ -28,6 +28,12 @@
                     </div>
                 </div>
             </div>
+            <div slot="empty" class="d-flex justify-content-center py-5">
+                <div class="col-auto text-center">
+                    <h1 class="display-3 color_2"><i class="fas fa-user-slash fa-fw fa-2x"></i></h1>
+                    <h4 class="color_3 text-uppercase">No Person Found!</h4>
+                </div>
+            </div>
         </alter-list>
     </div>
 </template>

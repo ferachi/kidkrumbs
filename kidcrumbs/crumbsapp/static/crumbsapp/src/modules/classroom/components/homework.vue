@@ -2,6 +2,8 @@
     <div id="homeWorkEdit">
         <transicion :isLoading="isLoading">
             <section>
+                <h4 class="font-weight-bold">Home Work</h4>
+                <hr>
                 <homework-list :editable="true" @add-homework="addHomework" @homework-click="homeworkClicked($event)"></homework-list>
                 <div>
                     <modal ref="modal" :enable-mobile-fullscreen="true" :modal-theme="getTheme" :overlay-theme="getTheme">

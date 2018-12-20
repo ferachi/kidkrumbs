@@ -6,7 +6,7 @@
                 <div>
                     <input type="hidden" v-model="assignment.submission_date" name="submission_date" v-validate="requiredDate" >
                     <div class="md-error" v-show="errors.has('submission_date')">
-                        <span class="text-danger">{{ errors.first('submission_date') }}</span>
+                        <small><span class="text-danger">{{ errors.first('submission_date') }}</span></small>
                     </div>
                 </div>
                 <hr>

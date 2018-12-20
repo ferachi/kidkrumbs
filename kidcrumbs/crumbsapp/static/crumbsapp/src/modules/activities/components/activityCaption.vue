@@ -2,7 +2,7 @@
     <div class="activity-caption">
         <div class="d-flex align-items-center">
             <div class="col-auto d-flex align-items-center justify-content-center text-center color-head p-0 px-lg-4" :style="{'background-color':`${activity.color.toLowerCase()} !important` }">
-                <h1 class="display-4 color_0 m-0 text-uppercase">{{activity.note.charAt(0)}}</h1>
+                <h2 class="color_0 m-0 text-uppercase">{{activity.note.charAt(0)}}</h2>
             </div>
             <div class="col px-2 d-flex flex-wrap">
                 <div class="col-lg-auto col-12 order-lg-1">
@@ -47,7 +47,7 @@ export default {
 <style lang="stylus">
 .activity-caption
     .color-head
-        height 70px
+        height 50px
         width @height
 
 </style>

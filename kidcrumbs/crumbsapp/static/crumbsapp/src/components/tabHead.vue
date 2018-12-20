@@ -3,7 +3,7 @@
         <div class="d-flex align-items-center" :class="justify">
             <div v-for="tab in tabs" class="col-auto" @click="tabClicked(tab.name)" :key="tab.name">
                 <slot name="tab" :tab="tab" >
-                <p class="text-center"><small class="color_3" :class="{'primary-color':tab.isActive}">{{tab.name}}</small></p>
+                <p class="text-center clickable"><small class="color_3" :class="{'primary-color':tab.isActive}">{{tab.name}}</small></p>
                 </slot>
             </div>
         </div>

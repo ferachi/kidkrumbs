@@ -1,6 +1,6 @@
 <template>
     <transicion :isLoading="isLoading">
-    <div id="activities" class="mx-lg-3">
+    <div id="activities" class="mx-lg-3 m-0">
         <div class="">
             <section >
                 <div class="add-btn">

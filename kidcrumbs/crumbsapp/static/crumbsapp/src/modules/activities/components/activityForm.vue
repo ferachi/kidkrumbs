@@ -41,7 +41,12 @@ export default {
     data(){
         return{
             factivity : this.activity,
-            colors: ['DODGERBLUE', 'RED', 'DARKSEAGREEN', 'ORANGE']
+            colors:[
+                [ 'DARKRED','RED','ORANGERED','TOMATO',],
+                ['SEAGREEN','FORESTGREEN','DARKOLIVEGREEN','TEAL'],
+                ['LIGHTBLUE','DODGERBLUE','DARKBLUE','CADETBLUE'],
+                ['REBECCAPURPLE','MEDIUMPURPLE','PLUM','HOTPINK'],
+            ]
         }
     },
     computed:{

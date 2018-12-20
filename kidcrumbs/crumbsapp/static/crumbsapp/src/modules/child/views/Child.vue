@@ -58,13 +58,12 @@ export default{
 
 
             // SETUP ALL GROUP RELATED MODELS
-            let group = this.getCurrentClassroom
-            let habits = this.fetchChildHabitsByGroup(group.id),
+            let group = this.getCurrentClassroom,
                 groupHabits = this.fetchGroupHabits(group.id),
                 activities = this.fetchActivities(group.id);
             
             // get the groups activities
-            Promise.all([habits,groupHabits, activities]).then( props => {
+            Promise.all([groupHabits, activities]).then( props => {
                 this.child = child;
                 this.isLoading = false;
             })
@@ -99,7 +98,6 @@ export default{
     },
     methods : {
         ...mapActions('child',[
-            "fetchChildHabitsByGroup",
             "fetchChildWithProps"
         ]),
         ...mapActions('group',[

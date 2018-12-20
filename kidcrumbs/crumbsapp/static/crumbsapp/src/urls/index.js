@@ -50,7 +50,8 @@ export const GROUP = (id) => `${GROUPS}${id}/`; // route to a single group
 export const GROUP_ACTIVITIES = (id) => `${GROUP(id)}get_activities/`; // route to a groups activity list
 export const GROUP_ROUTINES = (id) => `${GROUP(id)}get_routines/`; // route to a groups activity list
 export const GROUP_MEMBERS = (id) => `${GROUP(id)}get_current_members/`; // route to a groups member list
-export const GROUP_STUDENTS = (id) => `${GROUP(id)}get_current_students/`; // route to a groups student list
+export const GROUP_STUDENTS = (id) => `${GROUP(id)}get_students/`; // route to a groups student list
+export const GROUP_CURRENT_STUDENTS = (id) => `${GROUP(id)}get_current_students/`; // route to a groups current students' list
 export const GROUP_TEACHERS = (id) => `${GROUP(id)}get_current_teachers/`; // route to a groups teacher list
 export const GROUP_HABITS = (id) => `${GROUP(id)}get_habits/`; // route to a groups habit list
 
@@ -60,6 +61,7 @@ export const CLASSROOMS = '/api/classrooms/'; // All classrooms, this list diffe
 export const CLASSROOM = (id) => `${CLASSROOMS}${id}/`; // route to a single classroom
 export const CLASSROOM_SUBJECTS = (id) => `${CLASSROOM(id)}get_subjects/`; // route to a single classrooms' subjects
 export const CLASSROOM_HOMEWORKS = (id) => `${CLASSROOM(id)}get_homeworks/`; // route to a single classrooms' homeworks
+export const CLASSROOM_MEMBERS = (id) => `${CLASSROOM(id)}get_members/`; // route to a single classrooms' members
 
 
 // SCHOOLS
@@ -67,6 +69,7 @@ export const SCHOOLS = '/api/schools/'; // All Schools, this list differs depend
 export const SCHOOL = (id) => `${SCHOOLS}${id}/`; // route to a single school
 export const SCHOOL_CLASSROOMS = (id) => `${SCHOOL(id)}get_classrooms/`; // route to a schools classrooms
 export const SCHOOL_SUBJECTS = (id) => `${SCHOOL(id)}get_subjects/`; // route to a schools subjects
+export const SCHOOL_SESSIONS = (id) => `${SCHOOL(id)}get_sessions/`; // route to a schools subjects
 export const SCHOOL_STUDENTS = (id) => `${SCHOOL(id)}get_current_students/`; // route to a schools students
 export const SCHOOL_GROUPS = (id) => `${SCHOOL(id)}get_groups/`; // route to a schools groups
 export const SCHOOL_GRADE_SYSTEM = (id) => `${SCHOOL(id)}get_grade_system/`; // route to a schools groups
@@ -92,3 +95,9 @@ export const HOMEWORK = (id) => `${HOMEWORKS}${id}/`;
 // ANNOUNCEMENTS
 export const ANNOUNCEMENTS = '/api/announcements/';
 export const ANNOUNCEMENT = (id) => `${ANNOUNCEMENTS}${id}/`;
+
+// SESSIONS
+export const SESSIONS = '/api/sessions/';
+export const SESSION = (id) => `${SESSIONS}${id}/`;
+
+

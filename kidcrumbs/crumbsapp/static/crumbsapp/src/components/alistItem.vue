@@ -1,9 +1,9 @@
 <template>
     <div id="aListItem" class="my-1"@click="alistItemClicked(item)">
-        <div class="bg_0 px-3"  :class="{'primary-border border-bottom':isActive}" >
+        <div class="bg_0 px-0"  :class="{'primary-border border-bottom':isActive}" >
             <div class="pt-3 pb-1">
                 <div class="d-flex align-items-center">
-                    <div class="col px-2">
+                    <div class="col px-1">
                         <slot :item="item"></slot>
                     </div>
                     <div class="col-auto item-menu px-0" v-if="showMenu">

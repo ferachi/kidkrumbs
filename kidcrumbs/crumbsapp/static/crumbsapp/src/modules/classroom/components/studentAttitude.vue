@@ -2,12 +2,24 @@
     <div class="studentAttitude">
         <div v-if="isLoading" key="loading" id="myE"></div>
         <div v-else class="my-2" key="loaded">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="col-auto px-0">
+                    <h4 class="m-0 font-weight-bold text-upperase"> Routine </h4>
+                </div>
+                <div class="col-auto px-0 text-center">
+                    <div>
+                        <md-button class="md-primary md-icon-button md-dense m-0" @click="$router.go(-1)">
+                            <md-icon class="fas fa-user-friends fa-fw fa-sm"></md-icon>
+                        </md-button>
+                    </div>
+                    <div style="margin-top : -7px;" >
+                        <small>Behaviours</small>
+                    </div>
+                </div>
+            </div>
+            <hr>
             <div class="cad p-2">
                 <div class="cad-body">
-                    <div class="d-flex justify-content-between">
-                        <button class="btn btn-primary" @click="$router.go(-1)">back to list</button>
-                    </div>
-                    <hr>
                     <div class="px-3 py-1">
                         <div v-if="editable">
                             <h6 class="m-0 text-uppercase font-weight-bold">Notes</h6>

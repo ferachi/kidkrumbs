@@ -4,8 +4,10 @@
             <div class="col-auto px-1">
                 <slot name="pageTitle"></slot>
             </div>
-            <div class="col-auto px-1">
-                <slot name="pageMenu"></slot>
+            <div class="col-auto px-0">
+                <slot name="pageMenu">
+                    <p class="m-0 d-inline-block color_white" @click="$emit('page-head-menu-click')"> <i class="fas fa-ellipsis-v fa-fw fa-lg"></i></p>
+                </slot>
             </div>
         </div>
         <div>

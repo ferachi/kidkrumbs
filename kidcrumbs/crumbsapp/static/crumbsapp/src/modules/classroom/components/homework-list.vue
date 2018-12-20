@@ -9,26 +9,28 @@
             </div>
         </section>
         <div class="d-flex align-items-center flex-wrap">
-            <div class="col-12 p-0 d-flex flex-wrap">
-                <div class="col-12 col-sm d-flex justify-content-betwen align-items-center p-0">
-                    <div class="col-auto p-0">
-                        <md-checkbox class="md-primary my-2" v-model="showAll">Show All</md-checkbox>
-                    </div>
-                    <div class="col-auto px-4 pb-1 d-flex align-items-center">
-                        <div class="col-auto p-0">
-                            <md-switch v-model="sortAsc" class="md-primary my-2"> </md-switch>
-                        </div>
-                        <div class="col-auto p-0 pb-1" style="margin-left : -10px !important">
-                            <p class="m-0" v-if="sortAsc" key="up"> <i class="fas fa-sort-amount-up fa-fw"></i></p>
-                            <p class="m-0" v-else key="down"> <i class="fas fa-sort-amount-down fa-fw"></i></p>
-                        </div>
-                    </div>
+            <div class="col-12 p-0 d-flex flex-wrap justify-content-between">
+                <div class="col-auto p-0 order-sm-2">
+                    <md-radio class="md-primary my-2" v-model="status" value="">all</md-radio>
+                    <md-radio class="md-primary my-2" v-model="status" :value="false">active</md-radio>
+                    <md-radio class="md-primary my-2" v-model="status" :value="true">inactive</md-radio>
                 </div>
-                <div class="col-12 col-sm d-flex justify-content-sm-end p-0">
-                    <div class="col-auto p-0">
-                        <md-radio class="md-primary my-2" v-model="status" value="">all</md-radio>
-                        <md-radio class="md-primary my-2" v-model="status" :value="false">active</md-radio>
-                        <md-radio class="md-primary my-2" v-model="status" :value="true">inactive</md-radio>
+                <div class="col-auto p-0 order-sm-1">
+                    <div class="d-none d-sm-block">
+                        <div class="d-flex align-items-center" >
+                            <div class="col-auto p-0">
+                                <md-checkbox class="md-primary my-2" v-model="showAll">Show All</md-checkbox>
+                            </div>
+                            <div class="col-auto px-4 pb-1 d-flex align-items-center">
+                                <div class="col-auto p-0">
+                                    <md-switch v-model="sortAsc" class="md-primary my-2"> </md-switch>
+                                </div>
+                                <div class="col-auto p-0 pb-1" style="margin-left : -10px !important">
+                                    <p class="m-0" v-if="sortAsc" key="up"> <i class="fas fa-sort-amount-up fa-fw"></i></p>
+                                    <p class="m-0" v-else key="down"> <i class="fas fa-sort-amount-down fa-fw"></i></p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

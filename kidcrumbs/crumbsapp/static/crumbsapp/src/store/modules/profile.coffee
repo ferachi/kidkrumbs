@@ -21,7 +21,7 @@ mutations =
     #     # after the update
     #     state.profile = Object.assign {},state.profile
 
-actions = 
+actions =
     # Fetch users profile (person object)
     fetchProfile : ({commit, dispatch, state}, {id}) ->
         person = http.get(PROFILE(id))

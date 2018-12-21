@@ -15,7 +15,7 @@ class OtherAdminPersonManager(models.Manager):
 
 class ExternalPersonManager(models.Manager):
     def get_queryset(self):
-        return super(SchoolPersonManager, self).get_queryset().filter(person_school_roles__roles__name='external')
+        return super(ExternalPersonManager, self).get_queryset().filter(person_school_roles__roles__name='external')
 
 
 class NonAdminPersonManager(models.Manager):

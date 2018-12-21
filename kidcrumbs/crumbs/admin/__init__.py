@@ -7,7 +7,7 @@ from .group import GroupAdmin
 from .habit import HabitAdmin
 from .home_work import HomeWorkAdmin
 from .member import MembershipAdmin
-from .person import PersonAdmin, PersonSchoolRoleAdmin, RoleAdmin,Student
+from .person import PersonAdmin, PersonSchoolRoleAdmin, RoleAdmin,Student, ExternalPersonAdmin
 from .routine import RoutineAdmin, StudentRoutineAdmin
 from .school import SchoolAdmin
 from .session import SessionAdmin

@@ -25,14 +25,71 @@ const childRoute = {
     component : Child,
     meta : { page : "children", menuPage:true }, // if this is the first page of the sites menu navigation
     beforeEnter(to, from , next){
-        // ensuring that this routes is only accessible by parents and students
+        //TODO:
+        //  Should only allow parents of the browsed child, the child himself or teachers/admin in the childs 
+        //  'present' school to view the child.
+        
+        // get the users profile
         let profile = store.getters["profile/getProfile"];
-        let roles = profile.roles;
-        if(roles.indexOf(ROLES.EXTERNAL) > -1 || roles.indexOf(ROLES.STUDENT) > -1 ){
-            next();        
+
+        // check if this profile belongs to the child
+        if(profile.username == to.params.username){
+            next();
+            return ;
+        }
+
+        // check if it is a parent of the child
+        // find the child within users relatives
+        let child = _.find(profile.relatives, relative => {
+            return relative.username == to.params.username;
+        });
+        if(child && child.relationship_type == 'child'){
+            next();
+            return;
+        }
+        if(_.includes(profile.roles, 'kidkrumbee')){
+            next();
+            return ;
+        }
+
+        // if this user is an administrative user
+        if( _.includes(profile.roles,'administrative')){
+            // HACK:
+            // this will delay fetching of child view for teachers.
+            // there must be some better way to do this
+            store.dispatch('child/fetchChild', to.params.username).then( child => {
+                // HACK
+                // this assumes that a childs current group should be found in the 
+                // childs current school. There is no current way to find a childs
+                // current school
+                store.dispatch('child/fetchChildCurrentGroups').then(groups => {
+                    // HACK
+                    // Another assumption. the groups list contains homogenous groups.
+                    // homogenuity based on the school. i.e all the groups have the same school
+                    if(groups.length > 0){
+                        // if the user has a school role in the childs current school
+                        let school  = groups[0].school,
+                            role = _.find(profile.schoolRoles, _role => _role.school == school);
+
+                        // if this role is administrative
+                        if(!!role && _.includes(role.roles,'administrative')){
+                            next();
+                        }
+                        else{
+                            next({name:'noPermissions'});
+                        }
+                    }
+                    else{
+                        next({name:"noPermissions"});
+                    }
+                });
+            })
+            .catch(err => {
+                next({name:"noPermissions"});
+            });
         }
         else{
-            next({name:"app"});
+            next({name:"noPermissions"});
         }
     },
     children : [

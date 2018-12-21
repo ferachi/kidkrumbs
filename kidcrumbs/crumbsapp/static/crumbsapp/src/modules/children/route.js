@@ -12,8 +12,12 @@ const childrenRoute = {
         // ensuring that this routes is only accessible by parents and students
         let profile = store.getters["profile/getProfile"];
         let roles = profile.roles;
-        if(roles.indexOf(ROLES.EXTERNAL) > -1 || roles.indexOf(ROLES.STUDENT) > -1 ){
+        console.log(profile, 'profile')
+        if(roles.indexOf(ROLES.EXTERNAL) > -1){
             next();        
+        }
+        else if(roles.indexOf(ROLES.STUDENT) > -1){
+            next({name:'child', params : {username : profile.username}});        
         }
         else{
             next({name:"app"});
@@ -25,20 +29,6 @@ const childrenRoute = {
             component : ChildList,
             name : 'children',
             meta : { page : "children", menuPage:true }, // if this is the first page of the sites menu navigation
-            beforeEnter(to, from , next){
-                // ensuring that this routes is only accessible by parents and students
-                let profile = store.getters["profile/getProfile"];
-                let roles = profile.roles;
-                if(roles.indexOf(ROLES.STUDENT) > -1){
-                    next({name:'child'});        
-                }
-                else if(roles.indexOf(ROLES.EXTERNAL) > -1 ){
-                    next();        
-                }
-                else{
-                    next({name:"app"});
-                }
-            },
         },
         {
             path : ":username",

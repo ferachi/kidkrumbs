@@ -1,5 +1,5 @@
 from django.contrib import admin
-from crumbs.models import Person, Role, PersonSchoolRole, Relation, Student
+from crumbs.models import Person, Role, PersonSchoolRole, Relation, Student, ExternalPerson
 
 @admin.register(Person)
 class PersonAdmin(admin.ModelAdmin):
@@ -22,3 +22,6 @@ class RelationAdmin(admin.ModelAdmin):
 class StudentAdmin(admin.ModelAdmin):
     save_as = True
 
+@admin.register(ExternalPerson)
+class ExternalPersonAdmin(admin.ModelAdmin):
+    save_as = True

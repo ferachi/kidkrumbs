@@ -49,7 +49,7 @@ export default{
     data(){
         return {
             gradeScale : null,
-            width : 210,
+            width : 230,
             height : 6
         }
     },
@@ -79,5 +79,8 @@ export default{
 }
 </script>
 <style lang="stylus">
+#summaryLine
+    max-width 100vw
+    overflow-x auto
 </style>
 

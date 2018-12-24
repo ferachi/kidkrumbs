@@ -1,5 +1,4 @@
 mutations = 
-
     setChild : (state, child) ->
         state.child = child
 
@@ -15,9 +14,22 @@ mutations =
     setGroup : (state, group) ->
         state.group = group
 
+    setChildClassroom : (state, classroom) ->
+        if state.child
+            state.child = Object.assign {}, state.child,{classroom}
+
+
     setChildMemberships : (state, memberships)->
         if state.child
             state.child = Object.assign {}, state.child,{memberships}
+
+    setChildRelationships : (state, relationships)->
+        if state.child
+            state.child = Object.assign {}, state.child,{relationships}
+
+    setChildRelatives : (state, relatives)->
+        if state.child
+            state.child = Object.assign {}, state.child,{relatives}
 
     setChildHabits : (state, habits)->
         if state.child

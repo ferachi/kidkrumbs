@@ -8,7 +8,8 @@ from .group import GroupSerializer, StudentGroupSerializer
 from .habit import HabitSerializer, HabitOptionSerializer, HabitResponseSerializer
 from .home_work import HomeWorkSerializer
 from .membership import MembershipSerializer
-from .person import PersonSerializer, RelationSerializer, PersonSchoolRoleSerializer
+from .person import PersonSerializer, RelationSerializer, PersonSchoolRoleSerializer, PersonContactSerializer,\
+MedicalInformationSerializer
 from .routine import RoutineSerializer, StudentRoutineSerializer
 from .school import SchoolSerializer
 from .school_group import SchoolGroupSerializer

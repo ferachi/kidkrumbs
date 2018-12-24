@@ -6,7 +6,7 @@
             </slot>
         </header>
         <div class="content col-12 d-flex justify-content-center px-0">
-            <div class="col-xl-7 col-lg-8 col-12 px-0">
+            <div class="col-xl-6 col-lg-8 col-12 px-0">
                 <slot>
                     Content comes here
                 </slot>

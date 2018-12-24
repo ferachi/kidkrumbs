@@ -1,7 +1,7 @@
 <template>
     <div id="pageHeader" class="p-2" >
         <div class="d-flex justify-content-between align-items-center">
-            <div class="col-auto px-1">
+            <div class="col-10 px-1">
                 <slot name="pageTitle"></slot>
             </div>
             <div class="col-auto px-0">

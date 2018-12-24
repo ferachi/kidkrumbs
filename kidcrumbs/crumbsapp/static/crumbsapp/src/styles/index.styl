@@ -22,6 +22,7 @@ hr
 /body 
     background-color teal
     .md-select-menu.md-menu-content-bottom-start.md-menu-content-small.md-menu-content.md-theme-light 
+    .md-select-menu.md-menu-content-bottom-start.md-menu-content-small.md-menu-content.md-theme-dark 
     .md-datepicker-dialog.md-theme-default
         z-index 10000 !important
     .md-list.md-theme-default
@@ -76,6 +77,9 @@ a
     background-color shade_0 !important
     color shade_4 !important
 
+.md-button.md-theme-default.md-raised:not([disabled]).md-primary
+	background-color lighten(primary_color,50%) !important
+    
 .md-tabs.md-theme-dark .md-tabs-indicator
 .md-tabs.md-theme-light .md-tabs-indicator
     background-color primary_color !important

@@ -1,8 +1,13 @@
-import http from "../../../http";
-import {STUDENT, STUDENTS, STUDENT_MEMBERSHIPS, STUDENT_GROUPS, STUDENT_CURRENT_GROUPS, STUDENT_HABITS, STUDENT_HABITS_BY_GROUP, STUDENT_SUBJECTS, STUDENT_ENROLLMENTS, STUDENT_CLASSROOMS} from "../../../urls";
+import http from "../../../http"
+import {STUDENT, STUDENTS, STUDENT_MEMBERSHIPS, STUDENT_GROUPS, STUDENT_CURRENT_GROUPS, STUDENT_HABITS, STUDENT_HABITS_BY_GROUP, STUDENT_SUBJECTS, STUDENT_ENROLLMENTS, STUDENT_CLASSROOMS, PERSON_RELATIONSHIPS, PERSON_RELATIVES} from "../../../urls";
 
 
-fetchChild = ({commit}, username) ->
+fetchChild = ({commit, getters}, username) ->
+    child = getters.getChildByUsername(username)
+
+    if child
+        return child
+
     http.get(STUDENT(username)).then (response)->
         child = response.data
         commit 'setChild', child
@@ -14,7 +19,7 @@ fetchChild = ({commit}, username) ->
 fetchChildMemberships = ({commit, getters}) ->
     child = getters.getChild
 
-    return null unless child 
+    return null unless child
 
     http.get(STUDENT_MEMBERSHIPS(child.username)).then (response)->
         memberships = response.data
@@ -26,7 +31,7 @@ fetchChildMemberships = ({commit, getters}) ->
 fetchChildHabits = ({commit, getters}) ->
     child = getters.getChild
 
-    return null unless child 
+    return null unless child
 
     http.get(STUDENT_HABITS(child.username)).then (response)->
         habits = response.data
@@ -34,11 +39,35 @@ fetchChildHabits = ({commit, getters}) ->
         habits
     
 
+fetchChildRelationships = ({commit, getters}) ->
+    child = getters.getChild
+
+    return null unless child
+
+    http.get(PERSON_RELATIONSHIPS(child.username)).then (response)->
+        relationships = response.data
+        commit 'setChildRelationships', relationships
+        relationships
+
+fetchChildRelatives = ({commit, getters, dispatch}) ->
+    child = getters.getChild
+
+    return null unless child
+
+    Promise.all([http.get(PERSON_RELATIVES(child.username)), dispatch('fetchChildRelationships')]).then (response)->
+        relatives = _.map response[0].data, (relative) ->
+            relative.relation = _.find response[1],(relationship) ->
+                relationship.relative == relative.user
+            relative
+        relatives = _.sortBy relatives, 'names'
+        commit 'setChildRelatives', relatives
+        relatives
+
 # Fetches the currently selected childs' subjects
 fetchChildSubjects = ({commit, getters}) ->
     child = getters.getChild
 
-    return null unless child 
+    return null unless child
 
     http.get(STUDENT_SUBJECTS(child.username)).then (response)->
         subjects = response.data
@@ -51,7 +80,7 @@ fetchChildSubjects = ({commit, getters}) ->
 fetchChildEnrollments = ({commit, getters}) ->
     child = getters.getChild
 
-    return null unless child 
+    return null unless child
 
     http.get(STUDENT_ENROLLMENTS(child.username)).then (response)->
         enrollments = response.data
@@ -63,7 +92,7 @@ fetchChildEnrollments = ({commit, getters}) ->
 fetchChildHabitsByGroup = ({commit, getters}, groupId) ->
     child = getters.getChild
 
-    return null unless child 
+    return null unless child
 
     http.get(STUDENT_HABITS_BY_GROUP(child.username, groupId)).then (response)->
         habits = response.data
@@ -75,7 +104,7 @@ fetchChildHabitsByGroup = ({commit, getters}, groupId) ->
 fetchChildGroups = ({commit, getters}) ->
     child = getters.getChild
 
-    return null unless child 
+    return null unless child
 
     http.get(STUDENT_GROUPS(child.username)).then (response)->
         groups = response.data
@@ -86,7 +115,7 @@ fetchChildGroups = ({commit, getters}) ->
 fetchChildClassrooms = ({commit, getters}) ->
     child = getters.getChild
 
-    return null unless child 
+    return null unless child
 
     http.get(STUDENT_CLASSROOMS(child.username)).then (response)->
         classrooms = response.data
@@ -97,7 +126,7 @@ fetchChildClassrooms = ({commit, getters}) ->
 fetchChildResults = ({commit, getters, dispatch}) ->
     child = getters.getChild
 
-    return null unless child 
+    return null unless child
 
     dispatch("result/fetchStudentResults", child.username, {root:true}).then (results) ->
         commit 'setChildResults', results
@@ -108,7 +137,7 @@ fetchChildResults = ({commit, getters, dispatch}) ->
 fetchChildCurrentGroups = ({commit, getters}) ->
     child = getters.getChild
 
-    return null unless child 
+    return null unless child
 
     http.get(STUDENT_CURRENT_GROUPS(child.username)).then (response)->
         groups = response.data
@@ -124,12 +153,14 @@ fetchChildWithProps = ({commit, dispatch, getters, state}, username) ->
         memberships = dispatch('fetchChildMemberships')
         habits = dispatch('fetchChildHabits')
         subjects = dispatch('fetchChildSubjects')
+        relatives = dispatch('fetchChildRelatives')
         classrooms = dispatch('fetchChildClassrooms')
         results = dispatch('fetchChildResults')
 
-        Promise.all([currentGroups, groups, memberships, habits, subjects, classrooms, results]).then (props) ->
-            commit 'updateChildren', child
-            child
+
+        Promise.all([currentGroups, groups, memberships, habits, subjects, classrooms, results, relatives]).then (props) ->
+            commit 'updateChildren', state.child
+            state.child
 
 
-export {fetchChild, fetchChildGroups, fetchChildCurrentGroups, fetchChildClassrooms, fetchChildMemberships ,fetchChildHabitsByGroup, fetchChildHabits, fetchChildWithProps, fetchChildSubjects, fetchChildResults}
+export {fetchChild, fetchChildGroups, fetchChildCurrentGroups, fetchChildClassrooms, fetchChildMemberships ,fetchChildHabitsByGroup, fetchChildHabits, fetchChildWithProps, fetchChildSubjects, fetchChildResults, fetchChildRelationships, fetchChildRelatives}

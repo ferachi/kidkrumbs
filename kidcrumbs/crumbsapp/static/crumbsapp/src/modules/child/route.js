@@ -95,7 +95,7 @@ const childRoute = {
     children : [
         {
             path : '',
-            component : ChildInit,
+            component : ChildActivityList,
             name : 'child'
         },
         {
@@ -112,8 +112,8 @@ const childRoute = {
                     path : ":date",
                     component : ChildActivity,
                     name : 'activityDetailByDate',
+                    meta : {subMenu : true, subMenuName : 'childActivities'}
                 }
-
             ]
         },
         {
@@ -130,6 +130,7 @@ const childRoute = {
                     path : ":date",
                     component : ChildBehaviour,
                     name : 'childBehaviour',
+                    meta : {subMenu : true, subMenuName : 'childBehaviours'}
                 }
             ]
         },
@@ -137,6 +138,7 @@ const childRoute = {
             path : "homeworks",
             component : ChildHomework,
             name : 'childHomework',
+            meta : {subMenu : true, subMenuName : 'childHomework'}
         },
         {
             path : "menu",

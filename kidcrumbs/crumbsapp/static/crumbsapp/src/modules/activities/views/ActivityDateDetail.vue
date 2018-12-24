@@ -7,8 +7,11 @@
         <section class="activity-detail" v-if="activity">
             <activity-detail :id="activity.id"></activity-detail>
         </section>
-        <section class="detail-not-found" v-else>
-           <h1 class="display-3">Not Found</h1>  
+        <section class="detail-not-found d-flex justify-content-center align-items-center" v-else>
+            <div class="text-center col-auto">
+                <h1 class="display-2 color_2"><i class="fas fa-people-carry fa-fw"></i></h1>
+                <h3 class="color_3 text-uppercase">No Activities Today</h3>
+            </div>
         </section>
     </div>
 </template>
@@ -19,9 +22,11 @@ import activityDetail from "./ActivityDetail.vue"
 export default{
     name : "ActivityDateDetail",
     created(){
-        console.log(this.group)
-        this.activities = this.getActivitiesByGroup(this.group.id);
         this.init();
+    },
+    props:{
+        groupId : String,
+        required : true
     },
     data(){
         return {
@@ -55,6 +60,7 @@ export default{
     methods:{
         init(){
             this.date = this.$route.params.date;
+            this.activities = this.getActivitiesByGroup(this.groupId);
         }
     },
     watch : {
@@ -63,10 +69,16 @@ export default{
         },
         date(){
             this.$router.push({name : 'activityDetailByDate', params:{date: this.date}})
+        },
+        groupId(){
+            this.init();
         }
     }
 }
 </script>
 <style lang="stylus">
+#activityDateDetail
+    .detail-not-found
+        min-height 40vh
 </style>
 

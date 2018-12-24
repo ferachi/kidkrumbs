@@ -1,5 +1,8 @@
 mutations = 
 
+    setHomeworks : (state, homeworks) ->
+        state.homeworks = homeworks
+
     setHomework : (state, homework) ->
         state.homework = homework
 

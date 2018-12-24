@@ -2,10 +2,10 @@
     <div id="resultDetail">
         <transicion :isLoading="loading">
             <div>
-                <div class="d-flex py-3 align-items-center bg_0 m-1">
-
-                    <div class="col d-flex align-items-center">
-                        <div class="col-auto px-1">
+                <div class="d-flex py-3 align-items-center bg_0 m-1 flex-wrap">
+                    <div class="col d-flex align-items-center" @click="$router.push({name : 'child', params:{username :
+                    student.username}})">
+                        <div class="col-auto px-1 col-xs-12">
                             <div v-if="student.avatar" key="avatar">
                                 <md-avatar class="md-large">
                                     <img :src="student.avatar" alt="People">
@@ -22,7 +22,7 @@
                             <h6 class="color_3 m-0"> {{student.last_name}}</h6>                        
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col col-xs-12">
                         <tab-head :tabTitles="['overview', 'report']" @tab-click="tabClicked($event)"
                          justify="justify-content-end">
                             <div slot="tab" slot-scope="{tab}" class="p-2 clickable"><p class="m-0" :class="{'primary-color':tab.isActive}">{{tab.name}}</p></div>  

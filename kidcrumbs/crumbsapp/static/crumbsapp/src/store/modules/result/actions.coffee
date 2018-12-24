@@ -51,6 +51,9 @@ fetchStudentResults = ({commit,dispatch, getters}, id) ->
                 commit 'addResults', resultSet
                 resultSet
 
+        else
+            commit 'setResultSet', []
+            return []
 
 fetchReport = ({commit,getters,rootGetters}) ->
     # resultSet = getters.getResultsByStudentId(id)

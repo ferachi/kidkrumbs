@@ -2,7 +2,7 @@
     <div id="homeWorkEdit">
         <transicion :isLoading="isLoading">
             <section>
-                <homework-list :editable="true" @add-homework="addHomework" @homework-click="homeworkClicked($event)"></homework-list>
+                <homework-list :classroomId="this.classroom.id" :editable="true" @add-homework="addHomework" @homework-click="homeworkClicked($event)"></homework-list>
                 <div>
                     <modal ref="modal" :enable-mobile-fullscreen="true" :modal-theme="getTheme" :overlay-theme="getTheme">
                         <div class="d-flex justify-content-center">
@@ -75,7 +75,7 @@ export default{
         ...mapGetters('profile',{
             profile : 'getProfile'
         }),
-        session (){
+        ession (){
             return this.classroom.session;
         },
         isNew(){

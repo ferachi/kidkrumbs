@@ -1,6 +1,8 @@
 <template>
     <div id="childActivity" class="">
-        <activityDetailByDate></activityDetailByDate>
+        <h4 class="font-weight-bold">Activities</h4>
+        <hr>
+        <activityDetailByDate :groupId="classroom.id"></activityDetailByDate>
     </div>
 </template>
 <script>
@@ -17,6 +19,9 @@ export default{
     components:{
         activityDetailByDate
     },
+    computed:{
+        ...mapGetters('child', {'classroom' : 'getChildClassroom'})
+    }
 }
 </script>
 <style lang="stylus">

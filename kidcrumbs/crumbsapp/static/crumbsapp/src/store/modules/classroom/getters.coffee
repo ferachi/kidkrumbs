@@ -16,6 +16,9 @@ getters =
     getClassroomSubjects : (state) ->
         state.classroom?.subjects
 
+    getClassroomHabits : (state) ->
+        state.classroom?.habits
+
     getClassroomById : (state) -> (id) ->
         _.find(state.classrooms, {id})
 

@@ -9,6 +9,10 @@
             </div>
         </section>
         <div class="d-flex align-items-center flex-wrap">
+            <div class="col p-0">
+                <dtpicker :disable-time="true" :dark="isDark" :without-header="true" v-model="date" format="YYYY-MM-DD" :auto-close="true" formatted="dddd, MMMM DD, YYYY" label="Select date"></dtpicker>
+            <hr>
+            </div>
             <div class="col-12 p-0 d-flex flex-wrap">
                 <div class="col-12 col-sm d-flex justify-content-betwen align-items-center p-0">
                     <div class="col-auto p-0">
@@ -32,9 +36,6 @@
                     </div>
                 </div>
             </div>
-            <div class="col p-0 mt-3">
-                <dtpicker :disable-time="true" :dark="isDark" :without-header="true" v-model="date" format="YYYY-MM-DD" :auto-close="true" formatted="dddd, MMMM DD, YYYY" label="Select date"></dtpicker>
-            </div>
         </div>
         <div class="homework-list">
             <homeworks :sortOrder="sorting" :homeworks="homeworks" :date="dateChoice" @homework-click="homeworkClicked($event)"></homeworks>
@@ -50,14 +51,16 @@ import {mapGetters, mapActions} from 'vuex';
 export default{
     name : "HomeWorkList",
     created(){
-        this.fetchHomeworks().then( homeworks => {
-            this.isLoading = false;
-        });
+        this.fetchData();
     },
     props:{
         editable : {
             type : Boolean,
             default : false
+        },
+        classroomId : {
+            type : String,
+            required : true
         }
     },
     data(){
@@ -78,12 +81,16 @@ export default{
         ...mapGetters([
             'getTheme'
         ]),
+        ...mapGetters('classroom',[
+            'getClassroom',
+            'getClassroomHomeworks'
+        ]),
         ...mapGetters('homework',[
             'getHomeworks'
         ]),
         homeworks(){
-            if(this.status === '') return this.getHomeworks;
-            else return _.filter(this.getHomeworks, {isExpired : this.status})
+            if(this.status === '') return this.getClassroomHomeworks;
+            else return _.filter(this.getClassroomHomeworks, {isExpired : this.status})
         },
         isDark(){
             return this.getTheme == 'dark';
@@ -99,15 +106,24 @@ export default{
         }
     },
     methods:{
-        ...mapActions('homework',[
-            'fetchHomeworks',
-        ]),
+        ...mapActions('classroom', ['fetchClassroomHomeworks']),
+        fetchData(){
+            this.isLoading = true;
+            this.fetchClassroomHomeworks(this.classroomId).then( classroom => {
+                this.isLoading = false;
+            });
+        },
         homeworkClicked(homework){
             this.$emit('homework-click', homework);
         },
         addHomework(){
             this.$emit("add-homework");
         },
+    },
+    watch : {
+        classroomId(id){
+           this.fetchData(); 
+        }
     }
 }
 </script>

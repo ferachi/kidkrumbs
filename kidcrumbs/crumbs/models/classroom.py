@@ -35,3 +35,7 @@ class Classroom(Group):
     @property
     def full_name(self):
         return "{} - {}".format(self.group_base.full_name, self.session.session_year)
+
+    def save(self, *args, **kwargs):
+        self.group_name = self.name
+        super().save(*args, **kwargs)

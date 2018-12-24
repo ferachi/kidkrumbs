@@ -67,7 +67,7 @@ getters =
         _.maxBy getters.getResultSummary, 'score'
 
     getSessionDuration : (state,getters) ->
-        sessionDates = _.map getters.getResultSummary, 'sessionStart'
+        sessionDates = _.flatMap getters.getResultSummary,(result)-> [result.sessionStart, result.sessionEnd]
         {start : moment(_.min sessionDates).format("YYYY"), end : moment(_.max sessionDates).format("YYYY") }
 
     # gets the percentage scored per assessment type

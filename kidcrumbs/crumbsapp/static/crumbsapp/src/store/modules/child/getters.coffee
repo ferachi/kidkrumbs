@@ -34,14 +34,21 @@ getters =
             state.child.groups
 
 
+    getChildRelationships : (state) ->
+        state.child?.relationships
+
+        
+    getChildRelationships : (state) ->
+        state.child?.relatives
+
+
     getChildResults : (state) ->
         if state.child
             state.child.results
 
 
     getChildClassrooms : (state) ->
-        if state.child
-            state.child.classrooms
+        state.child?.classrooms
 
     getChildSubjects : (state) ->
         if state.child
@@ -51,12 +58,16 @@ getters =
         if state.child
             state.child.currentGroups
 
+    getChildClassroom : (state) ->
+        state.child?.classroom
+
     getCurrentClassroom : (state, getters) ->
         if state.child
             currentGroups = getters.getChildCurrentGroups
-            _.find currentGroups , (group) ->
+            group = _.find currentGroups , (group) ->
                 group.classroom isnt null
-            
+            group =if group? then group else {}
+            group
             
 
 export {getters as default}

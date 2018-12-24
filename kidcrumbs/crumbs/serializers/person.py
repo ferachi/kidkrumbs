@@ -1,5 +1,17 @@
 from rest_framework import serializers
-from crumbs.models import Person, Relation, PersonSchoolRole
+from crumbs.models import Person, Relation, PersonSchoolRole,PersonContact, MedicalInformation
+
+
+class PersonContactSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PersonContact
+        fields = '__all__'
+
+
+class MedicalInformationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MedicalInformation
+        fields = '__all__'
 
 
 class PersonSerializer(serializers.ModelSerializer):
@@ -10,11 +22,13 @@ class PersonSerializer(serializers.ModelSerializer):
     username  = serializers.CharField(read_only=True)
     email  = serializers.CharField(source="user.email", read_only=True)
     names = serializers.CharField(source="full_name", read_only=True)
+    contact = PersonContactSerializer(read_only=True)
+    medical_info = MedicalInformationSerializer(read_only=True)
 
     class Meta:
         model = Person
         fields = [ "user", "first_name","last_name","other_names","names", "username","avatar", "email", "title", "description","occupation",
-                "gender", "dob", "hobbies", "qualifications", "id"]
+                "gender", "dob", "hobbies", "qualifications", "id", "contact", "medical_info"]
 
 
 class RelationSerializer(serializers.ModelSerializer):

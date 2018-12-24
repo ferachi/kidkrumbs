@@ -28,7 +28,6 @@ class HabitResponseListSerializer(serializers.ListSerializer):
         for response_id, _response in data_mapping.items():
             response = response_mapping.get(response_id, None)
             if response is None:
-                print("is response none" , response)
                 data.append(self.child.create(_response))
             else:
                 data.append(self.child.update(response, _response))

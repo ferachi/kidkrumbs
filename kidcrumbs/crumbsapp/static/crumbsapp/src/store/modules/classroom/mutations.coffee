@@ -26,6 +26,9 @@ mutations =
 
     setClassroomMembers : (state, members)->
         state.classroom = Object.assign {},state.classroom,{members}
+        
+    setClassroomHabits : (state, habits)->
+        state.classroom = Object.assign {},state.classroom,{habits}
 
     setClassroomSubjects : (state, subjects)->
         state.classroom = Object.assign {},state.classroom,{subjects}

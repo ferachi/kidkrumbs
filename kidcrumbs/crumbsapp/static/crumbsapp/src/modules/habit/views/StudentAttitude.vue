@@ -119,7 +119,7 @@ export default{
                 let attitudes = routine.attitudes
 
                 // remap the habits to contain the attitudes w.r.t the habits' options
-                this.habits = _.sortBy(_.map(this.getGroupHabits, _habit =>{
+                this.habits = _.sortBy(_.map(_.cloneDeep(this.getGroupHabits), _habit =>{
 
                     // assign each habit its responses
                     _habit.attitudes =  _.filter(attitudes, attitude => {

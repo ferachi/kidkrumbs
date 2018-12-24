@@ -7,7 +7,9 @@
                 </nav>
             </section>
             <section class="col p-0 app-content">
+                <transition name="fade" mode="out-in">
                     <router-view></router-view>
+                </transition>
             </section>
             <section class="d-lg-none mobile-menu">
                 <nav class="border-top border_2">
@@ -41,11 +43,9 @@ export default{
         min-height 98vh
         max-height 100vh
         overflow-y hidden
-        padding-bottom 40px
+        padding-bottom 100px
     .mobile-menu
         position absolute
         bottom 0
         min-width 100vw
-
-
 </style>

@@ -6,7 +6,7 @@
 export default{
     name : "ChildActivityList",
     created(){
-        this.$router.push({name: "activityDateDetail", params : {date : moment().format("YYYY-MM-DD")}});
+        this.$router.push({name: "activityDetailByDate", params : {date : moment().format("YYYY-MM-DD")}});
     }
 }
 </script>

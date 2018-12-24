@@ -45,11 +45,10 @@ class GroupListFilter(admin.SimpleListFilter):
 
 @admin.register(Membership)
 class MembershipAdmin(admin.ModelAdmin):
-	form = MembershipAdminForm
 	raw_id_fields = ['person', 'group']
 	list_display = ['group_person', 'group_name','group_session']
 	list_filter = [GroupListFilter, 'group__session']
-	# search_fields = ['^group__name']
+	search_fields = ['^group__group_name']
 	ordering = ['person']
 
 	def group_person(self, obj):
@@ -68,41 +67,41 @@ class MembershipAdmin(admin.ModelAdmin):
 	group_session.short_description = 'session'
 
 
-	def save_model(self, request, obj, form, change):
-		if obj.group.category == 'CL':
-			# make sure the only person to have this membership to classroom is a student
-			try:
-				classroom = obj.group.classroom  # checking if the membership is for classrooms
-				# change all current memberships to false
-				if obj.is_current:
-					current_classrooms_memberships = Membership.objects.filter(group__category='CL', person=obj.person, is_current=True)
-					for membership in current_classrooms_memberships:
-						membership.is_current = False
-						membership.save()
-
-				# modify the student enrollment if person is a student
-				try:
-					student = Student.objects.get(pk=obj.person.pk)
-					courses = classroom.courses.all()
-					# for each course in the classrooms courses modify the students enrollment
-					for course in courses:
-						try:
-							enrollment = Enrollment.objects.get(student=student, course=course)
-						except Enrollment.DoesNotExist:
-							enrollment = Enrollment()
-							enrollment.student = student
-							enrollment.course = course
-							enrollment.session = obj.group.session
-							enrollment.save()
-				except Student.DoesNotExist:
-					pass
-			except Classroom.DoesNotExist:
-				pass
-
-		else:
-			if obj.is_current == True:
-				current_group_memberships = Membership.objects.filter(group__name=obj.group.name, group__category=obj.group.category, person=obj.person, is_current=True)
-				for membership in current_group_memberships:
-					membership.is_current = False
-					membership.save()
-		obj.save()
+	# def save_model(self, request, obj, form, change):
+	# 	if obj.group.category == 'CL':
+	# 		# make sure the only person to have this membership to classroom is a student
+	# 		try:
+	# 			classroom = obj.group.classroom  # checking if the membership is for classrooms
+	# 			# change all current memberships to false
+	# 			if obj.is_current:
+	# 				current_classrooms_memberships = Membership.objects.filter(group__category='CL', person=obj.person, is_current=True)
+	# 				for membership in current_classrooms_memberships:
+	# 					membership.is_current = False
+	# 					membership.save()
+        #
+	# 			# modify the student enrollment if person is a student
+	# 			try:
+	# 				student = Student.objects.get(pk=obj.person.pk)
+	# 				courses = classroom.courses.all()
+	# 				# for each course in the classrooms courses modify the students enrollment
+	# 				for course in courses:
+	# 					try:
+	# 						enrollment = Enrollment.objects.get(student=student, course=course)
+	# 					except Enrollment.DoesNotExist:
+	# 						enrollment = Enrollment()
+	# 						enrollment.student = student
+	# 						enrollment.course = course
+	# 						enrollment.session = obj.group.session
+	# 						enrollment.save()
+	# 			except Student.DoesNotExist:
+	# 				pass
+	# 		except Classroom.DoesNotExist:
+	# 			pass
+        #
+	# 	else:
+	# 		if obj.is_current == True:
+	# 			current_group_memberships = Membership.objects.filter(group__name=obj.group.name, group__category=obj.group.category, person=obj.person, is_current=True)
+	# 			for membership in current_group_memberships:
+	# 				membership.is_current = False
+	# 				membership.save()
+	# 	obj.save()

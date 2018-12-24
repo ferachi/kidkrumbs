@@ -8,7 +8,7 @@ from .habit import Habit, HabitOption, HabitResponse
 from .home_work import HomeWork
 from .member import Membership
 from .person import Person, PersonContact, PersonSchoolRole, AdminPerson, NonAdminPerson, SuperAdminPerson, \
-OtherAdminPerson, Student, Teacher, ExternalPerson, SchoolPerson, Role, Relation
+OtherAdminPerson, Student, Teacher, ExternalPerson, SchoolPerson, Role, Relation, MedicalInformation
 from .routine import Routine, StudentRoutine
 from .school import School, SchoolContact
 from .school_group import SchoolGroup, SchoolGroupBase

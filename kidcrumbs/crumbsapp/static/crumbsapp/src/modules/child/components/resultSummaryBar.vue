@@ -1,7 +1,7 @@
 <template>
-    <div id="resultSummaryBar" class="d-flex justify-content-center">
-       <div class="col-auto px-0">
-            <bar-chart title="results" :width="550" :height="300" :grading="getGrades" :data="barData" class="col-auto px-0"> </bar-chart>
+    <div id="resultSummaryBar" >
+       <div class="">
+            <bar-chart title="results" :width="600" :height="300" :grading="getGrades" :data="barData" > </bar-chart>
        </div>
     </div>
 </template>

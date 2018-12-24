@@ -1,13 +1,19 @@
 <template>
     <div id="childBehaviour" class="">
+        <h4 class="font-weight-bold">Behaviours</h4>
+        <hr>
         <section class="header">
                 <dtpicker :disable-time="true" :dark="isDark" :without-header="true" v-model="date" format="YYYY-MM-DD" :auto-close="true" formatted="dddd, MMMM DD, YYYY" label="Select date"></dtpicker>
         </section>
+        <hr>
         <section v-if="habit">
             <student-attitude :id="habit.id" :editable="false"></student-attitude>
         </section>
-        <section v-else>
-            <h1 class="display-2">No habits</h1>
+        <section v-else class="no-habit d-flex align-items-center justify-content-center">
+            <div class="text-center col-auto">
+                <h1 class="display-2 color_2"><i class="fas fa-people-carry fa-fw"></i></h1>
+                <h3 class="color_3 text-uppercase">No Behaviours Today</h3>
+            </div>
         </section>
     </div>
 </template>
@@ -32,7 +38,7 @@ export default{
             'getTheme'
         ]),
         ...mapGetters('child', [
-            'getCurrentClassroom',
+            'getChildClassroom',
             'getChildHabitsByGroup'
         ]),
         isDark(){
@@ -42,7 +48,7 @@ export default{
             return _.find(this.habits, {date : this.date});
         },
         habits() {
-            let habits = _.compact(_.map(this.getChildHabitsByGroup(this.getCurrentClassroom.id), _habit => {
+            let habits = _.compact(_.map(this.getChildHabitsByGroup(this.getChildClassroom.id), _habit => {
                 _habit.date = moment(_habit.routine.date).format("YYYY-MM-DD");   
                 // only display edited habits and routines with permissions to display. 
                 if (_habit.editted_habit && _habit.routine.public_display) 
@@ -74,5 +80,8 @@ export default{
 }
 </script>
 <style lang="stylus">
+#childBehaviour
+    .no-habit
+        min-height 40vh
 </style>
 

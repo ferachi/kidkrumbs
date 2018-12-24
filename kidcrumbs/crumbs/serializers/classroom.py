@@ -2,6 +2,7 @@ from rest_framework import serializers
 from crumbs.models import Classroom, ClassroomBase
 from .session import SessionSerializer
 from .person import PersonSerializer
+from .habit import HabitSerializer
 
 class ClassroomBaseSerializer(serializers.ModelSerializer):
     # school = serializers.CharField(source="school.slug", read_only=True)
@@ -13,6 +14,7 @@ class ClassroomBaseSerializer(serializers.ModelSerializer):
 class ClassroomSerializer(serializers.ModelSerializer):
     group_base = ClassroomBaseSerializer(read_only =True)
     session = SessionSerializer(read_only =True)
+    habits = HabitSerializer(read_only=True, many=True)
     head_teacher = PersonSerializer(read_only =True)
     className = serializers.CharField(source="name", read_only=True)
     class Meta:

@@ -12,7 +12,6 @@ const childrenRoute = {
         // ensuring that this routes is only accessible by parents and students
         let profile = store.getters["profile/getProfile"];
         let roles = profile.roles;
-        console.log(profile, 'profile')
         if(roles.indexOf(ROLES.EXTERNAL) > -1){
             next();        
         }

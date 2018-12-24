@@ -1,5 +1,7 @@
 <template>
     <div id="childSubjects">
+        <h4 class="font-weight-bold">Subjects</h4>
+        <hr>
         <subjects :subjects="subjects" @subject-click="subjectClicked($event)"></subjects>
     </div>
 </template>

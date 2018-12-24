@@ -21,7 +21,8 @@ const activitiesRoute = {
             path : "date/:date",
             component : ActivityDateDetail,
             name : 'activityDetailByDate',
-        },
+            props : { groupId : "944e18be-0b51-4ab5-a584-a87811cf1886"}
+       },
         {
             path : ":id",
             component : ActivityDetail,

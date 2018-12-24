@@ -14,7 +14,7 @@ mutations =
 
         if index is -1
             state.groups.push(group)
-        else 
+        else
             state.groups.splice(index, 1, group)
 
     setGroupStudents : (state, students)->
@@ -30,7 +30,7 @@ mutations =
         state.group?.routines = _.unionBy state.group?.routines, [routine], 'id'
 
     removeGroupRoutine : (state, routine)->
-        state.group.routines = _.differenceBy state.group.routines,[routine], 'id' 
+        state.group.routines = _.differenceBy state.group.routines,[routine], 'id'
         console.log(state.group.routines, 'routineee')
             
     setGroupHabits : (state, habits)->

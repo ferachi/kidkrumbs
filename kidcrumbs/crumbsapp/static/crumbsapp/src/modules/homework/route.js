@@ -12,7 +12,8 @@ const subjectRoute = {
         {
             path : "",
             component : HomeworkList,
-            name : 'homeworks'
+            name : 'homeworks',
+            props : { classroomId : '944e18be-0b51-4ab5-a584-a87811cf1886', editable : false }
         },
         {
             path : "assignment",

@@ -11,6 +11,8 @@ from django.core.validators import RegexValidator
 
 import uuid
 
+phone_regex = RegexValidator(regex=r'^\+?(234)?\d{9,11}$',\
+        message="Phone number to be entered in the format: '+234-XX...' or '0X0-XX'. Up to 13 digits allowed.")
 
 class Person(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, related_name='person')
@@ -24,7 +26,7 @@ class Person(models.Model):
     occupation = models.CharField(max_length=120, blank=True)
     gender = models.CharField(max_length=1, choices=GENDER, default='F')
     dob = models.DateField("date of birth", null=True, blank=True)
-    hobbies = models.CharField(max_length=300, blank=True, help_text="Specify hobbies separated by commas")
+    hobbies = models.CharField(max_length=300, blank=True, help_text="Specify hobbies seperated by commas")
     qualifications = models.CharField(max_length=150, help_text='qualifications separated with commas', blank=True)
     email_confirmed = models.BooleanField(default=False)
     relatives = models.ManyToManyField('self', through='Relation', through_fields=('person','relative'), symmetrical=False, blank=True)
@@ -53,7 +55,6 @@ class Person(models.Model):
 
 
 class PersonContact(models.Model):
-    phone_regex = RegexValidator(regex=r'^\+?(234)?\d{9,11}$', message="Phone number to be entered in the format: '+234-XX...' or '0X0-XX'. Up to 13 digits allowed.")
     person = models.OneToOneField('Person', primary_key=True, related_name='contact', on_delete=models.CASCADE)
     address_one = models.TextField("first address")
     address_two = models.TextField("second address", blank=True)
@@ -66,6 +67,19 @@ class PersonContact(models.Model):
 
     def __str__(self):
         return "contact for {}".format(self.person.full_name)
+
+class MedicalInformation(models.Model):
+    person = models.OneToOneField('Person', primary_key=True, related_name='medical_info', on_delete=models.CASCADE)
+    physician_name = models.CharField(help_text="Hospital/Physician/Clinic Name", max_length=50)
+    mobile_numbers = models.CharField(max_length=150, help_text="phone numbers seperated by commas")
+    address = models.TextField(blank=True)
+    allergies = models.TextField(blank=True, help_text="Allergies experienced seperated by commas")
+    medications = models.TextField(blank=True, help_text="Medications required seperated by commas")
+    created_date = models.DateTimeField(auto_now_add=True)
+    timestamp = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return "medical info for {}".format(self.person.full_name)
 
 
 class Role(models.Model):

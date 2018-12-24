@@ -1,5 +1,5 @@
 import http from "../../../http"
-import {CLASSROOM, SCHOOL_CLASSROOMS, CLASSROOM_MEMBERS, CLASSROOM_SUBJECTS, GROUP_STUDENTS, GROUP_HABITS, GROUP_ROUTINES, GROUP_ACTIVITIES, CLASSROOM_HOMEWORKS} from "../../../urls"
+import {CLASSROOM, SCHOOL_CLASSROOMS, CLASSROOM_MEMBERS, CLASSROOM_SUBJECTS, GROUP_STUDENTS, GROUP_HABITS, GROUP_ROUTINES, GROUP_ACTIVITIES, CLASSROOM_HOMEWORKS } from "../../../urls"
 
 
 fetchClassroom = ({dispatch,commit, getters}, id) ->
@@ -43,12 +43,24 @@ fetchClassroomHomeworks = ({dispatch, getters, commit}, id) ->
 
         http.get(CLASSROOM_HOMEWORKS(id)).then (response)->
             homeWorks = _.map response.data, (homework) ->
-                homework.isExpired = moment(homework.submission_date, "YYYY-MM-DD").isBefore(moment().format("YYYY-MM-DD"));
+                homework.isExpired = moment(homework.submission_date, "YYYY-MM-DD").isBefore(moment().format("YYYY-MM-DD"))
                 homework._name = homework.subject.name
                 homework
             commit "setClassroomHomeworks", homeWorks
+            commit "homework/setHomeworks", homeWorks, {root:true}
             homeWorks
 
+fetchClassroomHabits = ({dispatch, getters, commit}, id) ->
+    dispatch('fetchClassroom', id).then (group) ->
+        habits = getters.getClassroomHabits
+
+        if habits
+            return habits
+
+        http.get(GROUP_HABITS(id)).then (response)->
+            habits = response.data
+            commit "setClassroomHabits", habits
+            habits
 
 fetchClassroomSubjects = ({dispatch, getters, commit}, id) ->
     dispatch('fetchClassroom', id).then (classroom) ->
@@ -88,10 +100,10 @@ fetchClassroomMembers = ({dispatch, getters, commit}, id) ->
             members
 
 fetchClassroomWithProps = ({commit, dispatch, getters, state}, id) ->
-
     dispatch('fetchClassroom', id).then (classroom) ->
         activities = dispatch('fetchClassroomActivities', id)
         homeworks = dispatch('fetchClassroomHomeworks',id)
+        habits = dispatch('fetchClassroomHabits',id)
         subjects = dispatch('fetchClassroomSubjects',id)
         members = dispatch('fetchClassroomMembers',id)
         group = dispatch('group/fetchGroupWithProps', id, {root : true})
@@ -103,4 +115,4 @@ fetchClassroomWithProps = ({commit, dispatch, getters, state}, id) ->
 
 
 
-export {pullClassroom, fetchClassroom, fetchClassrooms,fetchClassroomActivities, fetchClassroomWithProps, pullClassrooms, fetchClassroomHomeworks, fetchClassroomSubjects, fetchClassroomMembers}
+export {pullClassroom, fetchClassroom, fetchClassrooms,fetchClassroomHabits, fetchClassroomActivities, fetchClassroomWithProps, pullClassrooms, fetchClassroomHomeworks, fetchClassroomSubjects, fetchClassroomMembers}

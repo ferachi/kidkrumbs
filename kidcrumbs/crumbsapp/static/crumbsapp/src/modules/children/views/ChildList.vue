@@ -48,7 +48,6 @@ export default{
             profile : "getProfile"
         }),
         children(){
-            console.log(this.profile, "dollars");
             // still confirming that this person has an external role
             if(this.profile.roles.indexOf(ROLES.EXTERNAL) > -1){
                 // get all relatives that are children

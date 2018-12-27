@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import VueRouter from 'vue-router';
 import Vue2Filters from 'vue2-filters'
 import VeeValidate from 'vee-validate';
+import {Validator} from 'vee-validate';
 import * as directives from './directives';
 import VCalendar from 'v-calendar';
 import 'v-calendar/lib/v-calendar.min.css';
@@ -17,13 +18,13 @@ import 'vue-material/dist/theme/default.css';
 import 'vue-material/dist/theme/default-dark.css';
 import './styles/material_styles.scss';
 import VueGoodTablePlugin from 'vue-good-table';
+import http from './http';
 
 // import the styles 
 import 'vue-good-table/dist/vue-good-table.css'
-
-
-
 Vue.use(VeeValidate);
+
+
 Vue.use(Vue2Filters);
 Vue.use(VModal)
 Vue.use(Toasted, {

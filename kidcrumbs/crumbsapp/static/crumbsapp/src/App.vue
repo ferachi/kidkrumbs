@@ -13,6 +13,8 @@ import {mapGetters, mapActions, mapMutations} from "vuex";
 import _ from 'lodash';
 import * as d3 from 'd3';
 import moment from 'moment';
+
+import Cropper from 'cropperjs'
 export default {
     created() {
         // get the device type on which the application runs
@@ -20,6 +22,7 @@ export default {
         // running it on the first create (before mount)
         window.moment = moment;
         window.d3 = d3;
+        window.Cropper = Cropper;
 
 
         this.getDevice().then( values =>{

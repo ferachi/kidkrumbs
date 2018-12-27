@@ -28,6 +28,7 @@ if settings.DEBUG:
 
 urlpatterns += [
     url('admin/', admin.site.urls),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url('crumbs/', include('crumbs.urls')),
     url('accounts/', include('crumbsauth.urls')),
     url(r'^', include('crumbsapp.urls', namespace="crumbsapp")),

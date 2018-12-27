@@ -1,6 +1,7 @@
 // AUTHENTICATION
 export const TOKEN = '/token/'; // direct access to token; is this secure?
-export const AUTH_USER = (id) => `/api/accounts/${id}/`; // access to the logged in user;
+export const AUTH_USER = (id) => `/api/accounts/${id}/`; // access to the logged in user.
+export const LOGOUT_USER = `/api/accounts/logout/`; // Logs out user
 
 
 // USER PROFILES
@@ -19,6 +20,9 @@ export const PERSON = (id) => `${PEOPLE}${id}/`; // route to a single person
 export const PERSON_RELATIVES = (id) => `${PERSON(id)}get_relatives/`; // gets the users relatives
 export const PERSON_RELATIONSHIPS = (id) => `${PERSON(id)}get_relationships/`; // gets the users relatives
 export const PERSON_ROLES = (id) => `${PERSON(id)}get_roles/`; // gets the users schools roles
+export const UPDATE_AVATAR = (id) => `${PERSON(id)}update_avatar/`; // updates profiles avatar
+export const UPDATE_PROFILE = (id) => `${PERSON(id)}update_profile/`; // updates the users profile
+export const CHANGE_PASSWORD = `${PEOPLE}change_password/`; // change the profiles password
 
 // STUDENTS
 export const STUDENTS = '/api/students/'; // All Students, this list differs depending on the user requesting it 

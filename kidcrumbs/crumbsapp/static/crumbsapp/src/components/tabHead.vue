@@ -13,7 +13,10 @@
 export default {
     name: "",
     created(){
-        this.tabs = this.tabTitles.map(title => ({ name : title, isActive:false}));
+        if(_.isString(this.tabTitles[0] ))
+            this.tabs = this.tabTitles.map(title => ({ name : title, isActive:false}));
+        else
+            this.tabs = this.tabTitles;
         this.tabs[0].isActive = true;
     },
     props:{

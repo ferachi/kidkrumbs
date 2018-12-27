@@ -3,7 +3,7 @@
         <!-- Mobile devices -->
         <div class="mobile d-lg-none">
             <div class="d-flex flex-wrap align-items-center">
-                <div class="col text-center " v-for="menu in menus">
+                <div class="col text-center " v-for="menu in menus" :key="menu.name">
                     <menuItem :menuItem="menu"> </menuItem>
                 </div>
             </div>
@@ -11,7 +11,7 @@
         <!-- tabs and cpus  -->
         <div class="bigscreens d-none d-lg-block">
             <div class="py-3">
-                <div class="text-center" v-for="menu in menus">
+                <div class="text-center" v-for="menu in menus" :key="menu.name">
                     <menuItem :menuItem="menu" class="mb-3"> </menuItem>
                 </div>
             </div>

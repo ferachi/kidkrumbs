@@ -9,6 +9,8 @@ state =
 mutations = 
     setProfile : (state, person) ->
         state.profile = person;
+    setProfileAvatar : (state, avatar) ->
+        state.profile =  Object.assign {}, state.profile,{avatar}
 
     # addRelation : (state, relation) ->
     #     # modify the relations

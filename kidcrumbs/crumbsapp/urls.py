@@ -1,6 +1,6 @@
 from django.conf.urls import url, include
 from .views import AppView
-from crumbsauth.views import TokenView 
+from crumbsauth.views import TokenView, LogoutView
 from crumbs.viewsets import *
 
 from rest_framework.routers import DefaultRouter
@@ -30,6 +30,7 @@ router.register(r'students', StudentViewSet)
 router.register(r'sessions', SessionViewSet)
 router.register(r'subjects', SubjectViewSet)
 router.register(r'student-routines', StudentRoutineViewSet)
+# router.register(r'validate', ValidateViewSet)
 
 urlpatterns = [
     url(r'^$', AppView.as_view(), name='home'),

@@ -25,6 +25,9 @@ const routes = [
             // before entering the application obtain the token
             store.dispatch("auth/obtainToken").then(res => {
                 next();
+            })
+            .catch(err => {
+                next({name : 'notAllowed'});   
             });
         },
         children : [
@@ -56,6 +59,11 @@ const routes = [
                 name  :'notFound'
             }
         ]
-    }
+    },
+    {
+        path:'/403',
+        component: NoPermissions,
+        name:'notAllowed'
+    },
 ]
 export default routes;

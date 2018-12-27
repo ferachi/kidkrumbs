@@ -1,4 +1,4 @@
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render, redirect
 from django.db.models import Q
 
@@ -11,6 +11,7 @@ from django.utils.http import urlsafe_base64_decode
 
 from rest_framework import status, views
 from rest_framework.response import Response
+
 
 # from .serializers import AccountSerializer
 from .tokens import account_activation_token
@@ -43,3 +44,9 @@ class TokenView(views.APIView):
     def get(self, request,format=None):
         return_obj = {'csrftoken':request.COOKIES.get('csrftoken'),'session':request.COOKIES.get('sessionid'), 'user':request.user.id, 'authenticated':request.user.is_authenticated}
         return Response(return_obj)
+
+
+class LogoutView(views.APIView):
+    def get(self, request, format=None):
+        logout(request)
+        return Response({'message' : 'Logged Out'}, status = status.HTTP_200_OK)

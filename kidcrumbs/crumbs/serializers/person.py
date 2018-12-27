@@ -29,6 +29,7 @@ class PersonSerializer(serializers.ModelSerializer):
         model = Person
         fields = [ "user", "first_name","last_name","other_names","names", "username","avatar", "email", "title", "description","occupation",
                 "gender", "dob", "hobbies", "qualifications", "id", "contact", "medical_info"]
+        extra_kwargs = {'avatar': {'read_only': True}}
 
 
 class RelationSerializer(serializers.ModelSerializer):

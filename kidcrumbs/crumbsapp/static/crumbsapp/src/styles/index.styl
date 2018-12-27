@@ -41,8 +41,6 @@ hr
     .md-list.md-theme-dark .md-selected .md-list-item-content, .md-list.md-theme-dark .router-link-exact-active .md-list-item-content
         color primary_color !important
 
-
-
 a
     &.active
         color lightblue !important
@@ -77,8 +75,6 @@ a
     background-color shade_0 !important
     color shade_4 !important
 
-.md-button.md-theme-default.md-raised:not([disabled]).md-primary
-	background-color lighten(primary_color,50%) !important
     
 .md-tabs.md-theme-dark .md-tabs-indicator
 .md-tabs.md-theme-light .md-tabs-indicator
@@ -86,14 +82,25 @@ a
     
 .md-tabs.md-theme-dark .md-tabs-navigation .md-button.md-active
 .md-tabs.md-theme-light .md-tabs-navigation .md-button.md-active
+.md-tabs.md-theme-default .md-tabs-navigation .md-button.md-active
     color primary_color !important
 
 .md-button.md-theme-light.md-raised:not([disabled]).md-primary
 .md-button.md-theme-dark.md-raised:not([disabled]).md-primary
+.md-button.md-theme-default.md-raised:not([disabled]).md-primary
     background-color primary_color !important
+
 .md-button.md-theme-light.md-raised:not([disabled]).md-primary .md-icon-font
 .md-button.md-theme-dark.md-raised:not([disabled]).md-primary .md-icon-font
     color shade_0 !important
+
+.md-button.md-theme-default.md-raised:not([disabled]).md-primary .md-icon-font
+    color whitesmoke !important
+
+.md-button.md-theme-light.md-raised:not([disabled]).md-primary .md-button-content
+.md-button.md-theme-dark.md-raised:not([disabled]).md-primary .md-button-content
+.md-button.md-theme-default.md-raised:not([disabled]).md-primary .md-button-content
+    color whitesmoke !important
 
 .md-checkbox.md-theme-default.md-checked.md-primary
     .md-checkbox-container
@@ -203,7 +210,11 @@ a
     color primary_color !important
 
 .md-button.md-theme-default.md-primary
-    color primary_color !important
+.md-button.md-theme-light.md-primary
+.md-button.md-theme-dark.md-primary
+    color shade_0 !important
+    background-color lighten(primary_color,40%) !important
+
 .md-datepicker-dialog.md-theme-default
     color primary_color !important
     background-color shade_aux !important
@@ -220,6 +231,7 @@ a
     background-color primary_color !important
     .md-icon.md-theme-default.md-icon-font
         color whitesmoke !important
+
 
 .ctk-date-time-picker .field .field-input
     background-color shade_1 !important
@@ -383,3 +395,13 @@ table.vgt-table
 	
 .vgt-table thead th.sorting-desc:after
 	border-top 6px solid primary_color !important
+    
+.sweet-modal.theme-dark
+    background shade_1 !important
+
+.sweet-modal-overlay.theme-dark
+    background rgba(25, 25, 25, 0.94) !important
+
+.sweet-modal.theme-dark .sweet-modal-icon.sweet-modal-success::before, .sweet-modal.theme-dark .sweet-modal-icon.sweet-modal-success::after, .sweet-modal.theme-dark .sweet-modal-icon.sweet-modal-success .sweet-modal-fix
+    background-color shade_1 !important
+

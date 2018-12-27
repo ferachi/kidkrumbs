@@ -1,7 +1,11 @@
+from django.contrib.auth import logout
 from rest_framework import permissions, viewsets, status
 from rest_framework import mixins
 from crumbs.serializers import AccountSerializer
 from crumbs.models import User
+from rest_framework.decorators import detail_route, list_route
+from rest_framework.response import Response
+from rest_framework import status, views
 
 
 # class AccountViewSet(viewsets.ModelViewSet):
@@ -12,3 +16,7 @@ class AccountViewSet(mixins.RetrieveModelMixin,mixins.UpdateModelMixin,viewsets.
     serializer_class = AccountSerializer
     lookup_field = 'id'
 
+    @list_route()
+    def logout(self, request, pk=None):
+        logout(request)
+        return Response({'message' : 'Logged Out'}, status = status.HTTP_200_OK)

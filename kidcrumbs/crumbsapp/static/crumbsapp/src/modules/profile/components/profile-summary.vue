@@ -10,7 +10,7 @@
                     <hr>
                     <div>
                         <h5 class="m-0 color_3">{{profile.title}}</h5>
-                        <h4 class="font-weight-bold ">{{names}}</h4>        
+                        <h4 class="font-weight-bold text-capitalize">{{names}}</h4>        
                         <p class="m-0">{{profile.description}}</p>
                         <p class="color_3">{{birthDate}}</p>
                     </div>

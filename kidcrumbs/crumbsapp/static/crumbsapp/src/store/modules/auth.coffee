@@ -1,22 +1,22 @@
-import http from "../../http";
-import {TOKEN, AUTH_USER} from "../../urls";
+import http from "../../http"
+import {TOKEN, AUTH_USER, LOGOUT_USER} from "../../urls"
 
 
 state =
     # Authenticated user
     # this differs from the users profile (person object) and is used for authentication
-    authUser : {} 
+    authUser : {}
     authCredentials : {}
 
 
-mutations = 
+mutations =
     setAuthenticatedUser : (state, user) ->
-        state.authUser = user;
+        state.authUser = user
     setAuthCredentials : (state, data) ->
-        state.authCredentials = data;
+        state.authCredentials = data
 
 
-actions = 
+actions =
     # Fetch the user account
     fetchUserAccount : ({commit, dispatch, state},{id}) ->
         http.get(AUTH_USER(id)).then (response) ->
@@ -24,7 +24,16 @@ actions =
             commit 'setAuthenticatedUser', user
 
             # Fetch the profile 
-            dispatch('profile/fetchProfile',user, {root:true}).then( (res)  => user);
+            dispatch('profile/fetchProfile',user, {root:true}).then( (res)  => user)
+   
+    # Logs out the user account
+    logout : ({commit, dispatch, state}) ->
+        http.get(LOGOUT_USER).then (response) ->
+            user = response.data
+            commit 'setAuthenticatedUser', {}
+            commit 'setAuthCredentials', {}
+            commit 'profile/setProfile', {}, {root : true}
+            response.data
 
 
     # Obtain the token for data editing
@@ -44,8 +53,8 @@ actions =
                 # the user id and sessions can be found here
                 commit 'setAuthCredentials', data
 
-                # get the account and set up the user;
-                dispatch('fetchUserAccount',{id:data.user}).then( (res)  => res);
+                # get the account and set up the user
+                dispatch('fetchUserAccount',{id:data.user}).then( (res)  => res)
 
 getters =
     getAuthUser : (state) ->

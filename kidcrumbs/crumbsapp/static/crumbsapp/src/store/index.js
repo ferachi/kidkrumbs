@@ -1,4 +1,5 @@
 import theme from './modules/theme';
+import color from './modules/color';
 import auth from './modules/auth.coffee';
 import profile from './modules/profile.coffee';
 import person from './modules/person.coffee';
@@ -37,6 +38,7 @@ export default {
         auth,
 		child,
 		classroom,
+		color,
 		grade,
 		group,
 		help,

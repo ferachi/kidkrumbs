@@ -1,6 +1,6 @@
 <template lang="html">
     <div :id='theme.app'>
-        <div id="appTheme" class="purple" v-if="!isLoading" key='app'>
+        <div id="appTheme" :class="getColor" v-if="!isLoading" key='app'>
             <router-view></router-view>
         </div>
         <div v-else key='loader'>
@@ -40,6 +40,7 @@ export default {
         ...mapGetters([
             'getTheme'
         ]),
+        ...mapGetters(['getColor'])
     },
     methods:{
         ...mapMutations([

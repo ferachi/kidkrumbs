@@ -8,6 +8,7 @@ import resultRoute from "../modules/result/route";
 import childrenRoute from "../modules/children/route";
 import classroomRoute from "../modules/classroom/route";
 import profileRoute from "../modules/profile/route";
+import moreRoute from "../modules/more/route";
 import homeworkProfile from "../modules/homework/route";
 import subjectRoute from "../modules/subject/route";
 import routineRoute from "../modules/routine/route";
@@ -39,6 +40,7 @@ const routes = [
             subjectRoute, 
             homeworkProfile, 
             routineRoute, 
+            moreRoute, 
             habitRoute, 
             activitiesRoute, 
             announcementRoute, 

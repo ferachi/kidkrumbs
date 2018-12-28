@@ -19,6 +19,21 @@ p, a, label, div, small
 
 hr
     border-top  1px solid shade_1 !important
+    
+.icon-button
+    height 40px
+    width @height
+    display flex
+    justify-content center
+    align-items center
+    border-radius 50%!important
+    background-color shade_1
+    transition background-color 0.3s ease-in-out
+    margin  0 auto !important
+    &:hover
+        background-color lighten(primary_color,75%) !important
+        span, i, svg
+            color #333 !important
 /body 
     background-color teal
     .md-select-menu.md-menu-content-bottom-start.md-menu-content-small.md-menu-content.md-theme-light 
@@ -405,3 +420,5 @@ table.vgt-table
 .sweet-modal.theme-dark .sweet-modal-icon.sweet-modal-success::before, .sweet-modal.theme-dark .sweet-modal-icon.sweet-modal-success::after, .sweet-modal.theme-dark .sweet-modal-icon.sweet-modal-success .sweet-modal-fix
     background-color shade_1 !important
 
+.sweet-modal .sweet-box-actions .sweet-action-close:hover
+    background lighten(primary_color,40%) !important

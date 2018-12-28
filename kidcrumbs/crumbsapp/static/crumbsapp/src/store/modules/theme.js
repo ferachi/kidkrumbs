@@ -1,6 +1,5 @@
-import * as types from "../mutation_types";
 const state = {
-    theme : 'dark'
+    theme : 'light'
 }
 
 const mutations = {

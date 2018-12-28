@@ -20,3 +20,10 @@ export const dashHover = Vue.directive('dash-hover',(el,binding) => {
             ev.currentTarget.style.transform = 'scale(1,1)';
         })
 })
+
+
+export const iconButton = Vue.directive('icon-button',(el,binding) => {
+    $(el).addClass('icon-button');
+    if(_.includes(_.keys(binding.modifiers), 'border'))
+            $(el).addClass('border border-width-2 border_4');
+})

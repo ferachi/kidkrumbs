@@ -4,7 +4,7 @@ import ROLES from "../../data_models/permissions";
 
 
 const moreRoute = {
-    path : '/my-menu/',
+    path : 'my-menu/',
     component : More,
     name : 'moreMenu',
     meta : { page : "moreMenu", menuPage:true },

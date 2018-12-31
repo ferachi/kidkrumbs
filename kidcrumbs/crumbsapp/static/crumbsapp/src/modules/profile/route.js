@@ -6,7 +6,7 @@ import ROLES from "../../data_models/permissions";
 
 
 const childRoute = {
-    path : '/profile/',
+    path : 'profile/',
     component : Profile,
     meta : { page : "profile", menuPage:true },
     children : [

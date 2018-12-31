@@ -13,6 +13,7 @@ import student from './modules/student';
 import subject from './modules/subject';
 import school from './modules/school';
 import homework from './modules/homework';
+import home from './modules/kidkrumb-home.coffee';
 import child from './modules/child';
 import group from './modules/group';
 import classroom from './modules/classroom';
@@ -23,7 +24,7 @@ import * as actions from './actions';
 import mutations from './mutations';
 import getters from './getters';
 const state = {
-	device:'',
+	device:{}
 }
 
 
@@ -43,6 +44,7 @@ export default {
 		group,
 		help,
         homework,
+        home,
 		menu,
         person,
         page,

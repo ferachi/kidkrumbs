@@ -13,16 +13,13 @@ fetchSchool = ({dispatch,commit, getters}, id) ->
         school
 
 
-fetchSchools = ({dispatch, getters}, schoolId) ->
-    schools = getters.getSchoolsBySchool(schoolId)
-    if schools[0]?
-        return schools
-    dispatch("pullSchools", schoolId).then (schools) ->
+fetchSchools = ({dispatch, getters, commit}) ->
+    dispatch("pullSchools").then (schools) ->
         commit 'addSchools', schools
         schools
 
 
-pullSchools = ({commit}, schoolId) ->
+pullSchools = ({commit}) ->
     http.get(SCHOOLS).then (response)->
         response.data
 

@@ -13,6 +13,7 @@ import {mapGetters, mapActions, mapMutations} from "vuex";
 import _ from 'lodash';
 import * as d3 from 'd3';
 import moment from 'moment';
+import anime from 'animejs';
 
 import Cropper from 'cropperjs'
 export default {
@@ -22,13 +23,17 @@ export default {
         // running it on the first create (before mount)
         window.moment = moment;
         window.d3 = d3;
+        window.anime = anime;
         window.Cropper = Cropper;
 
 
-        this.getDevice().then( values =>{
-            this.isLoading = false;
-            this.theme = this[this.getTheme];
-        });
+        this.manageScreen();
+        
+
+        window.addEventListener("orientationchange",this.manageScreen);
+
+        window.addEventListener('resize', this.manageScreen);
+
     },
     data(){
         return {
@@ -50,8 +55,15 @@ export default {
             "obtainToken"
         ]),
         ...mapActions([
-            "getDevice"
-        ])
+            "screenSize"
+        ]),
+        manageScreen(){
+            this.screenSize().then( screen =>{
+                this.theme = this[this.getTheme];
+                this.isLoading = false;
+                console.log(screen);
+            });
+        }
     }, 
     watch:{
         'getTheme'(val){

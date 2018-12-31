@@ -1,22 +1,31 @@
 import {SET_DEVICE} from './mutation_types';
 
-export const getDevice = ({commit}) => {
+
+export const screenSize = ({commit}) => {
     let deviceWidth = document.documentElement.clientWidth,
         deviceHeight = document.documentElement.clientHeight,
         maxDeviceDimension = deviceWidth > deviceHeight ? deviceWidth : deviceHeight,
-        deviceDimensions = {mobile:767, tab: 1024},
-        device = '';
-    if(deviceWidth <= deviceDimensions.mobile){
-        // it's a mobile
-        device = 'mobile';
+        device = {width:deviceWidth, height: deviceHeight},
+        screens = {xs : 576, sm : 768, md: 992, lg: 1200}
+    if(deviceWidth <= screens.xs){
+        // it's extra small
+        device['screen'] = 'xs';
     }
-    else if (maxDeviceDimension > deviceDimensions.mobile && maxDeviceDimension <= deviceDimensions.tab){
-        // it's a tab
-        device = 'tab';
+    else if(deviceWidth <= screens.sm){
+        // it's small
+        device['screen'] = 'sm';
+    }
+    else if(deviceWidth <= screens.md){
+        // it's medium
+        device['screen'] = 'md';
+    }
+    else if(deviceWidth <= screens.lg){
+        // it's large
+        device['screen'] = 'lg';
     }
     else{
-        // it a bigger screen
-        device = 'other';
+        // it's an extra large screen
+        device['screen'] = 'xl';
     }
     commit(SET_DEVICE,device);
     return device;

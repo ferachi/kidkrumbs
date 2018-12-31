@@ -34,7 +34,7 @@ const moreMenus = {
                 title : 'kidkrumbs',
                 icon : ` <span class="fa-layers fa-fw fa-lg" > <i class="fas fa-female" data-fa-transform="shrink-2
                 right-3"></i> <i class="fas fa-male" data-fa-transform="shrink-2 left-3"></i> </span>`,
-                link : '',
+                link : 'app',
             },
             {
                 name : 'schools',
@@ -121,6 +121,7 @@ export default {
                 menu = _.find(menus, {name : _menu.name});
             switch(menu.name){
                 case 'kidkrumbs':
+                    this.$router.push({name : menu.link});
                     break;
                 case 'schools':
                     break;

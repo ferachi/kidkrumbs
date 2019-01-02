@@ -94,8 +94,7 @@ export default{
 </script>
 <style lang="stylus">
 #siteHeader
-    .header-content
-        height 7vh
+    height 7vh
     .full-height
         .sweet-modal
             height 100% !important

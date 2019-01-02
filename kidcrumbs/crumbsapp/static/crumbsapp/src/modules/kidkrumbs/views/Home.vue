@@ -1,6 +1,5 @@
 <template>
     <div id="kidkrumbshome">
-        <transicion :isLoading='loading'>
             <div class="home" style="position:relative">
                 <section class="h-100">
                     <school-display :school="school"></school-display>
@@ -14,29 +13,19 @@
                     </div>
                 </section>
             </div>
-        </transicion>
     </div>
 </template>
 <script>
 import {mapGetters, mapActions, mapMutations} from 'vuex';
-import transicion from '../../../components/transicion.vue';
 import schoolDisplay from '../components/school-display.vue';
 import schoolPlayer from '../components/school-player.vue';
 export default{
     name : 'Home',
     created(){
-        this.fetchData();
-    },
-    data(){
-        return {
-            loading : true
-        }
     },
     components:{
-        transicion,
         schoolDisplay,
         schoolPlayer,
-
     },
     computed:{
         ...mapGetters('school', ['getSchools']),
@@ -47,13 +36,7 @@ export default{
         }
     },
     methods : {
-        ...mapActions('school', ['fetchSchools']),
         ...mapMutations('home', ['setSchool']),
-        fetchData(){
-            this.fetchSchools().then(schools => {
-                this.loading = false;
-            })
-        },
         schoolChanged(school){
             this.setSchool(school);
         },

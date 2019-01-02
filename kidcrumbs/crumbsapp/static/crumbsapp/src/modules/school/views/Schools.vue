@@ -10,6 +10,12 @@
                 <search-page></search-page>
             </section>
         </transition>
+        <section>
+            <modal ref="modal" :enable-mobile-fullscreen="true" :modal-theme="theme" :overlay-theme="theme"
+            @close="modalClosed">
+                <school-overview :school="school" @view-school="viewSchool($event)"></school-overview>
+            </modal>
+        </section>
         <section class="search-btn">
             <md-button v-if="isList" class="md-fab md-mini" @click="isList=!isList" key="search">
                 <md-icon class="fas fa-search"></md-icon>
@@ -17,11 +23,6 @@
             <md-button v-else class="md-fab md-mini" @click="isList=!isList" key="list">
                 <md-icon class="fas fa-th-large"></md-icon>
             </md-button>
-        </section>
-        <section>
-            <modal ref="modal" :enable-mobile-fullscreen="true" :modal-theme="theme" :overlay-theme="theme" >
-                <school-overview :school="school"></school-overview>
-            </modal>
         </section>
     </div>
 </template>
@@ -43,10 +44,16 @@ export default{
             return this.isList ? 'fade-up' : 'fade-down';
         }
     },
+    mounted(){
+        setTimeout(() => {
+            $(".search-btn").show();
+        }, 500);
+    },
     data(){
         return{
             isList : true,
-            school : {}
+            school : {},
+            schoolSelected : false 
         }
     },
     components:{
@@ -56,9 +63,24 @@ export default{
         modal : SweetModal
     },
     methods : {
+        ...mapMutations('home' , ['setSchool']),
         schoolClicked(school){
             this.$refs.modal.open();
             this.school = school; 
+        },
+        viewSchool(school){
+            this.schoolSelected = true;
+            this.$refs.modal.close();
+            this.setSchool(this.school);
+            $(".search-btn").hide();
+            setTimeout(()=>{
+                this.$router.push({name : 'kidkrumbsSchoolDetail', params : {id : this.school.id}});
+            },300);
+        },
+        modalClosed(){
+            if(this.schoolSelected){
+                this.schoolSelected = false;
+            }
         }
     }
 }
@@ -66,9 +88,14 @@ export default{
 
 <style lang="stylus">
 #kidkrumbSchools
+    position relative
+    top 0
+    left 0
+    min-height 85vh
     .search-btn
+        display none
         position fixed
-        bottom 60px
+        top 60px
         right 10px
 //   .schools:hover
 //     .school

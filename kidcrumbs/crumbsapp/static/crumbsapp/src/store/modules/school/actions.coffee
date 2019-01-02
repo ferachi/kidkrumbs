@@ -1,10 +1,10 @@
-import http from "../../../http";
+import http from "../../../http"
 import {SCHOOL, SCHOOLS, SCHOOL_STUDENTS, GROUP_HABITS, SCHOOL_SUBJECTS, GROUP_ACTIVITIES, GROUP_HOME_WORKS} from "../../../urls";
 
 
 fetchSchool = ({dispatch,commit, getters}, id) ->
     school = getters.getSchoolById(id)
-    if school 
+    if school
         commit('setSchool', school)
         return school
     dispatch("pullSchool", id).then (school) ->

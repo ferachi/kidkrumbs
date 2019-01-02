@@ -3,7 +3,7 @@ import Krumbs from "./views/Krumbs.vue";
 import Home from "./views/Home.vue";
 import About from "./views/About.vue";
 import Contact from "./views/Contact.vue";
-import Schools from "./views/Schools.vue";
+// import Schools from "./views/Schools.vue";
 
 import announcementRoute from "../announcement/route";
 import childRoute from "../child/route";
@@ -18,6 +18,8 @@ import routineRoute from "../routine/route";
 import habitRoute from "../habit/route";
 import playRoute from "../play/route";
 import activitiesRoute from "../activities/route";
+import schoolRoute from "../school/route";
+
 import {store} from "../../appbootstrap";
 import ROLES from "../../data_models/permissions";
 
@@ -44,12 +46,13 @@ const kidkrumbsRoute  = {
             name : 'contactKidkrumbs',
             meta : { page : "contactKidkrumbs", krumbMenu:true },
         },
-        {
-            path : 'schools',
-            component : Schools,
-            name : 'kidkrumbsSchools',
-            meta : { page : "kidkrumbsSchools", krumbMenu:true },
-        },
+        schoolRoute
+        // {
+        //     path : 'schools',
+        //     component : Schools,
+        //     name : 'kidkrumbsSchools',
+        //     meta : { page : "kidkrumbsSchools", krumbMenu:true },
+        // },
     ]
 }
 

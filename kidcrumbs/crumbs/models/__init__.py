@@ -10,7 +10,7 @@ from .member import Membership
 from .person import Person, PersonContact, PersonSchoolRole, AdminPerson, NonAdminPerson, SuperAdminPerson, \
 OtherAdminPerson, Student, Teacher, ExternalPerson, SchoolPerson, Role, Relation, MedicalInformation
 from .routine import Routine, StudentRoutine
-from .school import School, SchoolContact
+from .school import School, SchoolContact, SchoolFacility, SchoolRequirement, SchoolService
 from .school_group import SchoolGroup, SchoolGroupBase
 from .session import Session
 from .subject import CoreSubject, Subject,Syllabus, SyllabusItem, TeacherSubject 

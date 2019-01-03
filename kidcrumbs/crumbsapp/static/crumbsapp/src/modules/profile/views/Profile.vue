@@ -89,7 +89,7 @@ export default{
         },
         signOut(){
             this.logout().then( response => {
-                this.$router.push({name : 'notAllowed'});   
+                this.$router.push({name : 'app'});   
             });
         }
     }

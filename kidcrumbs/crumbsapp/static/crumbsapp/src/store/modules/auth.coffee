@@ -1,5 +1,5 @@
 import http from "../../http"
-import {TOKEN, AUTH_USER, LOGOUT_USER} from "../../urls"
+import {TOKEN, AUTH_USER, LOGOUT_USER, LOGIN} from "../../urls"
 
 
 state =
@@ -35,6 +35,10 @@ actions =
             commit 'profile/setProfile', {}, {root : true}
             response.data
 
+    login : ({commit, dispatch, state}, user) ->
+        http.post(LOGIN, user).then (response) ->
+            user = response.data
+            dispatch('fetchUserAccount',{id:user.id}).then( (res)  => res)
 
     # Obtain the token for data editing
     obtainToken : ({dispatch, commit}) ->
@@ -61,6 +65,9 @@ getters =
         state.authUser
     getAuthCredentials : (state) ->
         state.authCredentials
+    isAuthenticated: (state) ->
+        !_.isEmpty(state.authUser)
+
 
 export default {
 	namespaced : yes,

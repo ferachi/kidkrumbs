@@ -3,6 +3,7 @@ import Krumbs from "./views/Krumbs.vue";
 import Home from "./views/Home.vue";
 import About from "./views/About.vue";
 import Contact from "./views/Contact.vue";
+import Login from "./views/Login.vue";
 // import Schools from "./views/Schools.vue";
 
 import announcementRoute from "../announcement/route";
@@ -46,13 +47,13 @@ const kidkrumbsRoute  = {
             name : 'contactKidkrumbs',
             meta : { page : "contactKidkrumbs", krumbMenu:true },
         },
+        {
+            path : 'login',
+            component : Login,
+            name : 'login',
+            meta : { page : "login", krumbMenu:true },
+        },
         schoolRoute
-        // {
-        //     path : 'schools',
-        //     component : Schools,
-        //     name : 'kidkrumbsSchools',
-        //     meta : { page : "kidkrumbsSchools", krumbMenu:true },
-        // },
     ]
 }
 
@@ -60,6 +61,17 @@ const krumbsRoute = {
     path : 'krumbs',
     component : Krumbs,
     name : 'krumbs',
+    beforeEnter(to, from , next){
+        store.dispatch("auth/obtainToken").then(res => {
+            if(res)
+                next();
+            else
+                next({name : 'app'});
+        })
+        .catch(err => {
+            next({name : 'app'});   
+        });
+    },
     children : [
         playRoute, 
         childRoute, 

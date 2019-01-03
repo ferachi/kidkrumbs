@@ -40,11 +40,11 @@ export default{
     },
     computed : {
         ...mapGetters({theme : 'getTheme'}),
-        ...mapGetters('auth' ,['getAuthUser']),
+        ...mapGetters('auth' ,['isAuthenticated']),
         ...mapGetters('home' ,['getMenus']),
         menus(){
-            if(this.getAuthUser)
-                return _.filter(this.getMenus,menu => menu.name != 'logout')
+            if(this.isAuthenticated)
+                return _.filter(this.getMenus,menu => menu.name != 'login')
             else
                 return _.filter(this.getMenus,menu => menu.name != 'crumbs')
         }
@@ -58,9 +58,7 @@ export default{
             this.$refs.modal.open();
         },
         menuClick(menu){
-            if(menu.name !== "logout"){
-                this.$router.push({name:menu.link});
-            }
+            this.$router.push({name:menu.link});
         },
         ...mapMutations("page", ["setPage"]),
         watchRoute(_route){

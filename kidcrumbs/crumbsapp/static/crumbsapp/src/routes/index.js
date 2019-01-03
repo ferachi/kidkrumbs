@@ -9,15 +9,6 @@ const routes = [
     {
         path : '/',
         component : App,
-        beforeEnter(to, from , next){
-            // before entering the application obtain the token
-            store.dispatch("auth/obtainToken").then(res => {
-                next();
-            })
-            .catch(err => {
-                next();   
-            });
-        },
         children : [
             kidkrumbsRoute,
             krumbsRoute

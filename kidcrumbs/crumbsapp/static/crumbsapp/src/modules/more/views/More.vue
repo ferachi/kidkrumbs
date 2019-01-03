@@ -54,7 +54,7 @@ export default{
         ...mapActions('auth', ['logout']),
         signOut(){
             this.logout().then( response => {
-                this.$router.push({name : 'notAllowed'});   
+                this.$router.push({name : 'app'});   
             });
         }
     }

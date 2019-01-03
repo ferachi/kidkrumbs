@@ -2,6 +2,7 @@
 export const TOKEN = '/token/'; // direct access to token; is this secure?
 export const AUTH_USER = (id) => `/api/accounts/${id}/`; // access to the logged in user.
 export const LOGOUT_USER = `/api/accounts/logout/`; // Logs out user
+export const LOGIN = `/api/accounts/login_user/`; // Logs out user
 
 
 // USER PROFILES

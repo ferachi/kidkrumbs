@@ -1,6 +1,5 @@
 <template>
     <div id="AnnouncementList">
-        <h3>Announcements</h3>
             <section id="announcementList">
                 <announcements :announcements="announcements" @announcement-click="annoucementClicked($event)"></announcements>
             </section>
@@ -10,7 +9,7 @@
                     <div class="d-flex justify-content-center"  v-if="announcement">
                         <div class="col px-0 col-lg-11 py-2 text-left">
                             <div>
-                                <h4 class="font-weight-bold">{{announcement.title}}</h4>
+                                <h4 class="font-weight-bold text-capitalize">{{announcement.title}}</h4>
                                 <p>{{announcement.content}}</p> 
                                 <p><small class="color_3"> announcer : {{announcement.announcer.names}}</small></p>                    
                             </div>

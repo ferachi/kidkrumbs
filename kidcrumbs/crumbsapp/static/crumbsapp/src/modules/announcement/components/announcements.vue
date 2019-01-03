@@ -1,19 +1,24 @@
 <template>
     <div class="announcements">
+        <h3 class="font-weight-bold text-uppercase m-0 color_4 text-center">Announcements</h3>
         <search-list :items="announcements" :search="search" :searchFields="['title', 'content','overview']">
-            <section slot="controls"> 
+            <section slot="controls" class="d-flex justify-content-center"> 
+                <div class="col-xl-6 col-lg-8 col-12">
                 <md-field>
-                    <label >search</label>
+                    <label><i class="fas fa-search fa-fw"></i> search announcements</label>
                     <md-input v-model='search'></md-input>
                 </md-field>
+                </div>
             </section>
             <section slot="items" slot-scope="{items}">
-                <div class="card-columns">
-                    <div class="card" v-for="announcement in items" @click="$emit('announcement-click',announcement)">
-                        <div class="card-body">
-                            <h6 class="card-title font-weight-bold">{{announcement.title}}</h6>
-                            <h6 class="card-subtitle mb-2 color_3"><small>{{announcement.school}}</small></h6>
-                            <p class="card-text">{{announcement.overview}}</p>
+                <div class="d-flex flex-wrap">
+                    <div class="clickable col-xl-3 col-lg-4 col-12 bg_0 py-3 border border_aux announcement" v-for="announcement in items" @click="$emit('announcement-click',announcement)">
+                        <div class="d-flex h-100 align-items-center">
+                            <div class="col text-center">
+                                <h6 class="m-0 "><small class="color_3">{{announcement.school}}</small></h6>
+                                <h6 class="ont-weight-bold text-capitalize">{{announcement.title}}</h6>
+                                <p class="">{{announcement.overview}}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -42,5 +47,8 @@ export default{
 }
 </script>
 <style lang="stylus">
+.announcements
+    .announcement
+        min-height 200px
 
 </style>

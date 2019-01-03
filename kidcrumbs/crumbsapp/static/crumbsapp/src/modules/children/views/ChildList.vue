@@ -16,10 +16,8 @@
                         <h3 class="font-weight-bold text-uppercase m-0 color_4">My Children</h3>
                     </div>
                     <div class="col-auto p-0">
-                        <h1 class="m-0 font-weight-bold color_5 display-3 text-right" style="margin-bottom : -15px
-                        !important; margin-top:-15px !important;">{{childCount}}</h1>
-                        <p class="m-0 color_3" style="margin-top:-5px !important">{{childCount |
-                        pluralize('child','children')}}</p>
+                        <h1 class="m-0 font-weight-bold color_5 display-3 text-right" style="margin-bottom : -15px !important; margin-top:-15px !important;">{{childCount}}</h1>
+                        <p class="m-0 color_3" style="margin-top:-5px !important">{{childCount | pluralize('child','children')}}</p>
                     </div>
                 </div>
                 </section>

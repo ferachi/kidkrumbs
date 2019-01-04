@@ -2,11 +2,11 @@ import ROLES from '../../data_models/permissions'
 import MenuItem from '../../component_models/menu'
 
 menus = [
-    new MenuItem 0, "Me", "me", "children", "far fa-heart fa-sm fa-fw", [ROLES.STUDENT]
-    new MenuItem 1, "Children", "children", "children", "far fa-grin-squint fa-sm fa-fw", [ROLES.EXTERNAL]
-    new MenuItem 2, "Class", "classroom", "classrooms", "fas fa-sm fa-chalkboard fa-fw", [ROLES.ADMINISTRATIVE]
-    new MenuItem 3, "News", "news", "news", "far fa-bell fa-sm fa-fw", [ROLES.STUDENT,ROLES.ADMINISTRATIVE, ROLES.EXTERNAL]
-    new MenuItem 4, "Profile", "profile", "profile", "far fa-user fa-sm fa-fw", [ROLES.STUDENT,ROLES.ADMINISTRATIVE, ROLES.EXTERNAL]
+    new MenuItem 0, "Profile", "profile", "profile", "far fa-user fa-sm fa-fw", [ROLES.STUDENT,ROLES.ADMINISTRATIVE, ROLES.EXTERNAL]
+    new MenuItem 1, "Me", "me", "children", "far fa-heart fa-sm fa-fw", [ROLES.STUDENT]
+    new MenuItem 2, "Children", "children", "children", "far fa-grin-squint fa-sm fa-fw", [ROLES.EXTERNAL]
+    new MenuItem 3, "Class", "classroom", "classrooms", "fas fa-sm fa-chalkboard fa-fw", [ROLES.ADMINISTRATIVE]
+    new MenuItem 4, "News", "news", "news", "far fa-bell fa-sm fa-fw", [ROLES.STUDENT,ROLES.ADMINISTRATIVE, ROLES.EXTERNAL]
     new MenuItem 5, "More", "more", "moreMenu", "fas fa-bars fa-sm fa-fw", [ROLES.STUDENT,ROLES.ADMINISTRATIVE, ROLES.EXTERNAL]
 ]
     

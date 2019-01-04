@@ -15,6 +15,7 @@ import profileRoute from "../profile/route";
 import moreRoute from "../more/route";
 import homeworkProfile from "../homework/route";
 import subjectRoute from "../subject/route";
+import studentRoute from "../student/route";
 import routineRoute from "../routine/route";
 import habitRoute from "../habit/route";
 import playRoute from "../play/route";
@@ -82,6 +83,7 @@ const krumbsRoute = {
         homeworkProfile, 
         routineRoute, 
         moreRoute, 
+        studentRoute, 
         habitRoute, 
         activitiesRoute, 
         announcementRoute, 

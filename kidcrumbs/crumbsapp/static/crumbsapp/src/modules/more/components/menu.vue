@@ -40,7 +40,7 @@ const moreMenus = {
                 name : 'schools',
                 title : 'schools',
                 icon:`<span class="fas fa-school fa-fw fa-lg"></span>`,
-                link : ''
+                link : 'kidkrumbsSchools'
             }
         ],
         administration : [
@@ -60,7 +60,7 @@ const moreMenus = {
                 name : 'students',
                 title : 'students',
                 icon:`<span class="fas fa-user-graduate fa-fw fa-lg"></span`,
-                link : ''
+                link : 'students'
             },
 
         ],
@@ -124,6 +124,7 @@ export default {
                     this.$router.push({name : menu.link});
                     break;
                 case 'schools':
+                    this.$router.push({name : menu.link});
                     break;
                 case 'admin':
                     break;
@@ -131,6 +132,7 @@ export default {
                     this.$router.push({name : 'results'})
                     break;
                 case 'students':
+                    this.$router.push({name : menu.link});
                     break;
                 case 'aboutus':
                     this.view = menu.name;

@@ -9,6 +9,7 @@ import Login from "./views/Login.vue";
 import announcementRoute from "../announcement/route";
 import childRoute from "../child/route";
 import resultRoute from "../result/route";
+import assessmentRoute from "../assessment/route";
 import childrenRoute from "../children/route";
 import classroomRoute from "../classroom/route";
 import profileRoute from "../profile/route";
@@ -77,6 +78,7 @@ const krumbsRoute = {
         playRoute, 
         childRoute, 
         classroomRoute, 
+        assessmentRoute, 
         resultRoute, 
         profileRoute, 
         subjectRoute, 

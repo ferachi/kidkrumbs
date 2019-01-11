@@ -1,12 +1,14 @@
 import theme from './modules/theme';
 import color from './modules/color';
 import auth from './modules/auth.coffee';
+import assessment from './modules/assessment';
 import profile from './modules/profile.coffee';
 import person from './modules/person.coffee';
 import result from './modules/result';
 import grade from './modules/grades.coffee';
 import page from './modules/page.coffee';
 import session from './modules/session.coffee';
+import term from './modules/term.coffee';
 import help from './modules/help.coffee';
 import announcement from './modules/announcement';
 import student from './modules/student';
@@ -36,6 +38,7 @@ export default {
 	modules:{
         activity,
         announcement,
+        assessment,
         auth,
 		child,
 		classroom,
@@ -53,6 +56,7 @@ export default {
         routine,
         school,
         session,
+        term,
         subject,
         student,
 		theme,

@@ -54,7 +54,7 @@ const moreMenus = {
                 name : 'results',
                 title : 'results',
                 icon:`<span class="fas fa-chart-pie fa-fw fa-lg"></span`,
-                link : ''
+                link : 'assessments'
             },
             {
                 name : 'students',
@@ -129,7 +129,7 @@ export default {
                 case 'admin':
                     break;
                 case 'results':
-                    this.$router.push({name : 'results'})
+                    this.$router.push({name : menu.link})
                     break;
                 case 'students':
                     this.$router.push({name : menu.link});

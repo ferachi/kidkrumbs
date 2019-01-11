@@ -3,8 +3,10 @@ from rest_framework import mixins
 from rest_framework.response import Response
 from rest_framework.decorators import detail_route, list_route
 from crumbs.serializers import SchoolSerializer, GroupSerializer, SubjectSerializer, GradeSystemSerializer,\
-        StudentSerializer, ClassroomSerializer,SessionSerializer
-from crumbs.models import School, Group, Subject, GradeSystem, Session, Student, Classroom,Session
+        StudentSerializer, ClassroomSerializer,SessionSerializer, EnrollmentSerializer,AssessmentDetailSerializer,\
+        TermSerializer
+from crumbs.models import School, Group, Subject, GradeSystem, Session, Student, Classroom,Session, \
+Enrollment,Assessment,Term
 
 
 
@@ -23,6 +25,16 @@ class SchoolViewSet(viewsets.ModelViewSet):
         return Response(serializer.data)
 
     @detail_route()
+    def get_terms(self, request, pk=None):
+        """
+        Gets the Schools' Terms
+        """
+        school = self.get_object()
+        terms = Term.objects.filter(session__school=school)
+        serializer = TermSerializer(terms, many=True)
+        return Response(serializer.data)
+
+    @detail_route()
     def get_groups(self, request, pk=None):
         """
         Gets the Schools' groups
@@ -30,6 +42,26 @@ class SchoolViewSet(viewsets.ModelViewSet):
         school = self.get_object()
         groups = Group.objects.filter(session__school=school)
         serializer = GroupSerializer(groups, many=True)
+        return Response(serializer.data)
+
+    @detail_route()
+    def get_enrollments(self, request, pk=None):
+        """
+        Gets the Schools' enrollments
+        """
+        school = self.get_object()
+        enrollments = Enrollment.objects.filter(subject__core_subject__school=school)
+        serializer = EnrollmentSerializer(enrollments, many=True)
+        return Response(serializer.data)
+
+    @detail_route()
+    def get_assessments(self, request, pk=None):
+        """
+        Gets the Schools' assessments
+        """
+        school = self.get_object()
+        assessments = Assessment.objects.filter(subject__core_subject__school=school)
+        serializer = AssessmentDetailSerializer(assessments, many=True)
         return Response(serializer.data)
 
     @detail_route()

@@ -36,9 +36,10 @@ actions =
             response.data
 
     login : ({commit, dispatch, state}, user) ->
-        http.post(LOGIN, user).then (response) ->
-            user = response.data
-            dispatch('fetchUserAccount',{id:user.id}).then( (res)  => res)
+        dispatch('obtainToken').then (res) ->
+            http.post(LOGIN, user).then (response) ->
+                user = response.data
+                dispatch('fetchUserAccount',{id:user.id}).then( (res)  => res)
 
     # Obtain the token for data editing
     obtainToken : ({dispatch, commit}) ->

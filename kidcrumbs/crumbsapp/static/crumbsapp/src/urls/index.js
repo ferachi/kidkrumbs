@@ -73,8 +73,11 @@ export const CLASSROOM_MEMBERS = (id) => `${CLASSROOM(id)}get_members/`; // rout
 export const SCHOOLS = '/api/schools/'; // All Schools, this list differs depending on the user requesting it
 export const SCHOOL = (id) => `${SCHOOLS}${id}/`; // route to a single school
 export const SCHOOL_CLASSROOMS = (id) => `${SCHOOL(id)}get_classrooms/`; // route to a schools classrooms
+export const SCHOOL_ENROLLMENTS = (id) => `${SCHOOL(id)}get_enrollments/`; // gets a schools enrollment
+export const SCHOOL_ASSESSMENTS = (id) => `${SCHOOL(id)}get_assessments/`; // gets a schools' assessments
 export const SCHOOL_SUBJECTS = (id) => `${SCHOOL(id)}get_subjects/`; // route to a schools subjects
-export const SCHOOL_SESSIONS = (id) => `${SCHOOL(id)}get_sessions/`; // route to a schools subjects
+export const SCHOOL_TERMS = (id) => `${SCHOOL(id)}get_terms/`; // route to a schools terms
+export const SCHOOL_SESSIONS = (id) => `${SCHOOL(id)}get_sessions/`; // route to a schools sessions
 export const SCHOOL_STUDENTS = (id) => `${SCHOOL(id)}get_current_students/`; // route to a schools students
 export const SCHOOL_GROUPS = (id) => `${SCHOOL(id)}get_groups/`; // route to a schools groups
 export const SCHOOL_GRADE_SYSTEM = (id) => `${SCHOOL(id)}get_grade_system/`; // route to a schools groups
@@ -105,4 +108,7 @@ export const ANNOUNCEMENT = (id) => `${ANNOUNCEMENTS}${id}/`;
 export const SESSIONS = '/api/sessions/';
 export const SESSION = (id) => `${SESSIONS}${id}/`;
 
+
+//RESULTS
+export const ASSESSMENT_RESULTS = '/api/results/';
 

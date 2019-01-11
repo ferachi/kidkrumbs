@@ -61,7 +61,6 @@ export default {
             this.screenSize().then( screen =>{
                 this.theme = this[this.getTheme];
                 this.isLoading = false;
-                console.log(screen);
             });
         }
     }, 

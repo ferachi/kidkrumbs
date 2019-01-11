@@ -1,15 +1,17 @@
-import Student from "./views/Student.vue";
-import StudentInit from "./views/StudentInit.vue";
+import Assessment from "./views/Assessment.vue";
+import AssessmentDetail from "./views/AssessmentDetail.vue";
+import AssessmentRedirect from "./views/AssessmentRedirect.vue";
+import AssessmentView from "./views/AssessmentView.vue";
 import SelectSchool from "./views/SelectSchool.vue";
-import StudentList from "./views/StudentList.vue";
+import SelectAssessment from "./views/SelectPage.vue";
 import {store} from "../../appbootstrap";
 import ROLES from "../../data_models/permissions";
 
 
 const studentRoute = {
-    path : 'students/',
-    component : Student,
-    meta : { page : "students", menuPage:true },
+    path : 'assessments/',
+    component : Assessment,
+    meta : { page : "assessments", menuPage:true },
     beforeEnter(to, from , next){
         // who has permissions here?
         next();
@@ -17,8 +19,8 @@ const studentRoute = {
     children : [
         {
             path : '',
-            component : StudentInit,
-            name : 'students',
+            component : AssessmentRedirect,
+            name : 'assessments',
             beforeEnter(to, from , next){
                 // if this user has more than a single administrative role 
                 // in application redirect user to choose a school first 
@@ -29,7 +31,7 @@ const studentRoute = {
 
                 let profile = store.getters["profile/getProfile"];
 
-                if(profile.roles.length == 0) next({name : 'noPermissions'});
+                if(profile.roles.length == 0) next({name : 'app'});
 
                 // if this user has no administrative role
                 if(profile.roles.findIndex((role) => _.some( administrativeRoles, (ar) => ar == role)) == -1){
@@ -46,20 +48,31 @@ const studentRoute = {
 
                 // if user has more than a single administrative role redirect to selecting a school for which they want
                 // to view student else just show a list of students from his school
-                if(userAdminRoles.length > 1) next({name  : 'selectSchoolStudent'});
-                else next({name : 'studentList'});
+                if(userAdminRoles.length > 1) next({name  : 'selectAssessmentSchool'});
+                else next({name : 'selectAssessmentView'});
 
             }
         },
         {
-            path : 'list/:schoolId',
-            component : StudentList,
-            name : 'studentList'
-        },
-        {
             path : 'schools',
             component : SelectSchool,
-            name : 'selectSchoolStudent'
+            name : 'selectAssessmentSchool'
+        },
+        {
+            path : ':schoolId',
+            component : AssessmentView,
+            children : [
+                {
+                    path : '',
+                    component : SelectAssessment,
+                    name : 'selectAssessmentView'
+                },
+                {
+                    path : 'table',
+                    component : AssessmentDetail,
+                    name : 'assessmentDetail'
+                },
+            ]
         },
     ]
 }

@@ -81,7 +81,7 @@ themify()
 #app
     :global
         // list of colors 
-        colors = 'blue' 'pink' 'purple' 'red' 'green' 'orange' 'teal'
+        colors = 'dodgerblue' 'deeppink' 'purple' 'red' 'green' 'orange' 'teal'
 
         // for each color create an app theme selector to call themify on
         for color in colors
@@ -98,7 +98,7 @@ themify()
 #app
     :global
         // list of colors 
-        colors = 'blue' 'pink' 'purple' 'red' 'green' 'orange' 'teal'
+        colors = 'dodgerblue' 'deeppink' 'purple' 'red' 'green' 'orange' 'teal'
 
         // for each color create an app theme selector to call themify on
         for color in colors

@@ -1,59 +1,48 @@
 <template>
-    <div id="subjectDetail" class="bg_0 border border_1">
-        <transition name="fade" mode="out-in">
-        <div v-if="isLoading" class="loading d-flex align-items-center justify-content-center" key="loading">
-            <self-building-square-spinner :animation-duration="6000" :size="40" :color="'#ff1d5e'" />
-        </div>
-        <div v-else key="loaded">
-            <section class="header d-flex align-items-center flex-wrap" >
-                <div class="col-auto first-char d-flex justify-content-center align-items-center" :style="{background:color}">
-                    <div class="text-center">
-                        <h1 class="display-1 rammeto m-0 color_white" >{{firstChar}}</h1>
-                        <div class="d-xs-block d-sm-none">
-                            <h2 class="font-weight-bold m-0 righteous color_white"> {{subject.name}}</h2>
-                            <h5 class="m-0 font-weight-bold "><span class="color_white">{{subject.subject_code}} {{subject.session}}</span></h5>
-                        </div>
-                    </div>
+    <div id="subjectDetail" class="bg_0 ">
+        <transicion :isLoading="loading">
+            <section class='text-center'>
+                <div class="subject-caption bg_1 mx-auto text-center rounded-circle d-flex align-items-center
+                    justify-content-center" >
+                    <h1 class=" m-0 display-3 font-weight-bold" :style="{color:` ${color} !important`}">{{firstChar}}</h1>
                 </div>
-                <div class="col d-none d-sm-block">
-                    <h2 class="font-weight-bold m-0 righteous"> {{subject.name}}</h2>
-                    <h5 class="m-0 font-weight-bold "><span class="color_3">{{subject.subject_code}} {{subject.session}}</span></h5>
-                    <p>{{subject.overview}}</p>
-                </div>
+                <h4 class="mt-3 m-0 font-weight-bold text-uppercase">{{subject.name}}</h4>
+                <p class="m-0"><span class="color_3">{{subject.core_subject.name}} - {{subject.session}}</span></p>
             </section>
+            <hr>
             <section class="menus">
                 <div class="d-flex align-items-center  col-12 justify-content-around mt-3">
-                    <router-link class="col p-0 m-0 text-center color_0" :to="{name:'subjectDetail'}"><small
-                                 class="primary-color">About</small></router-link>
-                         <router-link class="col p-0 text-center color_0" :to="{name:'subjectSyllabus'}"><small
-                                      class="color_5 font-weight-bold"><u>Syllabus</u></small></router-link>
-                         <router-link class="col p-0 text-center color_0" :to="{name:'subjectTeacher'}"><small
-                                      class="primary-color">Teachers</small></router-link>
-                              <router-link class="col p-0 text-center color_0" :to="{name:'subjectResult'}"><small
-                                      class="primary-color">Results</small></router-link>
+                    <router-link v-for="menu in menus" :key="menu.name"
+                     class="col p-0 m-0 text-center color_0" :to="{name:menu.link}"><small
+                     class="primary-color" :style="{color : menu.isActive ? `${subject.color} !important` : ''}">{{menu.title}}</small></router-link>
                 </div>
-                <hr>
             </section>
-            <section class="p-3 sub-views">
-                <transition name="fade-right" mode="out-in">
-                
-                <router-view></router-view>
+                <hr/>
+            <section class="px-lg-2 px-xl-4">
+                <transition name="fade-up" mode="out-in">
+                    <router-view></router-view>
                 </transition>
             </section>
-        </div>
-        </transition>
+        </transicion>
     </div>
 </template>
 <script>
 import {mapActions, mapGetters} from 'vuex';
-import {SelfBuildingSquareSpinner} from 'epic-spinners';
+import transicion from '../../../components/transicion.vue';
+let menus = [
+    { name : '', title : 'About', link : 'subjectDetail', isActive:true},
+    { name : 'syllabus', title : 'Syllabus', link : 'subjectSyllabus', isActive:false},
+    { name : 'teachers', title : 'Teachers', link : 'subjectTeacher', isActive:false},
+    { name : 'results', title : 'Results', link : 'subjectResult', isActive:false}
+]
 export default{
     name : "SubjectDetail",
     created(){
         this.init();
+        this.activateRoute();
     },
     components:{
-        SelfBuildingSquareSpinner
+        transicion
     },
     computed:{
         firstChar(){
@@ -65,8 +54,9 @@ export default{
     },
     data(){
         return {
-            subject:null,
-            isLoading : true
+            subject:{name:'', core_subject:{}},
+            loading : true,
+            menus : menus
         }
     },
     methods:{
@@ -76,25 +66,30 @@ export default{
         init(){
             this.fetchSubject(this.$route.params.id).then( subject => {
                 this.subject = subject;
-                this.isLoading = false;
+                this.loading = false;
             });
+        },
+        activateRoute(){
+            let menu = _.find(this.menus, menu => menu.link == this.$route.name)
+            this.menus.forEach(menu => { menu.isActive = false; });
+            menu.isActive = true;
         }
     },
     watch:{
-        '$route'(){
-            this.init();
+        '$route'(val){
+            this.activateRoute();
         }
     }
 }
 </script>
 <style lang="stylus">
 #subjectDetail
-    .first-char
-        width 250px
+    .subject-caption
+        width 100px
         height @width
-        @media screen and (max-width: 600px)
-            width 100vw
-            height @width
+        //@media screen and (max-width: 600px)
+        //    width 100vw
+        //    height @width
     .sub-views
         min-height 75vh
         max-height 75vh

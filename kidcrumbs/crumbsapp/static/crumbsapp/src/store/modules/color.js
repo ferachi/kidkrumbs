@@ -1,6 +1,6 @@
 const state = {
-    colors:['blue','pink','purple','red','green','orange','teal'],
-    color : 'teal'
+    colors:['dodgerblue','deeppink','purple','red','green','orange','teal'],
+    color : 'dodgerblue'
 }
 
 const mutations = {

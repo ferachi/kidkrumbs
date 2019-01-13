@@ -1,5 +1,5 @@
 const state = {
-    theme : 'light'
+    theme : 'dark'
 }
 
 const mutations = {

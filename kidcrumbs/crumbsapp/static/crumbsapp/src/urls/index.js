@@ -95,6 +95,7 @@ export const ATTITUDES = '/api/attitudes/';
 // ROUTINES
 export const SUBJECTS = '/api/subjects/';
 export const SUBJECT = (id) => `${SUBJECTS}${id}/`;
+export const SUBJECT_RESULTS = (id) => `${SUBJECT(id)}get_results/`;
 
 // ROUTINES
 export const HOMEWORKS = '/api/home-works/';

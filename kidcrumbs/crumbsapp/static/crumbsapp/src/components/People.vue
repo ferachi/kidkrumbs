@@ -1,10 +1,10 @@
 <template>
     <div>
         <alter-list :items="people" :search="search" :searchFields="['first_name', 'last_name', 'other_names']">
-            <div slot="controls" class="d-flex justify-content-center">
+            <div slot="controls" class="d-flex justify-content-center" >
                 <div class="col-md-8">
                     <md-field>
-                        <label>Search</label>
+                        <label><i class="fas fa-fw fa-search"></i> search</label>
                         <md-input v-model="search" ></md-input>
                     </md-field>
                 </div>

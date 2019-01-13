@@ -7,7 +7,7 @@
 -->
 <template>
     <div class='search-list'>
-        <div class="list-controls" v-if="listItems.length > 0" >
+        <div class="list-controls" >
             <slot name='controls' >
             <div class="form-group">
                 <input type="text" class="form-control" id="listsearch" v-model='searchWord' placeholder="search">

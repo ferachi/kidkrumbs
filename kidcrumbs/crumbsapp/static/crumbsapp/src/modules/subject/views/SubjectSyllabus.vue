@@ -1,34 +1,28 @@
 <template>
     <div id="subjectSyllabus">
         <div v-if="syllabus">
-            <h5 class="righteous text-capitalize">{{subject.name}} Syllabus</h5>
-            <p>{{syllabus.description}}</p>
-            
+            <h4 class="font-weight-bold my-3">Syllabus</h4>
+            <p><small class="color_4">{{syllabus.description}}</small></p>
             <div>
-                <dl>
-                    <template v-for="item in syllabus.syllabus_items" >
-                        <hr>
-                        <dt class="color_5">{{item.title}} <span class="color_3"> - {{item.duration}}</span></dt>
-                        <dd>
-                        <p class="m-0">{{item.description}}</p>
-                        </dd>
-                        
-                    </template>
-                </dl>
+                <template v-for="item in syllabus.syllabus_items" >
+                    <hr>
+                    <h6 class="color_5 font-weight-bold m-0">{{item.title}} </h6>
+                    <p class="m-0"><span class="color_3">{{item.duration}}</span></p>
+                    <p class="my-3"><small class="color_4">{{item.description}}</small></p>
+                </template>
             </div>
         </div>
-        <div v-else class="empty-holder d-flex align-items-center">
-            <div class="col text-center " >
-                <h2 class="text-capitalize color_3">Oops!!!</h2>
-                <h1>
-                    <span class="color_2 fa-stack fa-4x" style="vertical-align: top;">
-                        <i class="far fa-circle fa-stack-2x"></i>
-                        <i class="fas fa-times fa-stack-1x"></i>
+        <div v-else class="d-flex justify-content-center align-items-center" > 
+            <div class="text-center col-auto py-4">
+                <h1 class="color_2 mb-5">
+                    <span class="color_2 fa-layers fa-fw fa-3x" style="vertical-align: top;">
+                        <i class="fas fa-ban" data-fa-transform="grow-7"></i>
+                        <i class="fas fa-book-open" data-fa-transform="shrink-7"></i>
                     </span>
                 </h1>
-                <h5>
-                    No syllabus for {{subject.name}}
-                </h5>
+                <h3 class="color_3 text-uppercase">No Syllabus</h3>
+                <h6 class="color_3 text-upperase" style="line-height : 1.3em !important">{{subject.name}} does not have
+                any syllabus yet</h6>
             </div>
         </div>
     </div>

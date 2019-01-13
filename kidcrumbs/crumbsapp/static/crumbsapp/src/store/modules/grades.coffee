@@ -1,12 +1,12 @@
 import http from "../../http";
 import {SCHOOL_GRADE_SYSTEM} from "../../urls"; 
 
-state = 
+state =
     gradeSystem : null
     gradeSystems : []
 
 
-mutations = 
+mutations =
     setGradeSystem : (state, gradeSystem) ->
         state.gradeSystem = gradeSystem
         
@@ -14,7 +14,7 @@ mutations =
         state.gradeSystems = _.unionBy state.gradeSystems, [gradeSystem], 'id'
 
 
-getters = 
+getters =
     getGradeSystem : (state) ->
         state.gradeSystem
 
@@ -28,7 +28,7 @@ getters =
     getGradeSystemBySchool : (state) -> (school) ->
         _.find state.gradeSystems, {school}
     
-    getGrader : (state, getters) -> 
+    getGrader : (state, getters) ->
         grades = getters.getGrades
         if grades
             grades = _.reverse(_.map(grades, 'grade'))
@@ -42,7 +42,7 @@ getters =
 
 
 
-actions = 
+actions =
     fetchGradeSystem : ({commit, getters}, schoolId) ->
         gradeSystem = getters.getGradeSystemBySchool(schoolId)
         if gradeSystem
@@ -51,8 +51,9 @@ actions =
             
         http.get(SCHOOL_GRADE_SYSTEM(schoolId)).then (response) ->
             gradeSystem = response.data
+            console.log gradeSystem
             gradeSystem.grades = _.map gradeSystem.grades, (grade) ->
-                { minScore : grade.min_value, maxScore : grade.max_value, grade : grade.grade_char, color : grade.color.toLowerCase()};
+                { minScore : grade.min_value, maxScore : grade.max_value, grade : grade.grade_char, color : grade.color.toLowerCase()}
             commit 'setGradeSystem', gradeSystem
             commit 'addGradeSystem', gradeSystem
             gradeSystem

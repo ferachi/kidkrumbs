@@ -55,7 +55,7 @@ getters =
                 studentTotal = _termResults[0].assessmentTermStudentTotal
                 score = _.sum _.map _termResults, 'score'
                 maxScore = _.sum _.map _termResults, 'assessmentMaxScore'
-                {school: school,subject:subject, term: term,score:score, subjectBase : subjectBase,session:session, 
+                {school: school,subject:subject, term: term,score:score, subjectBase : subjectBase,session:session,
                 maxScore:maxScore,subjectBase:subjectBase, subjectCode : subjectCode,
                 subjectColor:subjectColor,termEnd:termEnd, term:term, position:termPosition, studentTotal : studentTotal,
                 average:_.round(score/maxScore * 100), sessionStart, sessionEnd}

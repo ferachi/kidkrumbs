@@ -4,7 +4,8 @@ import getters from './getters.coffee';
 
 const state = {
     subjects : [],
-    subject : null
+    subject : null,
+    term : ''
 }
 
 

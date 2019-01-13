@@ -54,7 +54,7 @@ export default
 
             # arc to represent the percentage scores 
             arc = d3.arc()
-                    .innerRadius  radius * 9 / 10
+                    .innerRadius  radius * 8 / 10
                     .outerRadius radius
                     .startAngle 0
                     .endAngle (@percentage/100) * 2 * Math.PI

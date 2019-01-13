@@ -1,7 +1,8 @@
 <template>
     <div id="subjectOverview">
-        <h5 class="righteous">{{subject.name}}</h5>
-        <p>{{subject.description}}</p>
+        <h4 class="font-weight-bold my-3">About</h4>
+        <p class="">{{subject.description}}</p>
+        <p class="p-3"><span class="color_3">"{{subject.overview}}"</span></p>
     </div>
 </template>
 <script>

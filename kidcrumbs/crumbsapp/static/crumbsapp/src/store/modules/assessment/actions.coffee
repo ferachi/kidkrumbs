@@ -38,8 +38,9 @@ fetchEnrollmentResults = ({commit, dispatch}, schoolId) ->
     assessmentsPromise = dispatch 'fetchAssessments', schoolId
     enrollmentPromise = dispatch 'fetchEnrollments', schoolId
     classroomPromise = dispatch 'classroom/fetchClassrooms', schoolId, {root : true}
+    gradeSystemPromise = dispatch 'grade/fetchGradeSystem', schoolId, {root : true}
 
-    Promise.all([assessmentsPromise, enrollmentPromise, classroomPromise]).then (responses) ->
+    Promise.all([assessmentsPromise, enrollmentPromise, classroomPromise, gradeSystemPromise]).then (responses) ->
         assessments = responses[0]
         classrooms = responses[2]
         enrollments = _.map responses[1], (enrollment) ->

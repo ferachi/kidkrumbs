@@ -1,5 +1,8 @@
 
 mutations = 
+    setTerm : (state, term) ->
+        state.term = term
+
     setSubject : (state, subject) ->
         state.subject = subject
 

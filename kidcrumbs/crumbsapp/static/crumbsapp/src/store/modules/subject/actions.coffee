@@ -1,5 +1,5 @@
-import http from "../../../http";
-import {SUBJECTS, SUBJECT} from "../../../urls";
+import http from "../../../http"
+import {SUBJECTS, SUBJECT, SUBJECT_RESULTS} from "../../../urls"
 
 
 fetchSubject = ({dispatch, commit, getters}, id) ->
@@ -8,11 +8,21 @@ fetchSubject = ({dispatch, commit, getters}, id) ->
         commit 'setSubject', subject
         commit 'addSubject', subject
         return subject
-    dispatch('pullSubject', id).then (subject) ->
-        commit 'setSubject', subject
-        commit 'updateSubjects', subject
-        subject
 
+    dispatch('pullSubject', id).then (_subject) ->
+        subject = _subject
+        schoolId = subject.core_subject.school
+        gradeSystemPromise = dispatch 'grade/fetchGradeSystem', schoolId, {root : true}
+        Promise.all([dispatch('pullSubjectResults', id),gradeSystemPromise]).then (responses) ->
+            assessments = responses[0]
+            subject.assessments = assessments
+            commit 'setSubject', subject
+            commit 'updateSubjects', subject
+            subject
+
+pullSubjectResults =  ({commit}, id) ->
+    http.get(SUBJECT_RESULTS(id)).then (response)->
+        response.data
 
 pullSubject = ({commit}, id) ->
     http.get(SUBJECT(id)).then (response)->
@@ -35,4 +45,4 @@ pullSubjects = ({commit}) ->
         response.data
 
 
-export {fetchSubject, pullSubject,fetchSubjects, pullSubjects}
+export {fetchSubject, pullSubject,fetchSubjects, pullSubjects, pullSubjectResults}

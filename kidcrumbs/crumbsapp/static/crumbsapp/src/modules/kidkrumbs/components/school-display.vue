@@ -1,25 +1,33 @@
 <template>
-    <div id="schoolDisplay" class="h-100 d-flex flex-wrap p-3" :style="{background:color}" >
-        <div class="col-12 col-lg-8 order-lg-1 h-100 px-0">
-            <div class="d-flex flex-wrap h-100 align-items-center">
-                <div class="col-12 col-lg px-0 order-lg-1 text-center">
-                    <transition :name="anim" mode="out-in">
-                        <div class="icon-pane" v-if="isSchool">
-                            <h1 class="display-2" v-html="icon"></h1>
+    <div id="schoolDisplay" class="d-flex justify-content-lg-center">
+        <div class="col-12 col-lg-10 col-xl-9 px-0 ">
+            <div class="d-flex flex-wrap">
+                <div class="col-12 col-lg-6 col-xl-5 px-lg-5 text-center">
+                    <transition name="left-right" mode="out-in">
+                        <div class="mx-auto w-75" v-if="isSchool">
+                            <img :src="school.logo" :alt="school.name" class="rounded-circle image-fluid clickable"
+                            @click="goToSchool">
                         </div>
                     </transition>
                 </div>
-                <div class="col-12 col-lg px-0 order-lg-0">
+                <div class="col-12 col-lg-6">
                     <transition name="fade" mode="out-in">
                         <div class="desc-pane" v-if="isSchool">
-                            <h4 class="font-weight-bold color_black">{{name}}</h4>
-                            <p class="color_black">{{description}}</p>
+                            <div class="fade-logo d-none d-lg-block">
+                                <h1 class="m-0 color_1 font-weight-bold text-uppercase"
+                                    style="font-size:10rem;">KC {{nIndex}}</h1>
+                            </div>
+                            <div class="description pr-xl-5 py-3">
+                                <h2 class="font-weight-bold d-none d-lg-block clickable" :style="{color : `${color}
+                                    !important`}" @click="goToSchool">{{name}}</h2>
+                                <h5 class="font-weight-bold d-lg-none" :style="{color : `${color} !important`}"
+                                @click="goToSchool">{{name}}</h5>
+                                <p class="color_4" >{{description}}</p>
+                            </div>
                         </div>
                     </transition>
                 </div>
             </div>
-        </div>
-        <div class="col-lg order-lg-0">
         </div>
     </div>
 </template>
@@ -27,7 +35,7 @@
 import {mapGetters} from 'vuex';
 export default{
     name : 'SchoolDisplay',
-    props : ['school'],
+    props : ['school', 'index'],
     created(){
         this.preschool = this.school;
     },
@@ -39,7 +47,6 @@ export default{
             preschool : '',
             animIndex : -1,
             animations : ['right', 'up', 'right', 'down','upright','right', 'downright']
-
         }
     },
     computed : {
@@ -51,26 +58,28 @@ export default{
             return this.school.color;
         },
         description(){
-            return this.preschool.brief_description;
+            return this.preschool.description;
         },
         name(){
             return this.preschool.name;
         },
         anim(){
             let school = this.school;
-            //animIndex = _.random(0, animations.length-1);
 
             this.animIndex = this.animIndex + 1 == this.animations.length ? 0 : this.animIndex + 1;
             return this.animations[this.animIndex];
         },
-        icon(){
-            return `<div class="fa-2x color_white"><span class="fa-layers fa-fw">
-                <span class="fas fa-pencil-ruler" data-fa-transform="shrink-4"></span>
-                <span class="far fa-circle" data-fa-transform="grow-10"></span>
-                </span> </div>`;
+        nIndex(){
+            return (Array(2).join("0") + (this.index + 1)).slice(-2);
         }
     },
     methods : {
+        fillPad(num,len){
+            return (Array(len).join("0") + num).slice(-len);
+        },
+        goToSchool(){
+            this.$router.push({name:'kidkrumbsSchoolDetail', params:{id : this.school.id}});
+        }
     },
     watch : {
         school(newVal, oldVal){
@@ -83,23 +92,44 @@ export default{
 </script>
 <style lang='stylus'>
 #schoolDisplay
-    width 100vw
-    overflow-y auto
-    overflow-x hidden
-    transition background 0.4s ease-in-out
+    transition all 0.4s ease-in-out
+    .desc-pane
+        .description
+        .fade-logo
+            position relative
+            top 0
+            left 0
+            z-index 100
+        .fade-logo
+            top 100px
+            z-index 10
 
+    .left-right-enter-active
+    .left-right-leave-active
     .right-enter-active
     .up-enter-active
     .down-enter-active
     .upright-enter-active
     .downright-enter-active
-        transition all 0.5s
+    .right-leave-active
+    .up-leave-active
+    .down-leave-active
+    .upright-leave-active
+    .downright-leave-active
+        transition all 0.3s ease-in-out
 
     .right-enter
     .right-leave-to
         transform translateX(40px)
         opacity 0
+
+    .left-right-enter
+        transform translateX(40px)
+        opacity 0
         
+    .left-right-leave-to
+        transform translateX(-40px)
+        opacity 0
 
     .up-enter
     .up-leave-to

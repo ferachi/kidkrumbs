@@ -1,47 +1,50 @@
 <template>
     <div id="kidkrumbshome" class="px-3">
-        <div class=" home d-flex flex-wrap align-items-center justify-content-center">
-            <div class="col-12 px-0 text-center">
-                <h1 id="brand" class="display-2 brand primary-color m-0 font-weight-bold" >Kidkrumbs</h1>
-                <p class="color_3 m-0">School hub for all</p>
+        <div class=" home">
+            <div class="pt-2 text-center">
+            <h1 class="d-none d-lg-block display-4 m-0 font-weight-bold primary-color text-uppercase">KidCrumbs</h1>
+            <h3 class="d-lg-none m-0 font-weight-bold primary-color text-uppercase">KidCrumbs</h3>
+            <p class="color_3 m-0" style="margin-top : -5px !important;"> <small class="color_3">One stop school hub</small></p>
             </div>
-            <div class="px-0" style="height:45vh">
-                <section class="schools-slide text-center py-3">
-                    <schools-slide :index='index' :schools="schools" class="d-inline-block"></schools-slide>
+            <div class="d-flex flex-wrap align-items-center h-100">
+                <section class="col-lg col-12 order-lg-2 school-display">
+                    <display :school="school" :index="index"></display>
                 </section>
-                <section class="school-preview text-center py-4">
-                    <school-preview :school="school"></school-preview>
-                </section>
-                <section class="control-pane py-4">
-                    <control :schools="schools" @index-change="indexChanged($event)"> </control>
-                </section>
-
+                <div class="col-auto order-lg-1">
+                    <p class="m-0 clickable d-none d-lg-block" @click="decreaseIndex" :style="{color : `${color} !important`}"><i class="fas fa-3x fa-chevron-left"></i></p>
+                </div>
+                <div class="col-auto order-lg-3 d-flex">
+                    <p class="m-0 clickable d-none d-lg-block" @click="increaseIndex"><i class="fas fa-3x fa-chevron-right" :style="{color : `${color} !important`}"></i></p>
+                </div>
+            </div>
+            <div class="mt-4 mt-lg-0">
+                <schools-carousel :index='index' :schools="schools" :direction="direction" @click-index="setIndex($event)"></schools-carousel>
             </div>
         </div>
     </div>
 </template>
 <script>
 import {mapGetters, mapActions, mapMutations} from 'vuex';
-import schoolPreview from '../components/school-preview.vue';
-import schoolsSlide from '../components/schools-slide.vue';
-import control from '../components/schools-slide-control.vue';
+import display from '../components/school-display.vue';
+import schoolsCarousel from '../components/schools-carousel.vue';
 export default{
     name : 'Home',
     created(){
     },
     components:{
-        schoolPreview,
-        schoolsSlide,
-        control
+        display,
+        schoolsCarousel,
     },
     data(){
         return {
-            index : 0
+            index : 0,
+            direction : 'right'
         }
     },
     computed:{
-        ...mapGetters('school', ['getSchools']),
+        ...mapGetters('school', {schools:'getSchools'}),
         ...mapGetters('home', {school:'getSchool'}),
+        ...mapGetters({color:'getColor'}),
         ...mapGetters({device:'getDevice'}),
         isLarge(){
             return this.device.screen == 'lg' || this.device.screen == 'xl';
@@ -50,14 +53,21 @@ export default{
             let school = this.schools[this.index];
             return school;
         },
-        schools(){
-            let sortedSchools = _.sortBy(this.getSchools, 'name');
-            return sortedSchools 
-        }
     },
     methods : {
         ...mapMutations('home', ['setSchool']),
         indexChanged(index){
+            this.index = index;
+        },
+        increaseIndex(){
+            this.index = this.index == this.schools.length - 1 ?  0 : this.index + 1;
+            this.direction = 'right';
+        },
+        decreaseIndex(){
+            this.index = this.index == 0 ?  this.schools.length - 1 : this.index - 1;
+            this.direction = 'left';
+        },
+        setIndex(index){
             this.index = index;
         }
     }
@@ -69,13 +79,6 @@ export default{
     h1#brand.brand
         font-family 'Aclonica', 'Dosis','Muli','Roboto',Arial,sans-serif !important
     .home
-        height 85vh
-        overflow-y auto
-        #controlPane
-            position absolute
-            top 0
-            left 0
-            background rgba(240,240,240,0.1)
-            width 30vw
+        height 65vh
 
 </style>

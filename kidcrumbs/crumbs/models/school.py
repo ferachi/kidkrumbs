@@ -22,7 +22,7 @@ class School(models.Model):
     slug = models.SlugField(max_length=150, null=True, blank=True)
     short_name = models.CharField(max_length=10, unique=True, help_text="Abbreviated Name; A text composed of the first letters in school's name.")
     brief_description = models.CharField("caption",max_length=500)
-    description = models.TextField(help_text="simple description of your school")
+    description = models.TextField( max_length=200, help_text="simple description of your school")
     about = models.TextField(help_text="detailed description of your school")
     motto = models.CharField(max_length=200)
     vision = models.CharField(max_length=300)

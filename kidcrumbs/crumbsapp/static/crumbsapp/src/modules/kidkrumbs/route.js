@@ -30,6 +30,14 @@ import ROLES from "../../data_models/permissions";
 const kidkrumbsRoute  = {
     path : '',
     component : KidKrumbs,
+    beforeEnter(to, from , next){
+        store.dispatch("auth/obtainToken").then(res => {
+            next();
+        })
+        .catch(err => {
+            next({name : 'app'});   
+        });
+    },
     children : [
         {
             path : '',

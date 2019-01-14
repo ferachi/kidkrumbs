@@ -53,6 +53,9 @@ export default{
         width 100vw
         overflow-y auto
         overflow-x hidden
+        @media screen and (max-width : 768px)
+            height 93vh
+
     .site-footer
         height 8vh
 </style>

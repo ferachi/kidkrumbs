@@ -1,9 +1,9 @@
 <template>
-    <div id="siteHeader" >
-        <section class="header-content bg_0 d-flex align-items-center py-4 py-lg-2 ">
+    <div id="siteHeader"  class="py-4 py-lg-2 bg_0" >
+        <section class="header-content d-flex align-items-center h-100">
             <div class="d-flex col px-0">
                 <div class="col px-2">
-                    <h4 class="m-0 primary-color">KidCrumbs</h4>
+                    <h5 class="m-0 primary-color font-weight-bold text-uppercase">KidCrumbs</h5>
                 </div>
                 <div class="col-auto px-2">
                     <div class="d-none d-md-block">
@@ -25,6 +25,19 @@
         </section>
         <section>
             <modal ref="modal" :enable-mobile-fullscreen="true" width="100%" class="full-height" :modal-theme="theme" :overlay-theme="theme" >
+                <div>
+                    <section class="mobile-menu d-flex align-items-center">
+                        <div class="col text-center">
+                        <div v-for="menu in menus":key="menu.name" class="my-3">
+                            <div @click="mobileMenuClick(menu)"><h3 class="color_3 text-capitalize" :class="{'primary-color' :menu.isActive}">{{menu.title}}</h3></div>
+                        </div>
+                        </div>
+                    </section>
+                    <section class="text-center">
+                        <small class="m-0 color_3">created by  <span class="fas fa-frog fa-fw primary-color"></span>
+                            <span class="color_4">Fercube</span></small>
+                    </section>
+                </div>
             </modal>
         </section>
     </div>
@@ -59,6 +72,12 @@ export default{
         },
         menuClick(menu){
             this.$router.push({name:menu.link});
+        },
+        mobileMenuClick(menu){
+            this.$router.push({name:menu.link});
+            setTimeout(() => {
+                this.$refs.modal.close();
+            },300);
         },
         ...mapMutations("page", ["setPage"]),
         watchRoute(_route){
@@ -96,6 +115,8 @@ export default{
     .full-height
         .sweet-modal
             height 100% !important
+    .mobile-menu
+        height 75vh
 </style>
 
 

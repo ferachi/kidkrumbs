@@ -1,6 +1,6 @@
 getters = 
     getSchools : (state) ->
-        state.schools
+        _.sortBy state.schools, 'name'
 
     getSchool : (state) ->
         state.school

@@ -52,6 +52,7 @@ actions =
             http.defaults.headers.common['X-CSRFTOKEN'] = data.csrftoken
 
 
+            console.log response.data.authenticated
             # if user is authenticated
             if response.data.authenticated
                 # set up the User's credentials 
